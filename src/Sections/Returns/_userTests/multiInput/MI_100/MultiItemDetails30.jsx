@@ -6,7 +6,7 @@ import { MRVinput } from "../../../../../mrv/mrv-components/inputs/MRVinput";
 
 import { useOutletContext } from "react-router";
 
-import cloneDeep from "lodash.clonedeep";
+import { cloneDeep } from "lodash";
 
 import { useReducer, useRef, useState } from "react";
 

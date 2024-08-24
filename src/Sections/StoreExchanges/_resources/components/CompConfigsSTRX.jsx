@@ -5,7 +5,7 @@ import { CashTotalMRV } from "../../../../mrv/mrv-components/DisplayOutputs/Cash
 import { baseReturnState } from "../../../../globalFunctions/globalJS_classes";
 import { NavNodeBarMRV } from "../../../../mrv/mrv-components/inputs/NavNodeBarMRV";
 import { useOutletContext } from "react-router";
-import { useNodeNavSTRX, baseStateSTRX } from "../hooks/STRXhooks";
+import { baseStateSTRX } from "../hooks/STRXhooks";
 import { useNodeNav } from "../../../../mrv/MRVhooks/MRVhooks";
 
 const TitleBarSTRX = ({

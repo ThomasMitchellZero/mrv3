@@ -5,7 +5,7 @@ import FooterContainer from "../../../components/UI/PageLayout/FooterContainer";
 
 import disposSqueezer from "../functions/dispoSqueezer";
 
-import cloneDeep from "lodash.clonedeep";
+import { cloneDeep } from "lodash";
 
 import { useReducer, useRef } from "react";
 

@@ -12,7 +12,7 @@ import { addItem } from "../../functions/addItem";
 import { useAddItem } from "../../functions/useAddItem";
 
 import { useState } from "react";
-import cloneDeep from "lodash.clonedeep";
+import { cloneDeep } from "lodash";
 
 import { MdOutlineClose, MdArrowBack } from "react-icons/md";
 

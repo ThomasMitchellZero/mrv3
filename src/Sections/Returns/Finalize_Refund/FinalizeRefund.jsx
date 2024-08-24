@@ -17,7 +17,7 @@ import Payout70 from "./Finalize70panels/Payout70";
 import Placeholder from "../../Placeholder/Placeholder";
 
 import { useOutletContext, Navigate } from "react-router-dom";
-import cloneDeep from "lodash.clonedeep";
+import { cloneDeep } from "lodash";
 
 const FinalizeRefund = () => {
   // Returns Session

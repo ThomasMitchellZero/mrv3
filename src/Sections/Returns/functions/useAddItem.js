@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import ProductContext from "../../../store/product-context";
 
-import cloneDeep from "lodash.clonedeep";
+import { cloneDeep } from "lodash";
 
 const useAddItem = ({ itemsToAddObj = {}, returnsSession = {} }) => {
   //context
@@ -14,7 +14,6 @@ const useAddItem = ({ itemsToAddObj = {}, returnsSession = {} }) => {
   const inputKeysArr = Object.keys(itemsToAddObj);
 
   for (const thisKey of inputKeysArr) {
-
     const thisItem = itemsToAddObj[thisKey];
     const outQty = parseInt(thisItem.quantity);
 

@@ -6,7 +6,7 @@ import ProductContext from "../../../store/product-context";
 import TitleBar from "../../../components/UI/PageLayout/TitleBar";
 import FooterContainer from "../../../components/UI/PageLayout/FooterContainer";
 
-import cloneDeep from "lodash.clonedeep";
+import { cloneDeep } from "lodash";
 
 const ItemEntry30 = (props) => {
   // props inherited from the parent

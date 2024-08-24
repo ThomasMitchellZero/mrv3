@@ -23,7 +23,6 @@ import {
   useResetLocStFields,
 } from "../../../../mrv/MRVhooks/MRVhooks";
 
-import { useImmer } from "use-immer";
 import { RtrnItemsList } from "./RtrnItems/RtrnItemsList";
 import { RtrnInvosList } from "./RtrnInvos/RtrnInvosList";
 import { useOutletContext } from "react-router";

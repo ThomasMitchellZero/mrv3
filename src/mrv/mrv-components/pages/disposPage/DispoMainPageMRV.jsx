@@ -9,12 +9,12 @@ import {
 } from "../../../../globalFunctions/globalJS_classes";
 import { TitleBarMRV } from "../../DisplayOutputs/TitleBarMRV";
 import { CashTotalMRV } from "../../DisplayOutputs/CashTotalMRV";
-import { useImmer, useImmerReducer } from "use-immer";
+
 import { useOutletContext } from "react-router";
 
 import { SetDispos30MRV } from "./SetDispos30MRV";
 import { DispoItems70 } from "./DispoItems70";
-import cloneDeep from "lodash.clonedeep";
+import { cloneDeep } from "lodash";
 
 // local state setter to run prior to this component's render.
 function dispoMainMethods({

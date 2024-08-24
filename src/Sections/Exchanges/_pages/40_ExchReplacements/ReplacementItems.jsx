@@ -15,9 +15,8 @@ import {
   useGroupAppointments,
 } from "../../_Resources/customHooks/exchHooks";
 
-
-
 import { useOutletContext } from "react-router";
+
 import { useImmer } from "use-immer";
 
 function ReplacementItems() {

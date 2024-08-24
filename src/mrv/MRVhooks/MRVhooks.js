@@ -3,7 +3,7 @@ import ProductContext from "../../store/product-context";
 import InvoContext from "../../store/invo-context";
 import { useOutletContext, useNavigate } from "react-router";
 
-import { useContext, useRef, useEffect } from "react";
+import { useContext } from "react";
 
 import {
   Invoice_SR,
@@ -27,7 +27,6 @@ import {
 } from "../../globalFunctions/globalJS_classes";
 
 import { cloneDeep, isEmpty } from "lodash";
-import { clear } from "@testing-library/user-event/dist/clear";
 
 //// Money Handlers ////
 

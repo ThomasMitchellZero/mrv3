@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom";
-import cloneDeep from "lodash.clonedeep";
+import { cloneDeep } from "lodash";
 
 const useSetLocalPanels = () => {
   const returnsCtx = useOutletContext();

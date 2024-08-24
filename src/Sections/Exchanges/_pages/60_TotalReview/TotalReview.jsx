@@ -1,13 +1,13 @@
 import classes from "./_TotalReviewCSS.module.css";
 
-import { ApptCardTotRev } from "./ApptCardTotRev.jsx";
-import { PaymentSummary } from "./PaymentSummary.jsx";
+import { ApptCardTotRev } from "./ApptCardTotRev";
+import { PaymentSummary } from "./PaymentSummary";
 
-import { ExchPizzaTracker } from "../../_Resources/components/pageLayout/exchPizzaTracker.js";
+import { ExchPizzaTracker } from "../../_Resources/components/pageLayout/exchPizzaTracker";
 
-import { ExchHeader } from "../../_Resources/components/pageLayout/ExchHeader.js";
+import { ExchHeader } from "../../_Resources/components/pageLayout/ExchHeader";
 
-import { useExchNav } from "../../_Resources/customHooks/useExchNav.js";
+import { useExchNav } from "../../_Resources/customHooks/useExchNav";
 
 import { MdDeleteOutline, MdArrowForward } from "react-icons/md";
 

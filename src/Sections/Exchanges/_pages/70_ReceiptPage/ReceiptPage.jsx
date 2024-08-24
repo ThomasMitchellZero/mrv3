@@ -8,7 +8,7 @@ import { MdDeleteOutline, MdArrowForward } from "react-icons/md";
 
 import { useOutletContext } from "react-router";
 import { useImmer } from "use-immer";
-import cloneDeep from "lodash.clonedeep";
+import { cloneDeep } from "lodash";
 
 function ExchReceiptPage() {
   const exchCtx = useOutletContext();

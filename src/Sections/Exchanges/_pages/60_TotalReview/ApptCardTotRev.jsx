@@ -2,7 +2,6 @@ import classes from "./_TotalReviewCSS.module.css";
 
 import { useOutletContext } from "react-router";
 import { useImmer } from "use-immer";
-import cloneDeep from "lodash.clonedeep";
 
 function ApptCardTotRev({ apptData = "" }) {
   const exchCtx = useOutletContext();
@@ -51,7 +50,9 @@ function ApptCardTotRev({ apptData = "" }) {
       </section>
       <div className={`divider horizontal`}></div>
       <section className={` ${classes.cardContent} ${classes.delivery}`}>
-        <p className={`color__secondary__text body__small`}>Delivery Instructions : </p>
+        <p className={`color__secondary__text body__small`}>
+          Delivery Instructions :{" "}
+        </p>
         <p className={`color__tertiary__text body`}>
           {`${thisApptObj.deliveryInstructions}`}
         </p>

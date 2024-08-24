@@ -1,7 +1,6 @@
 import { TitleBarSTRX } from "../../_resources/components/CompConfigsSTRX";
 
-import { useNavigate } from "react-router";
-import { useNodeNavSTRX } from "../../_resources/hooks/STRXhooks";
+
 import { useNodeNav } from "../../../../mrv/MRVhooks/MRVhooks";
 
 

@@ -1,5 +1,5 @@
 
-import cloneDeep from "lodash.clonedeep";
+import { cloneDeep } from "lodash";
 
 const addItem = ({ itemsToAddObj = {}, returnsItems = {}, productContext, }) => {
   //context

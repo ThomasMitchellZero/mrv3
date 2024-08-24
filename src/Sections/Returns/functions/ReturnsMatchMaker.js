@@ -1,6 +1,5 @@
 // Function for matching returned items with session invoices.
-
-import cloneDeep from "lodash.clonedeep";
+import { cloneDeep } from "lodash";
 import disposSqueezer from "./dispoSqueezer";
 import sortNprocessTenders from "./sortNprocessTenders";
 

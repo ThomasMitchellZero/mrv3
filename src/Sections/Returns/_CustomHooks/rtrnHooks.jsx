@@ -4,7 +4,7 @@ import ProductContext from "../../../store/product-context";
 import { useOutletContext } from "react-router";
 import { useContext } from "react";
 
-import cloneDeep from "lodash.clonedeep";
+import { cloneDeep } from "lodash";
 
 /*
 
