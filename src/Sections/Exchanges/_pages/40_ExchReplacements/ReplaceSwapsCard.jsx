@@ -1,4 +1,4 @@
-import classes from "./_ReplacementItems.css";
+import "./_ReplacementItems.css";
 
 import { ProductInfo } from "../../_Resources/components/displayOutputs/ProductInfo";
 

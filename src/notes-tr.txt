@@ -1,0 +1,134 @@
+Since I am starting Vyvanse, I want to do some trip reports and subjectively compare it to the Adderall.  I really do need to be as honest as I can.  The goal is to have the drug that lets me be my best, so it's important to describe honestly and accurately.
+
+Rule 1:  Document, don't expound. Accurately describe what you feel, but no more.  Time spent here is time not spent on real work.  Remember that writing is fun, but it's still technically a time-waster.
+
+Criteria and Definitions:  TBD.  WILL FILL OUT LATER.
+    -Drive: Intensity of desire to clear as many intended tasks as possible.
+    -Focus: 
+    -Energy:
+
+Breaking The Shell ideas:
+    -Start the 69420 process with something really really attractive to lure myself in.  Like, just the 69420 name sometimes lures me:
+        +Meditating on past big wins for 69 seconds?
+            - Is it sufficiently attractive?
+            + Low potential to turn into a time-waster b/c meditation is hard.
+        -4:20 spent writing/refining in a document, so it becomes 420-69-420? Like being my own hype man?  Things like "You are literally a prodigy with language" or "While fools were attending boot camps, you learned to code BY YOURSELF"
+            -Would definitely attract, but gotta be REALLY disciplined on time or else that might be a distraction.  
+        +Consider how happy I am to have a free day to work uninterrupted?
+
+
+
+4 Feb 2022
+    -8:00 dosed.  I probably should be in the habit of dosing right when I wake up, but I can't re-dose and I'm afraid of running out of fuel.
+
+    -9:45:  + ~1.5 cups of coffee.  Good is that I feel energetic and alert and fast, subjectively more than Adderall within the same time window.  Bad is that a LOT of things look interesting.  I was actually ready to go at 9:00 and just spent the last 45 minutes looking at Soviet airplane bureaus on Wikipedia -_-  Had a protein shake and appetite is basically nil so I REALLY need to remember to eat on time.  Like, seriously.  That's a task that is so easy that I fail so much, and it really does have consequences.  The cost is that feeling of being just out of gas at 3:00.  It's not like I eat and then minutes later the problem is gone.  It can easily take an hour to recover, and that whole time I'm losing momentum.
+
+    -9:55.  I actually feel REALLY good.  I'm ready to tear into this work.  This was not how I felt an hour ago, so this drug takes some time to spin up.
+
+    10:30 *  
+        Not actually a lot to show so far, so I need to keep that in mind.  I do really have this sense of tantalizing patterns to be grasped, just outside my reach.  Like if I had another 10 IQ points I could figure out some cool patterns in this program.
+            -Another way to put it - I feel like my intuition is outpacing my comprehension.  
+
+    11:45 * 
+        Not specific to Vyvanse but based on my initial observations this a problem that I need to create a pattern or a mind-tool to address:  How to point my interest at the right thing?  Like, every time I find myself reaching for something non-work, I KNOW that I'll regret it later (sometimes REALLY regret it) but I do it anyways.
+            -One idea is to create a document to record things that catch my interest for later.  Like when I looked up the Flying Flapjack, part of my motivation was 'Well, I won't remember to look at this later'.  Maybe if I have a repository for all that, it will let me put it in and then get back to work?
+
+        -Again, just a sense:  I feel like my avoidance of hard problems is still present, but in a more insidious way - like I'm able to find better justifications for doing things I'm not supposed to be doing.
+
+        -Still TBD, but my current subjective sense of Different From Normal is much greater than the Adderall.  Definitely more of a feeling of I Took A Drug.
+
+        -More sore throat, sweating, and bruxism than Adderall.  
+
+    12:50
+        -Had lunch, back in the chair.  My energy feels less potent but more controlled right now.  I don't feel my mind pinging off in different directions anymore.
+    
+    2:00
+        -Definitely less energy than this morning.  Actually feeling heavier than usual right now.  However, I do notice that when I'm not actively thinking, my attention is inactive rather than running around looking for some stimulation.
+
+    3:20
+        -Just want to put in a marker to remind myself to record how this goes.  I'm trying to sort out the conditional logic for what user interface to display as the refund tenders are processed in sequence.  This is a hard problem with a lot of possible solutions and many different factors to weigh and balance.  
+
+    5:00
+        -I can't say that my problem-solving is any better.  Even with my better focus, I don't feel like I have the ability to hold more factors in my mind at once.  I'm definitely locked onto the problem, where normally this kind of frustration causes me to seek out time-wasters to feel some positive stimulation.  Recurring theme for the day has been a feeling of being at the limits of my intelligence.  It's a combination of inability to hold enough things in my head long enough to find patterns, or else insufficient processing speed to find the patterns while I've got them.
+
+        -It has helped me to have something to look at.  Putting screens side-by-side in Figma helped me bypass my memory limitations and find the similarities.  
+
+    5:45
+        -OK.  Breakthrough.  I had two key insights: First, that behaviors based on tender Type vary a lot more than behaviors based on tender Status, which means ... something important?  
+
+            -Do my definitions in Type and my logic in status?
+            -Easier define how Status responds to Type than vice versa?
+            -Arguments live in Type, functions live in Status?  
+            -I actually still have yet to find a great explanation the pattern to the pattern, but it means I'm defining almost all behavior specifics in Type. 
+
+        The other breakthrough is that I'm already doing some Type-based definition in the Tenderizer function, so that is the natural place to handle all of the Type-specific defining.  I had type-specific logic in three places and that was what was itching, although at the time I didn't realize why.
+
+        -I also realize that one constant I've felt throughout the day was a sense of urgency.  Even when I was folding clothes I was trying to move ahead as fast as I could.
+
+        -I also don't feel tired.  Not exactly a fair sample because I still feel excited from figuring that out, but normally I'm about ready to be done.  
+
+        -Mostly not interested in time wasters either.  
+
+    Final Summary:
+        Overall, pretty pleased, would ride again, would DEFINITELY choose over having nothing.  This was one situation I struggle with - staying on task for a complex problem where there are many possible approaches and "best" isn't really clear.
+        
+        Relative to Adderall, my N=1 comparison is:
+
+        Better:
+        + Same average energy but more consistent
+        + Urgency was definitely better.  Consistent feeling of 'must go faster'
+        + Good agility - I felt like I could switch directions more easily.
+        + I really did feel like my my intuition was further and clearer.
+
+        Same:
+        = Improvement in ability to point my mind in a direction
+        = Reduction in brain fog and 'wait, what was I doing?'
+
+        Worse: 
+        - Do NOT like that it's an all-day commitment.  Sometimes I don't have all day.
+        - Side effects were definitely worse.  Might be a factor if I need to be in an office.
+        - For limited sample, worse for work that is clear but boring.
+        - Felt a bit worse for drive and motivation.  I had the ability to stay on task - I was choosing my next action - but I had no extra desire to stay on task or drive to get things done.  
+
+    -Sleep:
+        -I didn't fall asleep quickly last night, but although it took a while I never had the sense that sleep wasn't going to come.  I remember the feeling of trying to sleep after taking molly late at night, and this was not that.
+
+        -Once I did nod off I woke up a bunch (~5x) but was able to nod off quickly after.  That was also my pattern the night before though, so hard to say the drug was responsible.
+
+        -I have read on Reddit that when you're done working, drink something with some acidity.  Ordered some OJ from Costco and going to try tonight.
+
+----
+
+5 Feb 2023
+    -9:40:
+        Getting started now because I was about to go down the Wikipedia rabbit hole looking up the SR-71.  Apparently there's something about this drug and Cold War airplanes -_- 
+
+        Of note, I'm feeling more alert but zero extra motivation to be productive.  
+
+    -11:45:
+        Have been kind of uninterested in work so far.  I've just been kind of durdling along, making lackadaisical progress.  
+        
+        I'm writing now to say the last 15 minutes I've felt an uptick in drive.  I feel more like I WANT to start knocking some stuff out.  
+
+        A possible correlation I've noticed and now want to watch for.  The uptick in drive happend about the time I got the badges to appear on-screen.  I feel like I do remember multiple times my drive has accelerated when I'm SEEING changes in the UI.  If that is true then it could be valuable knowledge.  Like, really my whole productivity development, ever since the start of the Group FAPP project, has been finding ever-better techniques to trick myself into working.  
+
+
+----
+
+11 Feb 2023
+    12:10
+        -This is my first time with T and Vyvanse together, although the T was very recent so there may not be much to observe.  Kind of hoping the T will help with the drive?
+        -Haven't noticed any special drive or interest in work.  I did try doing all my house chores and girl-proofing first thing while listening to DragonForce, and that did seem to give me some velocity.  When I did sit my butt in the chair I didn't feel my usual aversion to starting, so I might want to repeat that.  
+        -I also really need to figure out a better approach to tearing through the membrane between Goofing Off and The First Task.  I want to try intentionally saving especially easy and satisfying tasks to get started.  
+        -I haven't been taking antacid with the Vyvanse.  Since antacid decreases stomach acidity ~100x, that might explain the reduced effects?
+    12:40.  
+        -I've been writing for 30 minutes.  I need to be REALLY conscious of the fact that this drug makes writing REALLY appealing, and however valuable the writing is, it isn't coding.  Let's make sure we're not drinking a 64oz diet soda here.
+
+    -Sleep
+        -I can't say I slept amazing last night, but it was my normal sleep.  I didn't feel like there was anything extra keeping me up.  
+        -I like the idea of a slow consumption of OJ to increase stomach acidity, although considering stomach acid is ~10-100x more acidic tha OJ I don't know if this actually has an effect.
+        -So far I have been very pleased with the effect ditching the comforter and going with just sheet + weighted.  I started doing it becasue of the surgery but sleep has been noticeably better since.
+
+
+If you don't feel like you are choosing an approach from multiple options, or if you don't have a conceptual framework you're acting within, there's a good chance you won't be proud of this work later.
+

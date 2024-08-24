@@ -4,6 +4,7 @@
 .App{
   display: flex;
   flex-direction: column;
+  width: 100%;
   min-width: 68rem;
   height: 100%;
   background-color: #e6e9f0;

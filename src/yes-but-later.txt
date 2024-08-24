@@ -1,0 +1,102 @@
+-What is a 'dark night of the soul' with meditation?
+
+-Try and think of some sort of routine or practice like 42069 to get myself to want to work?
+
+-Meaning of code-smell?
+
+-Elegant React?  If not, is Elegant Javascript worthwhile?  
+
+22 Feb 2023
+    -List and describe tactics for outwitting my ADD (first entry, this yes-but-later file!)
+
+    -Think about systematized approaches to handle wheel-spinning or that thing we do where we're just aimlessly looking around the code when we are stuck.  Kind of like the 'field-cutting' approach to bug fixes?
+
+    -It seems like the rate at which we are discovering anti-ADD weapons is increasing.  Analyze?
+
+    -Ponder why I don't seek out more work at work.  I'm generally happier when overtaxed instead of underused.
+
+    -Come up with a stomach-acid management approach.  Factors to consider:
+        -Does food acidity meaningfully effect stomach acidity?
+        -With how Vyvanse is absorbed, do I need to de-acidify on an extended basis to have an effect?
+        -If lower acidity = lower protein absorbtion, how does that affect my muscle/nutrition goals?
+
+    -Come up with a clear description of what is different about implications of Status vs. Type in Tenders.  I think there's a programming heuristic to be found in there.  
+
+    -I can never destroy my ADD.  But I can get better at defeating it.
+
+-Since we now have a clear understanding of why not to do programmatic state changes in useEffect (it's redundant) this would be a fun little section to write later.  
+
+-What is the deal with Cruella De Vil?  It seems like we have a very incomplete story.  Where does her money come from, and why does this coat matter so much to her? How does she know Roger and Anita?  If someone described a person like her to me in real life I would expect I was being lied to.  
+
+
+-For the next 69420, instead of discarding distractions, I want to try just focusing on one thing, like breathing, for 69 secons.
+
+15 Apr 2023
+
+-How did binary start getting used in computer science?
+
+-With money, and showing dollar values in cents.  Why does that work for not generating recurring decimal values?  We're still doing division, right?
+    -OK, I think I kind of brain-farted here.  This does make sense to me.  Because every price is measured in cents, every price is a whole number.  When we divide by 100, we move the decimal place two spaces, but that never generates an irrational number.  (Why?  Is it a base 10 thing?)
+
+    -We SHOULD also never be doing division.  It should just be multiplication.  When you multiply, by definition you cannot LOSE prime factors, so if [n] is divisible by 7, any number multiplied by [n] will also have 7 as a factor.  
+
+    I guess the exception would be percentage-based discounts.  Those could still generate irrational numbers.  
+
+
+https://www.youtube.com/watch?v=VwN8kAa_tfY
+
+https://www.youtube.com/watch?v=CicDaMO4bsA
+
+
+-Write my little amateur dissertation on how horns work.  Roman horn > bugle > trombone > French horn.
+
+-Learning to love, or at least accept, the ugly win.  In many games, the size of the win does not matter.  That's why pulling the goalie when you're down with a minute left is a good play.  Be awayre of what kind of game you are in. (Rest at the campfire, or upgrade with 16 health and an Elite coming up?)
+
+-I recently quit when I got three bad boss relics (Crown, Ecto, and Choker in a discard deck)  That should indicate to me that I still don't love the Ugly Win.  My thought should be 'It would take someone special to salvage this run'.  To an observer, would look a bit heroic.
+
+----
+
+-A toss that eludes some blockers but is harder to hit might just be lower EV because Ushijima is good enough to beat blockers.
+
+-Figure out what Semi can do that would be good for a different team but is worse for STZ.  
+
+-Freshman MBs JUST on feel:
+    -Tsukki
+    -Kindaichi
+    -Bessho
+    -Onaga
+
+
+-Freshman MBs (26 Aug)
+    -Tsukki
+    -Bessho
+    -Kindaichi
+    -Onaga
+
+-Write about humility when learning, not seeking validation and trying to show what you know.  I think the 'seeking validation' is most important to explore because when I think about showing my code to Tejas, what I really want to hear is 'This is really good!  You are very advanced!'  If goal is truly to LEARN, optimize for learning.
+
+-Research, buy some slipper socks.  
+
+4 1Y MBs (23 Sep)
+-Tsukki
+-Bessho
+-Kindaichi
+-Onaga
+
+-Try to figure out why Onaga keeps ending up at the bottom of the pile, specifically ahead of Kindaichi.  Is it just uncertainty discount?
+
+14 Oct.
+- Write about the 'taste' a true UXpert requires.  
+- Micro-gaslighting.  "You just don't get it.  Leave this to the experts."  
+
+
+31 Mar.
+    -order batteries for AirTags
+    -look at monitors with speakers.
+    -See if an Apple monitor can connect to a Windows PC.
+
+16 Jun 2024
+    Development of LttP: https://www.youtube.com/watch?v=TIZf2OUeWxo
+
+13 Jul 2024
+    

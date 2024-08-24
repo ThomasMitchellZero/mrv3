@@ -1,4 +1,4 @@
-import classes from "./MultiItemDetails30.css";
+import "./MultiItemDetails30.css";
 
 import TitleBar from "../../../../../components/UI/PageLayout/TitleBar";
 import FooterContainer from "../../../../../components/UI/PageLayout/FooterContainer";
