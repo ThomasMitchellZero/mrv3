@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+
 import classes from "./Modal.module.css";
 
 import TitleBar from "./TitleBar";

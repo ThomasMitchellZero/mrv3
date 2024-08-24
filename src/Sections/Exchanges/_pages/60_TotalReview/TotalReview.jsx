@@ -1,19 +1,19 @@
 import classes from "./_TotalReviewCSS.module.css";
 
-import { ApptCardTotRev } from "./ApptCardTotRev.js";
-import { PaymentSummary } from "./PaymentSummary";
+import { ApptCardTotRev } from "./ApptCardTotRev.jsx";
+import { PaymentSummary } from "./PaymentSummary.jsx";
 
-import { ExchPizzaTracker } from "../../_Resources/components/pageLayout/exchPizzaTracker";
+import { ExchPizzaTracker } from "../../_Resources/components/pageLayout/exchPizzaTracker.js";
 
-import { ExchHeader } from "../../_Resources/components/pageLayout/ExchHeader";
+import { ExchHeader } from "../../_Resources/components/pageLayout/ExchHeader.js";
 
-import { useExchNav } from "../../_Resources/customHooks/useExchNav";
+import { useExchNav } from "../../_Resources/customHooks/useExchNav.js";
 
 import { MdDeleteOutline, MdArrowForward } from "react-icons/md";
 
 import { useOutletContext } from "react-router";
 import { useImmer } from "use-immer";
-import cloneDeep from "lodash.clonedeep";
+
 
 function ExchTotalReview() {
   const exchCtx = useOutletContext();
