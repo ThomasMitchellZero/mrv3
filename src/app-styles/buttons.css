@@ -1,0 +1,95 @@
+
+/* Button CSS*/
+
+.baseButton{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border-width: 1.5px;
+    height: 2rem;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 0rem 1rem;
+    margin: 0rem;
+    font-weight: 500;
+    gap: .25rem;
+}
+  
+.baseButton.primary{
+    color: #fff;
+    background-color: #003BAF;
+    border: none;
+}
+  
+.baseButton.secondary{
+    color: #003BAF;
+    background-color: #fff;
+    border-color: #003BAF;
+}
+  
+.baseButton.tertiary{
+    color: #003BAF;
+    background-color: transparent;
+    border: none;
+  
+}
+  
+.baseButton.large{
+    max-height: 3.5rem;
+    height: 3.5rem;
+    font-size: 1.25rem;
+    border-radius: 8px;
+}
+  
+.baseButton:hover{
+    opacity: 80%;
+}
+  
+.primary:disabled{
+    color: #fff;
+    background-color: #555;
+    border: none;
+}
+  
+.secondary:disabled{
+    color:#555;
+    border-color: #555;
+}
+
+.baseButton.secondary.active{
+    background-color: #E6ECF9;
+}
+
+
+.contained100{
+  width: 28%;
+}
+.contained70{
+  width: 40%;
+}
+.contained30{
+  flex: 1 1 0rem;
+}
+.containedBtn2{
+    width: 30%;
+}
+
+.baseIconButton{
+    all: unset;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.baseIconButton:hover{
+    opacity: 80%;
+}
+
+.baseIconButton.medium{
+    height: 1.5rem;
+    width: 1.5rem;
+}

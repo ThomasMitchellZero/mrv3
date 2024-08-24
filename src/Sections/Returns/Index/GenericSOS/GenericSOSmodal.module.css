@@ -1,0 +1,20 @@
+.container{
+    display:flex;
+    flex-direction: column;
+    flex: 0 0 20rem;
+    background-color: #ffffff;
+    height: 40rem;
+    padding: 1.5rem 2rem;
+    gap: 1.5rem;
+
+}
+
+.title{
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 1rem;
+}
+
+

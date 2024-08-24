@@ -1,0 +1,263 @@
+.STRX_top {
+  & .addItemsAndInvos {
+    /* --------------------------------------------- */
+    /* --------------   Shared 30   ---------------- */
+    /* --------------------------------------------- */
+
+    --stdGap: 1rem;
+
+    & .allEntry30 {
+      & .tabBox {
+        display: flex;
+        flex-direction: row;
+        flex: 0 0 auto;
+        width: 100%;
+      }
+    }
+
+    & .inputSection {
+      display: flex;
+      flex-direction: column;
+      flex: 0 0 auto;
+      width: 100%;
+      gap: var(--stdGap);
+      padding: 2rem 0rem;
+
+      & .inputRow {
+        display: flex;
+        flex-direction: row;
+        flex: 0 0 auto;
+        width: 100%;
+        gap: var(--stdGap);
+        justify-content: right;
+      }
+    }
+
+    & .noneScanned {
+      display: flex;
+      flex: 1 1 0rem;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--stdGap);
+
+      & img {
+        height: 8rem;
+      }
+    }
+
+    /* --------------------------------------------- */
+    /* --------------   Shared 70   ---------------- */
+    /* --------------------------------------------- */
+
+    & .columnTitleRow {
+      flex: 0 0 auto;
+      padding: 0rem 1rem;
+    }
+
+    & .entryCard {
+      flex: 0 0 auto;
+      padding: 1rem;
+    }
+
+    & .field {
+      display: flex;
+      flex: 1 1 0rem;
+      flex-direction: row;
+      align-items: center;
+      height: 100%;
+    }
+
+    /* --------------------------------------------- */
+    /* --------------   Items List   --------------- */
+    /* --------------------------------------------- */
+
+    & .itemsList {
+      width: 100%;
+
+      & .items_grid {
+        display: grid;
+        grid-template-columns:
+          [detail] 1fr
+          [totalQty] 7rem
+          [receipt] 9rem
+          [unitPrice] 7rem
+          [totalPrice] 10rem
+          [trash] var(--DeleteColWidth);
+        flex: 0 0 auto;
+        gap: var(--stdGap);
+      }
+
+      & .itemSubcardColumn {
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-column: detail / trash;
+        gap: var(--stdGap);
+      }
+
+      /* 1 per individual item in the card.  Main and child are the same. */
+      & .itemRow {
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-column: detail / trash;
+        gap: var(--stdGap);
+        color: var(--color__primary);
+        align-items: flex-start;
+        box-shadow: none;
+      }
+
+      & .invoInfoColumn {
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-column: receipt / span 3;
+        gap: var(--stdGap);
+
+        & .invoInfoRow {
+          display: grid;
+          grid-template-columns: subgrid;
+          grid-column: receipt / span 3;
+          align-items: center;
+
+          &.merged {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            gap: 0.25rem;
+          }
+        }
+      }
+
+      & .detailCol {
+        grid-column: detail / span 1;
+      }
+
+      & .totalQtyCol {
+        grid-column: totalQty / span 1;
+      }
+
+      & .receiptCol {
+        grid-column: receipt / span 1;
+        justify-content: flex-end;
+
+        & .receiptNum{
+
+        }
+
+        & .qty_x{
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          gap: 1rem;
+        }
+      }
+
+      & .unitPriceCol {
+        grid-column: unitPrice / span 1;
+        justify-content: flex-end;
+      }
+
+      & .totalPriceCol {
+        grid-column: totalPrice / span 1;
+        justify-content: flex-end;
+
+        &.columnTitle {
+          padding-right: 1rem;
+        }
+      }
+
+      & .fullInfoCol {
+        grid-column: receipt / span 4;
+      }
+
+      & .trashCol {
+        grid-column: trash / span 1;
+        justify-content: flex-end;
+      }
+    }
+
+    /* --------------------------------------------- */
+    /* --------------   Invos List   --------------- */
+    /* --------------------------------------------- */
+
+    & .invosList {
+      width: 100%;
+      /*-- empty but prevents namespace collision --*/
+
+      & .invos_grid {
+        display: grid;
+        grid-template-columns:
+          [receiptDetails] 12rem
+          [invoItemDetails] 1fr
+          [unitQty] 4rem
+          [unitPrice] 8rem
+          [unitIcon] 5rem
+          [trash] var(--DeleteColWidth);
+        flex: 0 0 auto;
+        gap: var(--stdGap);
+      }
+
+      & .invoItemsColumn {
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-column: invoItemDetails / trash;
+        gap: var(--stdGap);
+      }
+
+      & .invoItemCluster {
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-column: invoItemDetails / trash;
+        gap: var(--stdGap);
+
+        &:last-child {
+          border-bottom: none;
+          gap: var(--stdGap);
+        }
+      }
+
+      & .invoItemSubcard {
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-column: invoItemDetails / trash;
+        align-items: flex-start;
+        box-shadow: none;
+      }
+
+      & .mergedReceiptCol {
+        grid-column: invoItemDetails / trash;
+        display: flex;
+        flex-direction: row;
+        gap: 4rem;
+      }
+
+      & .receiptDetailsCol {
+        grid-column: receiptDetails / span 1;
+        color: var(--color__primary);
+      }
+      & .invoItemDetailsCol {
+        grid-column: invoItemDetails / span 1;
+      }
+      & .unitQtyCol {
+        display: flex;
+        height: 100%;
+        grid-column: unitQty / span 1;
+        align-items: center;
+        justify-content: center;
+      }
+      & .unitPriceCol {
+        grid-column: unitPrice / span 1;
+        justify-content: flex-end;
+      }
+      & .unitIconCol {
+        grid-column: unitIcon / span 1;
+        justify-content: flex-end;
+      }
+      & .deleteCol {
+        grid-column: trash / span 1;
+        justify-content: right;
+      }
+    }
+  }
+}
+
+/* // .totalPriceCol deleteCol */

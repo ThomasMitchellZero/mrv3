@@ -1,0 +1,73 @@
+
+.replacementTop{
+
+
+
+    .cardStyle{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 auto;
+        gap: 1rem;
+        
+    };
+    .cardRow{
+        display: flex;
+        flex-direction: row;
+        flex: 0 0 auto;
+        width: 100%;
+        align-items: center;
+        box-sizing: border-box;
+
+        .divider{
+            box-sizing: border-box;
+            margin: 1rem 0rem;
+
+        }
+
+        .prodinfo_col{
+            display: flex;
+            flex-direction: row;
+            height: auto;
+            flex: 4 4 0rem;
+        };
+        .money_col{
+            display: flex;
+            flex-direction: row;
+            height: auto;
+            flex: 1 1 0rem;
+            justify-content: flex-end;
+        };
+    };
+
+    .RI_Panel30{
+        .main_content{
+            gap: 1.5rem;
+        };
+
+        .discountCtnr{
+            box-sizing: border-box;
+            flex-direction: column;
+            display: flex;
+            flex: 0 0 auto;
+            width: 100%;
+            gap: 1.5rem;
+
+            .inputsCtnr{
+                box-sizing: border-box;
+                flex-direction: row;
+                display: flex;
+                flex: 1 1 0rem;
+                width: 100%;
+                gap: 1rem;
+
+
+                input{
+                    height: 4rem;
+                };
+
+            };
+        };
+        
+    };
+}

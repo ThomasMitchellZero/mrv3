@@ -1,0 +1,120 @@
+.mrv {
+  & .mrvPage.multiReason {
+    background-color: var(--color__surface__default);
+  }
+
+
+
+  & .multiReason {
+    & .goWide {
+      width: 100%;
+    }
+
+    & .mrvPanel__main {
+      border-right: 0.5rem solid var(--color__surface__subdued);
+
+      & .infoCell{
+        display: flex;
+        flex-direction: column;
+        gap: 0rem;
+        padding: 0rem;
+        width: 100%;
+        padding-bottom: 1rem;
+      }
+    }
+
+    & .cardContainer {
+      gap: 0rem;
+    }
+    & .disposGrid {
+      display: grid;
+      grid-template-columns:
+        [activeBarCol] 0.5rem
+        [spaceBarCol] 0.5rem
+        [invoiceCol] 3fr
+        [itemDetailsCtnrCol] 16fr
+        [unitPriceCol] 4fr
+        [itemQtyCol] 3fr
+        [totalPriceCol] 4fr
+        [statusCol] 6fr;
+      flex: 0 0 auto;
+      grid-column-gap: 0;
+      width: 100%;
+    }
+
+    & .BYDheaderRow {
+      padding: 1rem 0rem;
+      background-color: var(--color__surface__lightgrey);
+      border-bottom: 1.5px solid var(--color__border);
+      & .gCol {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+      }
+    }
+
+    & .BYDtableRow {
+      padding: 0.5rem 0rem;
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-column: activeBarCol / -1;
+      background-color: var(--color__surface__default);
+      border-bottom: 1.5px solid var(--color__border);
+
+      &:hover {
+        cursor: pointer;
+        background-color: #efefef;
+      }
+
+      &.selected {
+        & .activeBar {
+          background-color: var(--color__interactive);
+        }
+      }
+    }
+    & .gCol {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    & .spaceBar{
+      grid-column: spaceBarCol / span 1;
+    }
+    & .invoice {
+      grid-column: invoiceCol / span 1;
+    }
+
+    & .itemDetailsCtnr {
+      grid-column: itemDetailsCtnrCol / span 1;
+
+    }
+    & .unitPrice {
+      grid-column: unitPriceCol / span 1;
+
+    }
+    & .itemQty {
+      grid-column: itemQtyCol / span 1;
+
+
+      & div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0rem 0.5rem;
+        border-radius: 4rem;
+        background-color: var(--color__surface__lightgrey);
+      }
+    }
+    & .totalPrice {
+      grid-column: totalPriceCol / span 1;
+
+    }
+    & .status {
+      grid-column: statusCol / span 1;
+
+    }
+  }
+}

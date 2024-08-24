@@ -1,0 +1,10 @@
+.container{
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    flex: 0 0 8rem;
+    padding: 0rem 1rem;
+    gap: 1rem;
+}

@@ -1,0 +1,37 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 0rem;
+    gap: 1rem;
+}
+
+.thirtyContent{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0rem;
+    background-color: #fff;
+    padding: .5rem 1rem;
+    overflow: auto;
+}
+
+.seventyContent{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0rem;
+    background-color: #fff;
+    padding: 0% 15%;
+    gap: 3rem;
+    overflow: auto;
+}
+
+.optionBtnHolder{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 0 0 auto;
+    gap: 1rem;
+}
+
+.icon{
+    font-size: 1.75rem;
+}

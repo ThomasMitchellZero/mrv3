@@ -1,0 +1,34 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 3rem;
+    border-radius: .5rem;
+    border: solid 2px #e0e7f5;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: #333;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.icon2{
+    margin: .5rem;
+    font-size: 10rem;
+    flex: 0 0 1.25rem;
+    color: #333
+}
+
+
+.container p{
+    flex: 1 1 0rem;
+    text-align: left;
+
+}
+
+/*
+
+#102169;
+
+*/

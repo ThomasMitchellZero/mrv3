@@ -1,0 +1,60 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 auto;
+    gap: .25rem;
+}
+
+.columnHolder{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0rem;
+}
+
+.leftColumn{
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    height: 100%;
+    align-items: center;
+    margin-right: .25rem;
+}
+
+.L2container{
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 auto;
+    gap: .25rem;
+}
+
+.lineHeight{
+    display: flex;
+    flex-direction: row;
+    height: 1.5rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stepLine{
+    width: 2px;
+    flex: 1 1 0rem;
+}
+
+
+.container h4, .container h5{
+
+    color: #8d8d8d;
+}
+
+.activeText h4, .activeText h5{
+    color: #262626;
+    font-weight: 500;
+}
+
+.strike{
+    text-decoration: line-through;
+}
+
+.icon{
+
+}

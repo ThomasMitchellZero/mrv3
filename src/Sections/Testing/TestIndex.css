@@ -1,0 +1,7 @@
+.mrv {
+  & .testIndex {
+    & .vBox {
+      width: 100%;
+    }
+  }
+}

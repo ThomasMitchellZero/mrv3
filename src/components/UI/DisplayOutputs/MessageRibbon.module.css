@@ -1,0 +1,35 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;  
+}
+
+/* Message Sizes */
+.large{
+    height: 2.125rem;
+    padding: 0rem 1.5rem;
+}
+
+.small{
+    height: 1.5rem;
+    padding: 0rem 1rem;
+}
+
+/* Message Colors */
+.blue{
+    background-color: #d9f1fa;
+}
+
+.green{      
+    background-color: #d6e7cc;
+}
+
+.gold{
+    background-color:  #f7f3d7
+}
+
+.red{
+    background-color: #f9d4d2;
+}

@@ -1,0 +1,36 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1 1 0rem;
+}
+
+.maincontent{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0rem;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    gap: 1.5rem;
+}
+
+.subcontainer{
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: .5rem;
+
+}
+
+.itemsearch{
+    width: 100%;
+}
+
+.itemquantity{
+    width: 6rem;
+
+}

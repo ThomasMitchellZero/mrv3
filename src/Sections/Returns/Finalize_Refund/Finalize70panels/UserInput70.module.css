@@ -1,0 +1,16 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0rem;
+}
+
+.mainContent{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0rem;
+    background-color: #ffffff;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0% 15%;
+}

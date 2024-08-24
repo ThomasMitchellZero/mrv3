@@ -1,0 +1,26 @@
+.container{
+    display:flex;
+    flex-direction: column;
+    flex: 1 1 0rem;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+img{
+    height: 8rem;
+}
+
+.maintext{
+    font-size: 3rem;
+    font-weight: 500;
+    color:#102169;
+    margin: 0;
+}
+
+.subtext{
+    font-size: 1rem;
+    font-weight: 400;
+    color: #6f6f6f;
+    margin: 0;
+}

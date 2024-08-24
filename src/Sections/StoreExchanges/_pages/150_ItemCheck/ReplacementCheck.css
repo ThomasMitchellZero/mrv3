@@ -1,0 +1,29 @@
+.STRX_top {
+  & .replacementCheck {
+    & .main_content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0rem 25%;
+
+      & .hBox {
+        padding: 2rem 0rem;
+        width: 100%;
+      }
+    }
+
+    & .prodImgTest{
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+    }
+
+    /* --------------------------------------------- */
+    /* --------------   Shared 30   ---------------- */
+    /* --------------------------------------------- */
+  }
+}
+
+/* // .totalPriceCol deleteCol */

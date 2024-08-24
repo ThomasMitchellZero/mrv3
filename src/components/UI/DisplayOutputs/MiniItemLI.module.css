@@ -1,0 +1,38 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 auto;
+    padding: .75rem 0rem;
+}
+
+.mainColumn{
+    display: flex;
+    flex-direction: column;
+    flex: 2 2 0rem;
+    align-items: flex-start;
+    overflow: hidden;
+    white-space: nowrap;
+    gap: 0.5rem;
+}
+
+.mainColumn p{
+    width: 100%;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.secondColumn{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0rem;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    
+}
+
+.secondColumn h4 {
+    margin-top: auto;
+
+}
