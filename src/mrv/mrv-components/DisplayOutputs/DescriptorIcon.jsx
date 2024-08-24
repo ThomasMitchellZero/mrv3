@@ -18,6 +18,7 @@ function DescriptorIcon({
 }) {
   const styleObj = {
     fontSize: fontSize,
+    color: color,
   };
 
   const iconsObj = {
@@ -32,8 +33,14 @@ function DescriptorIcon({
 
   return (
     <div
-      style={{ height: ctnrSize, width: ctnrSize, borderRadius: radius }}
-      className={`descriptorIcon ${color} ${backgroundColor}`}
+      style={{
+        height: ctnrSize,
+        width: ctnrSize,
+        borderRadius: radius,
+        color: color,
+        backgroundColor: backgroundColor,
+      }}
+      className={`descriptorIcon ${color}`}
     >
       {outIcon}
     </div>

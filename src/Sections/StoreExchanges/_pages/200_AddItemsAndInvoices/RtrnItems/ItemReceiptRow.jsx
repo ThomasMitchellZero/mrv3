@@ -31,19 +31,25 @@ function ItemReceiptRow(atomizedItem) {
 
   const config = oConfigs[invoStatus];
 
+  // style does not appear to be populating correctly but this is a lousy use of my time.
+
   const iconStyle = {
     iconStr: config.iconStr,
     ctnrSize: "1.5rem",
-    fontSize: "1rem",
+    fontSize: "3rem",
     color: config.invoColor,
+    backgroundcolor: "red",
   };
 
   // greenify neg. values because they are stored as positive in the invoices.
   return (
     <div key={atomizedItem.primaryKey} className={`invoInfoRow`}>
       <div className={`body__small field receiptCol ${config.invoColor}`}>
-        <DescriptorIcon {...iconStyle} />
-        <p className={`truncate`}>{`${config.invoStr}`}</p>
+        <div className={`receiptNum body color__primary__text`}>
+          <DescriptorIcon {...iconStyle} />
+          <p className={`truncate`}>{`${config.invoStr}`}</p>
+        </div>
+
         <div className={`qty_x body color__primary__text`}>
           {`${itemQty}`}
           <p>x</p>

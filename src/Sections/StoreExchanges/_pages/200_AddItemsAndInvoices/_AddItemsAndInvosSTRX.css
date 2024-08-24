@@ -66,6 +66,7 @@
       flex-direction: row;
       align-items: center;
       height: 100%;
+      
     }
 
     /* --------------------------------------------- */
@@ -140,6 +141,14 @@
         justify-content: flex-end;
 
         & .receiptNum{
+          display: flex;
+          flex: 1 1 0rem;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          gap: .25rem;
+          min-width: 0rem;
+          align-items: center;
+          justify-content: flex-start;
 
         }
 
@@ -148,6 +157,7 @@
           flex-direction: row;
           flex-wrap: nowrap;
           gap: 1rem;
+          padding-left: var(--stdGap);
         }
       }
 
