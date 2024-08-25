@@ -1,104 +1,23 @@
 import "./_AddItemsAndInvosSTRX.css";
-
+import { useAddItemsAndInvos_STRX } from "./C_AddItemsAndInvos_STRX";
 import {
   TitleBarSTRX,
   CashTotalSTRX,
 } from "../../_resources/components/CompConfigsSTRX";
 
-import {
-  returnAtom,
-  baseLocState,
-  clearedErrors,
-  clearedInputs,
-} from "../../../../globalFunctions/globalJS_classes";
+import { baseLocState } from "../../../../globalFunctions/globalJS_classes";
 
-import { AllEntry30, locSt_AllEntry30 } from "./AllEntry30";
+import { AllEntry30 } from "./AllEntry30";
 import { ItemDetails30STRX } from "../../_resources/components/ItemDetails30STRX";
-import { cloneDeep } from "lodash";
 
 import {
-  populateDisposArr,
   useNodeNav,
   useClearLocErrStates,
-  useResetLocStFields,
 } from "../../../../mrv/MRVhooks/MRVhooks";
 
 import { RtrnItemsList } from "./RtrnItems/RtrnItemsList";
 import { RtrnInvosList } from "./RtrnInvos/RtrnInvosList";
 import { useOutletContext } from "react-router";
-
-const locSt_AddItemsAndInvosSTRX = (() => {
-  // base local state to be used in NodeNav.
-  const outLocSt = cloneDeep(baseLocState);
-  outLocSt.rPan.activeUI1 = "AllEntry30";
-  outLocSt.page.activeError1 = "Fart";
-  outLocSt[locSt_AllEntry30._keyStr] = locSt_AllEntry30;
-  outLocSt.page.activeMode1 = "item";
-  console.log("outLocSt setter fired");
-  return outLocSt;
-})();
-
-export { locSt_AddItemsAndInvosSTRX };
-
-function Methods_AddItemsAndInvosSTRX() {
-  const mrvCtx = useOutletContext();
-  const sessionMRV = mrvCtx.sessionMRV;
-  const setSessionMRV = mrvCtx.setSessionMRV;
-  const nodeNav = useNodeNav();
-  const locStRt = sessionMRV.locSt;
-  const clearErrors = useClearLocErrStates();
-  const resetFields = useResetLocStFields();
-
-  const outMethods = {};
-
-  //-------------------------------------
-
-  const defaultReset = () => {
-    console.log("defaultReset");
-    resetFields({ oResetFields: { ...clearedErrors } });
-  };
-
-  const bgClick = () => {
-    console.log("bgClick");
-    //clearErrors();
-    defaultReset();
-  };
-
-  outMethods.bgClick = bgClick;
-
-  const testEz = () => {
-    console.log("testEz fired");
-    setSessionMRV((draft) => {
-      draft.test = "TestEz";
-    });
-  };
-  outMethods.testEz = testEz;
-
-  const entryTabClick = ({
-    keyStr = "receipt",
-    REF_keyStr____item_receipt,
-  }) => {
-    // handles toggle between item and receipt entry
-    console.log("entryTabClick" + keyStr);
-    const refLocFields = baseLocState;
-
-    setSessionMRV((draft) => {
-      draft.locSt.page.activeMode1 = keyStr;
-      draft.locSt.AllEntry30.activeMode1 = keyStr;
-    });
-
-    resetFields({
-      aNodeKeysToReset: [locSt_AllEntry30._keyStr],
-      oResetFields: { ...clearedInputs },
-    });
-  };
-  outMethods.entryTabClick = entryTabClick;
-
-  //-------------------------------------
-
-  return outMethods;
-}
-export { Methods_AddItemsAndInvosSTRX };
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //&&&&&&&&&&&&&&&     MAIN COMPONENT    &&&&&&&&&&&&&&&//
@@ -110,10 +29,7 @@ function AddItemsAndInvosSTRX() {
   const setSessionMRV = mrvCtx.setSessionMRV;
   const nodeNav = useNodeNav();
   const locStRt = sessionMRV.locSt;
-  const clearErrors = useClearLocErrStates();
-  const locMethods = Methods_AddItemsAndInvosSTRX();
-
-  console.log(locStRt);
+  const locMethods = useAddItemsAndInvos_STRX();
 
   const s70label = {
     item: "Items Being Returned",

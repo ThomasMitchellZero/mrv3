@@ -4,7 +4,7 @@ import ProductContext from "../../../../store/product-context";
 import { useOutletContext } from "react-router";
 import { useContext } from "react";
 
-import { locSt_AddItemsAndInvosSTRX } from "../../_pages/200_AddItemsAndInvoices/AddItemsAndInvosSTRX";
+import { locSt_AddItemsAndInvos_STRX } from "../../_pages/200_AddItemsAndInvoices/C_AddItemsAndInvos_STRX";
 
 import {
   ProdClass,
@@ -20,39 +20,6 @@ import {
 } from "../../../../mrv/MRVhooks/MRVhooks";
 
 import { cloneDeep, isEmpty } from "lodash";
-
-//// Item Handlers ////
-
-
-
-/*  Shouldn't need this, but keeping it for now.
-
-const useSetSessionItemsSTRX = () => {
-  // mrv qty changer, but configured for STRX.
-  const strxCtx = useOutletContext();
-  return useSetSessionItems({
-    sessionState: strxCtx.sessionSTRX,
-    setSessionState: strxCtx.setSessionStrx,
-  });
-};
-
-const useSetSessionInvosSTRX = () => {
-  const strxCtx = useOutletContext();
-  return useSetSessionInvos({
-    sessionState: strxCtx.sessionSTRX,
-    setSessionState: strxCtx.setSessionStrx,
-  });
-};
-
-const useNodeNavSTRX = () => {
-  const strxCtx = useOutletContext();
-  return useNodeNav({
-    sessionState: strxCtx.sessionSTRX,
-    setSessionState: strxCtx.setSessionStrx,
-  });
-};
-
-*/
 
 const defaultNavNodesSTRX = {
   testScenarios: navNode({
@@ -70,7 +37,7 @@ const defaultNavNodesSTRX = {
     titleStr: "Returns",
     breadcrumb: true,
     routeStr: "/mrv/store-exchanges/choose-items-invos",
-    locSt: locSt_AddItemsAndInvosSTRX,
+    locSt: locSt_AddItemsAndInvos_STRX(),
   }),
   reason: navNode({
     keyStr: "reason",
@@ -97,6 +64,4 @@ const baseStateSTRX = () => {
   return baseReturnState({ oNavNodes: defaultNavNodesSTRX });
 };
 
-export {
-  baseStateSTRX,
-};
+export { baseStateSTRX };

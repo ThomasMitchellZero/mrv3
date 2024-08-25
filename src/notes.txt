@@ -7992,6 +7992,19 @@ What to do today?
         -My window is VERY small and I don't know why.  
         -I gotta figure out the default fonts for the homepage.  AFAICT once I get under the MRV umbrella everything looks normal but this still seems to be an issue.  
         
+    5:25.
+    Well, against all odds it looks like I got the migration done?  If I'd been offered this result for 7:30 I'd have taken it with no backsies.  Let's see if we can't run away with some more goodies now.  
+
+    6:45.
+    I'm gonna call this a day.  Looks like I might want to reconsider having other files exported from the same file as my React components.  I don't understand all the specifics but this is apparently bad for Vite's hot module reload (hmr).  This is fairly plausible, since I never had any hot reload issues with CRA until VERY recently, which coincides with when I started using this pattern, so... maybe?
+
+25 Aug 2024
+    10:40.
+    I woke up excited to program, and so today I am raw-dogging it.  While this isn't fun, I should probably go through my files and make sure anything that renders in the UI is the lone export in its file.
+
+    
+
+
 
     
 

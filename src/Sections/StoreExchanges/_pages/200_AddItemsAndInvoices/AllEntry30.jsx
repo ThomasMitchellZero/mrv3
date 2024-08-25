@@ -1,5 +1,7 @@
 import { TitleBarSTRX } from "../../_resources/components/CompConfigsSTRX";
-import { ItemEntry, ReceiptEntry } from "./EntrySubsections";
+
+import { ItemEntry_SC_STRX } from "../../_resources/components/ItemEntry_SC_STRX";
+import { InvoEntry_SC_STRX } from "./InvoEntry_SC_STRX";
 
 import {
   returnAtom,
@@ -17,28 +19,18 @@ import {
   useResetLocStFields,
 } from "../../../../mrv/MRVhooks/MRVhooks";
 
-import { Methods_AddItemsAndInvosSTRX } from "./AddItemsAndInvosSTRX";
+import { useAddItemsAndInvos_STRX } from "./C_AddItemsAndInvos_STRX";
 
 import { RtrnItemsList } from "./RtrnItems/RtrnItemsList";
 import { RtrnInvosList } from "./RtrnInvos/RtrnInvosList";
 import { useOutletContext } from "react-router";
-
-const locSt_AllEntry30 = (() => {
-  // base local state to be used in NodeNav.
-  const outLocSt = cloneDeep(locStFields);
-  outLocSt._keyStr = "AllEntry30";
-  outLocSt.activeMode1 = "receipt";
-  return outLocSt;
-})();
-
-export { locSt_AllEntry30 };
 
 function AllEntry30() {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const locStRt = sessionMRV.locSt;
-  const locMethods = Methods_AddItemsAndInvosSTRX({});
+  const locMethods = useAddItemsAndInvos_STRX();
   const resetFields = useResetLocStFields();
   const s30Mode = locStRt.page.activeMode1;
 
@@ -46,12 +38,12 @@ function AllEntry30() {
   const oMode = {
     receipt: {
       sLabel: "receipt",
-      inputCluster: <ReceiptEntry />,
+      inputCluster: <InvoEntry_SC_STRX />,
     },
 
     item: {
       sLabel: "item",
-      inputCluster: <ItemEntry />,
+      inputCluster: <ItemEntry_SC_STRX />,
     },
   };
 
@@ -76,15 +68,6 @@ function AllEntry30() {
       </button>
     );
   };
-
-  /* ########  OUTPUT JSX   ######## */
-
-  /*
-      onClick={() =>
-        locMethods.bgClick()
-      }
-  
-  */
 
   return (
     <main

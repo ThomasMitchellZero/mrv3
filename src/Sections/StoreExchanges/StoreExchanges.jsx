@@ -1,19 +1,14 @@
 import "../../mrv/mrv-styles/mrvAllStyles.css";
 import "./StoreExchanges.css";
 
-
 import { baseStateSTRX } from "./_resources/hooks/STRXhooks";
-
 
 import { useImmer } from "use-immer";
 
 import { Outlet } from "react-router";
 
 function StoreExchanges() {
-
-  const [sessionMRV, setSessionMRV] = useImmer(
-    baseStateSTRX()
-  );
+  const [sessionMRV, setSessionMRV] = useImmer(baseStateSTRX());
 
   return (
     <section className={`mrv STRX_top`}>

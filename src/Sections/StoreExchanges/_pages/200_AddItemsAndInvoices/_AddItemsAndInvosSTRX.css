@@ -83,7 +83,7 @@
           [totalQty] 7rem
           [receipt] 9rem
           [unitPrice] 7rem
-          [totalPrice] 10rem
+          [totalPrice] 8rem
           [trash] var(--DeleteColWidth);
         flex: 0 0 auto;
         gap: var(--stdGap);

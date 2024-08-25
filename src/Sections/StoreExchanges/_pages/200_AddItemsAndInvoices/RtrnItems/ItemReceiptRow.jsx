@@ -1,3 +1,4 @@
+import { returnAtom } from "../../../../../globalFunctions/globalJS_classes";
 import { DescriptorIcon } from "../../../../../mrv/mrv-components/DisplayOutputs/DescriptorIcon";
 
 import { centsToDollars, greenify } from "../../../../../mrv/MRVhooks/MRVhooks";
@@ -36,18 +37,19 @@ function ItemReceiptRow(atomizedItem) {
   const iconStyle = {
     iconStr: config.iconStr,
     ctnrSize: "1.5rem",
-    fontSize: "3rem",
+    fontSize: "1rem",
     color: config.invoColor,
     backgroundcolor: "red",
   };
 
+
   // greenify neg. values because they are stored as positive in the invoices.
   return (
     <div key={atomizedItem.primaryKey} className={`invoInfoRow`}>
-      <div className={`body__small field receiptCol ${config.invoColor}`}>
+      <div className={`body__small field receiptCol`}>
         <div className={`receiptNum body color__primary__text`}>
           <DescriptorIcon {...iconStyle} />
-          <p className={`truncate`}>{`${config.invoStr}`}</p>
+          <p className={`truncate ${config.invoColor}`}>{`${config.invoStr}`}</p>
         </div>
 
         <div className={`qty_x body color__primary__text`}>

@@ -5,7 +5,6 @@ import { CashTotalMRV } from "../../../../mrv/mrv-components/DisplayOutputs/Cash
 import { baseReturnState } from "../../../../globalFunctions/globalJS_classes";
 import { NavNodeBarMRV } from "../../../../mrv/mrv-components/inputs/NavNodeBarMRV";
 import { useOutletContext } from "react-router";
-import { baseStateSTRX } from "../hooks/STRXhooks";
 import { useNodeNav } from "../../../../mrv/MRVhooks/MRVhooks";
 
 const TitleBarSTRX = ({
@@ -39,7 +38,6 @@ const TitleBarSTRX = ({
       navBtnClick={navBtnClick}
       handleClearSession={() => {
         nodeNavMRV("testScenarios");
-        setSessionMRV(() => baseStateSTRX());
       }}
       navNodeBar={navNodeBarSTRX}
       showNavNodeBar={showNavNodeBar}
