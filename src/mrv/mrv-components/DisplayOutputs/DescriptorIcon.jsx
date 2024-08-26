@@ -14,7 +14,7 @@ function DescriptorIcon({
   backgroundColor = "color__surface__default",
   color = "color__primary__text",
   radius = "100%",
-  REF_box__receipt__receiptLong__cart__alert = "",
+  REF_iconStr____box__receipt__receiptLong__cart__alert = "",
 }) {
   const styleObj = {
     fontSize: fontSize,
