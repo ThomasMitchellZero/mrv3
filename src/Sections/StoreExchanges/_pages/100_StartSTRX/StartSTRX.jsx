@@ -30,7 +30,12 @@ function StartSTRX() {
           </button>
         </div>
       </section>
-      <BaseSidesheet_MRV title="Fartrell Cluggins, Mississippi State" btnIcon={`close`} />
+      <BaseSidesheet_MRV
+        title="Fartrell Cluggins, Mississippi State"
+        btnIcon={`close`}
+      >
+        <button className={`mrvBtn primary`}>Test Scenario 1</button>
+      </BaseSidesheet_MRV>
     </section>
   );
 }
