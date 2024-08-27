@@ -1,12 +1,19 @@
 import { pad } from "lodash";
 import { MdOutlineClose, MdArrowBack } from "react-icons/md";
 
+import { useResetLocStFields } from "../../MRVhooks/MRVhooks";
+
 function BaseSidesheet_MRV({
   collapsed = false,
   title = "NO TITLE",
   btnIcon = null,
   REF_icon____close__back = "",
-  bgClickf = () => {},
+  fBgClick = () => {
+    console.log("No BG Click Fn");
+  },
+  fNavBtnClick = () => {
+    console.log("No Nav Btn Click Fn");
+  },
   children,
   ...rest
 }) {
@@ -19,15 +26,19 @@ function BaseSidesheet_MRV({
     back: <MdArrowBack {...iconProps} />,
   };
 
-  console.log("btnIcon: ", btnIcon);
-
   const icon = oIcons[btnIcon] || null;
+
+  const handleBGClick = () => {
+    fBgClick();
+  };
+
+  const handleNavBtnClick = () => {
+    fNavBtnClick();
+  };
 
   const actionBtn = icon ? (
     <button
-      onClick={() => {
-        navBtnClick();
-      }}
+      onClick={handleNavBtnClick}
       className={`mrvBtn miniBtn ghost padding__0`}
     >
       {icon}
@@ -36,12 +47,15 @@ function BaseSidesheet_MRV({
 
   const sCollapse = collapsed ? "collapsed" : "";
   return (
-    <section className={`mrvSidesheet ${sCollapse}`} {...rest}>
+    <section
+      onClick={handleBGClick}
+      className={`mrvSidesheet gap2rem ${sCollapse}`}
+    >
       <div className={`hBox minWidth__0 minFlex alignCenter `}>
         {actionBtn}
         <div className={` heading__small truncate`}>{title}</div>
       </div>
-      {children}
+      <div className={`vBox`}> {children}</div>
     </section>
   );
 }

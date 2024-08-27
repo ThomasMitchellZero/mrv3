@@ -8002,24 +8002,17 @@ What to do today?
     10:40.
     I woke up excited to program, and so today I am raw-dogging it.  While this isn't fun, I should probably go through my files and make sure anything that renders in the UI is the lone export in its file.
 
+26 Aug 2024
+    7:35.
+    I jammed for about 90 minutes.  No notes except to say that this was really smooth.  I mostly just made steady progress.  Also, so far my newfound understanding of Flexbox has paid off WELL :D.
+
+27 Aug 2024
+    2:30.
+    Tejas wanted to talk to me so there's a pretty good chance I get interrupted in the middle of everything.  That said, I'm gonna try and jam while I can.
+
+    Let's keep working on that sidesheet.  That's a 'Use Everywhere' component.  
+
     
-
-
-
-    
-
-        
-
-
-
-
-
-
-
-
-
-
-
 
 
 
