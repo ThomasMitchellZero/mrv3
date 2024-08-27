@@ -269,6 +269,7 @@
       height: 100%;
       display: flex;
       flex-direction: column;
+      padding: var(--PrimaryPadding__both);
     }
 
     & .mrvPanel__side {
@@ -300,7 +301,6 @@
       flex: 0 0 5rem;
       display: flex;
       flex-direction: row;
-      padding: var(--PrimaryPadding__both);
       align-items: flex-end;
       justify-content: center;
     }
@@ -309,7 +309,6 @@
       flex: 1 1 0rem;
       display: flex;
       flex-direction: column;
-      padding: var(--PrimaryPadding__both);
       align-items: center;
       justify-content: flex-start;
       overflow-y: auto;
@@ -317,7 +316,7 @@
 
     & .footer_text {
       flex: 0 0 auto;
-      padding: 0rem var(--PrimaryPadding__horizontal);
+      padding: 0rem;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -329,7 +328,6 @@
 
     & .footer_content {
       flex: 0 0 8rem;
-      padding: var(--PrimaryPadding__both);
       justify-content: flex-end;
       display: flex;
       flex-direction: row;

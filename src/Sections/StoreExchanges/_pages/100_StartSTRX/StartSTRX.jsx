@@ -1,6 +1,6 @@
 import { TitleBarSTRX } from "../../_resources/components/CompConfigsSTRX";
 
-import { BaseSidesheet_MRV } from "../../../../mrv/mrv-components/DisplayOutputs/BaseSidesheet_MRV";
+import { Sidesheet_Base_MRV } from "../../../../mrv/mrv-components/DisplayOutputs/Sidesheet_Base_MRV";
 
 import { useNodeNav } from "../../../../mrv/MRVhooks/MRVhooks";
 
@@ -18,7 +18,7 @@ function StartSTRX() {
           showNavNodeBar={true}
           headerTitle={"Choose Scenario"}
         ></TitleBarSTRX>
-        <div className={`main_content gap2rem alignLeft`}>
+        <div className={`main_content gap2rem alignLeft padding__vertical`}>
           <button
             type="button"
             onClick={() => {

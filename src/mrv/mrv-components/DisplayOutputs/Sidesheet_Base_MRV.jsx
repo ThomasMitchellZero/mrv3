@@ -3,7 +3,7 @@ import { MdOutlineClose, MdArrowBack } from "react-icons/md";
 
 import { useResetLocStFields } from "../../MRVhooks/MRVhooks";
 
-function BaseSidesheet_MRV({
+function Sidesheet_Base_MRV({
   collapsed = false,
   title = "NO TITLE",
   btnIcon = null,
@@ -60,4 +60,4 @@ function BaseSidesheet_MRV({
   );
 }
 
-export { BaseSidesheet_MRV };
+export { Sidesheet_Base_MRV };

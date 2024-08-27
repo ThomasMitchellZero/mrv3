@@ -1,56 +1,56 @@
-.mrv .titleBarMRV {
-  padding: var(--PrimaryPadding__both);
-  display: flex;
-  flex-direction: column;
-  flex: 0 0 auto;
-  align-items: flex-start;
-  color: var(--color__primary);
-  min-width: 0rem;
-
-  & .primaryRow {
+.mrv {
+  & .titleBarMRV {
     display: flex;
-    flex-direction: row;
-    flex: 0 0 3rem;
-    width: 100%;
-    gap: 0.25rem;
-    align-items: center;
+    flex-direction: column;
+    flex: 0 0 auto;
+    align-items: flex-start;
+    color: var(--color__primary);
     min-width: 0rem;
 
-    & .title {
+    & .primaryRow {
       display: flex;
-      flex: 1 1 0rem;
+      flex-direction: row;
+      flex: 0 0 3rem;
+      width: 100%;
+      gap: 0.25rem;
+      align-items: center;
       min-width: 0rem;
-      text-transform: capitalize;
+
+      & .title {
+        display: flex;
+        flex: 1 1 0rem;
+        min-width: 0rem;
+        text-transform: capitalize;
+      }
+
+      & .cancelBtn {
+        flex: 0 0 auto;
+        height: 3rem;
+        min-width: 0rem;
+      }
     }
 
-    & .cancelBtn {
-      flex: 0 0 auto;
-      height: 3rem;
-      min-width: 0rem;
-    }
-  }
-
-  & .secondaryRow {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    flex: 0 0 2.5rem;
-    gap: 1rem;
-    align-items: center;
-
-    & .appTitle {
+    & .secondaryRow {
       display: flex;
-      flex: 0 0 auto;
-      min-width: 0rem;
-    }
-  }
+      flex-direction: row;
+      width: 100%;
+      flex: 0 0 2.5rem;
+      gap: 1rem;
+      align-items: center;
 
-  & .navBtn {
-    
-    height: var(--standard-height);
-    flex: 0 0 auto;
-    padding: 0rem;
-    border-color: transparent;
-    background-color: transparent;
+      & .appTitle {
+        display: flex;
+        flex: 0 0 auto;
+        min-width: 0rem;
+      }
+    }
+
+    & .navBtn {
+      height: var(--standard-height);
+      flex: 0 0 auto;
+      padding: 0rem;
+      border-color: transparent;
+      background-color: transparent;
+    }
   }
 }

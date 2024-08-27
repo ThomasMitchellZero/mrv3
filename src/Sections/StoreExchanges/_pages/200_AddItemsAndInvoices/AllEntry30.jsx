@@ -3,6 +3,8 @@ import { TitleBarSTRX } from "../../_resources/components/CompConfigsSTRX";
 import { ItemEntry_SC_STRX } from "../../_resources/components/ItemEntry_SC_STRX";
 import { InvoEntry_SC_STRX } from "./InvoEntry_SC_STRX";
 
+import { Sidesheet_Base_MRV } from "../../../../mrv/mrv-components/DisplayOutputs/Sidesheet_Base_MRV";
+
 import {
   returnAtom,
   baseLocState,
@@ -39,11 +41,13 @@ function AllEntry30() {
     receipt: {
       sLabel: "receipt",
       inputCluster: <InvoEntry_SC_STRX />,
+      sidesheetTitle: "Add Receipts",
     },
 
     item: {
       sLabel: "item",
       inputCluster: <ItemEntry_SC_STRX />,
+      sidesheetTitle: "Add Return Items",
     },
   };
 
@@ -57,7 +61,7 @@ function AllEntry30() {
   };
 
   // Tab Buttons
-  const uiTabBtn = (btnType = "dong") => {
+  const uiTabBtn = (btnType = "NO TITLE") => {
     const isActive = s30Mode === btnType ? "active" : "";
     return (
       <button
@@ -70,14 +74,11 @@ function AllEntry30() {
   };
 
   return (
-    <main
-      onClick={() => locMethods.bgClick()}
-      className={`allEntry30 mrvPanel__side color__surface__default`}
-    >
+    <Sidesheet_Base_MRV title="" fBgClick={handleTabClick}>
       <TitleBarSTRX
         hasCluster={false}
         showProductName={false}
-        headerTitle={"Add To Exchange"}
+        headerTitle={oMode[s30Mode].sidesheetTitle}
       />
       <section className={`main_content`}>
         <div className={`tabBox`}>
@@ -87,7 +88,7 @@ function AllEntry30() {
         {/* Input cluster varies based on selected Mode */}
         {oMode[s30Mode].inputCluster}
       </section>
-    </main>
+    </Sidesheet_Base_MRV>
   );
 }
 
