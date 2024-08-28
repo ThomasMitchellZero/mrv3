@@ -1,6 +1,7 @@
 //---- Product ----
 
 import {cloneDeep} from 'lodash';
+import { act } from 'react';
 
 class moneyObj {
   constructor({
@@ -342,14 +343,22 @@ const clearedActiveKeys = {
   activeKey2: "",
 };
 
+export { clearedActiveKeys };
+
+const clearedActiveUI = {
+  activeUI1: "",
+  activeUI2: "",
+  activeUI3: "",
+}
+
+export { clearedActiveUI };
+
 const locStFields = {
   ...clearedInputs,
   ...clearedErrors,
+  ...clearedActiveKeys,
+  ...clearedActiveUI,
   _keyStr: "",
-  activeKey1: "",
-  activeKey2: "",
-  activeUI1: "",
-  activeUI2: "",
   activeMode1: "",
   activeMode2: "",
   activeData1: null,
@@ -368,110 +377,6 @@ const baseLocState = {
 
 export { baseLocState };
 
-/*
-function baseLocState({
-  pageActiveKey1 = "",
-  pageActiveKey2 = "",
-  pageActiveUI1 = "",
-  pageActiveUI2 = "",
-  pageActiveData1 = null,
-  pageActiveData2 = null, // NEVER CLEAR THESE
-  pageErrorSt1 = "",
-
-  rPanActiveKey1 = "",
-  rPanActiveKey2 = "",
-  rPanActiveUI1 = "",
-  rPanActiveUI2 = "",
-  rPanActiveData1 = null,
-  rPanActiveData2 = null,
-
-  mainActiveKey1 = "",
-  mainActiveKey2 = "",
-  mainActiveUI1 = "",
-  mainActiveUI2 = "",
-  mainActiveData1 = null,
-  mainActiveData2 = null,
-
-  locStError1 = "",
-  // NEVER CLEAR THESE
-  sContextName = "",
-  oClearSts = {},
-  methods = {},
-}) {
-  const makeBaseClearSt = () => {
-    // Returns a base locSt, minus the fields that must NEVER be cleared.
-    // Other clear states can be added by deleting further properties in local contexts.
-
-    // Clean up later, we're just trying to get this to work.
-    const outClearSt = {
-      pageActiveKey1,
-      pageActiveKey2,
-      pageActiveUI1,
-      pageActiveUI2,
-      pageActiveData1,
-      pageActiveData2,
-      pageErrorSt1,
-
-      rPanActiveKey1,
-      rPanActiveKey2,
-      rPanActiveUI1,
-      rPanActiveUI2,
-      rPanActiveData1,
-      rPanActiveData2,
-
-      mainActiveKey1,
-      mainActiveKey2,
-      mainActiveUI1,
-      mainActiveUI2,
-      mainActiveData1,
-      mainActiveData2,
-
-      locStError1,
-
-      sContextName,
-      oClearSts,
-      methods,
-    };
-    delete outClearSt.sContextName;
-    delete outClearSt.oClearSts;
-    delete outClearSt.methods;
-
-    return outClearSt;
-  };
-
-  oClearSts.baseClear = makeBaseClearSt();
-
-  return {
-    pageActiveKey1,
-    pageActiveKey2,
-    pageActiveUI1,
-    pageActiveUI2,
-    pageActiveData1,
-    pageActiveData2,
-    pageErrorSt1,
-
-    rPanActiveKey1,
-    rPanActiveKey2,
-    rPanActiveUI1,
-    rPanActiveUI2,
-    rPanActiveData1,
-    rPanActiveData2,
-
-    mainActiveKey1,
-    mainActiveKey2,
-    mainActiveUI1,
-    mainActiveUI2,
-    mainActiveData1,
-    mainActiveData2,
-
-    locStError1,
-
-    sContextName,
-    oClearSts,
-    methods,
-  };
-}
- */
 
 const baseReturnState = ({
   sessionConfigs = {

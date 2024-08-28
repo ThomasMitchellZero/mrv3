@@ -3,8 +3,7 @@ import ProductContext from "../../../../store/product-context";
 
 import { useOutletContext } from "react-router";
 import { useContext } from "react";
-
-import { locSt_AddItemsAndInvos_STRX } from "../../_pages/200_AddItemsAndInvoices/C_AddItemsAndInvos_STRX";
+import { LS_STRX_100_AddItemsAndInvos } from "../../_resources/components/CompLocStates_STRX";
 
 import {
   ProdClass,
@@ -19,7 +18,6 @@ import {
   useNodeNav,
 } from "../../../../mrv/MRVhooks/MRVhooks";
 
-import { cloneDeep, isEmpty } from "lodash";
 
 const defaultNavNodesSTRX = {
   testScenarios: navNode({
@@ -37,7 +35,7 @@ const defaultNavNodesSTRX = {
     titleStr: "Returns",
     breadcrumb: true,
     routeStr: "/mrv/store-exchanges/choose-items-invos",
-    locSt: locSt_AddItemsAndInvos_STRX(),
+    locSt: LS_STRX_100_AddItemsAndInvos,
   }),
   reason: navNode({
     keyStr: "reason",
@@ -58,6 +56,8 @@ const defaultNavNodesSTRX = {
     routeStr: "/mrv/store-exchanges/review",
   }),
 };
+
+console.log("defaultNavNodesSTRX", defaultNavNodesSTRX.returns.locSt);
 
 const baseStateSTRX = () => {
   // the basic state for Exchanges app.  Will need whenever we full-reset the app.

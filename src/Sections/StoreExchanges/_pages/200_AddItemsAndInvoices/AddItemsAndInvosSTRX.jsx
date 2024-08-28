@@ -1,5 +1,7 @@
 import "./_AddItemsAndInvosSTRX.css";
-import { useAddItemsAndInvos_STRX } from "./C_AddItemsAndInvos_STRX";
+
+import { useLocStMethods_STRX } from "../../_resources/components/CompHooks_STRX";
+
 import {
   TitleBarSTRX,
   CashTotalSTRX,
@@ -29,21 +31,25 @@ function AddItemsAndInvosSTRX() {
   const setSessionMRV = mrvCtx.setSessionMRV;
   const nodeNav = useNodeNav();
   const locStRt = sessionMRV.locSt;
-  const locMethods = useAddItemsAndInvos_STRX();
+  const locMethods = useLocStMethods_STRX();
 
-  const s70label = {
-    item: "Items Being Returned",
-    receipt: "Receipts for items being returned",
+  const activeMode = locStRt.page.activeMode1;
+  const activeUI = locStRt.page.activeUI3;
+
+  const oMode = {
+    item: {
+      s70label: "Items Being Returned",
+      s70panel: <RtrnItemsList />,
+    },
+    receipt: {
+      s70label: "Receipts List",
+      s70panel: <RtrnInvosList />,
+    },
   };
 
   const o30panels = {
     AllEntry30: <AllEntry30 />,
     ItemDetails30: <ItemDetails30STRX stateItemArr="returnItems" />,
-  };
-
-  const o70panels = {
-    item: <RtrnItemsList />,
-    receipt: <RtrnInvosList />,
   };
 
   const uiContinueWarning = (
@@ -52,8 +58,6 @@ function AddItemsAndInvosSTRX() {
     </div>
   );
 
-  const clearItems = () => {};
-
   /* ---- SHARED FUNCTIONS ---- */
 
   const refBaseLocState = baseLocState;
@@ -61,10 +65,8 @@ function AddItemsAndInvosSTRX() {
   const handleContinue = (e) => {
     e.stopPropagation();
 
-    if (locStRt.page.activeMode1 === "receipt") {
-      setSessionMRV((draft) => {
-        draft.locSt.page.activeMode1 = "item";
-      });
+    if (locStRt.page.activeMode3 === "receipt") {
+      locMethods.entryTabClick({ keyStr: "item" });
     } else if (sessionMRV.returnItems.length === 0) {
       setSessionMRV((draft) => {
         draft.locSt.page.errorSt1 = "noItem";
@@ -82,12 +84,10 @@ function AddItemsAndInvosSTRX() {
         <TitleBarSTRX
           //hasIcon={"back"}
           showProductName={true}
-          headerTitle={s70label[locStRt.page.activeMode1]}
+          headerTitle={oMode[activeMode].s70label}
           showNavNodeBar={true}
         />
-        <div className={`main_content`}>
-          {o70panels[locStRt.page.activeMode1]}
-        </div>
+        <div className={`main_content`}>{oMode[activeMode].s70panel}</div>
         {locStRt.page.errorSt1 === "noItem" ? uiContinueWarning : null}
         <div className={`footer_content`}>
           <CashTotalSTRX />
@@ -103,7 +103,7 @@ function AddItemsAndInvosSTRX() {
           </div>
         </div>
       </main>
-      {o30panels[locStRt.rPan.activeUI1]}
+      {o30panels[activeUI]}
     </section>
   );
 }

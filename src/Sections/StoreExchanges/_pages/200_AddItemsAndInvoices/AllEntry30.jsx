@@ -1,6 +1,6 @@
-import { TitleBarSTRX } from "../../_resources/components/CompConfigsSTRX";
 
-import { ItemEntry_SC_STRX } from "../../_resources/components/ItemEntry_SC_STRX";
+
+import { ItemEntry_SC_STRX } from "./ItemEntry_SC_STRX";
 import { InvoEntry_SC_STRX } from "./InvoEntry_SC_STRX";
 
 import { Sidesheet_Base_MRV } from "../../../../mrv/mrv-components/DisplayOutputs/Sidesheet_Base_MRV";
@@ -21,7 +21,8 @@ import {
   useResetLocStFields,
 } from "../../../../mrv/MRVhooks/MRVhooks";
 
-import { useAddItemsAndInvos_STRX } from "./C_AddItemsAndInvos_STRX";
+
+import { useLocStMethods_STRX } from "../../_resources/components/CompHooks_STRX";
 
 import { RtrnItemsList } from "./RtrnItems/RtrnItemsList";
 import { RtrnInvosList } from "./RtrnInvos/RtrnInvosList";
@@ -32,7 +33,7 @@ function AllEntry30() {
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const locStRt = sessionMRV.locSt;
-  const locMethods = useAddItemsAndInvos_STRX();
+  const locMethods = useLocStMethods_STRX();
   const resetFields = useResetLocStFields();
   const s30Mode = locStRt.page.activeMode1;
 

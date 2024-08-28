@@ -1,7 +1,7 @@
 import { MRVinput } from "../../../../mrv/mrv-components/inputs/MRVinput";
 import { MessageRibbonMRV } from "../../../../mrv/mrv-components/DisplayOutputs/MessageRibbonMRV";
 
-import { useAddItemsAndInvos_STRX } from "../../_pages/200_AddItemsAndInvoices/C_AddItemsAndInvos_STRX";
+import { useLocStMethods_STRX } from "../../_resources/components/CompHooks_STRX";
 import { useOutletContext } from "react-router";
 import { useContext } from "react";
 
@@ -31,7 +31,7 @@ const ItemEntry_SC_STRX = ({}) => {
 
   const locStRt = sessionMRV.locSt;
   const parentRt = sessionMRV.locSt.AllEntry30;
-  const locMethods = useAddItemsAndInvos_STRX();
+  const locMethods = useLocStMethods_STRX();
 
   const setSessionItems = useSetSessionItems();
   const productCtx = useContext(ProductContext);
