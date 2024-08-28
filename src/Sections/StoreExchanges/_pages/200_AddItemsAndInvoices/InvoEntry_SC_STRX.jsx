@@ -123,7 +123,7 @@ const InvoEntry_SC_STRX = () => {
         />
       </MRVinput>
       <div className={`inputRow`}>
-        <MRVinput flex={"2 2 0rem"}>
+        <MRVinput flex={"2 2 4rem"}>
           <input placeholder="Store" type="text" />
         </MRVinput>
         <MRVinput flex={"3 3 0rem"}>

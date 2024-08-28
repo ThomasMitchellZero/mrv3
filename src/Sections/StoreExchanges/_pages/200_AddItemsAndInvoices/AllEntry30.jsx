@@ -65,7 +65,10 @@ function AllEntry30() {
     const isActive = s30Mode === btnType ? "active" : "";
     return (
       <button
-        onClick={(e) => handleTabClick({ e: e, btnType: btnType })} // this is the issue
+        onClick={(e) => {
+          e.preventDefault();
+          locMethods.entryTabClick({ keyStr: btnType });
+        }} // this is the issue
         className={`tab fullWidth ${isActive}`}
       >
         {`${oMode[btnType].sLabel}s`}
@@ -74,14 +77,12 @@ function AllEntry30() {
   };
 
   return (
-    <Sidesheet_Base_MRV title="" fBgClick={handleTabClick}>
-      <TitleBarSTRX
-        hasCluster={false}
-        showProductName={false}
-        headerTitle={oMode[s30Mode].sidesheetTitle}
-      />
-      <section className={`main_content`}>
-        <div className={`tabBox`}>
+    <Sidesheet_Base_MRV
+      title={oMode[s30Mode].sidesheetTitle}
+      fBgClick={() => {}}
+    >
+      <section className={`main_content maxWidth`}>
+        <div className={`hBox minFlex`}>
           {uiTabBtn("receipt")}
           {uiTabBtn("item")}
         </div>

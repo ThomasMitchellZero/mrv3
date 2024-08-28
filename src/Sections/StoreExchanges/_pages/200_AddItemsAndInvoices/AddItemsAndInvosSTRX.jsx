@@ -52,6 +52,8 @@ function AddItemsAndInvosSTRX() {
     </div>
   );
 
+  const clearItems = () => {};
+
   /* ---- SHARED FUNCTIONS ---- */
 
   const refBaseLocState = baseLocState;

@@ -86,7 +86,7 @@ function useAddItemsAndInvos_STRX() {
 
     resetFields({
       aNodeKeysToReset: [locStRt.AllEntry30._keyStr],
-      oResetFields: { ...clearedInputs },
+      oResetFields: { ...clearedInputs, ...clearedErrors },
     });
   };
   outMethods.entryTabClick = entryTabClick;
