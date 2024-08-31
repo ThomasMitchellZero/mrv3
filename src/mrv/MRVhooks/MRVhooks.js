@@ -331,40 +331,6 @@ export { useNodeNav };
 
 // Make a change to the items in the current session state.
 
-function clearErrorStates(sessionSt) {
-  // returns a new locSt object with all locStError1 and locStError2 fields cleared.
-  const refDefaultState = baseReturnState({});
-  const refBaseLocState = baseLocState;
-  const refLocFields = locStFields;
-
-  const outLocSt = cloneDeep(sessionSt.locSt);
-  const aLocStNodes = Object.keys(outLocSt);
-
-  for (const thisNode of aLocStNodes) {
-    outLocSt[thisNode] = {
-      ...outLocSt[thisNode],
-      ...clearedErrors,
-    };
-  }
-  console.log(outLocSt);
-
-  return outLocSt;
-}
-
-function useClearLocErrStates() {
-  const mrvCtx = useOutletContext();
-  const sessionMRV = mrvCtx.sessionMRV;
-  const setSessionMRV = mrvCtx.setSessionMRV;
-
-  const clearLocErrStates = () => {
-    setSessionMRV((draft) => {
-      draft.locSt = clearErrorStates(sessionMRV);
-    });
-  };
-  return clearLocErrStates;
-}
-
-export { clearErrorStates, useClearLocErrStates };
 
 function useResetLocStFields() {
   // loops through the locSt object and merges the specified replacement fields into the specified nodes.
@@ -378,14 +344,15 @@ function useResetLocStFields() {
     const refBaseLocState = baseLocState;
     const refLocFields = locStFields;
 
-    console.log(aNodeKeysToReset);
-
     const resetKeys = aNodeKeysToReset || Object.keys(sessionMRV.locSt);
-    console.log(`Resetting ${oResetFields} fields`);
+
 
     if (Object.keys(oResetFields).length === 0) {
       console.log("No reset vals provided");
     }
+
+    // oErrorObjects contain possible error objects.  We don't want to overwrite them.
+    delete oResetFields.oErrorObjects;
 
     setSessionMRV((draft) => {
       for (const thisNode of resetKeys) {

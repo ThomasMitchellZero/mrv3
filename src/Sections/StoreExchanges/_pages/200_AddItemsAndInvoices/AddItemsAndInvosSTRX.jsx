@@ -7,15 +7,15 @@ import {
   CashTotalSTRX,
 } from "../../_resources/components/CompConfigsSTRX";
 
-import { baseLocState } from "../../../../globalFunctions/globalJS_classes";
+import {
+  baseLocState,
+  LocStFields,
+} from "../../../../globalFunctions/globalJS_classes";
 
 import { AllEntry30 } from "./AllEntry30";
 import { ItemDetails30STRX } from "../../_resources/components/ItemDetails30STRX";
 
-import {
-  useNodeNav,
-  useClearLocErrStates,
-} from "../../../../mrv/MRVhooks/MRVhooks";
+import { useNodeNav } from "../../../../mrv/MRVhooks/MRVhooks";
 
 import { RtrnItemsList } from "./RtrnItems/RtrnItemsList";
 import { RtrnInvosList } from "./RtrnInvos/RtrnInvosList";
@@ -36,6 +36,11 @@ function AddItemsAndInvosSTRX() {
   const activeMode = locStRt.page.activeMode1;
   const activeUI = locStRt.page.activeUI3;
 
+  const test = new LocStFields({});
+
+  console.log(test);
+  test.showInits();
+
   const oMode = {
     item: {
       s70label: "Items Being Returned",
@@ -54,7 +59,7 @@ function AddItemsAndInvosSTRX() {
 
   const uiContinueWarning = (
     <div className={`footer_text`}>
-      <div className={"buttonBox25 warning"}>{"FaRT warning"}</div>
+      <div className={"buttonBox25 warning"}>{"TBD"}</div>
     </div>
   );
 
@@ -65,8 +70,9 @@ function AddItemsAndInvosSTRX() {
   const handleContinue = (e) => {
     e.stopPropagation();
 
-    if (locStRt.page.activeMode3 === "receipt") {
+    if (activeMode === "receipt") {
       locMethods.entryTabClick({ keyStr: "item" });
+      console.log("itemmmmm");
     } else if (sessionMRV.returnItems.length === 0) {
       setSessionMRV((draft) => {
         draft.locSt.page.errorSt1 = "noItem";

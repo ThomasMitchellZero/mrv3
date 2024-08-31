@@ -21,7 +21,7 @@ function ItemReceiptRow(atomizedItem) {
       totalVal: `$${centsToDollars(totalValue)}`,
     },
     needsReceipt: {
-      invoStr: "Needs Receipt",
+      invoStr: "No Receipt",
       invoColor: "color__red__text",
       color: "color__red__text",
       iconStr: "alert",

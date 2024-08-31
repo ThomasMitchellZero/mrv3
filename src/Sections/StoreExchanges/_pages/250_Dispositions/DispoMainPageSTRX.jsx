@@ -20,19 +20,9 @@ function DispoMainPageSTRX() {
   const nodeNav = useNodeNav();
 
   return (
-    <DispoMainPageMRV
-      sessionState={sessionStateSTRX}
-      setSessionState={setSessionStateSTRX}
-      titleBar={
-        <TitleBarSTRX
-          headerTitle={`Provide reason for return`}
-          showNavNodeBar={true}
-          hasIcon={"back"}
-          navBtnClick={() => nodeNav("returns")}
-        />
-      }
-      cashTotal={<CashTotalSTRX />}
-    />
+    <section className={` mrvPage color__surface__subdued`}>
+      TBD
+    </section>
   );
 }
 

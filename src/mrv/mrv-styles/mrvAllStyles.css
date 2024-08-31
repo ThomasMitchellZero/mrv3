@@ -327,7 +327,7 @@
     }
 
     & .footer_content {
-      flex: 0 0 8rem;
+      flex: 0 0 6rem;
       justify-content: flex-end;
       display: flex;
       flex-direction: row;

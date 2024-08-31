@@ -14,7 +14,6 @@ import { greenify } from "../../../../../mrv/MRVhooks/MRVhooks";
 import { DeleteCardColMRV } from "../../../../../mrv/mrv-components/inputs/DeleteCardColMRV";
 import { returnAtom } from "../../../../../globalFunctions/globalJS_classes";
 
-import { cloneDeep } from "lodash";
 
 const RtrnItemsMainCard = ({ returnItemAtom }) => {
   const mrvCtx = useOutletContext();
