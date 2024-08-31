@@ -8012,6 +8012,36 @@ What to do today?
 
     Let's keep working on that sidesheet.  That's a 'Use Everywhere' component.  
 
+28 Aug 2024
+    2:35.
+    Been coding since this morning but didn't write anything.
+
+    OK, so here is the issue.  I've got a few different states that are semi-related.  I'm tracking the state in 2 places, and it ought to be only one.
+
+    On the main page, there are two modes, Receipts and Items.  AllEntry30 also has those modes.  
+    -Modes are generally set in AllEntry30, although the mode can also change if the user hits 'Continue' from the main page.
+    -AllEntry30 isn't always active.  ItemDetails is gonna be active a fairly large percentage of the time.
+
+    OK, so I think that's my answer.  Page.ActiveUI1 controls the 30-panel.  Page.ActiveMode1 stores Item/Receipt.  So then in the AllEntry30, I just read/set ActiveMode1 on the PAGE.  
+
+31 Aug 2024
+    11:35.
+    I've actually been at this for a bit longer and I am trying to decide if I want to convert my locSt objects into classes.  I'm not sure exactly what problem I am trying to solve, except that I want the Errors object to be frozen and I don't want to have to remember to do it every time.  
+
+    I also want to get more comfortable working with classes.  I am worried that this is the kind of under-hood wankery that keeps me from driving through to the finish.  
+
+    So I can do this.  I can make a big old class.  I guess my worry is that with the factory approach, it's really easy for me to spread in chunks of values, like UIstate, and to keep them consistent throughout.  
+
+    1:30
+    OK, I think I have figured this out.  I guess the next thing I'm wondering is if I could store all methods within each LocSt.  But that might just be overkill?
+
+    Let's just implement this change and then make some shit happen.  Comment out the existing, blow it all up, then keep slinging until it's working again.  Then I really should get down to making some progress.  
+
+    3:50.
+    Well, this sucks a bit of balls.  I don't quite know what's going on, but apparently changing a class's properties doesn't count as a state change?  
+
+    OK.  I still like the structure.  Maybe I just refactor this as a factory function.  I just cannot spend any more time on this.
+
     
 
 

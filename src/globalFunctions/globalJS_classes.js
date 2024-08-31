@@ -385,6 +385,7 @@ class LocStFields {
     activeData1 = null,
     activeData2 = null,
     oErrorObjects = {},
+    oLocStMethods = {},
     oCustomResetFieldArrs = {},
   }) {
     this.input1 = input1;
@@ -401,7 +402,9 @@ class LocStFields {
     this.activeData1 = activeData1;
     this.activeData2 = activeData2;
     this.oErrorObjects = oErrorObjects;
-    // these should be in response to specific interactions
+    this.oLocStMethods = oLocStMethods;
+    // these are for more complex cases where I'm not just clearing a whole category of fields
+    // Intent is for these be in response to specific interactions in the UI.
     this.oCustomResetFieldArrs = oCustomResetFieldArrs;
     this.#inits = { ...this };
 
