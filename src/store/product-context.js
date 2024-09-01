@@ -28,8 +28,6 @@ import washer_2_img from "../assets/product-images/washer_2.png";
 import { MdSubdirectoryArrowRight } from "react-icons/md";
 import {
   Product,
-  productTaxonomyMRV,
-  productKingdomMRV,
 } from "../globalFunctions/globalJS_classes";
 
 const ProductContext = React.createContext({
@@ -173,9 +171,7 @@ const ProductContext = React.createContext({
     itemNum: "3333",
     modelNum: "3YY",
     description: "3 Year LPP",
-    productTaxonomyMRV: productTaxonomyMRV({
-      productKingdomMRV: productKingdomMRV({ lpp: true }),
-    }),
+
   }),
 
   9900: new Product({
@@ -189,9 +185,6 @@ const ProductContext = React.createContext({
     restockFee: 0.2,
     inStock: 99,
     dcLocations: ["AAA"],
-    productTaxonomyMRV: productTaxonomyMRV({
-      productKingdomMRV: productKingdomMRV({ product: true }),
-    }),
   }),
 
   9910: new Product({
@@ -205,9 +198,6 @@ const ProductContext = React.createContext({
     restockFee: 0.2,
     inStock: 99,
     dcLocations: ["BBB"],
-    productTaxonomyMRV: productTaxonomyMRV({
-      productKingdomMRV: productKingdomMRV({ product: true }),
-    }),
   }),
 
   100001: new Product({
@@ -238,9 +228,7 @@ const ProductContext = React.createContext({
     description: "Bosch 4.5-cu ft. High Efficiency Washing Machine",
     inStock: 99,
     dcLocations: ["BBB"],
-    productTaxonomyMRV: productTaxonomyMRV({
-      productKingdomMRV: productKingdomMRV({ product: true }),
-    }),
+
   }),
 
   20110: new Product({
@@ -251,9 +239,6 @@ const ProductContext = React.createContext({
     description: "Whirlpool 5.1-cu ft. Top Loader Washing Machine",
     inStock: 99,
     dcLocations: ["BBB"],
-    productTaxonomyMRV: productTaxonomyMRV({
-      productKingdomMRV: productKingdomMRV({ product: true }),
-    }),
   }),
 
   20200: new Product({
@@ -267,9 +252,7 @@ const ProductContext = React.createContext({
     restockFee: 0.2,
     inStock: 99,
     dcLocations: ["BBB"],
-    productTaxonomyMRV: productTaxonomyMRV({
-      productKingdomMRV: productKingdomMRV({ product: true }),
-    }),
+
   }),
 
   20210: new Product({
@@ -283,9 +266,7 @@ const ProductContext = React.createContext({
     restockFee: 0.2,
     inStock: 99,
     dcLocations: ["BBB"],
-    productTaxonomyMRV: productTaxonomyMRV({
-      productKingdomMRV: productKingdomMRV({ product: true }),
-    }),
+
   }),
 
   20900: new Product({
@@ -296,9 +277,7 @@ const ProductContext = React.createContext({
     description: "8-inch Diamater Galvanized Steel Duct Clamp",
     inStock: 99,
     dcLocations: ["BBB"],
-    productTaxonomyMRV: productTaxonomyMRV({
-      productKingdomMRV: productKingdomMRV({ product: true }),
-    }),
+
   }),
 
   20910: new Product({
@@ -309,9 +288,7 @@ const ProductContext = React.createContext({
     description: "8-Inch x 36-Inch Flexible Dryer Duct",
     inStock: 99,
     dcLocations: ["BBB"],
-    productTaxonomyMRV: productTaxonomyMRV({
-      productKingdomMRV: productKingdomMRV({ product: true }),
-    }),
+
   }),
 
   20920: new Product({
@@ -322,9 +299,7 @@ const ProductContext = React.createContext({
     description: "1/4” x 48” steel-braided hose",
     inStock: 99,
     dcLocations: ["BBB"],
-    productTaxonomyMRV: productTaxonomyMRV({
-      productKingdomMRV: productKingdomMRV({ product: true }),
-    }),
+
   }),
 
   20333: new Product({
@@ -333,9 +308,7 @@ const ProductContext = React.createContext({
     itemNum: "20333",
     modelNum: "3YY",
     description: "3 Year LPP",
-    productTaxonomyMRV: productTaxonomyMRV({
-      productKingdomMRV: productKingdomMRV({ service: true }),
-    }),
+
   }),
 });
 

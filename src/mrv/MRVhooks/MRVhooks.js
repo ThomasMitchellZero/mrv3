@@ -20,10 +20,9 @@ import {
   navNode,
   SingleDispo,
   ItemDisposObj,
-  productKingdomMRV,
-  productTaxonomyMRV,
+  itemReturnReasons,
+  oReturnReason,
   parentChildGroup,
-  merchTree,
 } from "../../globalFunctions/globalJS_classes";
 
 import { cloneDeep, isEmpty } from "lodash";
@@ -84,8 +83,6 @@ const atomsMonetizer = (arrayOfAtoms) => {
 
   const outTotalMoneyObj = new moneyObj({ salesTaxRate: undefined });
 
-  const refMerchTree = merchTree;
-
   for (const thisAtom of arrayToSum) {
     const atomQty = thisAtom.atomItemQty;
 
@@ -144,35 +141,8 @@ function childGrouper({ itemAtomsArr = [], itemCatelog = {} }) {
       return thisAtom.parentKey === thisParentAtom.atomItemNum;
     });
 
-    // THIS IS OLD.  I don't know what the solve is but it's not gonna be this.
-
-    const filterKingdom = (
-      // To be used in a filter method.  Returns true if the atom's productKingdomMRV matches the passed keyStr.
-      thisItemAtom = new returnAtom({}),
-      kingdomKeyStr = productKingdomMRV({})
-    ) => {
-      const bifrostKey = thisItemAtom.bifrostKey;
-
-      const itemKingdom =
-        itemCatelog?.[bifrostKey]?.productTaxonomyMRV?.productKingdomMRV;
-
-      return itemKingdom === kingdomKeyStr;
-    };
-
-    // filter the different children by category.
-    outPCgroup.accessories = outPCgroup.allChildren.filter((thisAtom) => {
-      return filterKingdom(thisAtom, productKingdomMRV({ product: true }));
-    });
-
-    outPCgroup.services = outPCgroup.allChildren.filter((thisAtom) => {
-      return filterKingdom(thisAtom, productKingdomMRV({ service: true }));
-    });
-
-    outPCgroup.lpp = outPCgroup.allChildren.filter((thisAtom) => {
-      return filterKingdom(thisAtom, productKingdomMRV({ lpp: true }));
-    });
-
-    return outPCgroup;
+    // I still need to come up with a way of actually grouping these children.
+    // It's gonna be some kind of class system but I'm not sure how to implement it yet.
   };
 
   const outGroupedArr = parentArr.map((thisParentAtom) => {
@@ -204,6 +174,46 @@ function useChildGrouper() {
 }
 
 export { useChildGrouper };
+
+function returnReasoner(sessionState) {
+  const oldReturnReasons = cloneDeep(sessionState.returnReasons);
+  const sessionItems = sessionState.returnItems;
+  const refbaseReturnState = baseReturnState({});
+  const refItemAtom = new returnAtom({});
+  const refReturnReasons = itemReturnReasons({});
+  const refOReturnReason = oReturnReason({});
+
+  // start with empty ReturnReasons object so that deleted items don't persist.
+  const outReturnReasons = {};
+
+  // loop through the session items to ensure no return reasons for deleted items persist.
+  for (const thisItem of sessionItems) {
+    console.log("thisItem", thisItem);
+    // making a new returnReason object to ensure no stale data is present.
+
+    const outItemReasons = itemReturnReasons({
+      itemAtom: thisItem,
+    });
+
+    // collect the old reasons if they exist, otherwise an empty object.
+    const oldReasons = {
+      ...oldReturnReasons?.[thisItem.atomItemNum]?.oAllItemReasons,
+    };
+
+    // merge the old reasons (if any) with the new reasons.
+    outItemReasons.oAllItemReasons = {
+      ...outReturnReasons.oAllItemReasons,
+      ...oldReasons,
+    };
+
+    // HAVE NOT yet verified that this actually preserves the old reasons.  I think it does.
+
+    outReturnReasons[thisItem.atomItemNum] = outItemReasons;
+  }
+
+  // returns the new returnReasons object.  We still have to set it in the state.
+  return outReturnReasons;
+}
 
 const populateDisposArr = ({ sessionSt = baseReturnState({}) }) => {
   // returns an array of SingleDispo objects from an array of return items.
@@ -331,7 +341,6 @@ export { useNodeNav };
 
 // Make a change to the items in the current session state.
 
-
 function useResetLocStFields() {
   // loops through the locSt object and merges the specified replacement fields into the specified nodes.
   const mrvCtx = useOutletContext();
@@ -345,7 +354,6 @@ function useResetLocStFields() {
     const refLocFields = locStFields;
 
     const resetKeys = aNodeKeysToReset || Object.keys(sessionMRV.locSt);
-
 
     if (Object.keys(oResetFields).length === 0) {
       console.log("No reset vals provided");
@@ -367,40 +375,6 @@ function useResetLocStFields() {
 }
 
 export { useResetLocStFields };
-
-/*
-
-
-
-
-
-
-function useResetLocStFields() {
-  const mrvCtx = useOutletContext();
-  const sessionMRV = mrvCtx.sessionMRV;
-  const setSessionMRV = mrvCtx.setSessionMRV;
-
-  // returns a function that resets the specified fields in the locSt object.
-  const outResetter = ({aNodeKeysToClear, oReplacementFieldVals}) => {
-    const outLocSt = resetLocStFields({
-      sessionLocSt: sessionMRV.locSt,
-      aNodeKeysToClear,
-      oReplacementFieldVals,
-    });
-
-    setSessionMRV((draft) => {
-      draft.locSt = outLocSt;
-    });
-
-  };
-  return outResetter;
-
-}
-
-export { useResetLocStFields };
-
-
-*/
 
 function useSetSessionItems() {
   const itemsCtx = useContext(ProductContext);
@@ -677,6 +651,8 @@ function returnAutoDeriver(clonedDraft) {
 
   // auto-add child atoms if their parent is in the returnItems
   outSessionState = autoAddChildAtoms(outSessionState);
+
+  outSessionState.returnReasons = returnReasoner(outSessionState);
 
   // atomize the returnItems
   outSessionState.atomizedReturnItems = returnAtomizer({

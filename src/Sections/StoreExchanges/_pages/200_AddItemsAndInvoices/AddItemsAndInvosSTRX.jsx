@@ -9,7 +9,7 @@ import {
 
 import {
   baseLocState,
-  LocStFields,
+  locStFields,
 } from "../../../../globalFunctions/globalJS_classes";
 
 import { AllEntry30 } from "./AllEntry30";
@@ -30,16 +30,14 @@ function AddItemsAndInvosSTRX() {
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const nodeNav = useNodeNav();
-  const locStRt = sessionMRV.locSt;
   const locMethods = useLocStMethods_STRX();
 
-  const activeMode = locStRt.page.activeMode1;
-  const activeUI = locStRt.page.activeUI3;
+  const activeMode = sessionMRV.locSt.page.activeMode1;
+  const activeUI = sessionMRV.locSt.page.activeUI3;
 
-  const test = new LocStFields({});
+  console.log("activeMode", activeMode);
+  console.log("activeUI", activeUI);
 
-  console.log(test);
-  test.showInits();
 
   const oMode = {
     item: {
@@ -65,7 +63,6 @@ function AddItemsAndInvosSTRX() {
 
   /* ---- SHARED FUNCTIONS ---- */
 
-  const refBaseLocState = baseLocState;
 
   const handleContinue = (e) => {
     e.stopPropagation();
@@ -94,7 +91,7 @@ function AddItemsAndInvosSTRX() {
           showNavNodeBar={true}
         />
         <div className={`main_content`}>{oMode[activeMode].s70panel}</div>
-        {locStRt.page.errorSt1 === "noItem" ? uiContinueWarning : null}
+        {sessionMRV.locSt.page.errorSt1 === "noItem" ? uiContinueWarning : null}
         <div className={`footer_content`}>
           <CashTotalSTRX />
           <div className={`buttonBox25`}>

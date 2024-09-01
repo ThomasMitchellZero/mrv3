@@ -8042,9 +8042,24 @@ What to do today?
 
     OK.  I still like the structure.  Maybe I just refactor this as a factory function.  I just cannot spend any more time on this.
 
-    
+    4:40.
+    OK.  That time is gone, and worrying about it does nothing for us.  The man we want to be would focus on what he can do next.  And at the moment, that is getting Return Reasons up and running.
 
+    Return Reasons are going to be provided in-line, and I'm not actually sure that having it as a subsequent step was great to begin with.  So what I need to do is ensure that items in the Return cart have Dispo counterparts.  
 
+    Also.  I am confused.  I have classes all over the place.  ReturnAtom, singleDispo, etc.  Can it really be the case that class changes NEVER trigger a re-render?  And if so, how has this never been a problem before?
+
+    Screw it.  Focus.  
+
+    In retrospect, I think it was a mistake to have Qty stored separately for the ItemDisposObj.  I've got a connect to the itemAtom itself.  I think what I want to do is have the ItemDisposObj ONLY store dispositions because those can change independent of the item qty.  So what then would I need?
+
+    If an item is added to the cart, it should get an ItemDisposObj created along with it.  I guess I should also clear the disposObj if the item gets deleted, since that's a recovery scenario.  But it's a little tricky because I need to preserve whatever values have been added to the ItemDisposObj.
+
+    I guess the other way I could go about it is that whenever the itemCart changes, I could:
+        -loop through the items.
+        -
+
+    8:00.  OK.  It's at a point where the empty return reasons are at least refreshing as intended.  I think this is a very good stopping point.  Sucks that we went down that rathole, but we should be proud that we got back on the horse and still delivered something useful.  
 
 
 

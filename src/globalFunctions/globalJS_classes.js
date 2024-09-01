@@ -1,7 +1,6 @@
 //---- Product ----
 
 import { cloneDeep } from "lodash";
-import { act } from "react";
 
 class moneyObj {
   constructor({
@@ -82,35 +81,93 @@ class ItemDisposObj {
 
 export { SingleDispo, ItemDisposObj };
 
-const productKingdomMRV = ({
-  lpp = false,
-  service = false,
-  product = false,
+// This is the latest for Return Reasons.  I eventually want to sunset all the Dispos stuff.
+
+const oReturnReason = ({
+  keyStr = "",
+  strLabel = "NO LABEL",
+  isDefective = false,
+  reasonQty = 0,
 }) => {
-  let outTypeStr = lpp ? "lpp" : service ? "service" : "product";
-  return outTypeStr;
+  const uiLabel =
+    isDefective && reasonQty ? `${strLabel}: ${reasonQty}` : `${strLabel}`;
+  return { keyStr, strLabel, isDefective, reasonQty, uiLabel };
 };
 
-export { productKingdomMRV };
+const defaultReturnReasons = {
+  noWorky: oReturnReason({
+    isDefective: true,
+    keyStr: "noWorky",
+    strLabel: "Doesn't Work",
+  }),
+  missingParts: oReturnReason({
+    isDefective: true,
+    keyStr: "missingParts",
+    strLabel: "Missing Parts",
+  }),
+  rusted: oReturnReason({
+    isDefective: true,
+    keyStr: "rusted",
+    strLabel: "Rusted Metal",
+  }),
+  cosmetic: oReturnReason({
+    isDefective: true,
+    keyStr: "cosmetic",
+    strLabel: "Cosmetic",
+  }),
 
-const productTaxonomyMRV = ({ productKingdomMRV = null }) => {
-  // Returns an object with the product's entire taxonomy.
-  const outProdTaxonomy = {};
-  outProdTaxonomy.productKingdomMRV =
-    productKingdomMRV || productKingdomMRV({});
-  return outProdTaxonomy;
+  // Didn't Want / Need Reasons
+
+  boughtWrong: oReturnReason({
+    isDefective: false,
+    keyStr: "boughtWrong",
+    strLabel: "Bought Wrong Item",
+  }),
+  foundCheaper: oReturnReason({
+    isDefective: false,
+    keyStr: "foundCheaper",
+    strLabel: "Found Better Price",
+  }),
+  notNeeded: oReturnReason({
+    isDefective: false,
+    keyStr: "notNeeded",
+    strLabel: "Item Not Needed",
+  }),
+  tooMany: oReturnReason({
+    isDefective: false,
+    keyStr: "tooMany",
+    strLabel: "Bought Too Many",
+  }),
+  other: oReturnReason({
+    isDefective: false,
+    keyStr: "other",
+    strLabel: "Other Reason",
+  }),
 };
 
-export { productTaxonomyMRV };
+const itemReturnReasons = ({
+  itemAtom = new returnAtom({}),
+  oAllItemReasons = { ...defaultReturnReasons },
+}) => {
+  const refOSingleReason = oReturnReason({});
+  const itemQty = itemAtom.atomItemQty;
+  const itemNum = itemAtom.atomItemNum;
+  const reasonQty = Object.values(oAllItemReasons).reduce((acc, curr) => {
+    return acc + curr.reasonQty;
+  }, 0);
+  const qtySansReason = itemQty - reasonQty;
 
-const merchTree = {
-  lpp: {},
-  service: {},
-  item: {},
-  reduction: {},
+  return {
+    itemAtom,
+    oAllItemReasons,
+    itemQty,
+    itemNum,
+    reasonQty,
+    qtySansReason,
+  };
 };
 
-export { merchTree };
+export { oReturnReason, itemReturnReasons };
 
 function parentChildGroup({
   parentAtom = new returnAtom({}),
@@ -137,7 +194,6 @@ class Product {
     restockFee = null,
     inStock = 99,
     dcLocations = {},
-    productTaxonomyMRV = null,
   }) {
     this.img = img;
     this.price = price;
@@ -151,7 +207,6 @@ class Product {
     this.restockFee = restockFee;
     this.inStock = inStock;
     this.dcLocations = dcLocations;
-    this.productTaxonomyMRV = productTaxonomyMRV;
   }
 }
 
@@ -364,10 +419,12 @@ const locStFields = {
   activeData1: null,
   activeData2: null,
   oErrorObjects: {},
+  init: {},
 };
 
 export { locStFields };
 
+/*
 class LocStFields {
   #inits;
   constructor({
@@ -449,6 +506,8 @@ class LocStFields {
 
 export { LocStFields };
 
+*/
+
 const locStBaseMethods = {};
 
 const baseLocState = {
@@ -470,6 +529,7 @@ const baseReturnState = ({
   totalReplacementValue = new moneyObj({}),
   cashDeltaMO = new moneyObj({}),
   sessionInvos = {},
+  returnReasons = {},
   returnItemDispos = [],
   oNavNodes = {},
   locSt = cloneDeep(baseLocState),
