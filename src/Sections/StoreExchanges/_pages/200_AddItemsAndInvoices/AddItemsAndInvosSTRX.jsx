@@ -1,5 +1,7 @@
 import "./_AddItemsAndInvosSTRX.css";
 
+import { ContinueBtnMRV } from "../../../../mrv/mrv-components/inputs/ContinueBtnMRV";
+
 import { useLocStMethods_STRX } from "../../_resources/components/CompHooks_STRX";
 
 import {
@@ -35,7 +37,6 @@ function AddItemsAndInvosSTRX() {
   const activeMode = sessionMRV.locSt.page.activeMode1;
   const activeUI = sessionMRV.locSt.page.activeUI3;
 
-  
   const oMode = {
     item: {
       s70label: "Items Being Returned",
@@ -59,7 +60,6 @@ function AddItemsAndInvosSTRX() {
   );
 
   /* ---- SHARED FUNCTIONS ---- */
-
 
   const handleContinue = (e) => {
     e.stopPropagation();
@@ -91,16 +91,7 @@ function AddItemsAndInvosSTRX() {
         {sessionMRV.locSt.page.errorSt1 === "noItem" ? uiContinueWarning : null}
         <div className={`footer_content`}>
           <CashTotalSTRX />
-          <div className={`buttonBox25`}>
-            <button
-              className={`primary jumbo maxFlex`}
-              onClick={(e) => {
-                handleContinue(e);
-              }}
-            >
-              Continue
-            </button>
-          </div>
+          <ContinueBtnMRV />
         </div>
       </main>
       {o30panels[activeUI]}

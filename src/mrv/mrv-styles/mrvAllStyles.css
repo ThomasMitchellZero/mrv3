@@ -363,6 +363,16 @@
       padding: 0rem 0rem 0rem var(--PrimaryPadding__horizontal);
       justify-content: center;
     }
+
+    & .continueBtnBox {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      align-items: center;
+      width: 33%;
+      padding: 0rem 0rem 0rem var(--PrimaryPadding__horizontal);
+    }
   }
 
   & .mrvPage .border__left {
@@ -439,6 +449,12 @@
     &.jumbo {
       height: 6rem;
       font-size: 1.75rem;
+    }
+
+    &.continueBtn {
+      font-size: 1.75rem;
+      flex: 1 1 0rem;
+      width: 100%;
     }
 
     &.miniBtn {
@@ -718,6 +734,10 @@
 
   & .gap1rem {
     gap: 1rem;
+  }
+
+  & .gap25pct {
+    gap: 0.25rem;
   }
 
   & .gap0rem {

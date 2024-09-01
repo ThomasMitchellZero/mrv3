@@ -25,20 +25,6 @@ const RtrnInvosCardLowInfo = ({ invoice = new Invoice_SR({}) }) => {
   const setSessionMRV = mrvCtx.setSessionMRV;
   const setSessionInvosMRV = useSetSessionInvos();
 
-  /*
-
-    const uiInvoCard = (invoObj) => {
-    const aInvoProducts = invoObj.itemAtomsArr;
-    // filter out any child items, since they will be displayed adjacent to their parent item.
-    const mainItems = aInvoProducts.filter((thisAtom) => {
-      return !thisAtom.parentKey;
-    });
-
-      };
-  
-  
-  */
-
   const refInvo = new Invoice_SR({});
 
   return (

@@ -40,7 +40,6 @@ const InvoEntry_SC_STRX = () => {
   const setSessionItems = useSetSessionItems();
   const setSessionInvosMRV = useSetSessionInvos();
 
-
   const noInvos = isEmpty(sessionMRV.sessionInvos);
 
   const invoCtx = useContext(InvoContext);

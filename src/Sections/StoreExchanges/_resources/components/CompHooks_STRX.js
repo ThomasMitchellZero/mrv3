@@ -21,10 +21,6 @@ function useLocStMethods_STRX() {
 
   // Shared Methods -------------------------------------
 
-  const defaultReset = () => {
-    const refLocFields = locStFields();
-  };
-
   const bgClick = () => {
     setSession((draft) => {
       console.log("Tried to BG click");
@@ -47,7 +43,11 @@ function useLocStMethods_STRX() {
 
     setSession((draft) => {
       draft.locSt.page.activeMode1 = keyStr;
-      draft.locSt.AllEntry30 = { ...draft.locSt.AllEntry30, ...clearedErrors, ...clearedInputs };
+      draft.locSt.AllEntry30 = {
+        ...draft.locSt.AllEntry30,
+        ...clearedErrors,
+        ...clearedInputs,
+      };
     });
   };
   outMethods.entryTabClick = entryTabClick;
@@ -55,8 +55,6 @@ function useLocStMethods_STRX() {
   const handleItemInvoContinue = () => {
     // still need to set up.
     console.log("handleItemInvoContinue");
-    //clearErrors();
-    defaultReset();
   };
 
   //-------------------------------------
