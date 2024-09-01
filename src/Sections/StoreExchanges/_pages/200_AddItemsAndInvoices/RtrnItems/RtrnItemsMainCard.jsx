@@ -14,7 +14,6 @@ import { greenify } from "../../../../../mrv/MRVhooks/MRVhooks";
 import { DeleteCardColMRV } from "../../../../../mrv/mrv-components/inputs/DeleteCardColMRV";
 import { returnAtom } from "../../../../../globalFunctions/globalJS_classes";
 
-
 const RtrnItemsMainCard = ({ returnItemAtom }) => {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
@@ -56,83 +55,6 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
   };
 
   ///////////////////////////////////////////////////////////////////
-  //                     Row for each invoiced Item.
-  ///////////////////////////////////////////////////////////////////
-
-  /*
-
-    const uiReceiptRow = (atomizedItem) => {
-    // invoStatus will eventually include NRR Lifetime Warranty.
-    const invoStatus = atomizedItem.atomInvoNum ? "receipted" : "needsReceipt";
-    const moneyObj = atomizedItem.atomMoneyObj;
-    const unitBaseValue = moneyObj.unitBaseValue;
-
-    const iconStyle = {
-      ctnrSize: "2.5rem",
-      fontSize: "2rem",
-      backgroundColor: "color__surface__default",
-      color: "color__primary__text",
-      radius: "100%",
-    };
-
-    const uiRecieptIcon = <DescriptorIcon {...iconStyle} />;
-
-    const oConfigs = {
-      receipted: {
-        color: greenify(unitBaseValue),
-        iconStr: "receipt",
-        unitVal: `$${centsToDollars(atomizedItem.atomMoneyObj.unitBaseValue)}`,
-        totalVal: `$${centsToDollars(
-          atomizedItem.atomMoneyObj.unitBaseValue * atomizedItem.atomItemQty
-        )}`,
-      },
-      needsReceipt: {
-        color: "color__red__text",
-        iconStr: "alert",
-        unitVal: "- -",
-        totalVal: "- -",
-      },
-    };
-
-    const totalValue = unitBaseValue * atomizedItem.atomItemQty;
-    const oVals = {
-      invo: hasInvo ? `#${atomizedItem.atomInvoNum}` : "Needs Receipt",
-      red: hasInvo ? "" : "color__red__text",
-      unitVal: hasInvo ? `$${centsToDollars(unitBaseValue)}` : "- -",
-      totalVal: hasInvo ? `$${centsToDollars(totalValue)}` : "- -",
-    };
-
-    // greenify neg. values because they are stored as positive in the invoices.
-    return (
-      <div key={atomizedItem.primaryKey} className={`invoInfoRow`}>
-        <div className={`body__small field receiptCol ${oVals.red}`}>
-          {`${oVals.invo}`}
-        </div>
-        <div className={`unitQtyCol field body keepSpace ${oVals.red}`}>
-          {`${atomizedItem.atomItemQty}   x`}
-        </div>
-        <div
-          className={`unitPriceCol field body alignRight ${greenify(
-            unitBaseValue
-          )}`}
-        >
-          {oVals.unitVal}
-        </div>
-        <div
-          className={`totalPriceCol field alignRight body bold ${greenify(
-            totalValue
-          )}`}
-        >
-          {oVals.totalVal}
-        </div>
-      </div>
-    );
-  };
-  
-  
-  */
-
-  ///////////////////////////////////////////////////////////////////
   //                     Tile for an item.
   ///////////////////////////////////////////////////////////////////
 
@@ -140,22 +62,26 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
     const refAtom = new returnAtom({});
 
     const handleClick = (event) => {
-      //FIX WITH SHARED LOCAL STATE
+      event.stopPropagation();
+      console.log("tileItemAtom", tileItemAtom);
+      setSessionMRV((draft) => {
+        draft.locSt.page.activeData1 = tileItemAtom
+      });
     };
 
-    const activeClass = ""; // FIX WITH SHARED LOCAL STATE
+    const activeClass = tileItemAtom.atomItemNum === sessionMRV.locSt.page.activeData1?.atomItemNum ? "selected" : "";
 
     const aInfoRows = aAtomizedItems.filter((thisSubAtom) => {
       return thisSubAtom.atomItemNum === tileItemAtom.atomItemNum;
     });
 
     const aInfoRowsUI = aInfoRows.map((thisSubAtom) => {
-      return ItemReceiptRow(thisSubAtom);
+      return <ItemReceiptRow atomizedItem={thisSubAtom} />;
     });
 
     return (
       <div
-        key={tileItemAtom.atomItemNum}
+        key={`${tileItemAtom.primaryKey}tile`}
         className={`itemRow subCardStyle ${activeClass}`}
         onClick={(e) => handleClick(e)}
       >
@@ -194,7 +120,7 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
 
   return (
     <div
-      key={returnItemAtom.primaryKey}
+      key={`${returnItemAtom.atomItemNum}card`}
       className={`cardStyle entryCard items_grid`}
       onClick={(e) => {
         e.stopPropagation();

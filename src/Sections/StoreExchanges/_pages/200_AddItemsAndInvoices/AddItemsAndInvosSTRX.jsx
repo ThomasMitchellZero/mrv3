@@ -35,10 +35,7 @@ function AddItemsAndInvosSTRX() {
   const activeMode = sessionMRV.locSt.page.activeMode1;
   const activeUI = sessionMRV.locSt.page.activeUI3;
 
-  console.log("activeMode", activeMode);
-  console.log("activeUI", activeUI);
-
-
+  
   const oMode = {
     item: {
       s70label: "Items Being Returned",

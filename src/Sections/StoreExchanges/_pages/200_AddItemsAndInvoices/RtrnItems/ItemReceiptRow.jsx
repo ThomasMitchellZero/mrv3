@@ -3,7 +3,7 @@ import { DescriptorIcon } from "../../../../../mrv/mrv-components/DisplayOutputs
 
 import { centsToDollars, greenify } from "../../../../../mrv/MRVhooks/MRVhooks";
 
-function ItemReceiptRow(atomizedItem) {
+function ItemReceiptRow({atomizedItem}) {
   // invoStatus will eventually include NRR Lifetime Warranty.
   const invoStatus = atomizedItem.atomInvoNum ? "receipted" : "needsReceipt";
   const moneyObj = atomizedItem.atomMoneyObj;
@@ -42,10 +42,9 @@ function ItemReceiptRow(atomizedItem) {
     backgroundcolor: "red",
   };
 
-
   // greenify neg. values because they are stored as positive in the invoices.
   return (
-    <div key={atomizedItem.primaryKey} className={`invoInfoRow`}>
+    <div key={`${atomizedItem.atomItemNum}row`} className={`invoInfoRow`}>
       <div className={`body__small field receiptCol`}>
         <div className={`receiptNum body color__primary__text`}>
           <DescriptorIcon {...iconStyle} />

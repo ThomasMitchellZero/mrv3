@@ -1,40 +1,40 @@
-
-
+import { set } from "lodash";
 import {
   returnAtom,
   baseLocState,
+  locStFields,
   clearedErrors,
   clearedInputs,
-  locStFields,
 } from "../../../../globalFunctions/globalJS_classes";
 
-
-import {
-  useResetLocStFields,
-} from "../../../../mrv/MRVhooks/MRVhooks";
+import {} from "../../../../mrv/MRVhooks/MRVhooks";
 
 import { useOutletContext } from "react-router";
 
 function useLocStMethods_STRX() {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
-  const setSessionMRV = mrvCtx.setSessionMRV;
+  const setSession = mrvCtx.setSessionMRV;
   const locStRt = sessionMRV.locSt;
-  const resetFields = useResetLocStFields();
 
   const outMethods = {};
 
   // Shared Methods -------------------------------------
 
   const defaultReset = () => {
-    console.log("defaultReset");
-    resetFields({ oResetFields: { ...clearedErrors } });
+    const refLocFields = locStFields();
   };
 
   const bgClick = () => {
-    console.log("bgClick");
-    //clearErrors();
-    defaultReset();
+    setSession((draft) => {
+      console.log("Tried to BG click");
+      draft.locSt.page = {
+        ...draft.locSt.page,
+        ...clearedErrors,
+        activeData1: null,
+      };
+      draft.locSt.AllEntry30 = { ...draft.locSt.AllEntry30, ...clearedErrors };
+    });
   };
 
   outMethods.bgClick = bgClick;
@@ -44,18 +44,20 @@ function useLocStMethods_STRX() {
     REF_keyStr____item_receipt,
   }) => {
     // handles toggle between item and receipt entry
-    const refLocFields = baseLocState;
 
-    setSessionMRV((draft) => {
+    setSession((draft) => {
       draft.locSt.page.activeMode1 = keyStr;
-    });
-
-    resetFields({
-      aNodeKeysToReset: [locStRt.AllEntry30._keyStr],
-      oResetFields: { ...clearedInputs, ...clearedErrors },
+      draft.locSt.AllEntry30 = { ...draft.locSt.AllEntry30, ...clearedErrors, ...clearedInputs };
     });
   };
   outMethods.entryTabClick = entryTabClick;
+
+  const handleItemInvoContinue = () => {
+    // still need to set up.
+    console.log("handleItemInvoContinue");
+    //clearErrors();
+    defaultReset();
+  };
 
   //-------------------------------------
 
