@@ -2,7 +2,7 @@ function ContinueBtnMRV({
   btnText = "Continue",
   warningText = "",
   handleClick = () => {
-    console.log("No Continue Function");
+    console.log("No Continue Function Set");
   },
 }) {
   return (
