@@ -1,6 +1,7 @@
 //---- Product ----
 
 import { cloneDeep } from "lodash";
+import { act } from "react";
 
 class moneyObj {
   constructor({
@@ -423,6 +424,59 @@ const locStFields = {
 };
 
 export { locStFields };
+
+/*
+
+*/
+
+const makeLocStFields = ({
+  _keyStr = "",
+  input1 = "",
+  input2 = "",
+  input3 = "",
+  input4 = "",
+  activeError1 = null,
+  activeError2 = null,
+  activeKey1 = "",
+  activeKey2 = "",
+  activeMode1 = "",
+  activeMode2 = "",
+  activeData1 = null,
+  activeData2 = null,
+  activeUI1 = "",
+  activeUI2 = "",
+  activeUI3 = "",
+  oErrorObjects = {},
+}) => {
+  const locStFields = {
+    _keyStr,
+    input1,
+    input2,
+    input3,
+    input4,
+    activeError1,
+    activeError2,
+    activeKey1,
+    activeKey2,
+    activeMode1,
+    activeMode2,
+    activeData1,
+    activeData2,
+    activeUI1,
+    activeUI2,
+    activeUI3,
+    oErrorObjects,
+  };
+  const init = structuredClone(locStFields);
+  delete init.oErrorObjects;
+  locStFields.init = init;
+  Object.freeze(locStFields.oErrorObjects);
+  Object.freeze(locStFields.init);
+
+  return locStFields;
+};
+
+export { makeLocStFields };
 
 /*
 class LocStFields {

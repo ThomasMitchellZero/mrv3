@@ -36,6 +36,8 @@ function AddItemsAndInvosSTRX() {
 
   const activeMode = sessionMRV.locSt.page.activeMode1;
   const activeUI = sessionMRV.locSt.page.activeUI3;
+  const errorObjRt = sessionMRV.locSt.page.oErrorObjects;
+  const activeError = sessionMRV.locSt.page.activeError1;
 
   const oMode = {
     item: {
@@ -53,11 +55,8 @@ function AddItemsAndInvosSTRX() {
     ItemDetails30: <ItemDetails30STRX stateItemArr="returnItems" />,
   };
 
-  const uiContinueWarning = (
-    <div className={`footer_text`}>
-      <div className={"buttonBox25 warning"}>{"TBD"}</div>
-    </div>
-  );
+  const uiContinueWarning =
+    activeError?.key === "noItems" ? errorObjRt?.noItems?.str : "";
 
   /* ---- SHARED FUNCTIONS ---- */
 
@@ -65,11 +64,10 @@ function AddItemsAndInvosSTRX() {
     e.stopPropagation();
 
     if (activeMode === "receipt") {
-      locMethods.entryTabClick({ keyStr: "item" });
-      console.log("itemmmmm");
+      locMethods.modeSwitch({ keyStr: "item" });
     } else if (sessionMRV.returnItems.length === 0) {
       setSessionMRV((draft) => {
-        draft.locSt.page.errorSt1 = "noItem";
+        draft.locSt.page.activeError1 = errorObjRt?.noItems;
       });
     } else {
       nodeNav("reason");
@@ -80,18 +78,20 @@ function AddItemsAndInvosSTRX() {
 
   return (
     <section className={`addItemsAndInvos mrvPage color__surface__subdued`}>
-      <main onClick={locMethods.bgClick} className={`mrvPanel__main`}>
+      <main onClick={locMethods.clearDataToo} className={`mrvPanel__main`}>
         <TitleBarSTRX
-          //hasIcon={"back"}
           showProductName={true}
           headerTitle={oMode[activeMode].s70label}
           showNavNodeBar={true}
         />
         <div className={`main_content`}>{oMode[activeMode].s70panel}</div>
-        {sessionMRV.locSt.page.errorSt1 === "noItem" ? uiContinueWarning : null}
+
         <div className={`footer_content`}>
           <CashTotalSTRX />
-          <ContinueBtnMRV />
+          <ContinueBtnMRV
+            warningText={uiContinueWarning}
+            handleClick={(e) => handleContinue(e)}
+          />
         </div>
       </main>
       {o30panels[activeUI]}

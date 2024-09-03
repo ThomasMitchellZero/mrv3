@@ -341,34 +341,99 @@ export { useNodeNav };
 
 // Make a change to the items in the current session state.
 
-function useResetLocStFields() {
+function useResetLocStFields(locStKey) {
   // loops through the locSt object and merges the specified replacement fields into the specified nodes.
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
 
-  const resetLocStFields = ({ aNodeKeysToReset = null, oResetFields = {} }) => {
+  const resetLocStFields = ({
+    input1 = false,
+    input2 = false,
+    input3 = false,
+    input4 = false,
+    inputALL = false,
+    activeError1 = false,
+    activeError2 = false,
+    activeErrorALL = false,
+    activeKey1 = false,
+    activeKey2 = false,
+    activeKeyALL = false,
+    activeMode1 = false,
+    activeMode2 = false,
+    activeModeALL = false,
+    activeData1 = false,
+    activeData2 = false,
+    activeDataALL = false,
+    activeUI1 = false,
+    activeUI2 = false,
+    activeUI3 = false,
+    activeUIALL = false,
+  }) => {
     // returns a new locSt object with all fields cleared.
     const refDefaultState = baseReturnState({});
     const refBaseLocState = baseLocState;
     const refLocFields = locStFields;
 
-    const resetKeys = aNodeKeysToReset || Object.keys(sessionMRV.locSt);
+    const args = {
+      input1,
+      input2,
+      input3,
+      input4,
+      activeError1,
+      activeError2,
+      activeKey1,
+      activeKey2,
+      activeMode1,
+      activeMode2,
+      activeData1,
+      activeData2,
+      activeUI1,
+      activeUI2,
+      activeUI3,
+    };
 
-    if (Object.keys(oResetFields).length === 0) {
-      console.log("No reset vals provided");
+    // the ALLs are for convenience.  They will override any other values.
+    if (inputALL) {
+      [args.input1, args.input2, args.input3, args.input4] = [
+        true,
+        true,
+        true,
+        true,
+      ];
     }
 
-    // oErrorObjects contain possible error objects.  We don't want to overwrite them.
-    delete oResetFields.oErrorObjects;
+    if (activeErrorALL) {
+      [args.activeError1, args.activeError2] = [true, true];
+    }
+
+    if (activeKeyALL) {
+      [args.activeKey1, args.activeKey2] = [true, true];
+    }
+
+    if (activeModeALL) {
+      [args.activeMode1, args.activeMode2] = [true, true];
+    }
+
+    if (activeDataALL) {
+      [args.activeData1, args.activeData2] = [true, true];
+    }
+
+    if (activeUIALL) {
+      [args.activeUI1, args.activeUI2, args.activeUI3] = [true, true, true];
+    }
+
+    const outLocSt = {};
+    const init = sessionMRV.locSt[locStKey].init;
+
+    for (const [key, value] of Object.entries(args)) {
+      if (value) {
+        outLocSt[key] = init[key];
+      }
+    }
 
     setSessionMRV((draft) => {
-      for (const thisNode of resetKeys) {
-        draft.locSt[thisNode] = {
-          ...draft.locSt[thisNode],
-          ...oResetFields,
-        };
-      }
+      Object.assign(draft.locSt[locStKey], outLocSt);
     });
   };
   return resetLocStFields;

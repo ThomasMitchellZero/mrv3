@@ -7,7 +7,7 @@ import {
   clearedInputs,
 } from "../../../../globalFunctions/globalJS_classes";
 
-import {} from "../../../../mrv/MRVhooks/MRVhooks";
+import { useResetLocStFields } from "../../../../mrv/MRVhooks/MRVhooks";
 
 import { useOutletContext } from "react-router";
 
@@ -19,38 +19,38 @@ function useLocStMethods_STRX() {
 
   const outMethods = {};
 
+  const resetPageLS = useResetLocStFields("page");
+  const resetAllEntry30LS = useResetLocStFields("AllEntry30");
+
   // Shared Methods -------------------------------------
 
-  const bgClick = () => {
-    setSession((draft) => {
-      console.log("Tried to BG click");
-      draft.locSt.page = {
-        ...draft.locSt.page,
-        ...clearedErrors,
-        activeData1: null,
-      };
-      draft.locSt.AllEntry30 = { ...draft.locSt.AllEntry30, ...clearedErrors };
-    });
+
+  const basicClear = () => {
+    console.log("Ya Basic");
+    resetPageLS({ activeErrorALL: true });
+    resetAllEntry30LS({ activeErrorALL: true });
   };
 
-  outMethods.bgClick = bgClick;
+  outMethods.basicClear = basicClear;
 
-  const entryTabClick = ({
-    keyStr = "receipt",
-    REF_keyStr____item_receipt,
-  }) => {
-    // handles toggle between item and receipt entry
+  const clearDataToo = () => {
+    console.log("And Your Little Data Too"); 
+    resetAllEntry30LS({ activeErrorALL: true });
+    resetPageLS({ activeErrorALL: true, activeData1: true });
+  }
 
+  outMethods.clearDataToo = clearDataToo;
+
+
+  const modeSwitch = ({ keyStr = "receipt" }) => {
     setSession((draft) => {
       draft.locSt.page.activeMode1 = keyStr;
-      draft.locSt.AllEntry30 = {
-        ...draft.locSt.AllEntry30,
-        ...clearedErrors,
-        ...clearedInputs,
-      };
     });
+    resetAllEntry30LS({ activeErrorALL: true, inputALL: true });
+    resetPageLS({ activeErrorALL: true });
   };
-  outMethods.entryTabClick = entryTabClick;
+
+  outMethods.modeSwitch = modeSwitch;
 
   const handleItemInvoContinue = () => {
     // still need to set up.

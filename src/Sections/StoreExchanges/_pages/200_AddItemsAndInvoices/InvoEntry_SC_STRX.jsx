@@ -33,37 +33,30 @@ const InvoEntry_SC_STRX = () => {
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
 
-  const parentRt = sessionMRV.locSt.AllEntry30;
-  const locStRt = sessionMRV.locSt;
+  const locStRt = sessionMRV.locSt.AllEntry30;
+
   const locMethods = useLocStMethods_STRX();
 
   const setSessionItems = useSetSessionItems();
   const setSessionInvosMRV = useSetSessionInvos();
 
+
+
   const noInvos = isEmpty(sessionMRV.sessionInvos);
 
   const invoCtx = useContext(InvoContext);
 
-  const oErrors = {
-    invalidReceipt: new errorObj({
-      str: "Invalid Receipt Number",
-    }),
-    duplicateInvo: new errorObj({
-      str: "Receipt Already Added",
-    }),
-  };
-
-  const activeErrorStr = parentRt?.activeError1?.str || "";
+  const activeErrorStr = locStRt?.activeError1?.str || "";
 
   const errorInInvoForm = () => {
-    const thisInvoNum = parentRt.input1;
+    const thisInvoNum = locStRt.input1;
     const invoNumValid = thisInvoNum in invoCtx;
     const invoAlreadyAdded = thisInvoNum in sessionMRV.sessionInvos;
 
     let outFormError = !invoNumValid
-      ? oErrors.invalidReceipt
+      ? locStRt.oErrorObjects.invalidReceipt
       : invoAlreadyAdded
-      ? oErrors.duplicateInvo
+      ? locStRt.oErrorObjects.duplicateInvo
       : false;
 
     console.log("outFormError function result was was", outFormError);
@@ -83,12 +76,12 @@ const InvoEntry_SC_STRX = () => {
     } else {
       setSessionInvosMRV({
         invosRtStr: "sessionInvos",
-        invoNum: parentRt.input1,
+        invoNum: locStRt.input1,
         actionType: "add",
       });
 
       // clear the input fields in the local state.
-      let outLocState = { ...cloneDeep(parentRt), ...clearedInputs };
+      let outLocState = { ...cloneDeep(locStRt), ...clearedInputs };
       setSessionMRV((draft) => {
         draft.locSt.AllEntry30 = outLocState;
       });
@@ -105,14 +98,14 @@ const InvoEntry_SC_STRX = () => {
         flex={"1 1 0rem"}
         width={`100%`}
         hasError={
-          activeErrorStr === oErrors.duplicateInvo.str ||
-          activeErrorStr === oErrors.invalidReceipt.str
+          activeErrorStr === locStRt.oErrorObjects.duplicateInvo.str ||
+          activeErrorStr === locStRt.oErrorObjects.invalidReceipt.str
         }
       >
         <input
           type="text"
           placeholder="Receipt Number"
-          value={parentRt.input1}
+          value={locStRt.input1}
           onChange={(event) => {
             const fieldInput = event.target.value.toUpperCase();
             setSessionMRV((draft) => {

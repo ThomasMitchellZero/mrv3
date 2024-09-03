@@ -29,36 +29,26 @@ const ItemEntry_SC_STRX = ({}) => {
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
 
-  const locStRt = sessionMRV.locSt;
-  const parentRt = sessionMRV.locSt.AllEntry30;
+  const locStRt = sessionMRV.locSt.AllEntry30;
   const locMethods = useLocStMethods_STRX();
 
   const setSessionItems = useSetSessionItems();
   const productCtx = useContext(ProductContext);
   const invoCtx = useContext(InvoContext);
 
-  const oErrors = {
-    invalidItem: new errorObj({
-      str: "Invalid Item Number",
-    }),
-    invalidQty: new errorObj({
-      str: "Invalid Quantity",
-    }),
-  };
-
-  const activeErrorStr = parentRt?.activeError1?.str || "";
+  const activeErrorStr = locStRt?.activeError1?.str || "";
 
 
   const errorInItemForm = () => {
-    const itemNumInput = parentRt.input1;
-    const itemQtyInput = parentRt.input2;
+    const itemNumInput = locStRt.input1;
+    const itemQtyInput = locStRt.input2;
     const itemNumValid = itemNumInput in productCtx;
     const itemQtyValid = itemQtyInput > 0;
 
     let outFormError = !itemNumValid
-      ? oErrors.invalidItem
+      ? locStRt.oErrorObjects.invalidItem
       : !itemQtyValid
-      ? oErrors.invalidQty
+      ? locStRt.oErrorObjects.invalidQty
       : false;
 
     return outFormError;
@@ -76,19 +66,19 @@ const ItemEntry_SC_STRX = ({}) => {
       });
     } else {
       const outAtom = new returnAtom({
-        atomItemNum: parentRt.input1,
-        atomItemQty: parentRt.input2, // is this needed?
+        atomItemNum: locStRt.input1,
+        atomItemQty: locStRt.input2, // is this needed?
       });
 
       setSessionItems({
         itemAtom: outAtom,
-        newQty: parentRt.input2,
+        newQty: locStRt.input2,
         actionType: "add",
         itemsArrRouteStr: "returnItems",
       });
 
       // clear the inputs and then set the parent's local state.
-      const outParLocSt = { ...cloneDeep(parentRt), ...clearedInputs };
+      const outParLocSt = { ...cloneDeep(locStRt), ...clearedInputs };
 
       setSessionMRV((draft) => {
         draft.locSt.AllEntry30 = outParLocSt;
@@ -105,11 +95,11 @@ const ItemEntry_SC_STRX = ({}) => {
       <MRVinput
         flex={"1 1 0rem"}
         width={`100%`}
-        hasError={activeErrorStr === oErrors.invalidItem.str}
+        hasError={activeErrorStr === locStRt.oErrorObjects.invalidItem.str}
       >
         <input
           type="text"
-          value={parentRt.input1}
+          value={locStRt.input1}
           placeholder="Item Number"
           onChange={(event) => {
             const itemNumField = event.target.value;
@@ -123,14 +113,14 @@ const ItemEntry_SC_STRX = ({}) => {
       <div className={`inputRow`}>
         <MRVinput
           width={"8rem"}
-          hasError={activeErrorStr === oErrors.invalidQty.str}
+          hasError={activeErrorStr === locStRt.oErrorObjects.invalidQty.str}
         >
           <input
             type="number"
             min="0"
             step="1"
             placeholder="Qty"
-            value={parentRt.input2}
+            value={locStRt.input2}
             onChange={(event) => {
               const inputQty = parseInt(event.target.value) || "";
               setSessionMRV((draft) => {

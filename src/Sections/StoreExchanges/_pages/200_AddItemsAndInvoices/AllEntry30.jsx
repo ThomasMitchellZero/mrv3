@@ -1,5 +1,3 @@
-
-
 import { ItemEntry_SC_STRX } from "./ItemEntry_SC_STRX";
 import { InvoEntry_SC_STRX } from "./InvoEntry_SC_STRX";
 
@@ -14,17 +12,10 @@ import {
 
 import { cloneDeep } from "lodash";
 
-import {
-  populateDisposArr,
-  useNodeNav,
-  useResetLocStFields,
-} from "../../../../mrv/MRVhooks/MRVhooks";
-
+import {} from "../../../../mrv/MRVhooks/MRVhooks";
 
 import { useLocStMethods_STRX } from "../../_resources/components/CompHooks_STRX";
 
-import { RtrnItemsList } from "./RtrnItems/RtrnItemsList";
-import { RtrnInvosList } from "./RtrnInvos/RtrnInvosList";
 import { useOutletContext } from "react-router";
 
 function AllEntry30() {
@@ -33,7 +24,6 @@ function AllEntry30() {
   const setSessionMRV = mrvCtx.setSessionMRV;
   const locStRt = sessionMRV.locSt;
   const locMethods = useLocStMethods_STRX();
-  const resetFields = useResetLocStFields();
   const s30Mode = locStRt.page.activeMode1;
 
   // mode-specific properties
@@ -55,11 +45,6 @@ function AllEntry30() {
 
   /* ---- UI ELEMENTS ---- */
 
-  const handleTabClick = ({ e, btnType }) => {
-    e.preventDefault();
-    locMethods.entryTabClick({ keyStr: btnType });
-  };
-
   // Tab Buttons
   const uiTabBtn = (btnType = "NO TITLE") => {
     const isActive = s30Mode === btnType ? "active" : "";
@@ -67,7 +52,7 @@ function AllEntry30() {
       <button
         onClick={(e) => {
           e.preventDefault();
-          locMethods.entryTabClick({ keyStr: btnType });
+          locMethods.modeSwitch({ keyStr: btnType });
         }} // this is the issue
         className={`tab fullWidth ${isActive}`}
       >
@@ -79,7 +64,7 @@ function AllEntry30() {
   return (
     <Sidesheet_Base_MRV
       title={oMode[s30Mode].sidesheetTitle}
-      fBgClick={() => {}}
+      fBgClick={locMethods.basicClear}
     >
       <section className={`main_content maxWidth`}>
         <div className={`hBox minFlex`}>
