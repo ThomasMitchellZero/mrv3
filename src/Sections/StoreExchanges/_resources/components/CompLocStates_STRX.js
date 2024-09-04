@@ -8,6 +8,8 @@ import {
   errorObj,
 } from "../../../../globalFunctions/globalJS_classes";
 
+import { LS_MRV_ReasonPickerSC } from "../../../../mrv/mrv-components/CompLocStates_MRV";
+
 // Singleton Local States -------------------------------------
 
 const LS_STRX_100_AllEntry30 = makeLocStFields({
@@ -51,6 +53,7 @@ const LS_STRX_100_AddItemsAndInvos = {
     },
   }),
   [LS_STRX_100_AllEntry30._keyStr]: LS_STRX_100_AllEntry30,
+  [LS_MRV_ReasonPickerSC._keyStr]: LS_MRV_ReasonPickerSC,
 };
 
 /*

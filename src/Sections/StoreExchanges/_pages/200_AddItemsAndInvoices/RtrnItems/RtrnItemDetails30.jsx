@@ -1,5 +1,7 @@
 import { Sidesheet_Base_MRV } from "../../../../../mrv/mrv-components/DisplayOutputs/Sidesheet_Base_MRV";
 import { ProductImageMRV } from "../../../../../mrv/mrv-components/DisplayOutputs/ProductImageMRV";
+import { ReasonPickerSC_MRV } from "../../../../../mrv/mrv-components/inputs/ReasonPicker/ReasonPicker_SC_MRV";
+
 import { makeLocStFields } from "../../../../../globalFunctions/globalJS_classes";
 import { useOutletContext } from "react-router-dom";
 import { useLocStMethods_STRX } from "../../../_resources/components/CompHooks_STRX";
@@ -25,6 +27,7 @@ function RtrnItemDetails30({}) {
         <div className="miniItemInfo">
           <ProductImageMRV size="S" itemAtom={activeItem} imageOnly={true} />
         </div>
+        <ReasonPickerSC_MRV />
       </div>
     </Sidesheet_Base_MRV>
   );

@@ -166,7 +166,12 @@ const itemReturnReasons = ({
     itemNum,
     reasonQty,
     qtySansReason,
+    get itemQty() {
+      return this.itemAtom.atomItemQty; // not sure this stays fresh?
+    }
   };
+
+
 };
 
 export { oReturnReason, itemReturnReasons };
@@ -585,6 +590,7 @@ const baseReturnState = ({
   cashDeltaMO = new moneyObj({}),
   sessionInvos = {},
   returnReasons = {},
+  returnReasonsRepo = {},
   returnItemDispos = [],
   oNavNodes = {},
   locSt = cloneDeep(baseLocState),
@@ -596,6 +602,7 @@ const baseReturnState = ({
     replacementItems,
     totalReplacementValue,
     cashDeltaMO,
+    returnReasonsRepo,
     returnItemDispos,
     sessionInvos,
     oNavNodes,
