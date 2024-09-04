@@ -89,6 +89,7 @@ const oReturnReason = ({
   strLabel = "NO LABEL",
   isDefective = false,
   reasonQty = 0,
+  isChosen = false,
 }) => {
   const uiLabel =
     isDefective && reasonQty ? `${strLabel}: ${reasonQty}` : `${strLabel}`;
