@@ -166,7 +166,7 @@ const itemReturnReasons = ({
     itemNum,
     reasonQty,
     qtySansReason,
-    get itemQty() {
+    get freshItemQty() {
       return this.itemAtom.atomItemQty; // not sure this stays fresh?
     }
   };

@@ -183,6 +183,10 @@ function returnReasoner(sessionState) {
   const refReturnReasons = itemReturnReasons({});
   const refOReturnReason = oReturnReason({});
 
+  /////////////////////////////////////////////////
+  ///////////////// The Old ///////////////////////
+  /////////////////////////////////////////////////
+
   // start with empty ReturnReasons object so that deleted items don't persist.
   const outReturnReasons = {};
 
@@ -209,11 +213,44 @@ function returnReasoner(sessionState) {
     // HAVE NOT yet verified that this actually preserves the old reasons.  I think it does.
 
     outReturnReasons[thisItem.atomItemNum] = outItemReasons;
+
+    /////////////////////////////////////////////////////////////
+    ///////////////////////// The New ///////////////////////////
+    /////////////////////////////////////////////////////////////
+
+    const outReturnReasonsRepo = {};
   }
 
   // returns the new returnReasons object.  We still have to set it in the state.
   return outReturnReasons;
 }
+
+const returnReasonRepoMgr = (sessionState) => {
+  const refDefaultState = baseReturnState({});
+  const refItemAtom = new returnAtom({});
+  const refReturnReasons = itemReturnReasons({});
+  const refOReturnReason = oReturnReason({});
+  const refBaseLocState = baseLocState;
+
+  const sessionItems = sessionState.returnItems;
+  const oldReasonsRepo = sessionState.returnReasonsRepo;
+
+  // this starts empty to make sure that return reasons for deleted items don't persist.
+  const outReturnReasonsRepo = {};
+
+  for (const thisItem of sessionItems) {
+    //ItemReturnReasons gets recreated each time to ensure itemAtom freshness.
+    const outFreshItemReasons = itemReturnReasons({ itemAtom: thisItem });
+    const oldReasons = oldReasonsRepo?.[thisItem.atomItemNum]?.oAllItemReasons;
+
+    // if oldReasons is defined, assign it to the fresh itemReturnReasons obj.
+    oldReasons && (outFreshItemReasons.oAllItemReasons = oldReasons);
+
+    outReturnReasonsRepo[thisItem.atomItemNum] = outFreshItemReasons;
+  }
+
+  return outReturnReasonsRepo;
+};
 
 const populateDisposArr = ({ sessionSt = baseReturnState({}) }) => {
   // returns an array of SingleDispo objects from an array of return items.
@@ -722,6 +759,8 @@ function returnAutoDeriver(clonedDraft) {
   outSessionState = autoAddChildAtoms(outSessionState);
 
   outSessionState.returnReasons = returnReasoner(outSessionState);
+
+  outSessionState.returnReasonsRepo = returnReasonRepoMgr(outSessionState);
 
   // atomize the returnItems
   outSessionState.atomizedReturnItems = returnAtomizer({
