@@ -93,7 +93,7 @@ const oReturnReason = ({
 }) => {
   const uiLabel =
     isDefective && reasonQty ? `${strLabel}: ${reasonQty}` : `${strLabel}`;
-  return { keyStr, strLabel, isDefective, reasonQty, uiLabel };
+  return { keyStr, strLabel, isDefective, reasonQty, isChosen, uiLabel };
 };
 
 const defaultReturnReasons = {
@@ -168,10 +168,8 @@ const itemReturnReasons = ({
     qtySansReason,
     get freshItemQty() {
       return this.itemAtom.atomItemQty; // not sure this stays fresh?
-    }
+    },
   };
-
-
 };
 
 export { oReturnReason, itemReturnReasons };

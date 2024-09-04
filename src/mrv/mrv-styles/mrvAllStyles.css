@@ -492,7 +492,7 @@
 
       &.selected {
         border-color: var(--color__border);
-        background-color: var(--color__surface__lightgrey);
+        background-color: var(--color__card__selected);
       }
 
       &.active {

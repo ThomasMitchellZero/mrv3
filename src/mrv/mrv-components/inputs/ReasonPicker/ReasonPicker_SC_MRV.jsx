@@ -102,9 +102,27 @@ function ReasonPickerSC_MRV({}) {
   ////////////   UI Chip Elements   /////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
+  const okClick = (oReason) => {
+    setSessionMRV((draft) => {
+      const bool =
+        draft.returnReasonsRepo[activeItemKey].oAllItemReasons[oReason.keyStr]
+          .isChosen;
+      draft.returnReasonsRepo[activeItemKey].oAllItemReasons[
+        oReason.keyStr
+      ].isChosen = !bool;
+    });
+  };
+
   oMode.ItemOK.chips = aItemOKreasons.map((thisReason) => {
+    const isChosen = thisReason.isChosen ? "selected" : "";
     return (
-      <button key={thisReason.keyStr} className={`chip`} onClick={() => {}}>
+      <button
+        key={thisReason.keyStr}
+        className={`chip ${isChosen}`}
+        onClick={() => {
+          okClick(thisReason);
+        }}
+      >
         {thisReason.strLabel}
       </button>
     );
