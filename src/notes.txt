@@ -8064,5 +8064,35 @@ What to do today?
 1 Sep 2024
     Rawdog Sunday go!  *Should* be a decent day, as I think I have a pretty good idea of what I'm doing?  
 
+2 Sep 2024
+    I've had some time to think about the State Resetter.  I think if I can just crystalize what I want, this should be fairly easy.  Resetting local state is going to be constant, and if I can have a nice, ergonomic way to pull it off I'll be in good shape.  
 
+3 Sep 2024
+    Gonna get interrupted fairly soon so I would really like to at least get into a good groove here.  What's on my mind?
+
+    -I'm having a really hard time believing that you can't edit a Class instance in state, but there appears to be a lot of smoke on the Internet to that effect.  OK.  We aren't sure it's even going to work, and it doesn't solve any problem we currently have.
+
+    So the next thing I want is a unified way of resetting local state, since the vast majority of locSt changes are going to be resets.  What do I need for an ideal solution?
+
+    -probably need to have an init field when each local state is created.  In fact, if I can't have that then there's not a whole lot of purpose to a unified state resetter.  So why don't I start with that and see if I can't make it work?  
+        -Ideally it would be created when the locSt object is created with no extra work on my part.  
+
+    4:00.
+
+    Good news!  My 1:1 was cancelled and it looks like my factory function approach is working.  I am gonna take a quick walk and think about how exactly I want to handle all of this.  
+
+    OK.  Let's try to describe it as generally as possible.
+        -A way to target a specific locSt, since it's unlikely I'm resetting the same keys throughout.  
+        -An easy way to reset a batch of properties at once, since for things like errors or inputs, that is common.
+            -I think it still makes sense to collect these resets in functions keyed to actions.  That way I can ensure they are consistent.  
+            -It makes additional sense because not EVERY locSt modification is a reset.  Sometimes I'm actually changing properties.  
+            -Those probably do get stored in CompHooks.  
+
+    5:30.
+    Sweet.  My resetter also appears to be working.  
+
+        -If I don't mind configuring it every time, I could wrap it in a second function that returns the actual resetter, configured for the proper target.  In fact, if I wanted to have it as a hook, that would be really easy to do.  I wouldn't even have to keep separate hooks for each possible locSt.  No matter what, I have to instantiate the function so I might as well just do it all at once.
+
+
+        -Should I be 
 

@@ -12,10 +12,11 @@ import {
 import {
   baseLocState,
   locStFields,
+  returnAtom,
 } from "../../../../globalFunctions/globalJS_classes";
 
 import { AllEntry30 } from "./AllEntry30";
-import { ItemDetails30STRX } from "../../_resources/components/ItemDetails30STRX";
+import { RtrnItemDetails30 } from "./RtrnItems/RtrnItemDetails30";
 
 import { useNodeNav } from "../../../../mrv/MRVhooks/MRVhooks";
 
@@ -50,9 +51,15 @@ function AddItemsAndInvosSTRX() {
     },
   };
 
+  // 30 panel is determined conditionally, so I will just do that here.
+  const active30key =
+    sessionMRV.locSt.page.activeData1 instanceof returnAtom
+      ? "ItemDetails30"
+      : "AllEntry30";
+
   const o30panels = {
     AllEntry30: <AllEntry30 />,
-    ItemDetails30: <ItemDetails30STRX stateItemArr="returnItems" />,
+    ItemDetails30: <RtrnItemDetails30 />,
   };
 
   const uiContinueWarning =
@@ -94,7 +101,7 @@ function AddItemsAndInvosSTRX() {
           />
         </div>
       </main>
-      {o30panels[activeUI]}
+      {o30panels[active30key]}
     </section>
   );
 }

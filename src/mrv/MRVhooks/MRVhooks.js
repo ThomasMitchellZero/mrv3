@@ -375,6 +375,10 @@ function useResetLocStFields(locStKey) {
     const refBaseLocState = baseLocState;
     const refLocFields = locStFields;
 
+    if (!sessionMRV.locSt[locStKey]) {
+      return false; // I might reuse some functions and this lets me dip out if the locStKey is invalid.
+    }
+
     const args = {
       input1,
       input2,

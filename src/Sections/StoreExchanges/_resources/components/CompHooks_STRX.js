@@ -52,11 +52,6 @@ function useLocStMethods_STRX() {
 
   outMethods.modeSwitch = modeSwitch;
 
-  const handleItemInvoContinue = () => {
-    // still need to set up.
-    console.log("handleItemInvoContinue");
-  };
-
   //-------------------------------------
 
   return outMethods;
