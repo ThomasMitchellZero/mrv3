@@ -32,5 +32,13 @@
       flex-wrap: wrap;
       min-width: 0rem;
     }
+
+    & .inputCluster {
+        display: flex;
+        flex-direction: row;
+        min-width: 0rem;
+        width: 100%;
+        gap: 2rem;
+    }
   }
 }

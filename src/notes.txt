@@ -13,14 +13,14 @@ Pictograph => Think REAALLLY hard => Alphabet.
 Without the Rebus phase it can be hard to identify the commonalities that can be systematized.  Kludgy code is generally a waypoint on the route to good code, not a detour from it.  
 
 RULE 5: 
-Be VERY careful with highly-abstract or non-obvious solutions.  Even if they result in very short code, you still have to understand what it does later.  There are a lot of regex expressions that are 1-liners, but we don't know regex and it looks hard AF to read. If it was hard to dream up the first time, there's a good chance it will be hard to comprehend in the future.  And if high abstraction is truly the best solution, comment the fuck out of the pattern and ALWAYS look for ways to refine the clarity of the comments.  
+Be VERY careful with highly-abstract or non-obvious solutions.  Even if they result in very short code, you still have to understand what it does later.  There are a lot of regex expressions that are 1-liners, but we don't know regex and it looks hard AF to read. If it was hard to create the first time, there's a good chance it will be hard to comprehend in the future.  And if high abstraction is truly the best solution, comment the fuck out of the pattern and ALWAYS look for ways to refine the clarity of the comments.  
 
 
 Root-Ripping check:
 We want to be clean and clear to make it easier on ourselves.  Enforced conscientiousness.  But some of the days we regret the most are the ones where we code for a couple of days and at the end we get pretty much the same output we had before.  
 
     Rip away:
-    -We have a specific reason to believe that the current model won't handle something we expect (with high confidence) that we will need it to do.
+    -We have a specific reason to believe that the current model won't handle something we confidently expect we will need to handle later.
     -The current model is unintuitive AND we have a clear idea of how to simplify it.
     -We expect to have numerous future dependencies on the roots and doing it later only makes more work.
     -We have a clear understanding of the advantage we expect to get.
@@ -8094,5 +8094,27 @@ What to do today?
         -If I don't mind configuring it every time, I could wrap it in a second function that returns the actual resetter, configured for the proper target.  In fact, if I wanted to have it as a hook, that would be really easy to do.  I wouldn't even have to keep separate hooks for each possible locSt.  No matter what, I have to instantiate the function so I might as well just do it all at once.
 
 
-        -Should I be 
+4 Sept 2024
+    12:10.
+    Had a 1:1 with Liz, it went surprisingly well, and now I am gonna finally get the Return Reasons working.
+
+    I'm looking at my tool for producing Return Reasons, and I feel like it's way too over-complicated.  Let's see if we can't simplify what's happening by thinking about what it needs to do.
+
+    -Needs to PRESERVE reasons already assigned as changes are made.
+    -Needs to track the Item Qty.  Wondering if this should be a Getter instead of stored separately?  SSoT.
+    -I think we need to clear items that are no longer in the cart.  If the reasons are all completely fucked, that's a good way to blow it all out.
+
+    OK, so here's where that leaves me.
+        -I do want to return a whole new global collection of all itemReturnReasons.
+            -I loop through the items in the cart and check if it has a corresponding item in the Reasons repo.
+                -If it does, copy it into the outgoing Reasons Repo.
+                -If it does not, create a new empty one.  
+            -Any Return Items that have been removed won't be in that loop, so they won't be carried over into the new ReasonsRepo.
+
+    1:50.
+    It's gone suspiciously well so far.  This is how I imagined it would be once I got more stuff systematized.  I'm nervous.  
+
+    Anyways.  I think it's OK for any functions that are ONLY consumed within a single component to live only in that component.  Most of the LS operations for the Picker should only live within the picker, so I should be good... right?  Guess we're gonna find out.
+
+    
 

@@ -490,12 +490,12 @@
       line-height: 1.5rem;
       background-color: var(--color__surface__default);
 
-      &.selected {
+      &.active {
         border-color: var(--color__border);
         background-color: var(--color__card__selected);
       }
 
-      &.active {
+      &.selected {
         border-color: var(--color__interactive);
         background-color: var(--color__interactive);
         color: var(--color__white);

@@ -32,6 +32,21 @@ function ReasonPickerSC_MRV({}) {
 
   // arrays for the two types of reasons.
 
+  const oMode = {
+    ItemOK: {
+      label: "Item OK",
+      instruction: "Select return reason.",
+      chips: [],
+      inputs: null,
+    },
+    Defective: {
+      label: "Defective",
+      instruction: "Select condition and enter qty.",
+      chips: [],
+      inputs: null,
+    },
+  };
+
   const aItemOKreasons = Object.values(activeItemReasons).filter(
     (thisReason) => {
       return thisReason.isDefective === false;
@@ -43,24 +58,6 @@ function ReasonPickerSC_MRV({}) {
       return thisReason.isDefective === true;
     }
   );
-
-  const oMode = {
-    ItemOK: {
-      label: "Item OK",
-      instruction: "Select return reason.",
-      chips: aItemOKreasons.map((thisReason) => {
-        return (
-          <button key={thisReason.keyStr} className={`chip`} onClick={() => {}}>
-            {thisReason.strLabel}
-          </button>
-        );
-      }),
-    },
-    Defective: {
-      label: "Defective",
-      instruction: "Select condition and enter qty.",
-    },
-  };
 
   ///////////////////////////////////////////////////////////////////
   ////////////   UI Tab Elements   //////////////////////////////////
@@ -102,6 +99,8 @@ function ReasonPickerSC_MRV({}) {
   ////////////   UI Chip Elements   /////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
+  // Item OK Chips
+
   const okClick = (oReason) => {
     setSessionMRV((draft) => {
       const bool =
@@ -114,7 +113,7 @@ function ReasonPickerSC_MRV({}) {
   };
 
   oMode.ItemOK.chips = aItemOKreasons.map((thisReason) => {
-    const isChosen = thisReason.isChosen ? "selected" : "";
+    const isChosen = thisReason.isChosen ? "active" : "";
     return (
       <button
         key={thisReason.keyStr}
@@ -128,13 +127,52 @@ function ReasonPickerSC_MRV({}) {
     );
   });
 
+  // Defective Chips
+
+  const defectiveClick = (oReason) => {
+    const refOReturnReason = oReturnReason({});
+    setSessionMRV((draft) => {
+      draft.locSt.ReasonPickerSC.activeData1 = oReason;
+    });
+  };
+
   oMode.Defective.chips = aItemDefectiveReasons.map((thisReason) => {
+    // Checks if the chip keyStr is the same as the activeData1 keyStr
+    const isSelected =
+      locStRt.ReasonPickerSC.activeData1?.keyStr === thisReason.keyStr;
+    // if the reasonQty is greater than 0, the chip is active
+    const chipQty = thisReason.reasonQty;
+
+    const chipClass = isSelected ? "selected" : chipQty ? "active" : "";
+
+    const labelStr = chipQty
+      ? `${thisReason.strLabel} : ${chipQty}`
+      : `${thisReason.strLabel}`;
     return (
-      <button key={thisReason.keyStr} className={`chip`} onClick={() => {}}>
-        {thisReason.strLabel}
+      <button
+        key={thisReason.keyStr}
+        className={`chip ${chipClass}`}
+        onClick={() => {
+          defectiveClick(thisReason);
+        }}
+      >
+        {labelStr}
       </button>
     );
   });
+
+  ///////////////////////////////////////////////////////////////////
+  ////////////   UI Input Cluster    /////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
+
+
+  // start here tomorrow.
+  const uiInputCluster = (
+    <div className={`inputCluster`}>
+
+    </div>
+  );
+
   // Final Render /////////////////////////////////////////////////
 
   return (

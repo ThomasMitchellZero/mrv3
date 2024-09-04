@@ -21,6 +21,7 @@ function useCompHooks_MRV({}) {
       oReasonPicker_SC.resetReasonPickerLS({
         activeErrorALL: true,
         inputALL: true,
+        activeData1: true,
       });
     },
   };
