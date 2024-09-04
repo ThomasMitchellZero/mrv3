@@ -243,7 +243,7 @@ const returnReasonRepoMgr = (sessionState) => {
     const outFreshItemReasons = itemReturnReasons({ itemAtom: thisItem });
     const oldReasons = oldReasonsRepo?.[thisItem.atomItemNum]?.oAllItemReasons;
 
-    // if oldReasons is defined, assign it to the fresh itemReturnReasons obj.
+    // if oldReasons exists, assign it to the fresh itemReturnReasons obj.
     oldReasons && (outFreshItemReasons.oAllItemReasons = oldReasons);
 
     outReturnReasonsRepo[thisItem.atomItemNum] = outFreshItemReasons;
