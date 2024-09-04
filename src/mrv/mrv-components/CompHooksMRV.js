@@ -1,28 +1,33 @@
-import {
-  TitleBarSTRX,
-  CashTotalSTRX,
-} from "../../_resources/components/CompConfigsSTRX";
+import { useContext } from "react";
+import { useOutlet, useOutletContext } from "react-router-dom";
 
-import {
-  returnAtom,
-  baseLocState,
-  clearedErrors,
-  clearedInputs,
-  locStFields,
-} from "../../../../globalFunctions/globalJS_classes";
+import { useResetLocStFields } from "../MRVhooks/MRVhooks";
+import { set } from "lodash";
 
-import { AllEntry30 } from "./AllEntry30";
-import { ItemDetails30STRX } from "../../_resources/components/ItemDetails30STRX";
-import { cloneDeep } from "lodash";
+function useCompHooks_MRV({}) {
+  const mrvCtx = useOutletContext();
+  const sessionMRV = mrvCtx.sessionMRV;
+  const setSessionMRV = mrvCtx.setSessionMRV;
 
-import {
-  populateDisposArr,
-  useNodeNav,
-  useClearLocErrStates,
-  useResetLocStFields,
-} from "../../../../mrv/MRVhooks/MRVhooks";
+  const outMethods = {}; // the object to return
 
-import { RtrnItemsList } from "./RtrnItems/RtrnItemsList";
-import { RtrnInvosList } from "./RtrnInvos/RtrnInvosList";
-import { useOutletContext } from "react-router";
+  const oReasonPicker_SC = {
+    resetReasonPickerLS: useResetLocStFields("ReasonPickerSC"),
 
+    modeSwitch: ({ keyStr = "no mode key" }) => {
+      setSessionMRV((draft) => {
+        draft.locSt.ReasonPickerSC.activeMode1 = keyStr;
+      });
+      oReasonPicker_SC.resetReasonPickerLS({
+        activeErrorALL: true,
+        inputALL: true,
+      });
+    },
+  };
+
+  outMethods.oReasonPicker_SC = oReasonPicker_SC;
+
+  return outMethods;
+}
+
+export { useCompHooks_MRV };

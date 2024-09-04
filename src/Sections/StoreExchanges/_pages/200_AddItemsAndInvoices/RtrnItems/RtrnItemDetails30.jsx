@@ -24,7 +24,7 @@ function RtrnItemDetails30({}) {
   return (
     <Sidesheet_Base_MRV title="Return Item Details">
       <div className={`itemDetails`}>
-        <div className="miniItemInfo">
+        <div className="miniDetails">
           <ProductImageMRV size="S" itemAtom={activeItem} imageOnly={true} />
         </div>
         <ReasonPickerSC_MRV />

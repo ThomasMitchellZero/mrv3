@@ -252,6 +252,7 @@ const returnReasonRepoMgr = (sessionState) => {
   return outReturnReasonsRepo;
 };
 
+// I want to scrap this once I am sure it's not needed in Exchanges.
 const populateDisposArr = ({ sessionSt = baseReturnState({}) }) => {
   // returns an array of SingleDispo objects from an array of return items.
   const refItemDisposObj = new ItemDisposObj({});

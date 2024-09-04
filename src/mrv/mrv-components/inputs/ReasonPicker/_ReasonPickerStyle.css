@@ -3,18 +3,30 @@
     display: flex;
     flex-direction: column;
     min-width: 0rem;
+    width: 100%;
+    height: 100%;
+    gap: 2rem;
 
-    & .tabCtnr {
+    & .navCluster {
       display: flex;
       flex-direction: row;
       min-width: 0rem;
+      width: 100%;
       gap: 0rem;
+    }
+
+    & .chipCluster {
+      display: flex;
+      flex-direction: column;
+      min-width: 0rem;
+      width: 100%;
+      gap: 2rem;
     }
 
     & .chipCtnr {
       display: flex;
       flex-direction: row;
-      gap: 0.5rem;
+      gap: 1rem;
       align-items: center;
       justify-content: flex-start;
       flex-wrap: wrap;
