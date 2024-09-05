@@ -407,6 +407,7 @@ function useResetLocStFields(locStKey) {
     activeUI2 = false,
     activeUI3 = false,
     activeUIALL = false,
+    EVERYONE = false,
   }) => {
     // returns a new locSt object with all fields cleared.
     const refDefaultState = baseReturnState({});
@@ -465,13 +466,18 @@ function useResetLocStFields(locStKey) {
       [args.activeUI1, args.activeUI2, args.activeUI3] = [true, true, true];
     }
 
-    const outLocSt = {};
+    let outLocSt = {};
     const init = sessionMRV.locSt[locStKey].init;
 
     for (const [key, value] of Object.entries(args)) {
       if (value) {
         outLocSt[key] = init[key];
       }
+    }
+
+    // shortcut to reset all fields.
+    if (EVERYONE) {
+      outLocSt = cloneDeep(init);
     }
 
     setSessionMRV((draft) => {

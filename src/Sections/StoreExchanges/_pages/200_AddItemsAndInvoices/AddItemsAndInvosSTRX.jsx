@@ -85,7 +85,7 @@ function AddItemsAndInvosSTRX() {
 
   return (
     <section className={`addItemsAndInvos mrvPage color__surface__subdued`}>
-      <main onClick={locMethods.clearKeysToo} className={`mrvPanel__main`}>
+      <main onClick={locMethods.resetKeysToo} className={`mrvPanel__main`}>
         <TitleBarSTRX
           showProductName={true}
           headerTitle={oMode[activeMode].s70label}

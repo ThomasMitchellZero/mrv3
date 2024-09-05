@@ -3,11 +3,13 @@ import { MRVitemDetails } from "../../../../../mrv/mrv-components/DisplayOutputs
 import { MRVinput } from "../../../../../mrv/mrv-components/inputs/MRVinput";
 import { DescriptorIcon } from "../../../../../mrv/mrv-components/DisplayOutputs/DescriptorIcon";
 import { ItemReceiptRow } from "./ItemReceiptRow";
+import { useLocStMethods_STRX } from "../../../_resources/components/CompHooks_STRX";
 import {
   centsToDollars,
   atomsMonetizer,
   centStringifier,
   useSetSessionItems,
+  useResetLocStFields,
 } from "../../../../../mrv/MRVhooks/MRVhooks";
 
 import { greenify } from "../../../../../mrv/MRVhooks/MRVhooks";
@@ -16,9 +18,12 @@ import { returnAtom } from "../../../../../globalFunctions/globalJS_classes";
 
 const RtrnItemsMainCard = ({ returnItemAtom }) => {
   const mrvCtx = useOutletContext();
+  const resetReasonPickerLS = useResetLocStFields("ReasonPickerSC");
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const setSessionItems = useSetSessionItems();
+
+  const locMethods = useLocStMethods_STRX().AddItemsAndInvos;
 
   const aReturnItems = sessionMRV.returnItems;
   const aAtomizedItems = sessionMRV.atomizedReturnItems;
@@ -67,9 +72,13 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
       setSessionMRV((draft) => {
         draft.locSt.page.activeKey1 = tileItemAtom.atomItemNum;
       });
+      resetReasonPickerLS({ EVERYONE: true });
     };
 
-    const activeClass = tileItemAtom.atomItemNum === sessionMRV.locSt.page.activeKey1 ? "selected" : "";
+    const activeClass =
+      tileItemAtom.atomItemNum === sessionMRV.locSt.page.activeKey1
+        ? "selected"
+        : "";
 
     const aInfoRows = aAtomizedItems.filter((thisSubAtom) => {
       return thisSubAtom.atomItemNum === tileItemAtom.atomItemNum;

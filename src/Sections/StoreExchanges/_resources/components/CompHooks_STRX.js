@@ -7,7 +7,10 @@ import {
   clearedInputs,
 } from "../../../../globalFunctions/globalJS_classes";
 
-import { useResetLocStFields, useFindAtom } from "../../../../mrv/MRVhooks/MRVhooks";
+import {
+  useResetLocStFields,
+  useFindAtom,
+} from "../../../../mrv/MRVhooks/MRVhooks";
 
 import { useOutletContext } from "react-router";
 
@@ -21,38 +24,40 @@ function useLocStMethods_STRX() {
   const outMethods = {};
 
   const resetPageLS = useResetLocStFields("page");
-  const resetAllEntry30LS = useResetLocStFields("AllEntry30");
 
   // Shared Methods -------------------------------------
 
-  const AddItemsAndInvos = {
+  const AddItemsAndInvos = () => {
+    const resetAllEntry30LS = useResetLocStFields("AllEntry30");
+    const resetReasonPickerLS = useResetLocStFields("ReasonPickerSC");
 
+    const lsMethods = {
+      basicClear: () => {
+        console.log("Ya Basic");
+        resetPageLS({ activeErrorALL: true });
+        resetAllEntry30LS({ activeErrorALL: true });
+      },
 
+      resetKeysToo: () => {
+        resetAllEntry30LS({ activeErrorALL: true });
+        console.log("Ya Clear Keys Too");
+        resetPageLS({ activeErrorALL: true, activeKey1: true });
+        resetReasonPickerLS({ activeErrorALL: true, activeKey1: true });
+      },
 
+      modeSwitch: ({ keyStr = "receipt" }) => {
+        setSession((draft) => {
+          draft.locSt.page.activeMode1 = keyStr;
+        });
+        resetAllEntry30LS({ activeErrorALL: true, inputALL: true });
+        resetPageLS({ activeErrorALL: true });
+      },
+    };
 
-    basicClear: () => {
-      console.log("Ya Basic");
-      resetPageLS({ activeErrorALL: true });
-      resetAllEntry30LS({ activeErrorALL: true });
-    },
-
-    clearKeysToo: () => {
-      resetAllEntry30LS({ activeErrorALL: true });
-      resetPageLS({ activeErrorALL: true, activeKey1: true });
-    },
-
-    modeSwitch: ({ keyStr = "receipt" }) => {
-      setSession((draft) => {
-        draft.locSt.page.activeMode1 = keyStr;
-      });
-      resetAllEntry30LS({ activeErrorALL: true, inputALL: true });
-      resetPageLS({ activeErrorALL: true });
-    },
-
-    resetAllEntry30LS: resetAllEntry30LS,
+    return lsMethods;
   };
 
-  outMethods.AddItemsAndInvos = AddItemsAndInvos;
+  outMethods.AddItemsAndInvos = AddItemsAndInvos();
 
   //-------------------------------------
 
