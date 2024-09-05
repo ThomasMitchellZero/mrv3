@@ -5,22 +5,26 @@ import { ReasonPickerSC_MRV } from "../../../../../mrv/mrv-components/inputs/Rea
 import { makeLocStFields } from "../../../../../globalFunctions/globalJS_classes";
 import { useOutletContext } from "react-router-dom";
 import { useLocStMethods_STRX } from "../../../_resources/components/CompHooks_STRX";
+import { useFindAtom } from "../../../../../mrv/MRVhooks/MRVhooks";
 
 import { useContext } from "react";
 import ProductContext from "../../../../../store/product-context";
 
 function RtrnItemDetails30({}) {
   const mrvCtx = useOutletContext();
+  const findAtom = useFindAtom();
+
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const locStRt = sessionMRV.locSt;
+  const activeItemKey = locStRt.page.activeKey1;
 
 
   const productCtx = useContext(ProductContext);
 
   const refLocFields = makeLocStFields({});
 
-  const activeItem = locStRt.page.activeData1;
+  const activeItem = findAtom({itemNum: activeItemKey, asIndex: false});
   return (
     <Sidesheet_Base_MRV title="Return Item Details">
       <div className={`itemDetails`}>

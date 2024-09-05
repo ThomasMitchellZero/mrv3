@@ -25,7 +25,6 @@ import {
 import InvoContext from "../../../../store/invo-context";
 import ProductContext from "../../../../store/product-context";
 
-
 /* &&&&&&&&&&&&&&   Receipt Entry Cluster    &&&&&&&&&&&&&&&&&&& */
 
 const InvoEntry_SC_STRX = () => {
@@ -39,8 +38,6 @@ const InvoEntry_SC_STRX = () => {
 
   const setSessionItems = useSetSessionItems();
   const setSessionInvosMRV = useSetSessionInvos();
-
-
 
   const noInvos = isEmpty(sessionMRV.sessionInvos);
 
@@ -79,12 +76,7 @@ const InvoEntry_SC_STRX = () => {
         invoNum: locStRt.input1,
         actionType: "add",
       });
-
-      // clear the input fields in the local state.
-      let outLocState = { ...cloneDeep(locStRt), ...clearedInputs };
-      setSessionMRV((draft) => {
-        draft.locSt.AllEntry30 = outLocState;
-      });
+      locMethods.resetAllEntry30LS({ activeErrorALL: true, inputALL: true });
     }
   };
 

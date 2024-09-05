@@ -53,7 +53,7 @@ function AddItemsAndInvosSTRX() {
 
   // 30 panel is determined conditionally, so I will just do that here.
   const active30key =
-    sessionMRV.locSt.page.activeData1 instanceof returnAtom
+    sessionMRV.locSt.page.activeKey1 && activeMode === "item"
       ? "ItemDetails30"
       : "AllEntry30";
 
@@ -85,7 +85,7 @@ function AddItemsAndInvosSTRX() {
 
   return (
     <section className={`addItemsAndInvos mrvPage color__surface__subdued`}>
-      <main onClick={locMethods.clearDataToo} className={`mrvPanel__main`}>
+      <main onClick={locMethods.clearKeysToo} className={`mrvPanel__main`}>
         <TitleBarSTRX
           showProductName={true}
           headerTitle={oMode[activeMode].s70label}

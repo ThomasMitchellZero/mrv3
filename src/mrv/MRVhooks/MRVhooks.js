@@ -556,6 +556,32 @@ function useSetSessionItems() {
   return setSessionItems;
 }
 
+function useFindAtom() {
+  const mrvCtx = useOutletContext();
+  const sessionMRV = mrvCtx.sessionMRV;
+
+  const findAtom = ({
+    itemNum = "",
+    asIndex = false,
+    itemRepo = "returnItems",
+    REF_itemRepo____returnItems,
+  }) => {
+    const refAtom = new returnAtom({});
+    const refDefaultState = baseReturnState({});
+    const itemsArr = sessionMRV[itemRepo];
+    const atomIndex = itemsArr.findIndex((thisAtom) => {
+      return thisAtom.atomItemNum === itemNum;
+    });
+
+    const outAtom = atomIndex !== -1 ? itemsArr[atomIndex] : false;
+    return asIndex ? atomIndex : outAtom;
+  };
+
+  return findAtom;
+}
+
+export { useFindAtom };
+
 // Make a change to the invos in the Session state
 function useSetSessionInvos() {
   const invosCtx = useContext(InvoContext);

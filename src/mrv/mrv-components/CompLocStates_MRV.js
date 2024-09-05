@@ -9,6 +9,10 @@ const LS_MRV_ReasonPickerSC = makeLocStFields({
       key: "qtyExceeded",
       str: "Too Many, Son",
     }),
+    subZero: new errorObj({
+      key: "subZero",
+      str: "Minimum Value: 0",
+    }),
   },
   activeMode1: "ItemOK",
 });

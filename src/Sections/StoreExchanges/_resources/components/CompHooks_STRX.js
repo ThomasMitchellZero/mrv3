@@ -1,4 +1,4 @@
-import { set } from "lodash";
+import { find, set } from "lodash";
 import {
   returnAtom,
   baseLocState,
@@ -7,7 +7,7 @@ import {
   clearedInputs,
 } from "../../../../globalFunctions/globalJS_classes";
 
-import { useResetLocStFields } from "../../../../mrv/MRVhooks/MRVhooks";
+import { useResetLocStFields, useFindAtom } from "../../../../mrv/MRVhooks/MRVhooks";
 
 import { useOutletContext } from "react-router";
 
@@ -16,6 +16,7 @@ function useLocStMethods_STRX() {
   const sessionMRV = mrvCtx.sessionMRV;
   const setSession = mrvCtx.setSessionMRV;
   const locStRt = sessionMRV.locSt;
+  const findAtom = useFindAtom();
 
   const outMethods = {};
 
@@ -25,14 +26,17 @@ function useLocStMethods_STRX() {
   // Shared Methods -------------------------------------
 
   const AddItemsAndInvos = {
+
+
+
+
     basicClear: () => {
       console.log("Ya Basic");
       resetPageLS({ activeErrorALL: true });
       resetAllEntry30LS({ activeErrorALL: true });
     },
 
-    clearDataToo: () => {
-      console.log("And Your Little Data Too");
+    clearKeysToo: () => {
       resetAllEntry30LS({ activeErrorALL: true });
       resetPageLS({ activeErrorALL: true, activeKey1: true });
     },
@@ -44,6 +48,8 @@ function useLocStMethods_STRX() {
       resetAllEntry30LS({ activeErrorALL: true, inputALL: true });
       resetPageLS({ activeErrorALL: true });
     },
+
+    resetAllEntry30LS: resetAllEntry30LS,
   };
 
   outMethods.AddItemsAndInvos = AddItemsAndInvos;

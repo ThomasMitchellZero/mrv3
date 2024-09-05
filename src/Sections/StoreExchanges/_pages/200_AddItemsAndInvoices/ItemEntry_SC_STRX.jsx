@@ -77,12 +77,7 @@ const ItemEntry_SC_STRX = ({}) => {
         itemsArrRouteStr: "returnItems",
       });
 
-      // clear the inputs and then set the parent's local state.
-      const outParLocSt = { ...cloneDeep(locStRt), ...clearedInputs };
-
-      setSessionMRV((draft) => {
-        draft.locSt.AllEntry30 = outParLocSt;
-      });
+      locMethods.resetAllEntry30LS({ activeErrorALL: true, inputALL: true });
     }
   };
 

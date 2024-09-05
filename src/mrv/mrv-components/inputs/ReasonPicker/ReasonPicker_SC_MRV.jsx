@@ -2,7 +2,7 @@ import "./_ReasonPickerStyle.css";
 
 import { MdOutlineAdd, MdMinimize } from "react-icons/md";
 
-import { useResetLocStFields } from "../../../MRVhooks/MRVhooks";
+import { useResetLocStFields, useFindAtom } from "../../../MRVhooks/MRVhooks";
 
 import { useCompHooks_MRV } from "../../CompHooksMRV";
 
@@ -17,19 +17,23 @@ import { useContext } from "react";
 
 function ReasonPickerSC_MRV({}) {
   const mrvCtx = useOutletContext();
+  const findAtom = useFindAtom();
+
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
+  const rsnRepoRt = sessionMRV.returnReasonsRepo;
 
   const locMethods = useCompHooks_MRV({}).oReasonPicker_SC;
 
   // state routes shortcuts
   const locStRt = sessionMRV.locSt;
-  const activeItem = locStRt.page.activeData1;
-  const activeItemKey = activeItem.atomItemNum;
+
+  const activeItemKey = locStRt.page.activeKey1;
+  const activeItemAtom = findAtom({ itemNum: activeItemKey, asIndex: false });
   const localMode = locStRt.ReasonPickerSC.activeMode1;
-  const activeItemReasons =
-    sessionMRV.returnReasonsRepo?.[activeItemKey]?.oAllItemReasons;
-  const activeSingleReason = locStRt.ReasonPickerSC.activeData1;
+  const RepoItemReasons = rsnRepoRt?.[activeItemKey]?.oAllItemReasons;
+  const activeReasonKey = locStRt.ReasonPickerSC.activeKey1;
+  const oActiveReason = RepoItemReasons?.[activeReasonKey];
 
   // arrays for the two types of reasons.
 
@@ -48,13 +52,13 @@ function ReasonPickerSC_MRV({}) {
     },
   };
 
-  const aItemOKreasons = Object.values(activeItemReasons).filter(
+  const aItemOKreasons = Object.values(RepoItemReasons).filter(
     (thisReason) => {
       return thisReason.isDefective === false;
     }
   );
 
-  const aItemDefectiveReasons = Object.values(activeItemReasons).filter(
+  const aItemDefectiveReasons = Object.values(RepoItemReasons).filter(
     (thisReason) => {
       return thisReason.isDefective === true;
     }
@@ -108,17 +112,17 @@ function ReasonPickerSC_MRV({}) {
     });
   };
 
-  oMode.ItemOK.chips = aItemOKreasons.map((thisReason) => {
-    const isChosen = thisReason.isChosen ? "active" : "";
+  oMode.ItemOK.chips = aItemOKreasons.map((oReason) => {
+    const isChosen = oReason.isChosen ? "active" : "";
     return (
       <button
-        key={thisReason.keyStr}
+        key={oReason.keyStr}
         className={`chip ${isChosen}`}
         onClick={() => {
-          okClick(thisReason);
+          okClick(oReason);
         }}
       >
-        {thisReason.strLabel}
+        {oReason.strLabel}
       </button>
     );
   });
@@ -132,23 +136,23 @@ function ReasonPickerSC_MRV({}) {
     });
   };
 
-  oMode.Defective.chips = aItemDefectiveReasons.map((thisReason) => {
+  oMode.Defective.chips = aItemDefectiveReasons.map((oReason) => {
     // Checks if the chip keyStr is the same as the activeData1 keyStr
-    const isSelected = locStRt.ReasonPickerSC.activeKey1 === thisReason.keyStr;
+    const isSelected = activeReasonKey === oReason.keyStr;
     // if the reasonQty is greater than 0, the chip is active
-    const chipQty = thisReason.reasonQty;
+    const chipQty = oReason.reasonQty;
 
     const chipClass = isSelected ? "selected" : chipQty ? "active" : "";
 
     const labelStr = chipQty
-      ? `${thisReason.strLabel} : ${chipQty}`
-      : `${thisReason.strLabel}`;
+      ? `${oReason.strLabel} : ${chipQty}`
+      : `${oReason.strLabel}`;
     return (
       <button
-        key={thisReason.keyStr}
+        key={oReason.keyStr}
         className={`chip ${chipClass}`}
         onClick={() => {
-          defectiveClick(thisReason);
+          defectiveClick(oReason);
         }}
       >
         {labelStr}
