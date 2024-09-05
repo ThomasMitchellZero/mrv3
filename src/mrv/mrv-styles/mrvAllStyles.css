@@ -204,6 +204,10 @@
     font-weight: 600;
   }
 
+  & .regular {
+    font-weight: 500;
+  }
+
   & .keepSpace {
     white-space: pre-wrap;
   }

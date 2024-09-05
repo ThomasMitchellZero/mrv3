@@ -39,6 +39,11 @@
         min-width: 0rem;
         width: 100%;
         gap: 2rem;
+
+        & button{
+            width: 4rem;
+            padding: 0rem;
+        }
     }
   }
 }

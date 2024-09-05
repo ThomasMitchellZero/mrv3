@@ -1,5 +1,7 @@
 import "./_ReasonPickerStyle.css";
 
+import { MdOutlineAdd, MdMinimize } from "react-icons/md";
+
 import { useResetLocStFields } from "../../../MRVhooks/MRVhooks";
 
 import { useCompHooks_MRV } from "../../CompHooksMRV";
@@ -27,8 +29,7 @@ function ReasonPickerSC_MRV({}) {
   const localMode = locStRt.ReasonPickerSC.activeMode1;
   const activeItemReasons =
     sessionMRV.returnReasonsRepo?.[activeItemKey]?.oAllItemReasons;
-
-  console.log("activeItemReasons", activeItemReasons);
+  const activeSingleReason = locStRt.ReasonPickerSC.activeData1;
 
   // arrays for the two types of reasons.
 
@@ -62,8 +63,6 @@ function ReasonPickerSC_MRV({}) {
   ///////////////////////////////////////////////////////////////////
   ////////////   UI Tab Elements   //////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-
-  console.log("aItemOKreasons", aItemOKreasons);
 
   const refAtom = new returnAtom({});
   const refItemReasons = itemReturnReasons({});
@@ -103,12 +102,9 @@ function ReasonPickerSC_MRV({}) {
 
   const okClick = (oReason) => {
     setSessionMRV((draft) => {
-      const bool =
-        draft.returnReasonsRepo[activeItemKey].oAllItemReasons[oReason.keyStr]
-          .isChosen;
-      draft.returnReasonsRepo[activeItemKey].oAllItemReasons[
-        oReason.keyStr
-      ].isChosen = !bool;
+      let okRsn =
+        draft.returnReasonsRepo[activeItemKey].oAllItemReasons[oReason.keyStr];
+      okRsn.isChosen = !okRsn.isChosen;
     });
   };
 
@@ -132,14 +128,13 @@ function ReasonPickerSC_MRV({}) {
   const defectiveClick = (oReason) => {
     const refOReturnReason = oReturnReason({});
     setSessionMRV((draft) => {
-      draft.locSt.ReasonPickerSC.activeData1 = oReason;
+      draft.locSt.ReasonPickerSC.activeKey1 = oReason.keyStr;
     });
   };
 
   oMode.Defective.chips = aItemDefectiveReasons.map((thisReason) => {
     // Checks if the chip keyStr is the same as the activeData1 keyStr
-    const isSelected =
-      locStRt.ReasonPickerSC.activeData1?.keyStr === thisReason.keyStr;
+    const isSelected = locStRt.ReasonPickerSC.activeKey1 === thisReason.keyStr;
     // if the reasonQty is greater than 0, the chip is active
     const chipQty = thisReason.reasonQty;
 
@@ -165,11 +160,28 @@ function ReasonPickerSC_MRV({}) {
   ////////////   UI Input Cluster    /////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
+  // function to handle inputs from the plus and minus buttons
+
+  // button template for plus and minus
+  const uiPlusMinBtn = ({ plus = true }) => {
+    return (
+      <button
+        className={`plusMinBtn heading__large regular secondary`}
+        onClick={() => {
+          console.log("isPlus", plus);
+          locMethods.handlePlusMinus({ plus: plus });
+        }}
+      >
+        {plus ? "+" : "-"}
+      </button>
+    );
+  };
 
   // start here tomorrow.
-  const uiInputCluster = (
+  oMode.Defective.inputs = (
     <div className={`inputCluster`}>
-
+      {uiPlusMinBtn({ plus: false })}
+      {uiPlusMinBtn({ plus: true })}
     </div>
   );
 
@@ -184,6 +196,7 @@ function ReasonPickerSC_MRV({}) {
         </div>
         <div className={`chipCtnr`}>{oMode[localMode].chips}</div>
       </div>
+      {oMode[localMode].inputs}
     </div>
   );
 }
