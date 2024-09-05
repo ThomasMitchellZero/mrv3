@@ -1,7 +1,6 @@
 import "./_ReasonPickerStyle.css";
 
-
-
+import { MRVinput } from "../MRVinput";
 
 import { useResetLocStFields, useFindAtom } from "../../../MRVhooks/MRVhooks";
 
@@ -53,11 +52,9 @@ function ReasonPickerSC_MRV({}) {
     },
   };
 
-  const aItemOKreasons = Object.values(RepoItemReasons).filter(
-    (thisReason) => {
-      return thisReason.isDefective === false;
-    }
-  );
+  const aItemOKreasons = Object.values(RepoItemReasons).filter((thisReason) => {
+    return thisReason.isDefective === false;
+  });
 
   const aItemDefectiveReasons = Object.values(RepoItemReasons).filter(
     (thisReason) => {
@@ -187,6 +184,16 @@ function ReasonPickerSC_MRV({}) {
   oMode.Defective.inputs = (
     <div className={`inputCluster`}>
       {uiPlusMinBtn({ plus: false })}
+      <MRVinput>
+        <input
+          type="number"
+          min={0}
+          onChange={(e) => {
+            locMethods.setReasonRepoQty({ newQty: e.target.value });
+          }}
+          value={oActiveReason?.reasonQty || ""}
+        ></input>
+      </MRVinput>
       {uiPlusMinBtn({ plus: true })}
     </div>
   );

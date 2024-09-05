@@ -37,6 +37,13 @@ function useLocStMethods_STRX() {
         resetPageLS({ activeErrorALL: true });
         resetAllEntry30LS({ activeErrorALL: true });
       },
+      
+      resetForm: () => {
+        resetAllEntry30LS({ activeErrorALL: true, inputALL: true });
+        resetPageLS({ activeErrorALL: true });
+        resetReasonPickerLS({ activeErrorALL: true
+        });
+      },
 
       resetKeysToo: () => {
         resetAllEntry30LS({ activeErrorALL: true });

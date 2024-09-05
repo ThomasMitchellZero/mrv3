@@ -48,11 +48,11 @@ function useCompHooks_MRV({}) {
       },
 
       setReasonRepoQty: ({ newQty }) => {
-        console.log("Qty Setting:", newQty);
+        const numQty = Number(newQty);
         setSessionMRV((draft) => {
           draft.returnReasonsRepo[activeItemKey].oAllItemReasons[
             activeReasonKey
-          ].reasonQty = newQty;
+          ].reasonQty = numQty;
         });
       },
 

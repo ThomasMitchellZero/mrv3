@@ -76,7 +76,7 @@ const InvoEntry_SC_STRX = () => {
         invoNum: locStRt.input1,
         actionType: "add",
       });
-      locMethods.resetAllEntry30LS({ activeErrorALL: true, inputALL: true });
+      locMethods.resetForm();
     }
   };
 

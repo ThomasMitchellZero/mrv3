@@ -77,7 +77,7 @@ const ItemEntry_SC_STRX = ({}) => {
         itemsArrRouteStr: "returnItems",
       });
 
-      locMethods.resetAllEntry30LS({ activeErrorALL: true, inputALL: true });
+      locMethods.resetForm();
     }
   };
 
