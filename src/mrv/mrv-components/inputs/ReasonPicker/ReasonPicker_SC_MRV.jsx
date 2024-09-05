@@ -162,13 +162,11 @@ function ReasonPickerSC_MRV({}) {
   ////////////   UI Input Cluster    /////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-  // function to handle inputs from the plus and minus buttons
-
   // button template for plus and minus
   const uiPlusMinBtn = ({ plus = true }) => {
     return (
       <button
-        className={`plusMinBtn heading__large regular secondary`}
+        className={`plusMinBtn heading__large regular ghost`}
         disabled={!activeReasonKey}
         onClick={() => {
           console.log("isPlus", plus);
@@ -180,14 +178,21 @@ function ReasonPickerSC_MRV({}) {
     );
   };
 
+  const handleInactiveCluster = (e) => {
+    e.stopPropagation();
+    console.log("Inactive Cluster");
+    if (!activeReasonKey) locMethods.setError({ errorKey: "noReasonPicked" });
+  };
+
   // start here tomorrow.
   oMode.Defective.inputs = (
-    <div className={`inputCluster`}>
+    <div onClick={(e) => handleInactiveCluster(e)} className={`inputCluster`}>
       {uiPlusMinBtn({ plus: false })}
-      <MRVinput>
+      <MRVinput width={"5rem"}>
         <input
           type="number"
           min={0}
+          disabled={!activeReasonKey}
           onChange={(e) => {
             locMethods.setReasonRepoQty({ newQty: e.target.value });
           }}
@@ -197,6 +202,12 @@ function ReasonPickerSC_MRV({}) {
       {uiPlusMinBtn({ plus: true })}
     </div>
   );
+
+  const uiInputError = locStRt.ReasonPickerSC.activeError1?.str ? (
+    <div className={`warning tinyText`}>
+      {locStRt.ReasonPickerSC.activeError1.str}
+    </div>
+  ) : null;
 
   // Final Render /////////////////////////////////////////////////
 
@@ -210,6 +221,7 @@ function ReasonPickerSC_MRV({}) {
         <div className={`chipCtnr`}>{oMode[localMode].chips}</div>
       </div>
       {oMode[localMode].inputs}
+      {uiInputError}
     </div>
   );
 }

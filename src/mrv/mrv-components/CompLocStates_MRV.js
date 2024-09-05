@@ -13,6 +13,10 @@ const LS_MRV_ReasonPickerSC = makeLocStFields({
       key: "subZero",
       str: "Minimum Value: 0",
     }),
+    noReasonPicked: new errorObj({
+      key: "noReasonPicked",
+      str: "Choose Reason For Return",
+    }),
   },
   activeMode1: "ItemOK",
 });

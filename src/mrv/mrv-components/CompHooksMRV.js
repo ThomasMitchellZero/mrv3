@@ -47,6 +47,13 @@ function useCompHooks_MRV({}) {
         return qty < 0 ? "subZero" : qty > itemQty ? "qtyExceeded" : false;
       },
 
+      setError: ({ errorKey }) => {
+        setSessionMRV((draft) => {
+          draft.locSt.ReasonPickerSC.activeError1 =
+            draft.locSt.ReasonPickerSC.oErrorObjects[errorKey];
+        });
+      },
+
       setReasonRepoQty: ({ newQty }) => {
         const numQty = Number(newQty);
         setSessionMRV((draft) => {
