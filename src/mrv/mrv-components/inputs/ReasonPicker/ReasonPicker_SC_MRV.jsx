@@ -1,6 +1,7 @@
 import "./_ReasonPickerStyle.css";
 
-import { MdOutlineAdd, MdMinimize } from "react-icons/md";
+
+
 
 import { useResetLocStFields, useFindAtom } from "../../../MRVhooks/MRVhooks";
 
@@ -171,6 +172,7 @@ function ReasonPickerSC_MRV({}) {
     return (
       <button
         className={`plusMinBtn heading__large regular secondary`}
+        disabled={!activeReasonKey}
         onClick={() => {
           console.log("isPlus", plus);
           locMethods.handlePlusMinus({ plus: plus });

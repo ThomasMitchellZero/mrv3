@@ -416,6 +416,15 @@
 
     cursor: pointer;
 
+    &:disabled {
+      opacity: 25%;
+      cursor: not-allowed;
+
+      &:hover {
+        opacity: 25%;
+      }
+    }
+
     &:hover {
       opacity: 80%;
     }
