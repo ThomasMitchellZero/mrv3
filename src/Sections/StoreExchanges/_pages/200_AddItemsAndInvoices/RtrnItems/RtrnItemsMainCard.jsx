@@ -65,11 +65,11 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
       event.stopPropagation();
       console.log("tileItemAtom", tileItemAtom);
       setSessionMRV((draft) => {
-        draft.locSt.page.activeData1 = tileItemAtom
+        draft.locSt.page.activeKey1 = tileItemAtom.atomItemNum;
       });
     };
 
-    const activeClass = tileItemAtom.atomItemNum === sessionMRV.locSt.page.activeData1?.atomItemNum ? "selected" : "";
+    const activeClass = tileItemAtom.atomItemNum === sessionMRV.locSt.page.activeKey1 ? "selected" : "";
 
     const aInfoRows = aAtomizedItems.filter((thisSubAtom) => {
       return thisSubAtom.atomItemNum === tileItemAtom.atomItemNum;

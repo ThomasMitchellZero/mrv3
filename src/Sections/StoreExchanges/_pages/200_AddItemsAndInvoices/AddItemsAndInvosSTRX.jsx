@@ -33,7 +33,7 @@ function AddItemsAndInvosSTRX() {
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const nodeNav = useNodeNav();
-  const locMethods = useLocStMethods_STRX();
+  const locMethods = useLocStMethods_STRX().AddItemsAndInvos;
 
   const activeMode = sessionMRV.locSt.page.activeMode1;
   const activeUI = sessionMRV.locSt.page.activeUI3;

@@ -35,7 +35,7 @@ const InvoEntry_SC_STRX = () => {
 
   const locStRt = sessionMRV.locSt.AllEntry30;
 
-  const locMethods = useLocStMethods_STRX();
+  const locMethods = useLocStMethods_STRX().AddItemsAndInvos;
 
   const setSessionItems = useSetSessionItems();
   const setSessionInvosMRV = useSetSessionInvos();

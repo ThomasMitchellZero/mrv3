@@ -24,33 +24,29 @@ function useLocStMethods_STRX() {
 
   // Shared Methods -------------------------------------
 
+  const AddItemsAndInvos = {
+    basicClear: () => {
+      console.log("Ya Basic");
+      resetPageLS({ activeErrorALL: true });
+      resetAllEntry30LS({ activeErrorALL: true });
+    },
 
-  const basicClear = () => {
-    console.log("Ya Basic");
-    resetPageLS({ activeErrorALL: true });
-    resetAllEntry30LS({ activeErrorALL: true });
+    clearDataToo: () => {
+      console.log("And Your Little Data Too");
+      resetAllEntry30LS({ activeErrorALL: true });
+      resetPageLS({ activeErrorALL: true, activeKey1: true });
+    },
+
+    modeSwitch: ({ keyStr = "receipt" }) => {
+      setSession((draft) => {
+        draft.locSt.page.activeMode1 = keyStr;
+      });
+      resetAllEntry30LS({ activeErrorALL: true, inputALL: true });
+      resetPageLS({ activeErrorALL: true });
+    },
   };
 
-  outMethods.basicClear = basicClear;
-
-  const clearDataToo = () => {
-    console.log("And Your Little Data Too"); 
-    resetAllEntry30LS({ activeErrorALL: true });
-    resetPageLS({ activeErrorALL: true, activeData1: true });
-  }
-
-  outMethods.clearDataToo = clearDataToo;
-
-
-  const modeSwitch = ({ keyStr = "receipt" }) => {
-    setSession((draft) => {
-      draft.locSt.page.activeMode1 = keyStr;
-    });
-    resetAllEntry30LS({ activeErrorALL: true, inputALL: true });
-    resetPageLS({ activeErrorALL: true });
-  };
-
-  outMethods.modeSwitch = modeSwitch;
+  outMethods.AddItemsAndInvos = AddItemsAndInvos;
 
   //-------------------------------------
 

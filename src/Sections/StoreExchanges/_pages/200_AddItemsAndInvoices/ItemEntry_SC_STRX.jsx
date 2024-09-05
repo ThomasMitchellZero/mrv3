@@ -30,7 +30,7 @@ const ItemEntry_SC_STRX = ({}) => {
   const setSessionMRV = mrvCtx.setSessionMRV;
 
   const locStRt = sessionMRV.locSt.AllEntry30;
-  const locMethods = useLocStMethods_STRX();
+  const locMethods = useLocStMethods_STRX().AddItemsAndInvos;
 
   const setSessionItems = useSetSessionItems();
   const productCtx = useContext(ProductContext);

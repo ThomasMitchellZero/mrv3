@@ -14,7 +14,7 @@ function RtrnItemDetails30({}) {
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const locStRt = sessionMRV.locSt;
-  const locMethods = useLocStMethods_STRX();
+
 
   const productCtx = useContext(ProductContext);
 

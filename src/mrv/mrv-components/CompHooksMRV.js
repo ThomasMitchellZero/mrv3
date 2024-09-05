@@ -6,14 +6,14 @@ import {
   oReturnReason,
   returnAtom,
 } from "../../globalFunctions/globalJS_classes";
-import { set } from "lodash";
+
 
 function useCompHooks_MRV({}) {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
-  const activeItem = sessionMRV.locSt.page.activeData1;
-  const activeReason = sessionMRV.locSt.ReasonPickerSC.activeData1;
+  const activeItem = sessionMRV.locSt.page.activeData1; // change to a key.
+  const activeReason = sessionMRV.locSt.ReasonPickerSC.activeKey1;
   const thisReasonRt = sessionMRV.returnReasonsRepo[activeItem.atomItemNum]
 
   const outMethods = {}; // the object to return

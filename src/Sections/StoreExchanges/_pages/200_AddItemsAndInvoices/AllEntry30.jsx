@@ -23,7 +23,7 @@ function AllEntry30() {
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const locStRt = sessionMRV.locSt;
-  const locMethods = useLocStMethods_STRX();
+  const locMethods = useLocStMethods_STRX().AddItemsAndInvos;
   const s30Mode = locStRt.page.activeMode1;
 
   // mode-specific properties
