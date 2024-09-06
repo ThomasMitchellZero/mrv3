@@ -31,7 +31,8 @@ function ReasonPickerSC_MRV({}) {
   const activeItemKey = locStRt.page.activeKey1;
   const activeItemAtom = findAtom({ itemNum: activeItemKey, asIndex: false });
   const localMode = locStRt.ReasonPickerSC.activeMode1;
-  const RepoItemReasons = rsnRepoRt?.[activeItemKey]?.oAllItemReasons;
+  const activeItemReasons = rsnRepoRt?.[activeItemKey];
+  const RepoItemReasons = activeItemReasons?.oAllItemReasons;
   const activeReasonKey = locStRt.ReasonPickerSC.activeKey1;
   const oActiveReason = RepoItemReasons?.[activeReasonKey];
 
@@ -49,6 +50,17 @@ function ReasonPickerSC_MRV({}) {
       instruction: "Select condition and enter qty.",
       chips: [],
       inputs: null,
+    },
+  };
+
+  const tabMode = {
+    ItemOK: {
+      onClick: () => {},
+      tabQty: 0,
+    },
+    Defective: {
+      onClick: () => {},
+      tabQty: 0,
     },
   };
 
@@ -75,7 +87,16 @@ function ReasonPickerSC_MRV({}) {
   };
 
   const uiReasonTab = (btnKey = "NO TITLE") => {
+    const tabMode = {
+      ItemOK: {
+        tabQty: "",
+      },
+      Defective: {
+        tabQty: `: ${activeItemReasons?.allReasonsQty() || 0}`,
+      },
+    };
     const isTabActive = localMode === btnKey ? "active" : "";
+
     return (
       <button
         onClick={(e) => {
@@ -84,7 +105,7 @@ function ReasonPickerSC_MRV({}) {
         }}
         className={`tab ${isTabActive} `}
       >
-        {`${oMode[btnKey].label}`}
+        {`${oMode[btnKey].label} ${tabMode[btnKey].tabQty}`}
       </button>
     );
   };
@@ -135,7 +156,6 @@ function ReasonPickerSC_MRV({}) {
   };
 
   oMode.Defective.chips = aItemDefectiveReasons.map((oReason) => {
-
     const refOReturnReason = oReturnReason({});
     // Checks if the chip keyStr is the same as the activeData1 keyStr
     const isSelected = activeReasonKey === oReason.keyStr;

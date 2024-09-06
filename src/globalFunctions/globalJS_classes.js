@@ -157,20 +157,17 @@ const itemReturnReasons = ({
   const refOSingleReason = oReturnReason({});
   const itemQty = itemAtom.atomItemQty;
   const itemNum = itemAtom.atomItemNum;
-  const reasonQty = Object.values(oAllItemReasons).reduce((acc, curr) => {
-    return acc + curr.reasonQty;
-  }, 0);
-  const qtySansReason = itemQty - reasonQty;
 
   return {
     itemAtom,
     oAllItemReasons,
     itemQty,
     itemNum,
-    reasonQty,
-    qtySansReason,
-    get freshItemQty() {
-      return this.itemAtom.atomItemQty; // not sure this stays fresh?
+    allReasonsQty() {
+      const outQty = Object.values(this.oAllItemReasons).reduce((acc, curr) => {
+        return acc + curr.reasonQty;
+      }, 0);
+      return outQty;
     },
   };
 };
@@ -484,90 +481,6 @@ const makeLocStFields = ({
 };
 
 export { makeLocStFields };
-
-/*
-class LocStFields {
-  #inits;
-  constructor({
-    input1 = "",
-    input2 = "",
-    input3 = "",
-    input4 = "",
-    activeError1 = null,
-    activeError2 = null,
-    activeKey1 = "",
-    activeKey2 = "",
-    _keyStr = "",
-    activeMode1 = "",
-    activeMode2 = "",
-    activeData1 = null,
-    activeData2 = null,
-    oErrorObjects = {},
-    oLocStMethods = {},
-    oCustomResetFieldArrs = {},
-  }) {
-    this.input1 = input1;
-    this.input2 = input2;
-    this.input3 = input3;
-    this.input4 = input4;
-    this.activeError1 = activeError1;
-    this.activeError2 = activeError2;
-    this.activeKey1 = activeKey1;
-    this.activeKey2 = activeKey2;
-    this._keyStr = _keyStr;
-    this.activeMode1 = activeMode1;
-    this.activeMode2 = activeMode2;
-    this.activeData1 = activeData1;
-    this.activeData2 = activeData2;
-    this.oErrorObjects = oErrorObjects;
-    this.oLocStMethods = oLocStMethods;
-    // these are for more complex cases where I'm not just clearing a whole category of fields
-    // Intent is for these be in response to specific interactions in the UI.
-    this.oCustomResetFieldArrs = oCustomResetFieldArrs;
-    this.#inits = { ...this };
-
-    Object.freeze(this.oErrorObjects);
-    Object.freeze(this.#inits);
-    Object.freeze(this.oCustomResetFieldArrs);
-  }
-
-  showInits() {
-    return this.#inits;
-  }
-
-  reset(aKeys) {
-    aKeys.forEach((key) => {
-      this[key] = this.#inits[key];
-    });
-  }
-
-  resetError() {
-    this.reset(["activeError1", "activeError2"]);
-  }
-
-  resetActiveKeys() {
-    this.reset(["activeKey1", "activeKey2"]);
-  }
-
-  resetActiveUI() {
-    this.reset(["activeUI1", "activeUI2", "activeUI3"]);
-  }
-
-  resetCustom(customResetKey) {
-    this.reset(this.oCustomResetFieldArrs[customResetKey]);
-  }
-
-  resetAll() {
-    Object.keys(this.#inits).forEach((key) => {
-      this[key] = this.#inits[key];
-    });
-  }
-
-}
-
-export { LocStFields };
-
-*/
 
 const locStBaseMethods = {};
 

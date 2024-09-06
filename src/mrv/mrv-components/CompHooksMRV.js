@@ -3,6 +3,7 @@ import { useOutlet, useOutletContext } from "react-router-dom";
 
 import { useResetLocStFields, useFindAtom } from "../MRVhooks/MRVhooks";
 import {
+  itemReturnReasons,
   oReturnReason,
   returnAtom,
 } from "../../globalFunctions/globalJS_classes";
@@ -56,6 +57,7 @@ function useCompHooks_MRV({}) {
 
       setReasonRepoQty: ({ newQty }) => {
         const numQty = Number(newQty);
+        const refItemReasons = itemReturnReasons({});
         setSessionMRV((draft) => {
           draft.returnReasonsRepo[activeItemKey].oAllItemReasons[
             activeReasonKey
