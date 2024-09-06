@@ -35,9 +35,7 @@ function ReasonPickerSC_MRV({}) {
   const RepoItemReasons = activeItemReasons?.oAllItemReasons;
   const activeReasonKey = locStRt.ReasonPickerSC.activeKey1;
   const oActiveReason = RepoItemReasons?.[activeReasonKey];
-
-  console.log("activeItemReasons", activeItemReasons.okReasonsQty());
-  activeItemReasons?.okReasonsQty();
+  const iActiveReasonQty = oActiveReason?.reasonQty;
 
   // arrays for the two types of reasons.
 
@@ -187,18 +185,23 @@ function ReasonPickerSC_MRV({}) {
   ////////////   UI Input Cluster    /////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
+  const isBtnDisabled = (isPlus) => {
+    if (!activeReasonKey) return true;
+    if (isPlus) return locMethods.exceedsItemQty(iActiveReasonQty);
+    if (!isPlus) return  0 >= iActiveReasonQty;
+  };
+
   // button template for plus and minus
-  const uiPlusMinBtn = ({ plus = true }) => {
+  const uiPlusMinBtn = ({ isPlus = true }) => {
     return (
       <button
         className={`plusMinBtn heading__large regular ghost`}
-        disabled={!activeReasonKey}
+        disabled={isBtnDisabled(isPlus)}
         onClick={() => {
-          console.log("isPlus", plus);
-          locMethods.handlePlusMinus({ plus: plus });
+          locMethods.handlePlusMinus({ isPlus: isPlus });
         }}
       >
-        {plus ? "+" : "-"}
+        {isPlus ? "+" : "-"}
       </button>
     );
   };
@@ -212,7 +215,7 @@ function ReasonPickerSC_MRV({}) {
   // start here tomorrow.
   oMode.Defective.inputs = (
     <div onClick={(e) => handleInactiveCluster(e)} className={`inputCluster`}>
-      {uiPlusMinBtn({ plus: false })}
+      {uiPlusMinBtn({ isPlus: false })}
       <MRVinput width={"5rem"}>
         <input
           type="number"
@@ -224,7 +227,7 @@ function ReasonPickerSC_MRV({}) {
           value={oActiveReason?.reasonQty || ""}
         ></input>
       </MRVinput>
-      {uiPlusMinBtn({ plus: true })}
+      {uiPlusMinBtn({ isPlus: true })}
     </div>
   );
 

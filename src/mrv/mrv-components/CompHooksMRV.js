@@ -22,23 +22,46 @@ function useCompHooks_MRV({}) {
     const activeItem = findAtom({ itemNum: activeItemKey, asIndex: false });
 
     const activeReasonKey = sessionMRV.locSt.ReasonPickerSC.activeKey1;
-    const thisReasonRt =
-      sessionMRV.returnReasonsRepo?.[activeItemKey].oAllItemReasons?.[
-        activeReasonKey
-      ];
+    const activeRepoItemObj = sessionMRV.returnReasonsRepo?.[activeItemKey];
+    const activeReasonObj =
+      activeRepoItemObj?.oAllItemReasons?.[activeReasonKey];
+
+    const resetReasonPickerLS = useResetLocStFields({ locSt: "ReasonPickerSC" });
 
     const lsMethods = {
-      resetReasonPickerLS: useResetLocStFields("ReasonPickerSC"),
 
-      modeSwitch: ({ keyStr = "no mode key" }) => {
-        setSessionMRV((draft) => {
-          draft.locSt.ReasonPickerSC.activeMode1 = keyStr;
-        });
-        lsMethods.resetReasonPickerLS({
-          activeErrorALL: true,
-          inputALL: true,
-          activeData1: true,
-        });
+      
+
+      exceedsItemQty: (qtyToCheck) => {
+        // oriented to True because this will be used to disable stuff.
+        const refAtom = new returnAtom({});
+        return qtyToCheck >= activeItem.atomItemQty;
+      },
+
+      handlePlusMinus: ({ isPlus = true }) => {
+        const refOReturnReason = oReturnReason({});
+        const sMode = isPlus ? "plus" : "minus";
+
+        const increment = isPlus ? 1 : -1;
+        let draftQty = activeReasonObj.reasonQty + increment;
+        const qtyError = false; //oReasonPicker_SC.inputQtyValidator({ qty: draftQty });
+
+        const oMode = {
+          plus: {
+            qtyError: ""
+          },
+          minus: {},
+        };
+
+        if (qtyError) {
+          setSessionMRV((draft) => {
+            const locReason = draft.locSt.ReasonPickerSC;
+            locReason.activeError1 = locReason.oErrorObjects[qtyError];
+          });
+        } else {
+          console.log("draftQty", draftQty);
+          lsMethods.setReasonRepoQty({ newQty: draftQty });
+        }
       },
 
       inputQtyValidator: ({ qty }) => {
@@ -46,6 +69,17 @@ function useCompHooks_MRV({}) {
         let itemQty = activeItem?.atomItemQty;
         // qtyExceeded, subZero
         return qty < 0 ? "subZero" : qty > itemQty ? "qtyExceeded" : false;
+      },
+
+      modeSwitch: ({ keyStr = "no mode key" }) => {
+        setSessionMRV((draft) => {
+          draft.locSt.ReasonPickerSC.activeMode1 = keyStr;
+        });
+        resetReasonPickerLS({
+          activeErrorALL: true,
+          inputALL: true,
+          activeData1: true,
+        });
       },
 
       setError: ({ errorKey }) => {
@@ -63,24 +97,6 @@ function useCompHooks_MRV({}) {
             activeReasonKey
           ].reasonQty = numQty;
         });
-      },
-
-      handlePlusMinus: ({ plus = true }) => {
-        const refOReturnReason = oReturnReason({});
-        const increment = plus ? 1 : -1;
-        let draftQty = thisReasonRt.reasonQty + increment;
-        const qtyError = false; //oReasonPicker_SC.inputQtyValidator({ qty: draftQty });
-
-        if (qtyError) {
-          console.log("qtyError", qtyError);
-          setSessionMRV((draft) => {
-            const locReason = draft.locSt.ReasonPickerSC;
-            locReason.activeError1 = locReason.oErrorObjects[qtyError];
-          });
-        } else {
-          console.log("draftQty", draftQty);
-          lsMethods.setReasonRepoQty({ newQty: draftQty });
-        }
       },
     };
     return lsMethods;
