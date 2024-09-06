@@ -164,10 +164,26 @@ const itemReturnReasons = ({
     itemQty,
     itemNum,
     allReasonsQty() {
+      // loops thru all reasons and sums their qtys.  
+      // No check for defective b/c OK reasons don't get individual qtys.
       const outQty = Object.values(this.oAllItemReasons).reduce((acc, curr) => {
         return acc + curr.reasonQty;
       }, 0);
       return outQty;
+    },
+    qtySansReason() {
+      return this.itemQty - this.allReasonsQty();
+
+    },
+    okReasonsQty() {
+      // OK reasons never have a qty, so we just need to know if any are chosen.
+      const hasOK = Object.values(this.oAllItemReasons).includes(
+        (thisReason) => {
+          return thisReason.isChosen;
+        }
+      );
+      // If any OK reasons are chosen, the value is whatever is left after the defective reasons.
+      return hasOK ? Math.max(this.qtySansReason(), 0) : 0;
     },
   };
 };

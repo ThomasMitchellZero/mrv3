@@ -49,7 +49,7 @@ const RtrnItemsList = () => {
   );
 
   const uiCardArr = aMainItems.map((thisReturnItem) => {
-    return <RtrnItemsMainCard returnItemAtom={thisReturnItem} />;
+    return <RtrnItemsMainCard key={thisReturnItem.atomItemNum} returnItemAtom={thisReturnItem} />;
   });
 
   // final UI output

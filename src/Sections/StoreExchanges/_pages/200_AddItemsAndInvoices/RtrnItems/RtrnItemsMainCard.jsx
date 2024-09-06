@@ -85,7 +85,12 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
     });
 
     const aInfoRowsUI = aInfoRows.map((thisSubAtom) => {
-      return <ItemReceiptRow atomizedItem={thisSubAtom} />;
+      return (
+        <ItemReceiptRow
+          key={thisSubAtom.primaryKey}
+          atomizedItem={thisSubAtom}
+        />
+      );
     });
 
     return (

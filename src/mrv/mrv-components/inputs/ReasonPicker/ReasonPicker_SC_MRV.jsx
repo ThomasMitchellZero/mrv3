@@ -89,10 +89,10 @@ function ReasonPickerSC_MRV({}) {
   const uiReasonTab = (btnKey = "NO TITLE") => {
     const tabMode = {
       ItemOK: {
-        tabQty: "",
+        tabQty: `${activeItemReasons?.okReasonsQty()}`,
       },
       Defective: {
-        tabQty: `: ${activeItemReasons?.allReasonsQty() || 0}`,
+        tabQty: `${activeItemReasons?.allReasonsQty()}`,
       },
     };
     const isTabActive = localMode === btnKey ? "active" : "";
@@ -105,7 +105,7 @@ function ReasonPickerSC_MRV({}) {
         }}
         className={`tab ${isTabActive} `}
       >
-        {`${oMode[btnKey].label} ${tabMode[btnKey].tabQty}`}
+        {`${oMode[btnKey].label}: ${tabMode[btnKey].tabQty}`}
       </button>
     );
   };
