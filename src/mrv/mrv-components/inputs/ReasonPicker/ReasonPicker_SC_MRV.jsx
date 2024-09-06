@@ -36,6 +36,9 @@ function ReasonPickerSC_MRV({}) {
   const activeReasonKey = locStRt.ReasonPickerSC.activeKey1;
   const oActiveReason = RepoItemReasons?.[activeReasonKey];
 
+  console.log("activeItemReasons", activeItemReasons.okReasonsQty());
+  activeItemReasons?.okReasonsQty();
+
   // arrays for the two types of reasons.
 
   const oMode = {

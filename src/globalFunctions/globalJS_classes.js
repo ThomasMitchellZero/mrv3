@@ -177,11 +177,12 @@ const itemReturnReasons = ({
     },
     okReasonsQty() {
       // OK reasons never have a qty, so we just need to know if any are chosen.
-      const hasOK = Object.values(this.oAllItemReasons).includes(
+      const hasOK = Object.values(this.oAllItemReasons).find(
         (thisReason) => {
           return thisReason.isChosen;
         }
       );
+      console.log("hasOK", hasOK);
       // If any OK reasons are chosen, the value is whatever is left after the defective reasons.
       return hasOK ? Math.max(this.qtySansReason(), 0) : 0;
     },
