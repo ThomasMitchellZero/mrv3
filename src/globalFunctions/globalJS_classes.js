@@ -1,7 +1,6 @@
 //---- Product ----
 
-import { cloneDeep } from "lodash";
-import { act } from "react";
+import { cloneDeep, get } from "lodash";
 
 class moneyObj {
   constructor({
@@ -91,9 +90,13 @@ const oReturnReason = ({
   reasonQty = 0,
   isChosen = false,
 }) => {
-  const uiLabel =
-    isDefective && reasonQty ? `${strLabel}: ${reasonQty}` : `${strLabel}`;
-  return { keyStr, strLabel, isDefective, reasonQty, isChosen, uiLabel };
+  return {
+    keyStr,
+    strLabel,
+    isDefective,
+    reasonQty,
+    isChosen,
+  };
 };
 
 const defaultReturnReasons = {

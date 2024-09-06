@@ -2,8 +2,6 @@ import React from "react";
 
 import {
   Invoice_SR,
-  InvoProduct,
-  ProdClass,
   returnAtom,
   moneyObj,
 } from "../globalFunctions/globalJS_classes";
@@ -13,6 +11,8 @@ import tenderTypes from "../components/global_functions/tenderTypes";
 //products = 100, 200, 300, 400, 900, 910
 
 const tType = tenderTypes;
+
+const invo = {a: new Invoice_SR({})}
 
 const invoiceObj = {
   7771: new Invoice_SR({

@@ -135,6 +135,8 @@ function ReasonPickerSC_MRV({}) {
   };
 
   oMode.Defective.chips = aItemDefectiveReasons.map((oReason) => {
+
+    const refOReturnReason = oReturnReason({});
     // Checks if the chip keyStr is the same as the activeData1 keyStr
     const isSelected = activeReasonKey === oReason.keyStr;
     // if the reasonQty is greater than 0, the chip is active
