@@ -42,6 +42,7 @@
   --color__tertiary: #565e5a;
   --color__interactive: #0072ce;
   --color__interactive__pressed: #0e52a4;
+  --color__interactice__inverse: #51aaf2;
   --color__green: #007a33;
   --color__green__inverse: #37c271;
   --color__gold: #f5b62f;
@@ -504,7 +505,7 @@
       background-color: var(--color__surface__default);
 
       &.active {
-        border-color: var(--color__border);
+        border-color: var(--color__interactice__inverse);
         background-color: var(--color__card__selected);
       }
 
