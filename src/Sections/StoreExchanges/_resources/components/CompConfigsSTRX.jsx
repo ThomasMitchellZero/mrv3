@@ -6,6 +6,8 @@ import { baseReturnState } from "../../../../globalFunctions/globalJS_classes";
 import { NavNodeBarMRV } from "../../../../mrv/mrv-components/inputs/NavNodeBarMRV";
 import { useOutletContext } from "react-router";
 import { useNodeNav } from "../../../../mrv/MRVhooks/MRVhooks";
+import { useCompHooks_MRV } from "../../../../mrv/mrv-components/CompHooksMRV";
+import { BigLabeledValue } from "../../../../mrv/mrv-components/DisplayOutputs/BigLabeledValue";
 
 const TitleBarSTRX = ({
   hasIcon = null,
@@ -54,3 +56,31 @@ export { TitleBarSTRX };
 const CashTotalSTRX = () => <CashTotalMRV mode={"returnMinusReplace"} />;
 
 export { CashTotalSTRX };
+
+const ReasonBadgeSTRX = ({ itemAtom }) => {
+  // doing this as a Config since it's used in a couple places.
+  const mrvCtx = useOutletContext();
+  const sessionMRV = mrvCtx.sessionMRV;
+  const reasonRepo = sessionMRV.returnReasonsRepo;
+  const itemReasonsQty = reasonRepo?.[itemAtom.atomItemNum]?.allReasonsQty();
+  const mrvMethods = useCompHooks_MRV().oReasonPicker_SC;
+
+  const sLabelStatus = mrvMethods.isReasonQtyValid({
+    itemAtom: itemAtom,
+    validCondition: "notOver",
+  })
+    ? "neutralGrey"
+    : "badRed";
+
+  return (
+    <BigLabeledValue
+      status={`${sLabelStatus}`}
+      labelStr="Reasons"
+      invertColors={true}
+      valueStr={`${itemReasonsQty} / ${itemAtom.atomItemQty}`}
+      size="S"
+    />
+  );
+};
+
+export { ReasonBadgeSTRX };

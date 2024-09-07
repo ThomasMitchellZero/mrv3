@@ -24,7 +24,7 @@ function ReasonPickerSC_MRV({}) {
   const setSessionMRV = mrvCtx.setSessionMRV;
   const rsnRepoRt = sessionMRV.returnReasonsRepo;
 
-  const locMethods = useCompHooks_MRV({}).oReasonPicker_SC;
+  const locMethods = useCompHooks_MRV().oReasonPicker_SC;
 
   // state routes shortcuts
   const locStRt = sessionMRV.locSt;
@@ -116,13 +116,14 @@ function ReasonPickerSC_MRV({}) {
     itemAtom: activeItemAtom,
     validCondition: "notOver",
   })
-    ? "goodGreen"
+    ? "neutralGrey"
     : "badRed";
 
   const uiNavCluster = (
     <div className={`navCluster`}>
       {uiReasonTab(`ItemOK`)}
       {uiReasonTab(`Defective`)}
+      <div className={`spacer`}></div>
       <BigLabeledValue
         status={`${sLabelStatus}`}
         labelStr="Reasons"

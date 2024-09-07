@@ -9,7 +9,7 @@ import {
 } from "../../globalFunctions/globalJS_classes";
 import { find } from "lodash";
 
-function useCompHooks_MRV({}) {
+function useCompHooks_MRV() {
   const mrvCtx = useOutletContext();
   const findAtom = useFindAtom();
   const sessionMRV = mrvCtx.sessionMRV;

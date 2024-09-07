@@ -13,6 +13,10 @@
       min-width: 0rem;
       width: 100%;
       gap: 0rem;
+
+      & .spacer {
+        flex: 1 1 0rem;
+      }
     }
 
     & .chipCluster {
@@ -34,16 +38,16 @@
     }
 
     & .inputCluster {
-        display: flex;
-        flex-direction: row;
-        min-width: 0rem;
-        width: 100%;
-        gap: 0.5rem;
+      display: flex;
+      flex-direction: row;
+      min-width: 0rem;
+      width: 100%;
+      gap: 0.5rem;
 
-        & button{
-            width: 4rem;
-            padding: 0rem;
-        }
+      & button {
+        width: 4rem;
+        padding: 0rem;
+      }
     }
   }
 }

@@ -12,7 +12,6 @@
       min-width: 0rem;
       width: 100%;
 
-
       & .miniDetails {
         display: flex;
         flex-direction: row;
@@ -157,6 +156,13 @@
 
       & .totalQtyCol {
         grid-column: totalQty / span 1;
+
+        &.rowCol {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.5rem;
+        }
       }
 
       & .receiptCol {

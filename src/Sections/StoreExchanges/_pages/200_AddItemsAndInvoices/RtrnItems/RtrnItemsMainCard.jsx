@@ -1,9 +1,10 @@
 import { useOutletContext } from "react-router";
 import { MRVitemDetails } from "../../../../../mrv/mrv-components/DisplayOutputs/mrvItemDetails";
 import { MRVinput } from "../../../../../mrv/mrv-components/inputs/MRVinput";
-import { DescriptorIcon } from "../../../../../mrv/mrv-components/DisplayOutputs/DescriptorIcon";
+import { ReasonBadgeSTRX } from "../../../_resources/components/CompConfigsSTRX";
 import { ItemReceiptRow } from "./ItemReceiptRow";
 import { useLocStMethods_STRX } from "../../../_resources/components/CompHooks_STRX";
+import { useCompHooks_MRV } from "../../../../../mrv/mrv-components/CompHooksMRV";
 import {
   centsToDollars,
   atomsMonetizer,
@@ -24,6 +25,7 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
   const setSessionItems = useSetSessionItems();
 
   const locMethods = useLocStMethods_STRX().AddItemsAndInvos;
+  const mrvMethods = useCompHooks_MRV().oReasonPicker_SC;
 
   const aReturnItems = sessionMRV.returnItems;
   const aAtomizedItems = sessionMRV.atomizedReturnItems;
@@ -116,6 +118,7 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
               }}
             />
           </MRVinput>
+          <ReasonBadgeSTRX itemAtom={tileItemAtom} />
         </div>
         <div className={`invoInfoColumn`}>{aInfoRowsUI}</div>
       </div>
