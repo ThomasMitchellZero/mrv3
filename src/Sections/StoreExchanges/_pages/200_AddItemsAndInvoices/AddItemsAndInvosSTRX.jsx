@@ -38,7 +38,7 @@ function AddItemsAndInvosSTRX() {
   const activeMode = sessionMRV.locSt.page.activeMode1;
   const activeUI = sessionMRV.locSt.page.activeUI3;
   const errorObjRt = sessionMRV.locSt.page.oErrorObjects;
-  const activeError = sessionMRV.locSt.page.activeError1;
+  const activeError1 = sessionMRV.locSt.page.activeError1;
 
   const oMode = {
     item: {
@@ -63,22 +63,18 @@ function AddItemsAndInvosSTRX() {
   };
 
   const uiContinueWarning =
-    activeError?.key === "noItems" ? errorObjRt?.noItems?.str : "";
+    activeError1?.key === "noItems"
+      ? errorObjRt?.noItems?.str
+      : activeError1?.key === "invalidReturnReasons"
+      ? errorObjRt?.invalidReturnReasons?.str
+      : "";
 
   /* ---- SHARED FUNCTIONS ---- */
 
   const handleContinue = (e) => {
     e.stopPropagation();
 
-    if (activeMode === "receipt") {
-      locMethods.modeSwitch({ keyStr: "item" });
-    } else if (sessionMRV.returnItems.length === 0) {
-      setSessionMRV((draft) => {
-        draft.locSt.page.activeError1 = errorObjRt?.noItems;
-      });
-    } else {
-      nodeNav("reason");
-    }
+    locMethods.continue();
   };
 
   /* ---- OUTPUT JSX ---- */

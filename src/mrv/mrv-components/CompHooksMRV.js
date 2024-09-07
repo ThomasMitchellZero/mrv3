@@ -17,6 +17,28 @@ function useCompHooks_MRV() {
 
   const outMethods = {}; // the object to return
 
+  const universal = () => {
+    const oOut = {
+      /*
+            setError:({lsRtKey="page", errorKey, errorSegment = "1"}) => {
+        const rtStr = `activeError${errorSegment || 1}`;
+        setSessionMRV((draft) => {
+          draft.locSt?.[lsRtKey]?.[rtStr] =
+            draft.locSt[lsRtKey].oErrorObjects[errorKey];
+        });
+      },
+      setLSfield: ({lsRtKey = "page", fieldKey, newValue}) => {
+        setSessionMRV((draft) => {
+          draft.locSt?.[lsRtKey]?.[fieldKey] = newValue;
+        });
+      }
+      
+      */
+    };
+    return oOut;
+  };
+  outMethods.universal = universal();
+
   const oReasonPicker_SC = () => {
     const activeItemKey = sessionMRV.locSt.page.activeKey1;
     const activeItem = findAtom({ itemNum: activeItemKey, asIndex: false });
@@ -94,11 +116,16 @@ function useCompHooks_MRV() {
 
         const oConditionConfigs = {
           notOver: {
-            fn: itemReasonQty <= returnItemQty,
+            outBool: itemReasonQty <= returnItemQty,
+          },
+          notUnder: {
+            outBool: itemReasonQty >= returnItemQty,
           },
         };
+        console.log(returnItemQty, itemReasonQty, validCondition);
+        console.log(oConditionConfigs[validCondition].outBool);
 
-        return oConditionConfigs[validCondition].fn;
+        return oConditionConfigs[validCondition].outBool;
       },
 
       setError: ({ errorKey }) => {
