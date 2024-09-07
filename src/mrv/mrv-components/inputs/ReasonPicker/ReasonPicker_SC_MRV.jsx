@@ -4,6 +4,7 @@ import { MRVinput } from "../MRVinput";
 import { BigLabeledValue } from "../../DisplayOutputs/BigLabeledValue";
 
 import { useResetLocStFields, useFindAtom } from "../../../MRVhooks/MRVhooks";
+import { ReasonBadgeSTRX } from "../../../../Sections/StoreExchanges/_resources/components/CompConfigsSTRX";
 
 import { useCompHooks_MRV } from "../../CompHooksMRV";
 
@@ -80,9 +81,6 @@ function ReasonPickerSC_MRV({}) {
   ////////////   UI Tab Elements   //////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-  const refAtom = new returnAtom({});
-  const refItemReasons = itemReturnReasons({});
-  const refOSingleReason = oReturnReason({});
 
   const handleTabClick = (btnKey) => {
     locMethods.modeSwitch({ keyStr: btnKey });
@@ -112,25 +110,13 @@ function ReasonPickerSC_MRV({}) {
     );
   };
 
-  const sLabelStatus = locMethods.isReasonQtyValid({
-    itemAtom: activeItemAtom,
-    validCondition: "notOver",
-  })
-    ? "neutralGrey"
-    : "badRed";
 
   const uiNavCluster = (
     <div className={`navCluster`}>
       {uiReasonTab(`ItemOK`)}
       {uiReasonTab(`Defective`)}
       <div className={`spacer`}></div>
-      <BigLabeledValue
-        status={`${sLabelStatus}`}
-        labelStr="Reasons"
-        invertColors={true}
-        valueStr={`${activeItemReasons?.allReasonsQty() } / ${activeItemAtom.atomItemQty}`}
-        size="S"
-      />
+      <ReasonBadgeSTRX itemAtom={activeItemAtom} />
     </div>
   );
 
