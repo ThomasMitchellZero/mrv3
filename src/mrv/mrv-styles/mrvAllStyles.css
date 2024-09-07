@@ -50,6 +50,7 @@
   --color__red__inverse: #f19caa;
   --color__disabled__text: #00000052;
   --color__white: #ffffff;
+  --color__meltdown__magenta: #ff00ff;
 
   --color__card__selected: #e7f1fd;
   --color__card__hover: #f0f0f0;
@@ -151,6 +152,13 @@
 
   & .color__transparent {
     background-color: transparent;
+  }
+
+  & .color__meltdown__magenta {
+    background-color: var(--color__meltdown__magenta);
+  }
+  & .color__meltdown__magenta__text {
+    color: var(--color__meltdown__magenta);
   }
 
   /* ---- MRV STANDARD HTML STYLES ---- */
@@ -412,7 +420,7 @@
 
     border: 0.125rem solid;
     border-radius: var(--radius__medium);
-    background-color: fuchsia;
+    background-color: var(--color__meltdown__magenta);
     text-decoration: none;
 
     font-family: "Fellix";

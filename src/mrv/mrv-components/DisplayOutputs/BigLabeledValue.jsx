@@ -47,6 +47,14 @@ function BigLabeledValue({
         color: "color__primary__text  color__surface__lightgrey", // Identical for now.
       },
     },
+    meltdownMagenta: {
+      normal: {
+        color: "color__white__text  color__magenta",
+      },
+      inverted: {
+        color: "color__white__text  color__magenta",
+      },
+    },
     M: {
       labelSize: "body__small",
       valueSize: "heading__large",

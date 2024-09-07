@@ -7,7 +7,9 @@ import { NavNodeBarMRV } from "../../../../mrv/mrv-components/inputs/NavNodeBarM
 import { useOutletContext } from "react-router";
 import { useNodeNav } from "../../../../mrv/MRVhooks/MRVhooks";
 import { useCompHooks_MRV } from "../../../../mrv/mrv-components/CompHooksMRV";
+import { useLocStMethods_STRX } from "./CompHooks_STRX";
 import { BigLabeledValue } from "../../../../mrv/mrv-components/DisplayOutputs/BigLabeledValue";
+import { ReasonBadgeMRV } from "../../../../mrv/mrv-components/inputs/ReasonPicker/ReasonBadge";
 
 const TitleBarSTRX = ({
   hasIcon = null,
@@ -73,13 +75,7 @@ const ReasonBadgeSTRX = ({ itemAtom }) => {
     : "badRed";
 
   return (
-    <BigLabeledValue
-      status={`${sLabelStatus}`}
-      labelStr="Reasons"
-      invertColors={true}
-      valueStr={`${itemReasonsQty} / ${itemAtom.atomItemQty}`}
-      size="S"
-    />
+    <ReasonBadgeMRV itemAtom={itemAtom} sLabelStatus={sLabelStatus} />
   );
 };
 

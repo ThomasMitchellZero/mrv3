@@ -6,6 +6,7 @@ import { makeLocStFields } from "../../../../../globalFunctions/globalJS_classes
 import { useOutletContext } from "react-router-dom";
 import { useLocStMethods_STRX } from "../../../_resources/components/CompHooks_STRX";
 import { useFindAtom } from "../../../../../mrv/MRVhooks/MRVhooks";
+import { ReasonBadgeSTRX } from "../../../_resources/components/CompConfigsSTRX";
 
 import { useContext } from "react";
 import ProductContext from "../../../../../store/product-context";
@@ -32,7 +33,7 @@ function RtrnItemDetails30({}) {
         <div className="miniDetails">
           <ProductImageMRV size="S" itemAtom={activeItem} imageOnly={true} />
         </div>
-        <ReasonPickerSC_MRV />
+        <ReasonPickerSC_MRV itemQtyBadge={<ReasonBadgeSTRX itemAtom={activeItem} />} />
       </div>
     </Sidesheet_Base_MRV>
   );

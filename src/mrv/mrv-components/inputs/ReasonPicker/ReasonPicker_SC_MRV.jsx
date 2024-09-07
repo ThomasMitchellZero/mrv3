@@ -15,9 +15,9 @@ import {
 } from "../../../../globalFunctions/globalJS_classes";
 
 import { useOutletContext } from "react-router";
-import { useContext } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 
-function ReasonPickerSC_MRV({}) {
+function ReasonPickerSC_MRV({ itemQtyBadge = null }) {
   const mrvCtx = useOutletContext();
   const findAtom = useFindAtom();
 
@@ -39,7 +39,18 @@ function ReasonPickerSC_MRV({}) {
   const oActiveReason = RepoItemReasons?.[activeReasonKey];
   const iActiveReasonQty = oActiveReason?.reasonQty;
 
-  // arrays for the two types of reasons.
+  const [shouldFocus, setShouldFocus] = useState(false);
+
+  useEffect(() => {
+    if (shouldFocus) {
+      inputRef.current.focus();
+      setShouldFocus(false);
+    }
+  }, [shouldFocus]);
+
+  const inputRef = useRef(null);
+
+  // App modes
 
   const oMode = {
     ItemOK: {
@@ -81,7 +92,6 @@ function ReasonPickerSC_MRV({}) {
   ////////////   UI Tab Elements   //////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-
   const handleTabClick = (btnKey) => {
     locMethods.modeSwitch({ keyStr: btnKey });
   };
@@ -110,13 +120,12 @@ function ReasonPickerSC_MRV({}) {
     );
   };
 
-
   const uiNavCluster = (
     <div className={`navCluster`}>
       {uiReasonTab(`ItemOK`)}
       {uiReasonTab(`Defective`)}
       <div className={`spacer`}></div>
-      <ReasonBadgeSTRX itemAtom={activeItemAtom} />
+      {itemQtyBadge}
     </div>
   );
 
@@ -153,6 +162,7 @@ function ReasonPickerSC_MRV({}) {
 
   const defectiveClick = (oReason) => {
     const refOReturnReason = oReturnReason({});
+    setShouldFocus(true);
     setSessionMRV((draft) => {
       draft.locSt.ReasonPickerSC.activeKey1 = oReason.keyStr;
     });
@@ -221,7 +231,9 @@ function ReasonPickerSC_MRV({}) {
       <MRVinput width={"5rem"}>
         <input
           type="number"
+          ref={inputRef}
           min={0}
+          max={activeItemAtom.atomItemQty}
           disabled={!activeReasonKey}
           onChange={(e) => {
             locMethods.setReasonRepoQty({ newQty: e.target.value });

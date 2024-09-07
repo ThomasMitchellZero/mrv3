@@ -8116,5 +8116,70 @@ What to do today?
 
     Anyways.  I think it's OK for any functions that are ONLY consumed within a single component to live only in that component.  Most of the LS operations for the Picker should only live within the picker, so I should be good... right?  Guess we're gonna find out.
 
+6 Sep 2024
+    1:15.
+    Kind of a late start today but I did have Let's Pretend and some other Real Job crap to take care of.  Let's do this thing!
+    A lot of stuff appears to be going pretty well.  The qty editing just clicked together really fast.  A lot of the 'to-do' related to Reason Codes is like, error handling, background clicks, etc.  I guess the error handling could get hairy but I don't think it would be a trainwreck if I rolled into a test with what I have right now.
+
+    OK, there's a few things I could work on.  
+        -I would like to get rid of those fucking key errors.  
+            -Separate out the Tile and Card components.
+            -For the time being, I could just render 1 card/tile.  
+                -Eventually I will need to be able to filter and sort.
+                -That's gonna require me to solve the category issue.
+
+        -I gotta get the reason aggregation working.
+            -This is probably the smart choice.  
     
+    2:50.  Took a quick walk and I have a plan I feel good about:
+        -Get everything I need for Return Reasons
+            X -Get Reason Qty working
+            X -Get qtySansReason working.
+            -Qty validation on the inputs
+            -Qty display in the sidesheet and also the item column.
+            -UseEffect to handle focusing.
+            -Error if user tries to proceed with invalid Qty.
+
+        -ReturnReasons OPTIONAL
+            -Auto-focusing on the other input fields if I'm feeling froggy.
+            -Error if user tries to interact 
+        -Get the New Item addition built
+            -For this I will use the new <BaseCardMRV> component.
+            -Using my newfound knowledge of Flexbox, I will try to simplify the column-handling.
+        -Get the Item Rejection up and running.
+        -Assuming the column handling works well on NewItems and Rejection, I can THEN come back through ReturnItems and refactor that card.
+
+    So the VERY first issue is that my qtySansReason isn't working.  Let's see what we can do about that.  
+
+    4:00.
+    This is a puzzler, all right.  OK, so what do we know?
+        -We're able to get fresh(ish) values out of the objects.  I say 'ish' because they are one render behind, but that might well be a result of calling in a state-setting method.  The target object is at least updating.  
+        -This feels like either 
+            -the method calling this property contains a dead end OR
+            -the reducer (which I don't really use) is doing something fucky.
+        
+7 Sep 2024
+    11:20.
+    I actually played a couple sets of volleyball this morning, so it isn't like this is a lousy start.  Let's get after it!  List from yesterday still applies so I am copying it below:  
+
+    I will start with the qty display on the sidesheet + table items.  
+
+        -Get everything I need for Return Reasons
+            X -Get Reason Qty working
+            X -Get qtySansReason working.
+            X -Qty validation on the +/- buttons.
+            X -Qty display in the sidesheet 
+            X -And also the item column.
+            X -UseEffect to handle focusing.
+            -Error if user tries to proceed with invalid Qty.
+
+        -ReturnReasons OPTIONAL
+            -Auto-focusing on the other input fields if I'm feeling froggy.
+            -Error if user tries to interact 
+        -Get the New Item addition built
+            -For this I will use the new <BaseCardMRV> component.
+            -Using my newfound knowledge of Flexbox, I will try to simplify the column-handling.
+        -Get the Item Rejection up and running.
+        -Assuming the column handling works well on NewItems and Rejection, I can THEN come back through ReturnItems and refactor that card.
+
 
