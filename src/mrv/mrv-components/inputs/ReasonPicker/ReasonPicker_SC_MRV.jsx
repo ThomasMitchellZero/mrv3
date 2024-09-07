@@ -1,6 +1,7 @@
 import "./_ReasonPickerStyle.css";
 
 import { MRVinput } from "../MRVinput";
+import { BigLabeledValue } from "../../DisplayOutputs/BigLabeledValue";
 
 import { useResetLocStFields, useFindAtom } from "../../../MRVhooks/MRVhooks";
 
@@ -93,7 +94,7 @@ function ReasonPickerSC_MRV({}) {
         tabQty: `${activeItemReasons?.okReasonsQty()}`,
       },
       Defective: {
-        tabQty: `${activeItemReasons?.allReasonsQty()}`,
+        tabQty: `${activeItemReasons?.defectiveQty()}`,
       },
     };
     const isTabActive = localMode === btnKey ? "active" : "";
@@ -111,10 +112,24 @@ function ReasonPickerSC_MRV({}) {
     );
   };
 
+  const sLabelStatus = locMethods.isReasonQtyValid({
+    itemAtom: activeItemAtom,
+    validCondition: "notOver",
+  })
+    ? "goodGreen"
+    : "badRed";
+
   const uiNavCluster = (
     <div className={`navCluster`}>
       {uiReasonTab(`ItemOK`)}
       {uiReasonTab(`Defective`)}
+      <BigLabeledValue
+        status={`${sLabelStatus}`}
+        labelStr="Reasons"
+        invertColors={true}
+        valueStr={`${activeItemReasons?.allReasonsQty() } / ${activeItemAtom.atomItemQty}`}
+        size="S"
+      />
     </div>
   );
 
@@ -188,7 +203,7 @@ function ReasonPickerSC_MRV({}) {
   const isBtnDisabled = (isPlus) => {
     if (!activeReasonKey) return true;
     if (isPlus) return locMethods.exceedsItemQty(iActiveReasonQty);
-    if (!isPlus) return  0 >= iActiveReasonQty;
+    if (!isPlus) return 0 >= iActiveReasonQty;
   };
 
   // button template for plus and minus

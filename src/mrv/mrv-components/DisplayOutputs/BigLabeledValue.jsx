@@ -5,24 +5,57 @@ function BigLabeledValue({
   valueStr = "NO VALUE",
   status = "defaultBlack",
   labelMatchesValue = true,
+  size = "M",
+  ref_size____M_S,
   style = {},
   width = "",
-  ref_status____defaultBlack_goodGreen_badRed_lowGrey,
+  ref_status____defaultBlack_goodGreen_badRed_neutralGrey,
+  invertColors = false,
 }) {
+  const invKey = invertColors ? "inverted" : "normal";
+
   const oConfigs = {
     defaultBlack: {
-      textColor: "color__primary__text",
+      normal: {
+        color: "color__primary__text  color__surface__default",
+      },
+      inverted: {
+        color: "color__white__text  color__primary",
+      },
     },
     goodGreen: {
-      textColor: "color__green__text",
+      normal: {
+        color: "color__green__text  color__surface__default",
+      },
+      inverted: {
+        color: "color__white__text  color__green",
+      },
     },
-    badRed: {},
-    lowGrey: {},
+    badRed: {
+      normal: {
+        color: "color__red__text  color__surface__default",
+      },
+      inverted: {
+        color: "color__white__text  color__red",
+      },
+    },
+    neutralGrey: {
+      normal: {
+        color: "color__primary__text  color__surface__lightgrey",
+      },
+      inverted: {
+        color: "color__primary__text  color__surface__lightgrey", // Identical for now.
+      },
+    },
+    M: {
+      labelSize: "body__small",
+      valueSize: "heading__large",
+    },
+    S: {
+      labelSize: "tinyText",
+      valueSize: "body__large",
+    },
   };
-
-  const labelColor = labelMatchesValue
-    ? oConfigs[status].textColor
-    : "color__primary__text";
 
   const oStyle = style;
 
@@ -32,13 +65,11 @@ function BigLabeledValue({
 
   return (
     <div
-      className={`bigLabeledValue  ${oConfigs[status].textColor}`}
+      className={`bigLabeledValue ${size} ${oConfigs[status][invKey].color}`}
       style={oStyle}
     >
-      <div className={`label body__small minWidth ${labelColor}`}>
-        {labelStr}
-      </div>
-      <div className={`value heading__large minWidth`}>{valueStr}</div>
+      <div className={`label ${oConfigs[size].labelSize}`}>{labelStr}</div>
+      <div className={`value ${oConfigs[size].valueSize}`}>{valueStr}</div>
     </div>
   );
 }

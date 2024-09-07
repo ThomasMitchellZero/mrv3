@@ -26,12 +26,11 @@ function useCompHooks_MRV({}) {
     const activeReasonObj =
       activeRepoItemObj?.oAllItemReasons?.[activeReasonKey];
 
-    const resetReasonPickerLS = useResetLocStFields({ locSt: "ReasonPickerSC" });
+    const resetReasonPickerLS = useResetLocStFields({
+      locSt: "ReasonPickerSC",
+    });
 
     const lsMethods = {
-
-      
-
       exceedsItemQty: (qtyToCheck) => {
         // oriented to True because this will be used to disable stuff.
         const refAtom = new returnAtom({});
@@ -48,7 +47,7 @@ function useCompHooks_MRV({}) {
 
         const oMode = {
           plus: {
-            qtyError: ""
+            qtyError: "",
           },
           minus: {},
         };
@@ -80,6 +79,26 @@ function useCompHooks_MRV({}) {
           inputALL: true,
           activeData1: true,
         });
+      },
+
+      isReasonQtyValid: ({
+        itemAtom,
+        validCondition = "notOver",
+        ref_validCondition____notOver,
+      }) => {
+        // returns boolean of item passing validCondition fn.
+        const refAtom = new returnAtom({});
+        const returnItemQty = itemAtom.atomItemQty;
+        const itemReasonQty =
+          sessionMRV.returnReasonsRepo?.[itemAtom.atomItemNum]?.allReasonsQty();
+
+        const oConditionConfigs = {
+          notOver: {
+            fn: itemReasonQty <= returnItemQty,
+          },
+        };
+
+        return oConditionConfigs[validCondition].fn;
       },
 
       setError: ({ errorKey }) => {

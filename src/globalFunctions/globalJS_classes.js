@@ -1,6 +1,7 @@
 //---- Product ----
 
 import { cloneDeep, get } from "lodash";
+import { all } from "superheroes";
 
 class moneyObj {
   constructor({
@@ -163,7 +164,7 @@ const itemReturnReasons = ({
     oAllItemReasons,
     itemQty,
     itemNum,
-    allReasonsQty() {
+    defectiveQty() {
       // loops thru all reasons and sums their qtys.  
       // No check for defective b/c OK reasons don't get individual qtys.
       const outQty = Object.values(this.oAllItemReasons).reduce((acc, curr) => {
@@ -172,7 +173,7 @@ const itemReturnReasons = ({
       return outQty;
     },
     qtySansReason() {
-      return this.itemQty - this.allReasonsQty();
+      return this.itemQty - this.defectiveQty();
 
     },
     okReasonsQty() {
@@ -182,10 +183,12 @@ const itemReturnReasons = ({
           return thisReason.isChosen;
         }
       );
-      console.log("hasOK", hasOK);
       // If any OK reasons are chosen, the value is whatever is left after the defective reasons.
       return hasOK ? Math.max(this.qtySansReason(), 0) : 0;
     },
+    allReasonsQty() {
+      return this.defectiveQty() + this.okReasonsQty();
+    }
   };
 };
 
