@@ -8171,7 +8171,8 @@ What to do today?
             X -Qty display in the sidesheet 
             X -And also the item column.
             X -UseEffect to handle focusing.
-            -Error if user tries to proceed with invalid Qty.
+            X -Error if user tries to proceed with invalid Qty.
+            -show Tile Error State for all with invalid Qtys.
 
         -ReturnReasons OPTIONAL
             -Auto-focusing on the other input fields if I'm feeling froggy.

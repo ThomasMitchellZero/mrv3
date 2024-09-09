@@ -1,7 +1,11 @@
 import { useContext } from "react";
 import { useOutlet, useOutletContext } from "react-router-dom";
 
-import { useResetLocStFields, useFindAtom } from "../MRVhooks/MRVhooks";
+import {
+  useResetLocStFields,
+  useSetLocStFields,
+  useFindAtom,
+} from "../MRVhooks/MRVhooks";
 import {
   itemReturnReasons,
   oReturnReason,
@@ -12,36 +16,19 @@ import { find } from "lodash";
 function useCompHooks_MRV() {
   const mrvCtx = useOutletContext();
   const findAtom = useFindAtom();
+  const setLocStFields = useSetLocStFields();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
 
   const outMethods = {}; // the object to return
 
-  const universal = () => {
-    const oOut = {
-      /*
-            setError:({lsRtKey="page", errorKey, errorSegment = "1"}) => {
-        const rtStr = `activeError${errorSegment || 1}`;
-        setSessionMRV((draft) => {
-          draft.locSt?.[lsRtKey]?.[rtStr] =
-            draft.locSt[lsRtKey].oErrorObjects[errorKey];
-        });
-      },
-      setLSfield: ({lsRtKey = "page", fieldKey, newValue}) => {
-        setSessionMRV((draft) => {
-          draft.locSt?.[lsRtKey]?.[fieldKey] = newValue;
-        });
-      }
-      
-      */
-    };
-    return oOut;
-  };
+  const universal = () => {};
   outMethods.universal = universal();
 
   const oReasonPicker_SC = () => {
     const activeItemKey = sessionMRV.locSt.page.activeKey1;
     const activeItem = findAtom({ itemNum: activeItemKey, asIndex: false });
+    const errorsObj = sessionMRV.locSt.ReasonPickerSC.oErrorObjects;
 
     const activeReasonKey = sessionMRV.locSt.ReasonPickerSC.activeKey1;
     const activeRepoItemObj = sessionMRV.returnReasonsRepo?.[activeItemKey];
@@ -65,19 +52,12 @@ function useCompHooks_MRV() {
 
         const increment = isPlus ? 1 : -1;
         let draftQty = activeReasonObj.reasonQty + increment;
-        const qtyError = false; //oReasonPicker_SC.inputQtyValidator({ qty: draftQty });
-
-        const oMode = {
-          plus: {
-            qtyError: "",
-          },
-          minus: {},
-        };
+        const qtyError = false;
 
         if (qtyError) {
-          setSessionMRV((draft) => {
-            const locReason = draft.locSt.ReasonPickerSC;
-            locReason.activeError1 = locReason.oErrorObjects[qtyError];
+          setLocStFields({
+            locStKey: "ReasonPickerSC",
+            oNewFields: { activeError1: errorsObj[qtyError] },
           });
         } else {
           console.log("draftQty", draftQty);
@@ -93,9 +73,12 @@ function useCompHooks_MRV() {
       },
 
       modeSwitch: ({ keyStr = "no mode key" }) => {
-        setSessionMRV((draft) => {
-          draft.locSt.ReasonPickerSC.activeMode1 = keyStr;
+        console.log("modeSwitch", keyStr);
+        setLocStFields({
+          locStKey: "ReasonPickerSC",
+          oNewFields: { activeMode1: keyStr },
         });
+
         resetReasonPickerLS({
           activeErrorALL: true,
           inputALL: true,

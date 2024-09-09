@@ -1,4 +1,3 @@
-
 import ProductContext from "../../store/product-context";
 import InvoContext from "../../store/invo-context";
 import { useOutletContext, useNavigate } from "react-router";
@@ -378,6 +377,24 @@ export { useNodeNav };
 ////////////////////////////////////////////////////////////////////////////////
 
 // Make a change to the items in the current session state.
+
+function useSetLocStFields() {
+  // merges newFields into the specified locSt object.
+  const mrvCtx = useOutletContext();
+  const sessionMRV = mrvCtx.sessionMRV;
+  const setSessionMRV = mrvCtx.setSessionMRV;
+
+  const setLocStFields = ({ locStKey = "", oNewFields = {} }) => {
+    setSessionMRV((draft) => {
+      console.log("attempting to set", draft.locSt[locStKey]);
+      //Object.assign(draft.locSt[locStKey], oNewFields);
+      draft.locSt[locStKey] = { ...draft.locSt[locStKey], ...oNewFields };
+    });
+  };
+  return setLocStFields;
+}
+
+export { useSetLocStFields };
 
 function useResetLocStFields(locStKey) {
   // loops through the locSt object and merges the specified replacement fields into the specified nodes.
