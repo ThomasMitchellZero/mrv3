@@ -1,7 +1,6 @@
 //---- Product ----
 
 import { cloneDeep, get } from "lodash";
-import { all } from "superheroes";
 
 class moneyObj {
   constructor({
