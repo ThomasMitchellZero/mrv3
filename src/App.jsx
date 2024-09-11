@@ -64,6 +64,15 @@ enableMapSet();
 function App() {
   return (
     <div className="App">
+      Fartrell Cluggins
+    </div>
+    
+  );
+}
+
+
+/*
+<div className="App">
       <Routes>
         <Route path="mrv" element={<Main />}>
           <Route index element={<Placeholder titleText="Home" />} />
@@ -146,8 +155,10 @@ function App() {
         </Route>
       </Routes>
     </div>
-  );
-}
-//  mrv/store-exchanges/choose-items-invos
+
+
+
+
+*/
 
 export default App;
