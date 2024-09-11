@@ -7,7 +7,7 @@ import './index.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter basename='mrv'>
+    <BrowserRouter basename='/mrv'>
       <App />
     </BrowserRouter>
   </StrictMode>
