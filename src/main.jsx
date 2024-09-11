@@ -4,10 +4,12 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import './index.css'
 
+//      <App />
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <div>Fartrell Cluggins</div>
     </BrowserRouter>
   </StrictMode>
 )
