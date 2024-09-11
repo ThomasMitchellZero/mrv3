@@ -8183,4 +8183,27 @@ What to do today?
         -Get the Item Rejection up and running.
         -Assuming the column handling works well on NewItems and Rejection, I can THEN come back through ReturnItems and refactor that card.
 
+11 Sep 2024
+
+    4:20
+    How appropriate that I'm dealing with a total collapse of the entire structure today :D  I am attempting to deploy the app and currently eating shit.  Gotta remember that given enough time, I eventually win these things.  I've cracked every other failure so far.  Also gotta remember that we win these things by progressively narrowing the search space until we find where the problem is hiding.  
+
+    Let's keep a running total of things I have tried.
+        -Switched to Vercel because apparently Github Pages uses Jekyll and Jekyll gets fussy when you have folders prefixed with "_" which I have a lot of.  
+            > no improvement
+        -Replaced <App/> with a single <div/>.  Also installed the Vercel CLI which is not great science, but who cares.  
+            > Looks like it worked.  There is a deployed app that now says "Fartrell Cluggins".  So what does that tell us?  
+        -Put <App/> back in.  
+            > Slight improvement?  I'm at least not getting the earlier 404 failure to find the main.jsx file, but it's still not working.
+
+    5:35
+    I'm dragging my feet on this.  I know exactly why.  I fear the frustration of failure and the anxiety of a problem that I don't know how to fix.
+
+    OK, hold up.  It looks like this is a pretty common problem.  A search for 'vercel react router' yields an awful lot.  Let's start with the easy ones first.
+
+    -Create a _redirects file inside the /public folder and put this inside: /* /index.html 200
+
+
+    
+
 
