@@ -57,9 +57,6 @@ import { MultiReasonMain } from "./Sections/Testing/T_Sections/MultiReason/_page
 
 //Store Exchanges
 
-import { enableMapSet } from "immer";
-
-enableMapSet();
 
 function App() {
   return (
