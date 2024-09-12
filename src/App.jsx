@@ -65,7 +65,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="mrv" element={<Main />}>
+        <Route path="/" element={<Main />}>
           <Route index element={<Placeholder titleText="Home" />} />
           <Route path="home" element={<Placeholder titleText="Home" />} />
           <Route path="orders" element={<Placeholder titleText="Orders" />} />
