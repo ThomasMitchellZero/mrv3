@@ -8203,7 +8203,16 @@ What to do today?
 
     -Create a _redirects file inside the /public folder and put this inside: /* /index.html 200
 
+    https://stackoverflow.com/questions/77655971/vite-with-react-not-working-for-basename-with-react-router-dom-after-build
 
+    https://github.com/remix-run/react-router/issues/11116
+    
+12 Sep 2024
+    OK.  Got a couple of choices here.  Of the low-hanging solutions, there's still one attractive version I have not tried.  That is the one where I provide a redirect for each route in the router.  Maybe the thing to do is to to just give that last Hail Mary a shot, since I've seen it suggested in a few places and it shouldn't be hard to at least verify that it is working.  
+
+    The other option is just to create, route, and publish a new Vite project from scratch, and then give descriptive names to each factor as I create them.  That would allow me to see the source of each entity.  Because the problem I feel like I am facing is that in the domain of servers, routers, and deployments, I don't actually understand anything.  I am actually doing the opposite of understanding - trying to stick in answers without actually understanding the questions.  
+
+    
     
 
 
