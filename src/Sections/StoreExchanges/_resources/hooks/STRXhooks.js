@@ -23,37 +23,37 @@ const defaultNavNodesSTRX = {
   testScenarios: navNode({
     keyStr: "testScenarios",
     titleStr: "Start",
-    routeStr: "/mrv/store-exchanges",
+    routeStr: "/store-exchanges",
   }),
   replacementCheck: navNode({
     keyStr: "replacementCheck",
     titleStr: "Replacement Check",
-    routeStr: "/mrv/store-exchanges/replacement-check",
+    routeStr: "/store-exchanges/replacement-check",
   }),
   returns: navNode({
     keyStr: "returns",
     titleStr: "Returns",
     breadcrumb: true,
-    routeStr: "/mrv/store-exchanges/choose-items-invos",
+    routeStr: "/store-exchanges/choose-items-invos",
     locSt: LS_STRX_100_AddItemsAndInvos,
   }),
   reason: navNode({
     keyStr: "reason",
     titleStr: "Reason",
     breadcrumb: true,
-    routeStr: "/mrv/store-exchanges/reason",
+    routeStr: "/store-exchanges/reason",
   }),
   replacements: navNode({
     keyStr: "replacements",
     titleStr: "Replacements",
     breadcrumb: true,
-    routeStr: "/mrv/store-exchanges/replacements",
+    routeStr: "/store-exchanges/replacements",
   }),
   review: navNode({
     keyStr: "review",
     titleStr: "Review",
     breadcrumb: true,
-    routeStr: "/mrv/store-exchanges/review",
+    routeStr: "/store-exchanges/review",
   }),
 };
 
