@@ -28,7 +28,7 @@ const NewItemsSTRX = () => {
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const nodeNav = useNodeNav();
-  const locMethods = useLocStMethods_STRX()
+  const locMethods = useLocStMethods_STRX();
 
   const activeMode = sessionMRV.locSt.page.activeMode1;
   const activeUI = sessionMRV.locSt.page.activeUI3;
@@ -38,11 +38,9 @@ const NewItemsSTRX = () => {
   const oMode = {
     item: {
       s70label: "Items Being Returned",
-      s70panel: <RtrnItemsList />,
     },
     receipt: {
       s70label: "Receipts List",
-      s70panel: <RtrnInvosList />,
     },
   };
 
@@ -52,10 +50,7 @@ const NewItemsSTRX = () => {
       ? "ItemDetails30"
       : "AllEntry30";
 
-  const o30panels = {
-    AllEntry30: <AllEntry30 />,
-    ItemDetails30: <RtrnItemDetails30 />,
-  };
+  const o30panels = {};
 
   /* ---- SHARED FUNCTIONS ---- */
 
@@ -71,7 +66,7 @@ const NewItemsSTRX = () => {
 
   return (
     <section className={`addItemsAndInvos mrvPage color__surface__subdued`}>
-      <main onClick={locMethods.resetKeysToo} className={`mrvPanel__main`}>
+      <main onClick={() => {}} className={`mrvPanel__main`}>
         <TitleBarSTRX
           showProductName={true}
           headerTitle={`New Items For Exchange`}
@@ -82,7 +77,6 @@ const NewItemsSTRX = () => {
         <div className={`footer_content`}>
           <CashTotalSTRX />
           <ContinueBtnMRV
-            warningText={uiContinueWarning}
             handleClick={(e) => handleContinue(e)}
           />
         </div>

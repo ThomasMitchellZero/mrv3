@@ -7,7 +7,6 @@ import {
 } from "../../../globalFunctions/globalJS_classes";
 import { useNodeNav } from "../../MRVhooks/MRVhooks";
 
-
 const NavNodeBarMRV = ({ sessionState, setSessionState }) => {
   const nodeNav = useNodeNav({
     sessionState: sessionState,
@@ -26,15 +25,36 @@ const NavNodeBarMRV = ({ sessionState, setSessionState }) => {
     const refNavNode = navNode({});
     const selected = crumbNavNodes.selected ? "selected" : "";
     const disabled = crumbNavNodes.disabled ? "disabled nohover" : "";
+    const sConfig = crumbNavNodes.disabled
+      ? "disabled"
+      : crumbNavNodes.selected
+      ? "selected"
+      : "past";
+
+    const oConfigs = {
+      past: {
+        class: "",
+        action: () => {
+          nodeNav(crumbNavNodes.keyStr);
+        },
+      },
+      selected: {
+        class: "selected nohover",
+        action: () => {},
+      },
+      disabled: {
+        class: "disabled nohover",
+        action: () => {},
+      },
+    };
 
     return (
       <button
         key={crumbNavNodes.keyStr}
-        disabled={crumbNavNodes.disabled}
         onClick={() => {
-          nodeNav(crumbNavNodes.keyStr);
+          oConfigs[sConfig].action();
         }}
-        className={`ghost miniBtn ${selected} ${disabled}`}
+        className={`ghost miniBtn ${oConfigs[sConfig].class}`}
       >
         {crumbNavNodes.titleStr}
         <MdChevronRight />

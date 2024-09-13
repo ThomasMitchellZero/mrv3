@@ -1,5 +1,7 @@
 import "./MessageRibbonMRV.css";
 
+import { useState } from "react";
+
 import {
   MdWarning,
   MdInfo,
@@ -8,10 +10,15 @@ import {
 } from "react-icons/md";
 
 const MessageRibbonMRV = ({
-  message = "No Message Provided",
+  message = "No Message Provided", 
   type = "info",
+  allowClose = false,
   info__success__error__critical,
 }) => {
+  const [ribbonState, setRibbonState] = useState({
+    isClosed: false,
+  });
+
   const iconSize = "1.5rem";
 
   const oConfigs = {

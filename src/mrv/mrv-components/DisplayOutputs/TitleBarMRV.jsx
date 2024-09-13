@@ -5,7 +5,6 @@ import { NavNodeBarMRV } from "../inputs/NavNodeBarMRV";
 import { useOutletContext } from "react-router";
 import { baseReturnState } from "../../../globalFunctions/globalJS_classes";
 
-
 function TitleBarMRV({
   sessionState = baseReturnState({}),
   setSessionState = () => console.log("No Session State Setter Provided"),
@@ -20,20 +19,17 @@ function TitleBarMRV({
   navBtnClick = () => {
     console.log("nothing here");
   },
+  clearSessionStr = "Exit",
   handleClearSession = () => {
     console.log("No Clear Session Fn");
   },
 }) {
-
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
 
   const uiNavNodeBar = (
-    <NavNodeBarMRV
-      sessionState={sessionMRV}
-      setSessionState={setSessionMRV}
-    />
+    <NavNodeBarMRV sessionState={sessionMRV} setSessionState={setSessionMRV} />
   );
 
   const iconsObj = {
@@ -60,7 +56,7 @@ function TitleBarMRV({
         className={`mrvBtn cancelBtn ghost `}
         onClick={() => handleClearSession()}
       >
-        {`End ${productName}`}
+        {clearSessionStr}
       </button>
     </section>
   );
