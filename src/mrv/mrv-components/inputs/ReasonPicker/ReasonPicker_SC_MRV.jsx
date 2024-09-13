@@ -1,10 +1,12 @@
 import "./_ReasonPickerStyle.css";
 
 import { MRVinput } from "../MRVinput";
-import { BigLabeledValue } from "../../DisplayOutputs/BigLabeledValue";
 
-import { useResetLocStFields, useFindAtom } from "../../../MRVhooks/MRVhooks";
-import { ReasonBadgeSTRX } from "../../../../Sections/StoreExchanges/_resources/components/CompConfigsSTRX";
+import {
+  useResetLocStFields,
+  useFindAtom,
+  useSetLocStFields,
+} from "../../../MRVhooks/MRVhooks";
 
 import { useCompHooks_MRV } from "../../CompHooksMRV";
 
@@ -20,6 +22,8 @@ import { useContext, useState, useEffect, useRef } from "react";
 function ReasonPickerSC_MRV({ itemQtyBadge = null }) {
   const mrvCtx = useOutletContext();
   const findAtom = useFindAtom();
+  const setLS = useSetLocStFields("ReasonPickerSC");
+
 
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
@@ -38,6 +42,7 @@ function ReasonPickerSC_MRV({ itemQtyBadge = null }) {
   const activeReasonKey = locStRt.ReasonPickerSC.activeKey1;
   const oActiveReason = RepoItemReasons?.[activeReasonKey];
   const iActiveReasonQty = oActiveReason?.reasonQty;
+  const oActiveError = locStRt.ReasonPickerSC.activeError1;
 
   const [shouldFocus, setShouldFocus] = useState(false);
 
@@ -64,17 +69,6 @@ function ReasonPickerSC_MRV({ itemQtyBadge = null }) {
       instruction: "Select condition and enter qty.",
       chips: [],
       inputs: null,
-    },
-  };
-
-  const tabMode = {
-    ItemOK: {
-      onClick: () => {},
-      tabQty: 0,
-    },
-    Defective: {
-      onClick: () => {},
-      tabQty: 0,
     },
   };
 
@@ -163,6 +157,7 @@ function ReasonPickerSC_MRV({ itemQtyBadge = null }) {
   const defectiveClick = (oReason) => {
     const refOReturnReason = oReturnReason({});
     setShouldFocus(true);
+    
     setSessionMRV((draft) => {
       draft.locSt.ReasonPickerSC.activeKey1 = oReason.keyStr;
     });
@@ -199,7 +194,7 @@ function ReasonPickerSC_MRV({ itemQtyBadge = null }) {
 
   const isBtnDisabled = (isPlus) => {
     if (!activeReasonKey) return true;
-    if (isPlus) return locMethods.exceedsItemQty(iActiveReasonQty);
+    if (isPlus) return iActiveReasonQty >= activeItemAtom.atomItemQty;
     if (!isPlus) return 0 >= iActiveReasonQty;
   };
 
@@ -221,7 +216,9 @@ function ReasonPickerSC_MRV({ itemQtyBadge = null }) {
   const handleInactiveCluster = (e) => {
     e.stopPropagation();
     console.log("Inactive Cluster");
-    if (!activeReasonKey) locMethods.setError({ errorKey: "noReasonPicked" });
+    if (!activeReasonKey) {
+      locMethods.setError({ errorKey: "noReasonPicked" });
+    }
   };
 
   // start here tomorrow.
@@ -245,9 +242,9 @@ function ReasonPickerSC_MRV({ itemQtyBadge = null }) {
     </div>
   );
 
-  const uiInputError = locStRt.ReasonPickerSC.activeError1?.str ? (
+  const uiInputError = oActiveError?.str ? (
     <div className={`warning tinyText`}>
-      {locStRt.ReasonPickerSC.activeError1.str}
+      {oActiveError.str}
     </div>
   ) : null;
 

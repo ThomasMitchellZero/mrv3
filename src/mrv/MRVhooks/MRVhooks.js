@@ -378,16 +378,15 @@ export { useNodeNav };
 
 // Make a change to the items in the current session state.
 
-function useSetLocStFields() {
+function useSetLocStFields(locStKey = "page") {
   // merges newFields into the specified locSt object.
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
 
-  const setLocStFields = ({ locStKey = "", oNewFields = {} }) => {
+  const setLocStFields = ({oNewFields = {} }) => {
     setSessionMRV((draft) => {
       console.log("attempting to set", draft.locSt[locStKey]);
-      //Object.assign(draft.locSt[locStKey], oNewFields);
       draft.locSt[locStKey] = { ...draft.locSt[locStKey], ...oNewFields };
     });
   };

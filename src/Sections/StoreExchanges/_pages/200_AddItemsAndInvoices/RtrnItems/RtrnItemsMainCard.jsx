@@ -151,6 +151,7 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
           description={"Refund Value"}
           greenifyVal={cardTotalVal}
           onClick={() => {
+            locMethods.resetKeysToo(); // need to clear the active item.
             setSessionItems({
               itemAtom: returnItemAtom,
               actionType: "remove",

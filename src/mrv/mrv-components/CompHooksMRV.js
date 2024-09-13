@@ -11,12 +11,11 @@ import {
   oReturnReason,
   returnAtom,
 } from "../../globalFunctions/globalJS_classes";
-import { find } from "lodash";
 
 function useCompHooks_MRV() {
   const mrvCtx = useOutletContext();
   const findAtom = useFindAtom();
-  const setLocStFields = useSetLocStFields();
+
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
 
@@ -29,22 +28,25 @@ function useCompHooks_MRV() {
     const activeItemKey = sessionMRV.locSt.page.activeKey1;
     const activeItem = findAtom({ itemNum: activeItemKey, asIndex: false });
     const errorsObj = sessionMRV.locSt.ReasonPickerSC.oErrorObjects;
+    const setReasonPickerLS = useSetLocStFields("ReasonPickerSC");
+    const resetReasonPickerLS = useResetLocStFields({
+      locSt: "ReasonPickerSC",
+    });
 
+    // route shortcuts
     const activeReasonKey = sessionMRV.locSt.ReasonPickerSC.activeKey1;
     const activeRepoItemObj = sessionMRV.returnReasonsRepo?.[activeItemKey];
     const activeReasonObj =
       activeRepoItemObj?.oAllItemReasons?.[activeReasonKey];
 
-    const resetReasonPickerLS = useResetLocStFields({
-      locSt: "ReasonPickerSC",
-    });
-
     const lsMethods = {
-      exceedsItemQty: (qtyToCheck) => {
+      /*
+            exceedsItemQty: (qtyToCheck) => {
         // oriented to True because this will be used to disable stuff.
         const refAtom = new returnAtom({});
         return qtyToCheck >= activeItem.atomItemQty;
       },
+      */
 
       handlePlusMinus: ({ isPlus = true }) => {
         const refOReturnReason = oReturnReason({});
@@ -55,8 +57,7 @@ function useCompHooks_MRV() {
         const qtyError = false;
 
         if (qtyError) {
-          setLocStFields({
-            locStKey: "ReasonPickerSC",
+          setReasonPickerLS({
             oNewFields: { activeError1: errorsObj[qtyError] },
           });
         } else {
@@ -74,8 +75,7 @@ function useCompHooks_MRV() {
 
       modeSwitch: ({ keyStr = "no mode key" }) => {
         console.log("modeSwitch", keyStr);
-        setLocStFields({
-          locStKey: "ReasonPickerSC",
+        setReasonPickerLS({
           oNewFields: { activeMode1: keyStr },
         });
 
@@ -105,16 +105,13 @@ function useCompHooks_MRV() {
             outBool: itemReasonQty >= returnItemQty,
           },
         };
-        console.log(returnItemQty, itemReasonQty, validCondition);
-        console.log(oConditionConfigs[validCondition].outBool);
 
         return oConditionConfigs[validCondition].outBool;
       },
 
       setError: ({ errorKey }) => {
-        setSessionMRV((draft) => {
-          draft.locSt.ReasonPickerSC.activeError1 =
-            draft.locSt.ReasonPickerSC.oErrorObjects[errorKey];
+        setReasonPickerLS({
+          oNewFields: { activeError1: errorsObj[errorKey] },
         });
       },
 

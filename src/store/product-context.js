@@ -26,6 +26,9 @@ import rtf_duct_img from "../assets/product-images/rtf_duct.png";
 import washer_1_img from "../assets/product-images/washer_1.png";
 import washer_2_img from "../assets/product-images/washer_2.png";
 import { MdSubdirectoryArrowRight } from "react-icons/md";
+import walloutlet from "../assets/product-images/walloutlet.png";
+import paintstick from "../assets/product-images/paintstick.png";
+import windowscraper from "../assets/product-images/windowscraper.png"; 
 import {
   Product,
 } from "../globalFunctions/globalJS_classes";
@@ -309,6 +312,16 @@ const ProductContext = React.createContext({
     modelNum: "3YY",
     description: "3 Year LPP",
 
+  }),
+
+  3300: new Product({
+    img: faucet_img,
+    price: 5599,
+    itemNum: "3300",
+    modelNum: "DR3345",
+    description: "Two handle classic faucet in wrought iron",
+    categories: ["Stock"],
+    specialCategories: { ARD: true },
   }),
 });
 
