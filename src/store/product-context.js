@@ -315,13 +315,27 @@ const ProductContext = React.createContext({
   }),
 
   3300: new Product({
-    img: faucet_img,
-    price: 5599,
+    img: paintstick,
+    price: 599,
     itemNum: "3300",
     modelNum: "DR3345",
-    description: "Two handle classic faucet in wrought iron",
-    categories: ["Stock"],
-    specialCategories: { ARD: true },
+    description: "Project Source 1 Gal Paint Stick 10 Pack",
+  }),
+
+  4400: new Product({
+    img: walloutlet,
+    price: 1499,
+    itemNum: "4400",
+    modelNum: "DR3345",
+    description: "Eaton Arrow Hart 15-Amp 125-volt Residential/Commercial Duplex Outlet, Gray",
+  }),
+
+  5500: new Product({
+    img: windowscraper,
+    price: 399,
+    itemNum: "5500",
+    modelNum: "DR3345",
+    description: "Warner 1.5-in Steel Paint Scraper",
   }),
 });
 

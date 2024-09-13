@@ -12,7 +12,7 @@ import tenderTypes from "../components/global_functions/tenderTypes";
 
 const tType = tenderTypes;
 
-const invo = {a: new Invoice_SR({})}
+const invo = { a: new Invoice_SR({}) };
 
 const invoiceObj = {
   7771: new Invoice_SR({
@@ -311,6 +311,72 @@ const invoiceObj = {
         atomItemQty: 7,
         atomMoneyObj: new moneyObj({
           unitBaseValue: 2250,
+        }),
+      }),
+    ],
+  }),
+
+  888111: new Invoice_SR({
+    invoNum: "888111",
+    store: 1234,
+    date: new Date(2024, 2, 1),
+    payment: {
+      1111222211112222: {
+        tenderType: tType.credit,
+        tenderLabel: "MasterCard ****2222",
+        paid: 0,
+        ccNum: "1111222211112222",
+      },
+    },
+    itemAtomsArr: [
+      new returnAtom({
+        atomItemNum: "3300",
+        atomItemQty: 3,
+        atomMoneyObj: new moneyObj({
+          unitBaseValue: 599,
+        }),
+      }),
+      new returnAtom({
+        atomItemNum: "5500",
+        atomItemQty: 2,
+        atomMoneyObj: new moneyObj({
+          unitBaseValue: 450,
+        }),
+      }),
+      new returnAtom({
+        atomItemNum: "330",
+        atomItemQty: 2,
+        atomMoneyObj: new moneyObj({
+          unitBaseValue: 2250,
+        }),
+      }),
+    ],
+  }),
+  888222: new Invoice_SR({
+    invoNum: "888222",
+    store: 1234,
+    date: new Date(2024, 2, 1),
+    payment: {
+      1111222211112222: {
+        tenderType: tType.credit,
+        tenderLabel: "MasterCard ****2222",
+        paid: 0,
+        ccNum: "1111222211112222",
+      },
+    },
+    itemAtomsArr: [
+      new returnAtom({
+        atomItemNum: "5500",
+        atomItemQty: 2,
+        atomMoneyObj: new moneyObj({
+          unitBaseValue: 599,
+        }),
+      }),
+      new returnAtom({
+        atomItemNum: "4400",
+        atomItemQty: 4,
+        atomMoneyObj: new moneyObj({
+          unitBaseValue: 1499,
         }),
       }),
     ],
