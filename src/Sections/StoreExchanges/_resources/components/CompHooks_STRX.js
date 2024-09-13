@@ -11,6 +11,7 @@ import { useCompHooks_MRV } from "../../../../mrv/mrv-components/CompHooksMRV";
 
 import {
   useResetLocStFields,
+  useSetLocStFields,
   useFindAtom,
 } from "../../../../mrv/MRVhooks/MRVhooks";
 
@@ -24,19 +25,19 @@ function useLocStMethods_STRX() {
   const pageLocSt = locStRt.page;
 
   const findAtom = useFindAtom();
-  const lsUniversal = useCompHooks_MRV().universal;
-  const setPageError = ({ errorKeyStr }) =>
-    lsUniversal.setError({ errorKeyStr: errorKeyStr, lsRtKey: "page" });
-
   const outMethods = {};
 
   const resetPageLS = useResetLocStFields("page");
+  const setPageLS = useSetLocStFields("page");
 
   // Shared Methods -------------------------------------
 
   const AddItemsAndInvos = () => {
     const resetAllEntry30LS = useResetLocStFields("AllEntry30");
     const resetReasonPickerLS = useResetLocStFields("ReasonPickerSC");
+    const setReasonPickerLS = useSetLocStFields("ReasonPickerSC");
+    const setAllEntry30LS = useSetLocStFields("AllEntry30");
+
     const mrvMethods = useCompHooks_MRV().oReasonPicker_SC;
 
     const lsMethods = {
@@ -59,21 +60,18 @@ function useLocStMethods_STRX() {
         if (locStRt.page.activeMode1 === "receipt") {
           lsMethods.modeSwitch({ keyStr: "item" });
         } else if (sessionMRV.returnItems.length === 0) {
-          setSession((draft) => {
-            draft.locSt.page.activeError1 = pageLocSt.oErrorObjects["noItems"];
-          });
+          setPageLS({ activeError1: pageLocSt.oErrorObjects["noItems"] });
+          
         } else if (!allValid) {
-          setSession((draft) => {
-            draft.locSt.page.activeError1 =
-              pageLocSt.oErrorObjects["invalidReturnReasons"];
+          setPageLS({
+            activeError1: pageLocSt.oErrorObjects["invalidReturnReasons"],
           });
         } else {
-          console.log("Deeper, Daddy");
           resetPageLS({ activeErrorALL: true });
           resetAllEntry30LS({ activeErrorALL: true });
           resetReasonPickerLS({ activeErrorALL: true });
+          //nodeNav("reason");
         }
-        //nodeNav("reason");
       },
 
       resetForm: () => {
@@ -90,18 +88,13 @@ function useLocStMethods_STRX() {
       },
 
       modeSwitch: ({ keyStr = "receipt" }) => {
-        setSession((draft) => {
-          draft.locSt.page.activeMode1 = keyStr;
-        });
+        setPageLS({ activeMode1: keyStr });
         resetAllEntry30LS({ activeErrorALL: true, inputALL: true });
         resetPageLS({ activeErrorALL: true });
       },
 
       setPageError: ({ errorKeyStr = "" }) => {
-        setSession((draft) => {
-          draft.locSt.page.activeError1 =
-            draft.locSt.page.oErrorObjects[errorKeyStr];
-        });
+        setPageLS({ activeError1: pageLocSt.oErrorObjects[errorKeyStr] });
       },
     };
 

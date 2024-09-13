@@ -22,8 +22,7 @@ import { useContext, useState, useEffect, useRef } from "react";
 function ReasonPickerSC_MRV({ itemQtyBadge = null }) {
   const mrvCtx = useOutletContext();
   const findAtom = useFindAtom();
-  const setLS = useSetLocStFields("ReasonPickerSC");
-
+  const setReasonPickerLS = useSetLocStFields("ReasonPickerSC");
 
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
@@ -157,10 +156,8 @@ function ReasonPickerSC_MRV({ itemQtyBadge = null }) {
   const defectiveClick = (oReason) => {
     const refOReturnReason = oReturnReason({});
     setShouldFocus(true);
-    
-    setSessionMRV((draft) => {
-      draft.locSt.ReasonPickerSC.activeKey1 = oReason.keyStr;
-    });
+    setReasonPickerLS({ oNewFields: { activeKey1: oReason.keyStr } });
+
   };
 
   oMode.Defective.chips = aItemDefectiveReasons.map((oReason) => {
@@ -243,9 +240,7 @@ function ReasonPickerSC_MRV({ itemQtyBadge = null }) {
   );
 
   const uiInputError = oActiveError?.str ? (
-    <div className={`warning tinyText`}>
-      {oActiveError.str}
-    </div>
+    <div className={`warning tinyText`}>{oActiveError.str}</div>
   ) : null;
 
   // Final Render /////////////////////////////////////////////////
