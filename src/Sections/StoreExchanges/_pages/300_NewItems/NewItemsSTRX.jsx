@@ -1,4 +1,4 @@
-import "./_AddItemsAndInvosSTRX.css";
+import "./NewItems.css";
 
 import { ContinueBtnMRV } from "../../../../mrv/mrv-components/inputs/ContinueBtnMRV";
 
@@ -15,25 +15,20 @@ import {
   returnAtom,
 } from "../../../../globalFunctions/globalJS_classes";
 
-import { AllEntry30 } from "./AllEntry30";
-import { RtrnItemDetails30 } from "./RtrnItems/RtrnItemDetails30";
-
 import { useNodeNav } from "../../../../mrv/MRVhooks/MRVhooks";
 
-import { RtrnItemsList } from "./RtrnItems/RtrnItemsList";
-import { RtrnInvosList } from "./RtrnInvos/RtrnInvosList";
 import { useOutletContext } from "react-router";
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //&&&&&&&&&&&&&&&     MAIN COMPONENT    &&&&&&&&&&&&&&&//
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-function AddItemsAndInvosSTRX() {
+const NewItemsSTRX = () => {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const nodeNav = useNodeNav();
-  const locMethods = useLocStMethods_STRX().AddItemsAndInvos();
+  const locMethods = useLocStMethods_STRX()
 
   const activeMode = sessionMRV.locSt.page.activeMode1;
   const activeUI = sessionMRV.locSt.page.activeUI3;
@@ -62,32 +57,27 @@ function AddItemsAndInvosSTRX() {
     ItemDetails30: <RtrnItemDetails30 />,
   };
 
-  const uiContinueWarning =
-    activeError1?.key === "noItems"
-      ? errorObjRt?.noItems?.str
-      : activeError1?.key === "invalidReturnReasons"
-      ? errorObjRt?.invalidReturnReasons?.str
-      : "";
-
   /* ---- SHARED FUNCTIONS ---- */
 
   const handleContinue = (e) => {
     e.stopPropagation();
-
-    locMethods.continue();
   };
 
-  /* ---- OUTPUT JSX ---- */
+  /*
+
+
+
+*/
 
   return (
     <section className={`addItemsAndInvos mrvPage color__surface__subdued`}>
       <main onClick={locMethods.resetKeysToo} className={`mrvPanel__main`}>
         <TitleBarSTRX
           showProductName={true}
-          headerTitle={oMode[activeMode].s70label}
+          headerTitle={`New Items For Exchange`}
           showNavNodeBar={true}
         />
-        <div className={`main_content`}>{oMode[activeMode].s70panel}</div>
+        <div className={`main_content`}>All will be remade anew.</div>
 
         <div className={`footer_content`}>
           <CashTotalSTRX />
@@ -97,15 +87,8 @@ function AddItemsAndInvosSTRX() {
           />
         </div>
       </main>
-      {o30panels[active30key]}
     </section>
   );
-}
+};
 
-export { AddItemsAndInvosSTRX };
-
-/*
-
-
-
-*/
+export { NewItemsSTRX };

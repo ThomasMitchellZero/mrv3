@@ -28,7 +28,7 @@ function ReasonPickerSC_MRV({ itemQtyBadge = null }) {
   const setSessionMRV = mrvCtx.setSessionMRV;
   const rsnRepoRt = sessionMRV.returnReasonsRepo;
 
-  const locMethods = useCompHooks_MRV().oReasonPicker_SC;
+  const locMethods = useCompHooks_MRV().oReasonPicker_SC();
 
   // state routes shortcuts
   const locStRt = sessionMRV.locSt;

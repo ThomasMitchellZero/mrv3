@@ -24,8 +24,7 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
   const setSessionMRV = mrvCtx.setSessionMRV;
   const setSessionItems = useSetSessionItems();
 
-  const locMethods = useLocStMethods_STRX().AddItemsAndInvos;
-  const mrvMethods = useCompHooks_MRV().oReasonPicker_SC;
+  const locMethods = useLocStMethods_STRX().AddItemsAndInvos();
 
   const aReturnItems = sessionMRV.returnItems;
   const aAtomizedItems = sessionMRV.atomizedReturnItems;

@@ -19,7 +19,7 @@ function RtrnItemDetails30({}) {
   const setSessionMRV = mrvCtx.setSessionMRV;
   const locStRt = sessionMRV.locSt;
   const activeItemKey = locStRt.page.activeKey1;
-  const locMethods = useLocStMethods_STRX().AddItemsAndInvos;
+  const locMethods = useLocStMethods_STRX().AddItemsAndInvos();
 
 
   const productCtx = useContext(ProductContext);

@@ -30,11 +30,11 @@ const ItemEntry_SC_STRX = ({}) => {
   const setSessionMRV = mrvCtx.setSessionMRV;
 
   const locStRt = sessionMRV.locSt.AllEntry30;
-  const locMethods = useLocStMethods_STRX().AddItemsAndInvos;
+  const locMethods = useLocStMethods_STRX().AddItemsAndInvos();
 
   const setSessionItems = useSetSessionItems();
   const productCtx = useContext(ProductContext);
-  const invoCtx = useContext(InvoContext);
+
 
   const activeErrorStr = locStRt?.activeError1?.str || "";
 

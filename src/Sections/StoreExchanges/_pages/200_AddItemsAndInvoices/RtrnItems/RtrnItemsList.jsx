@@ -4,13 +4,10 @@ import { ScanScreenMRV } from "../../../../../mrv/mrv-components/DisplayOutputs/
 import { RtrnItemsMainCard } from "./RtrnItemsMainCard";
 import { DescriptorIcon } from "../../../../../mrv/mrv-components/DisplayOutputs/DescriptorIcon";
 
-import { cloneDeep } from "lodash";
 
 const RtrnItemsList = () => {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
-  const setSessionMRV = mrvCtx.setSessionMRV;
-  const setSessionItems = useSetSessionItems();
 
   const aReturnItems = sessionMRV.returnItems;
 

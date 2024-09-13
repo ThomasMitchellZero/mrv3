@@ -7,7 +7,6 @@ import { NavNodeBarMRV } from "../../../../mrv/mrv-components/inputs/NavNodeBarM
 import { useOutletContext } from "react-router";
 import { useNodeNav } from "../../../../mrv/MRVhooks/MRVhooks";
 import { useCompHooks_MRV } from "../../../../mrv/mrv-components/CompHooksMRV";
-import { useLocStMethods_STRX } from "./CompHooks_STRX";
 import { BigLabeledValue } from "../../../../mrv/mrv-components/DisplayOutputs/BigLabeledValue";
 import { ReasonBadgeMRV } from "../../../../mrv/mrv-components/inputs/ReasonPicker/ReasonBadge";
 
@@ -65,7 +64,7 @@ const ReasonBadgeSTRX = ({ itemAtom }) => {
   const sessionMRV = mrvCtx.sessionMRV;
   const reasonRepo = sessionMRV.returnReasonsRepo;
   const itemReasonsQty = reasonRepo?.[itemAtom.atomItemNum]?.allReasonsQty();
-  const mrvMethods = useCompHooks_MRV().oReasonPicker_SC;
+  const mrvMethods = useCompHooks_MRV().oReasonPicker_SC();
 
   const sLabelStatus = mrvMethods.isReasonQtyValid({
     itemAtom: itemAtom,

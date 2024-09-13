@@ -40,13 +40,6 @@ function useCompHooks_MRV() {
       activeRepoItemObj?.oAllItemReasons?.[activeReasonKey];
 
     const lsMethods = {
-      /*
-            exceedsItemQty: (qtyToCheck) => {
-        // oriented to True because this will be used to disable stuff.
-        const refAtom = new returnAtom({});
-        return qtyToCheck >= activeItem.atomItemQty;
-      },
-      */
 
       handlePlusMinus: ({ isPlus = true }) => {
         const refOReturnReason = oReturnReason({});
@@ -127,7 +120,8 @@ function useCompHooks_MRV() {
     };
     return lsMethods;
   };
-  outMethods.oReasonPicker_SC = oReasonPicker_SC();
+  // gotta acutally call the function in the LSs, otherwise we got a bunch of references to things that don't exist in scope.
+  outMethods.oReasonPicker_SC = oReasonPicker_SC;
 
   return outMethods;
 }

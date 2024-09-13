@@ -41,7 +41,7 @@ import { StoreExchanges } from "./Sections/StoreExchanges/StoreExchanges";
 import { StartSTRX } from "./Sections/StoreExchanges/_pages/100_StartSTRX/StartSTRX";
 import { ReplacementCheck } from "./Sections/StoreExchanges/_pages/150_ItemCheck/ReplacementCheck";
 import { AddItemsAndInvosSTRX } from "./Sections/StoreExchanges/_pages/200_AddItemsAndInvoices/AddItemsAndInvosSTRX";
-import { DispoMainPageSTRX } from "./Sections/StoreExchanges/_pages/250_Dispositions/DispoMainPageSTRX";
+import { NewItemsSTRX } from "./Sections/StoreExchanges/_pages/300_NewItems/NewItemsSTRX";
 
 //XDTX
 import { XDTX } from "./Sections/XDTX/XDTX";
@@ -56,7 +56,6 @@ import { TestIndex } from "./Sections/Testing/TestIndex";
 import { MultiReasonMain } from "./Sections/Testing/T_Sections/MultiReason/_pages/MultiReasonMain";
 
 //Store Exchanges
-
 
 function App() {
   return (
@@ -113,7 +112,7 @@ function App() {
               path="choose-items-invos"
               element={<AddItemsAndInvosSTRX />}
             />
-            <Route path="reason" element={<DispoMainPageSTRX />} />
+            <Route path="newitems" element={<NewItemsSTRX />} />
           </Route>
           <Route path="xdt-exchanges" element={<XDTX />}>
             <Route index element={<StartXDTX />} />
@@ -145,7 +144,6 @@ function App() {
     </div>
   );
 }
-
 
 /*
 

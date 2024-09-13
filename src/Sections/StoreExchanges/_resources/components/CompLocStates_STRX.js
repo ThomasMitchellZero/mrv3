@@ -56,14 +56,21 @@ const LS_STRX_100_AddItemsAndInvos = {
   [LS_MRV_ReasonPickerSC._keyStr]: LS_MRV_ReasonPickerSC,
 };
 
-/*
-
-LS_STRX_100_AddItemsAndInvos.rPan.activeUI1 = "AllEntry30";
-LS_STRX_100_AddItemsAndInvos.page.activeMode1 = "receipt";
-
-*/
-
 export { LS_STRX_100_AddItemsAndInvos };
+
+const LS_STRX_300_NewItems = {
+  page: makeLocStFields({
+    _keyStr: "page",
+    oErrorObjects: {
+      noItems: new errorObj({
+        key: "noItems",
+        str: "No Items Added",
+      }),
+    },
+  }),
+};
+
+export { LS_STRX_300_NewItems };
 
 /*
   

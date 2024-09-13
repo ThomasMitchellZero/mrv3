@@ -13,12 +13,14 @@ import {
   useResetLocStFields,
   useSetLocStFields,
   useFindAtom,
+  useNodeNav,
 } from "../../../../mrv/MRVhooks/MRVhooks";
 
 import { useOutletContext } from "react-router";
 
 function useLocStMethods_STRX() {
   const mrvCtx = useOutletContext();
+  const nodeNav = useNodeNav();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSession = mrvCtx.setSessionMRV;
   const locStRt = sessionMRV.locSt;
@@ -38,7 +40,7 @@ function useLocStMethods_STRX() {
     const setReasonPickerLS = useSetLocStFields("ReasonPickerSC");
     const setAllEntry30LS = useSetLocStFields("AllEntry30");
 
-    const mrvMethods = useCompHooks_MRV().oReasonPicker_SC;
+    const mrvMethods = useCompHooks_MRV().oReasonPicker_SC();
 
     const lsMethods = {
       basicClear: () => {
@@ -48,6 +50,7 @@ function useLocStMethods_STRX() {
       },
 
       continue: () => {
+        const allReceipted = true; // will populate later.
         const allValid = Object.values(sessionMRV.returnItems).every(
           (itemAtom) => {
             return mrvMethods.isReasonQtyValid({
@@ -61,16 +64,16 @@ function useLocStMethods_STRX() {
           lsMethods.modeSwitch({ keyStr: "item" });
         } else if (sessionMRV.returnItems.length === 0) {
           setPageLS({ activeError1: pageLocSt.oErrorObjects["noItems"] });
-          
         } else if (!allValid) {
           setPageLS({
             activeError1: pageLocSt.oErrorObjects["invalidReturnReasons"],
           });
+        } else if (!allReceipted) {
         } else {
           resetPageLS({ activeErrorALL: true });
           resetAllEntry30LS({ activeErrorALL: true });
           resetReasonPickerLS({ activeErrorALL: true });
-          //nodeNav("reason");
+          nodeNav("newitems");
         }
       },
 
@@ -88,7 +91,8 @@ function useLocStMethods_STRX() {
       },
 
       modeSwitch: ({ keyStr = "receipt" }) => {
-        setPageLS({ activeMode1: keyStr });
+        console.log("trying to mode switch");
+        setPageLS({ oNewFields: { activeMode1: keyStr } });
         resetAllEntry30LS({ activeErrorALL: true, inputALL: true });
         resetPageLS({ activeErrorALL: true });
       },
@@ -101,7 +105,23 @@ function useLocStMethods_STRX() {
     return lsMethods;
   };
 
-  outMethods.AddItemsAndInvos = AddItemsAndInvos();
+  outMethods.AddItemsAndInvos = AddItemsAndInvos;
+
+  const NewItemsHooks = () => {
+    const setAllEntry30LS = useSetLocStFields("AllEntry30");
+
+    const mNewItemsHooks = {
+      basicClear: () => {
+        console.log("Ya Basic");
+        resetPageLS({ activeErrorALL: true });
+      },
+
+      continue: () => {},
+    };
+
+    return mNewItemsHooks;
+  };
+  outMethods.NewItemsHooks = NewItemsHooks;
 
   //-------------------------------------
 

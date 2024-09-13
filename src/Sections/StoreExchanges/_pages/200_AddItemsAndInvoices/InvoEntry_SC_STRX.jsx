@@ -1,5 +1,4 @@
 import { MRVinput } from "../../../../mrv/mrv-components/inputs/MRVinput";
-import { MessageRibbonMRV } from "../../../../mrv/mrv-components/DisplayOutputs/MessageRibbonMRV";
 
 import { useLocStMethods_STRX } from "../../_resources/components/CompHooks_STRX";
 import { useOutletContext } from "react-router";
@@ -8,18 +7,7 @@ import { useContext } from "react";
 import { cloneDeep, isEmpty } from "lodash";
 
 import {
-  returnAtom,
-  baseLocState,
-  locStFields,
-  clearedInputs,
-  errorObj,
-  clearedErrors,
-} from "../../../../globalFunctions/globalJS_classes";
-
-import {
   useSetSessionInvos,
-  useSetSessionItems,
-  useResetLocStFields,
 } from "../../../../mrv/MRVhooks/MRVhooks";
 
 import InvoContext from "../../../../store/invo-context";
@@ -34,9 +22,8 @@ const InvoEntry_SC_STRX = () => {
 
   const locStRt = sessionMRV.locSt.AllEntry30;
 
-  const locMethods = useLocStMethods_STRX().AddItemsAndInvos;
+  const locMethods = useLocStMethods_STRX().AddItemsAndInvos();
 
-  const setSessionItems = useSetSessionItems();
   const setSessionInvosMRV = useSetSessionInvos();
 
   const noInvos = isEmpty(sessionMRV.sessionInvos);

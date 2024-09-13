@@ -1,15 +1,15 @@
 import {
   singleDispo,
   ItemDisposObj,
-} from "../../../../globalFunctions/globalJS_classes";
-import { DispoMainPageMRV } from "../../../../mrv/mrv-components/pages/disposPage/DispoMainPageMRV";
+} from "../globalFunctions/globalJS_classes";
+import { DispoMainPageMRV } from "../mrv/mrv-components/pages/disposPage/DispoMainPageMRV";
 
-import { useNodeNav } from "../../../../mrv/MRVhooks/MRVhooks";
+import { useNodeNav } from "../mrv/MRVhooks/MRVhooks";
 
 import {
   TitleBarSTRX,
   CashTotalSTRX,
-} from "../../_resources/components/CompConfigsSTRX";
+} from "../Sections/StoreExchanges/_resources/components/CompConfigsSTRX";
 import { useImmer, useImmerReducer } from "use-immer";
 import { useOutletContext } from "react-router";
 
