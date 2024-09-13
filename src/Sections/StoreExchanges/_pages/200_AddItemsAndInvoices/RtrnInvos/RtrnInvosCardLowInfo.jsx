@@ -3,12 +3,8 @@ import { MRVitemDetails } from "../../../../../mrv/mrv-components/DisplayOutputs
 import { MRVinput } from "../../../../../mrv/mrv-components/inputs/MRVinput";
 import { DeleteCardColMRV } from "../../../../../mrv/mrv-components/inputs/DeleteCardColMRV";
 import { BigLabeledValue } from "../../../../../mrv/mrv-components/DisplayOutputs/BigLabeledValue";
-import {
-  MdChevronRight,
-  MdDeleteOutline,
-  MdExpandLess,
-  MdExpandMore,
-} from "react-icons/md";
+import { DescriptorIcon } from "../../../../../mrv/mrv-components/DisplayOutputs/DescriptorIcon";
+
 import {
   useSetSessionInvos,
   centsToDollars,
@@ -36,7 +32,13 @@ const RtrnInvosCardLowInfo = ({ invoice = new Invoice_SR({}) }) => {
       }}
     >
       <div className={`receiptDetailsCol`}>
-        <div className={`body__large bold`}>{`# ${invoice.invoNum}`}</div>
+        <div className={`hBox gap25pct body__large bold`}>
+          <DescriptorIcon
+          iconStr="receiptLong"
+          ctnrSize="2rem"
+          fontSize="1.75rem" />
+          {`#${invoice.invoNum}`}
+        </div>
         <div className={`body__small`}>Date: {invoice.dateStr}</div>
         <div className={`body__small`}>Store: {invoice.store}</div>
       </div>

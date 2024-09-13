@@ -5,16 +5,17 @@ import {
   MdReceiptLong,
   MdShoppingCart,
   MdOutlineWarningAmber,
+  MdCircle,
 } from "react-icons/md";
 
 function DescriptorIcon({
-  iconStr = "box",
+  iconStr = "circle",
   ctnrSize = "2.5rem",
   fontSize = "2rem",
   backgroundColor = "color__surface__default",
   color = "color__primary__text",
   radius = "100%",
-  REF_iconStr____box__receipt__receiptLong__cart__alert = "",
+  REF_iconStr____circle__box__receipt__receiptLong__cart__alert = "",
 }) {
   const styleObj = {
     fontSize: fontSize,
@@ -22,6 +23,7 @@ function DescriptorIcon({
   };
 
   const iconsObj = {
+    circle: <MdCircle {...styleObj} />,
     box: <FaBoxOpen {...styleObj} />,
     receipt: <MdReceipt {...styleObj} />,
     receiptLong: <MdReceiptLong {...styleObj} />,
