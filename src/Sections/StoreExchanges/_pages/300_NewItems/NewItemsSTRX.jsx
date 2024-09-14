@@ -3,6 +3,8 @@ import "./NewItems.css";
 import { ContinueBtnMRV } from "../../../../mrv/mrv-components/inputs/ContinueBtnMRV";
 import { ScanScreenMRV } from "../../../../mrv/mrv-components/DisplayOutputs/ScanScreenMRV";
 import { ActionsSTRX } from "./Sidesheet/ActionsSTRX";
+import { NewItemsList } from "./NewItemsList/NewItemsList";
+
 import { NewItemEntrySTRX } from "./Sidesheet/NewItemEntrySTRX";
 import ProductContext from "../../../../store/product-context";
 
@@ -76,13 +78,14 @@ function NewItemsSTRX() {
           headerTitle={`New Items For Exchange`}
           showNavNodeBar={true}
         />
-        <div className={`main_content`}>{o70panels[active70key]}</div>
+        <div className={`main_content`}>
+          <NewItemsList />
+        </div>
 
         <div className={`footer_content`}>
           <CashTotalSTRX />
           <ContinueBtnMRV handleClick={(e) => handleContinue(e)} />
         </div>
-
       </main>
       {o30panels[activeUI3]}
     </section>

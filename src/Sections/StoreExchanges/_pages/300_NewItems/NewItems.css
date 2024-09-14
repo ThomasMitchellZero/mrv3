@@ -1,5 +1,35 @@
 .mrv{
     & .newItems{
-        
+
+        & .cols{
+            display: flex;
+            flex-direction: row;
+            gap: 0rem;
+
+            & .itemCol{
+                display: flex;
+                flex: 20 20 0rem;
+                background-color: lightgreen;
+
+            }
+            & .rtrnCol{
+                flex: 10 10 0rem;
+                background-color: coral;
+            }
+            & .qtyCol{
+                flex: 10 10 0rem;
+                background-color: bisque;
+            }
+            & .iconCol{
+                flex: 5 5 0rem;
+                background-color: aqua;
+            }
+        }
+
+        & .tile{
+            display: flex;
+            flex-direction: row;
+        }
+
     }
 }

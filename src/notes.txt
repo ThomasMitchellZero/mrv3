@@ -8244,6 +8244,10 @@ What to do today?
     OK, so here's a little puzzle.  How do I handle situations where the thing I display will change based on user interaction?  I'm thinking specifically the 30-panels, although I've run across this before in Return Items / Item Details / Return Reasons.
 
     I could handle it with a series of conditionals, but that can get a little hairy with the nested conditions and I'm actually wondering if the right move is just to set it explicitly.  Like I click on an item, and set 2 states instead of 1.
+
+    6:20.
+    I didn't actually get to any of the cool stuff today :/  Sure do wish I had another few hours.  Ahh, well.  I think I can jam for 90 more minutes and still have a nice night.  So let's try and do that.
+
     
 
 
