@@ -91,8 +91,7 @@ function useLocStMethods_STRX() {
       },
 
       modeSwitch: ({ keyStr = "receipt" }) => {
-        console.log("trying to mode switch");
-        setPageLS({ oNewFields: { activeMode1: keyStr } });
+        setPageLS({ activeMode1: keyStr });
         resetAllEntry30LS({ activeErrorALL: true, inputALL: true });
         resetPageLS({ activeErrorALL: true });
       },
@@ -108,8 +107,6 @@ function useLocStMethods_STRX() {
   outMethods.AddItemsAndInvos = AddItemsAndInvos;
 
   const NewItemsHooks = () => {
-    const setAllEntry30LS = useSetLocStFields("AllEntry30");
-
     const mNewItemsHooks = {
       basicClear: () => {
         console.log("Ya Basic");

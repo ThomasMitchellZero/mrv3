@@ -384,7 +384,7 @@ function useSetLocStFields(locStKey = "page") {
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
 
-  const setLocStFields = ({oNewFields = {} }) => {
+  const setLocStFields = (oNewFields = {} ) => {
     setSessionMRV((draft) => {
       draft.locSt[locStKey] = { ...draft.locSt[locStKey], ...oNewFields };
     });

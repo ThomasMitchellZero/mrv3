@@ -156,8 +156,7 @@ function ReasonPickerSC_MRV({ itemQtyBadge = null }) {
   const defectiveClick = (oReason) => {
     const refOReturnReason = oReturnReason({});
     setShouldFocus(true);
-    setReasonPickerLS({ oNewFields: { activeKey1: oReason.keyStr } });
-
+    setReasonPickerLS({ activeKey1: oReason.keyStr });
   };
 
   oMode.Defective.chips = aItemDefectiveReasons.map((oReason) => {

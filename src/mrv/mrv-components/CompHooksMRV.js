@@ -40,7 +40,6 @@ function useCompHooks_MRV() {
       activeRepoItemObj?.oAllItemReasons?.[activeReasonKey];
 
     const lsMethods = {
-
       handlePlusMinus: ({ isPlus = true }) => {
         const refOReturnReason = oReturnReason({});
         const sMode = isPlus ? "plus" : "minus";
@@ -51,7 +50,7 @@ function useCompHooks_MRV() {
 
         if (qtyError) {
           setReasonPickerLS({
-            oNewFields: { activeError1: errorsObj[qtyError] },
+            activeError1: errorsObj[qtyError],
           });
         } else {
           console.log("draftQty", draftQty);
@@ -69,7 +68,7 @@ function useCompHooks_MRV() {
       modeSwitch: ({ keyStr = "no mode key" }) => {
         console.log("modeSwitch", keyStr);
         setReasonPickerLS({
-          oNewFields: { activeMode1: keyStr },
+          activeMode1: keyStr,
         });
 
         resetReasonPickerLS({
@@ -104,7 +103,7 @@ function useCompHooks_MRV() {
 
       setError: ({ errorKey }) => {
         setReasonPickerLS({
-          oNewFields: { activeError1: errorsObj[errorKey] },
+          activeError1: errorsObj[errorKey],
         });
       },
 
