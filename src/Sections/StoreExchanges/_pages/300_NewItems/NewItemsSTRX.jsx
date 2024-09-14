@@ -4,6 +4,7 @@ import { ContinueBtnMRV } from "../../../../mrv/mrv-components/inputs/ContinueBt
 import { ScanScreenMRV } from "../../../../mrv/mrv-components/DisplayOutputs/ScanScreenMRV";
 import { ActionsSTRX } from "./Sidesheet/ActionsSTRX";
 import { NewItemEntrySTRX } from "./Sidesheet/NewItemEntrySTRX";
+import  ProductContext  from "../../../../store/product-context";
 
 import { useLocStMethods_STRX } from "../../_resources/components/CompHooks_STRX";
 
@@ -20,6 +21,8 @@ import {
 
 import { useNodeNav } from "../../../../mrv/MRVhooks/MRVhooks";
 
+import { useContext } from "react";
+
 import { useOutletContext } from "react-router";
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -31,6 +34,7 @@ function NewItemsSTRX(){
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const locMethods = useLocStMethods_STRX();
+  const productCtx = useContext(ProductContext);
 
   const activeMode = sessionMRV.locSt.page.activeMode1;
   const activeUI3 = sessionMRV.locSt.page.activeUI3;

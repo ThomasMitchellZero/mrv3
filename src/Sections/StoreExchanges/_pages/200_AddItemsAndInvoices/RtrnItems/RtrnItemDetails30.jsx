@@ -27,6 +27,7 @@ function RtrnItemDetails30({}) {
   const refLocFields = makeLocStFields({});
 
   const activeItem = findAtom({itemNum: activeItemKey, asIndex: false});
+  
   return (
     <Sidesheet_Base_MRV title="Return Item Details">
       <div className={`itemDetails`}>

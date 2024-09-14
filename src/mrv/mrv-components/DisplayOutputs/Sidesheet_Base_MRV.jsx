@@ -1,4 +1,3 @@
-
 import { MdOutlineClose, MdArrowBack } from "react-icons/md";
 
 function Sidesheet_Base_MRV({
@@ -30,13 +29,16 @@ function Sidesheet_Base_MRV({
     fBgClick();
   };
 
-  const handleNavBtnClick = () => {
+  const handleNavBtnClick = (e) => {
+    e.stopPropagation();
     fNavBtnClick();
   };
 
   const actionBtn = icon ? (
     <button
-      onClick={handleNavBtnClick}
+      onClick={(e) => {
+        handleNavBtnClick(e);
+      }}
       className={`mrvBtn miniBtn ghost padding__0`}
     >
       {icon}
@@ -46,10 +48,10 @@ function Sidesheet_Base_MRV({
   const sCollapse = collapsed ? "collapsed" : "";
   return (
     <section
-      onClick={handleBGClick}
+      onClick={(e) => handleBGClick(e)}
       className={`mrvSidesheet gap2rem ${sCollapse}`}
     >
-      <div className={`hBox minWidth__0 minFlex alignCenter `}>
+      <div className={`hBox minWidth__0 minFlex height2rem alignCenter `}>
         {actionBtn}
         <div className={` heading__small truncate`}>{title}</div>
       </div>

@@ -779,6 +779,7 @@
     gap: 0rem;
   }
 
+
   & .vw25 {
     width: var(--primaryColumn);
   }
@@ -825,6 +826,10 @@
 
   & .minHeight__0 {
     min-height: 0rem;
+  }
+
+  & .height2rem {
+    height: 2rem;
   }
 
   & .nohover {

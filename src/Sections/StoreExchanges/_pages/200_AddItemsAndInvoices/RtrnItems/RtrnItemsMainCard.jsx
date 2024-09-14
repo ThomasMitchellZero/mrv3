@@ -11,6 +11,7 @@ import {
   centStringifier,
   useSetSessionItems,
   useResetLocStFields,
+  useSetLocStFields,
 } from "../../../../../mrv/MRVhooks/MRVhooks";
 
 import { greenify } from "../../../../../mrv/MRVhooks/MRVhooks";
@@ -20,6 +21,7 @@ import { returnAtom } from "../../../../../globalFunctions/globalJS_classes";
 const RtrnItemsMainCard = ({ returnItemAtom }) => {
   const mrvCtx = useOutletContext();
   const resetReasonPickerLS = useResetLocStFields("ReasonPickerSC");
+  const setPageLS = useSetLocStFields("page");
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const setSessionItems = useSetSessionItems();
@@ -70,9 +72,13 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
     const handleClick = (event) => {
       event.stopPropagation();
       console.log("tileItemAtom", tileItemAtom);
-      setSessionMRV((draft) => {
+      setPageLS({ activeKey1: tileItemAtom.atomItemNum });
+      /*
+            setSessionMRV((draft) => {
         draft.locSt.page.activeKey1 = tileItemAtom.atomItemNum;
       });
+      */
+
       resetReasonPickerLS({ EVERYONE: true });
     };
 

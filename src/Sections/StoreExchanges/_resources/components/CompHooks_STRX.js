@@ -106,19 +106,22 @@ function useLocStMethods_STRX() {
 
   outMethods.AddItemsAndInvos = AddItemsAndInvos;
 
-  const NewItemsHooks = () => {
+  const NewItems = () => {
     const mNewItemsHooks = {
       basicClear: () => {
         console.log("Ya Basic");
         resetPageLS({ activeErrorALL: true });
       },
+      
 
-      continue: () => {},
+      continue: () => {
+        console.log("No Continue Set");
+      },
     };
 
     return mNewItemsHooks;
   };
-  outMethods.NewItemsHooks = NewItemsHooks;
+  outMethods.NewItems = NewItems;
 
   //-------------------------------------
 

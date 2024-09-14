@@ -8212,7 +8212,44 @@ What to do today?
 
     The other option is just to create, route, and publish a new Vite project from scratch, and then give descriptive names to each factor as I create them.  That would allow me to see the source of each entity.  Because the problem I feel like I am facing is that in the domain of servers, routers, and deployments, I don't actually understand anything.  I am actually doing the opposite of understanding - trying to stick in answers without actually understanding the questions.  
 
+1:30.
+    Ok, I need to stop malingering and get back online soon.  The deployment issues have been such a pain in my ass that I haven't done a lot of thinking about what to do next.
+
+    -I could go through AddItemsAndInvosSTRX and look for anything that is using the old local-state resetter, but for the  time being shit is working.  
+
+    -There shouldn't be any references to STRX in any of my MRV components.  But that, too, is a problem that isn't urgent.  
+
+    -I do need to think through all my error states and error-state handling.  
+        -Item Entry
+            X-Appear
+            X-Clear
+
+
+    -Gotta change the ItemNums and InvoNums to be of more realistic length.
+
+14 Sep 2024
+
+    11:20.
+    Let's do this.  I guess the thing that has been slowing me up is I keep wondering if I am structuring everything correctly.  What I would LIKE is to have the component, its local state, and its hooks and functions all exported separately from the same file.  I think the main thing stopping me is that Vite seems not to do HMR if a module has multiple exports, hence my current solution.  
+
+    I worry that my current model of each component having its own 'local state' that is actually just stored in the global state is trouble.  I can't say exactly why, only that I've never seen it done like this before.  I guess I also fear that at some point my components will start colliding.  For example, the ReasonPicker is at least referring to specific fields in the Page LS.  Might I run into situations where other components are also using those fields?
+
+    But I did it this way to avoid a bunch of stupid prop drilling, and I know that information can't really be passed acrosss or up, only down.  So... doesn't that just lead me back to One Big Local State covering all associated components?  And wouldn't the logical thing be to have all of those 'local states' living in one consistent location?  And isn't the global state a consistent and easily-accessible location?  Which is what I have now.  So until I have a better idea or at least a specific problem to solve, I can't see doing anything else.
+
+    Besides, I have a juicy problem today.  I want to try using a standard card component, and maybe even a standard Tile component, and I want to try using everything I've learned about Flex Box to try and do my columns in a much simpler way that I was doing for the Return Items.  
+
+    Later tonight when I ensalidate, it could be fun to write a little manifesto where I crystalize my overall pattern for handling components in my MRV framework.  Could be VERY fun, actually.  Fun enough that I need to ensure I don't just start doing it now.
+
+    1:05.
+    OK, so here's a little puzzle.  How do I handle situations where the thing I display will change based on user interaction?  I'm thinking specifically the 30-panels, although I've run across this before in Return Items / Item Details / Return Reasons.
+
+    I could handle it with a series of conditionals, but that can get a little hairy with the nested conditions and I'm actually wondering if the right move is just to set it explicitly.  Like I click on an item, and set 2 states instead of 1.
     
-    
+
+
+
+    At this point I probably shouldn't worry about it.  Experience has taught me that trying to skip the rebus phase and foresee the future pattern before I have enough pieces to know what the pattern actually is will generally be a waste of time.  Let's just blast ahead like this.  
+
+
 
 
