@@ -45,9 +45,6 @@ function NewItemsSTRX() {
 
   const oMode = {};
 
-  const active70key =
-    sessionMRV.newItems.length > 0 ? "newItemsList" : "scanScreen";
-
   const o30panels = {
     ActionsSTRX: <ActionsSTRX />,
     NewItemEntrySTRX: <NewItemEntrySTRX />,
@@ -71,7 +68,7 @@ function NewItemsSTRX() {
   };
 
   return (
-    <section className={`addItemsAndInvos mrvPage color__surface__subdued`}>
+    <section className={`newItems mrvPage color__surface__subdued`}>
       <main onClick={() => {}} className={`mrvPanel__main`}>
         <TitleBarSTRX
           showProductName={true}

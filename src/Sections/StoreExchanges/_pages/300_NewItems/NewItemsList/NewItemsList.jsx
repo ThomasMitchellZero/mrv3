@@ -1,7 +1,7 @@
 import { useOutlet } from "react-router-dom";
 import { useOutletContext } from "react-router";
 import { ScanScreenMRV } from "../../../../../mrv/mrv-components/DisplayOutputs/ScanScreenMRV";
-import { NewItemTileSTRX } from "./NewItemsTileSTRX";
+import { NewItemsTileSTRX } from "./NewItemsTileSTRX";
 
 function NewItemsList() {
   const mrvCtx = useOutletContext();
@@ -18,16 +18,14 @@ function NewItemsList() {
   );
 
   const uiTilesArr = aNewItems.map((itemAtom) => {
-    return <NewItemTileSTRX key={itemAtom.atomItemNum} itemAtom={itemAtom} />;
+    return <NewItemsTileSTRX key={itemAtom.atomItemNum} itemAtom={itemAtom} />;
   });
 
   return aNewItems.length ? (
-    <div className={`cardContainer`}>
-      {uiTilesArr}
-    </div>
+    <div className={`cardContainer`}>{uiTilesArr}</div>
   ) : (
     uiScanScreen
   );
 }
 
-export default NewItemsList;
+export { NewItemsList };

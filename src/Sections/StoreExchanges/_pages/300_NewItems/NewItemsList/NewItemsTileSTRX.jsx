@@ -1,8 +1,8 @@
 import { useOutlet } from "react-router-dom";
 import { useOutletContext } from "react-router";
 import { useContext } from "react";
-import { useLocStMethods_STRX } from "../../_resources/components/CompHooks_STRX";
-import { mrvItemDetails } from "../../../../../mrv/mrv-components/DisplayOutputs/mrvItemDetails";
+import { useLocStMethods_STRX } from "../../../_resources/components/CompHooks_STRX";
+import { MRVitemDetails } from "../../../../../mrv/mrv-components/DisplayOutputs/mrvItemDetails";
 import { returnAtom } from "../../../../../globalFunctions/globalJS_classes";
 import {
   useSetLocStFields,
@@ -10,7 +10,7 @@ import {
   useSetSessionItems,
 } from "../../../../../mrv/MRVhooks/MRVhooks";
 
-function NewItemsTileSTRX({itemAtom = new returnAtom({})}) {
+function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
@@ -19,7 +19,7 @@ function NewItemsTileSTRX({itemAtom = new returnAtom({})}) {
   return (
     <div className={`tile cols`}>
       <div className={`itemCol`}>
-        <mrvItemDetails itemAtom={itemAtom} />
+        <MRVitemDetails thisItemAtom={itemAtom} />
       </div>
       <div className={`rtrnCol`}></div>
       <div className={`qtyCol`}></div>
@@ -28,4 +28,4 @@ function NewItemsTileSTRX({itemAtom = new returnAtom({})}) {
   );
 }
 
-export default NewItemsTileSTRX;
+export { NewItemsTileSTRX };
