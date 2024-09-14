@@ -13,9 +13,8 @@ function ActionsSTRX() {
       <button
         onClick={(e) => {
           e.stopPropagation();
-          console.log("Tried to set activeUI3 ");
           setPageLS({ activeUI3: "NewItemEntrySTRX" });
-          //resetPageLS({ activeErrorALL: true });
+          resetPageLS({ activeErrorALL: true });
         }}
         className={`actionBtn secondary`}
       >
