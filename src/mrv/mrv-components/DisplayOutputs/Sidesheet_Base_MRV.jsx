@@ -25,7 +25,9 @@ function Sidesheet_Base_MRV({
 
   const icon = oIcons[btnIcon] || null;
 
-  const handleBGClick = () => {
+  const handleBGClick = (e) => {
+    console.log("Generic Sidesheet BG Click");
+    e.stopPropagation();
     fBgClick();
   };
 
@@ -48,7 +50,9 @@ function Sidesheet_Base_MRV({
   const sCollapse = collapsed ? "collapsed" : "";
   return (
     <section
-      onClick={(e) => handleBGClick(e)}
+      onClick={(e) => {
+        handleBGClick(e);
+      }}
       className={`mrvSidesheet gap2rem ${sCollapse}`}
     >
       <div className={`hBox minWidth__0 minFlex height2rem alignCenter `}>

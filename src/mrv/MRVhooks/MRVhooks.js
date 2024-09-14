@@ -495,8 +495,9 @@ function useResetLocStFields(locStKey) {
       outLocSt = cloneDeep(init);
     }
 
+    console.log("outLocSt", outLocSt);
     setSessionMRV((draft) => {
-      Object.assign(draft.locSt[locStKey], outLocSt);
+      draft.locSt[locStKey] = { ...draft.locSt[locStKey], ...outLocSt };
     });
   };
   return resetLocStFields;

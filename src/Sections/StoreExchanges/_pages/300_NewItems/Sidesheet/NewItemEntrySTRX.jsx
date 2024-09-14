@@ -6,7 +6,7 @@ import {
   useSetLocStFields,
   useResetLocStFields,
 } from "../../../../../mrv/MRVhooks/MRVhooks";
-import { useContext } from "react";
+import { act, useContext } from "react";
 import { useOutletContext } from "react-router";
 import ProductContext from "../../../../../store/product-context";
 import { returnAtom } from "../../../../../globalFunctions/globalJS_classes";
@@ -20,6 +20,7 @@ function NewItemEntrySTRX() {
   const resetPageLS = useResetLocStFields("page");
   const locStRt = sessionMRV.locSt.NewItemEntrySTRX;
   const locMethods = useLocStMethods_STRX().NewItems();
+  const activeError1 = locStRt.activeError1;
 
   const setSessionItems = useSetSessionItems();
   const productCtx = useContext(ProductContext);
@@ -66,9 +67,13 @@ function NewItemEntrySTRX() {
 
   return (
     <Sidesheet_Base_MRV
+      fBgClick={() => {
+        resetNewItemEntryLS({
+          activeErrorALL: true,
+        });
+      }}
       btnIcon={`back`}
       fNavBtnClick={() => {
-        console.log("back button clicked from NewItemEntrySTRX");
         resetNewItemEntryLS({
           inputALL: true,
           activeErrorALL: true,
@@ -79,29 +84,34 @@ function NewItemEntrySTRX() {
     >
       <form
         id={`addNewItemForm`}
-        className={`vBox minHeight gap2rem`}
+        className={`vBox minHeight gap1rem`}
         onSubmit={(e) => handleAddItem(e)}
       >
-        <MRVinput width={`100%`}>
+        <MRVinput hasError={activeError1?.key === "invalidItem"} width={`100%`}>
           <input
             placeholder="New Item #"
             type="text"
             value={locStRt.input1}
-            onChange={(event) =>
-              setNewItemEntryLS({ input1: event.target.value })
-            }
+            onChange={(event) => {
+              setNewItemEntryLS({ input1: event.target.value });
+              resetNewItemEntryLS({ activeErrorALL: true });
+            }}
           />
         </MRVinput>
 
         <div className={`hBox minFlex gap1rem`}>
-          <MRVinput width={`8rem`}>
+          <MRVinput
+            hasError={activeError1?.key === "invalidQty"}
+            width={`8rem`}
+          >
             <input
               placeholder="Item Qty"
               type="number"
               value={locStRt.input2}
-              onChange={(event) =>
-                setNewItemEntryLS({ input2: event.target.value })
-              }
+              onChange={(event) => {
+                setNewItemEntryLS({ input2: event.target.value });
+                resetNewItemEntryLS({ activeErrorALL: true });
+              }}
             />
           </MRVinput>
           <div className={`hbox maxFlex`}></div>
@@ -109,6 +119,7 @@ function NewItemEntrySTRX() {
             Add Item
           </button>
         </div>
+        <p className={`warning`}>{activeErrorStr}</p>
       </form>
     </Sidesheet_Base_MRV>
   );

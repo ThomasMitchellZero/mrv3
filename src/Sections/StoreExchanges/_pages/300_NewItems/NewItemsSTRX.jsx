@@ -4,7 +4,7 @@ import { ContinueBtnMRV } from "../../../../mrv/mrv-components/inputs/ContinueBt
 import { ScanScreenMRV } from "../../../../mrv/mrv-components/DisplayOutputs/ScanScreenMRV";
 import { ActionsSTRX } from "./Sidesheet/ActionsSTRX";
 import { NewItemEntrySTRX } from "./Sidesheet/NewItemEntrySTRX";
-import  ProductContext  from "../../../../store/product-context";
+import ProductContext from "../../../../store/product-context";
 
 import { useLocStMethods_STRX } from "../../_resources/components/CompHooks_STRX";
 
@@ -29,21 +29,20 @@ import { useOutletContext } from "react-router";
 //&&&&&&&&&&&&&&&     MAIN COMPONENT    &&&&&&&&&&&&&&&
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-function NewItemsSTRX(){
+function NewItemsSTRX() {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const locMethods = useLocStMethods_STRX();
   const productCtx = useContext(ProductContext);
 
-  const activeMode = sessionMRV.locSt.page.activeMode1;
   const activeUI3 = sessionMRV.locSt.page.activeUI3;
-  const errorObjRt = sessionMRV.locSt.page.oErrorObjects;
   const activeError1 = sessionMRV.locSt.page.activeError1;
+
+  const activeErrorStr = activeError1?.str || "";
 
   const oMode = {};
 
-  // keys for elements displayed conditionally rather than by LS.
   const active70key =
     sessionMRV.newItems.length > 0 ? "newItemsList" : "scanScreen";
 
@@ -69,7 +68,6 @@ function NewItemsSTRX(){
     e.stopPropagation();
   };
 
-
   return (
     <section className={`addItemsAndInvos mrvPage color__surface__subdued`}>
       <main onClick={() => {}} className={`mrvPanel__main`}>
@@ -84,10 +82,11 @@ function NewItemsSTRX(){
           <CashTotalSTRX />
           <ContinueBtnMRV handleClick={(e) => handleContinue(e)} />
         </div>
+
       </main>
       {o30panels[activeUI3]}
     </section>
   );
-};
+}
 
 export { NewItemsSTRX };
