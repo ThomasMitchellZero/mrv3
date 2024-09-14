@@ -164,7 +164,7 @@ const itemReturnReasons = ({
     itemQty,
     itemNum,
     defectiveQty() {
-      // loops thru all reasons and sums their qtys.  
+      // loops thru all reasons and sums their qtys.
       // No check for defective b/c OK reasons don't get individual qtys.
       const outQty = Object.values(this.oAllItemReasons).reduce((acc, curr) => {
         return acc + curr.reasonQty;
@@ -173,21 +173,18 @@ const itemReturnReasons = ({
     },
     qtySansReason() {
       return this.itemQty - this.defectiveQty();
-
     },
     okReasonsQty() {
       // OK reasons never have a qty, so we just need to know if any are chosen.
-      const hasOK = Object.values(this.oAllItemReasons).find(
-        (thisReason) => {
-          return thisReason.isChosen;
-        }
-      );
+      const hasOK = Object.values(this.oAllItemReasons).find((thisReason) => {
+        return thisReason.isChosen;
+      });
       // If any OK reasons are chosen, the value is whatever is left after the defective reasons.
       return hasOK ? Math.max(this.qtySansReason(), 0) : 0;
     },
     allReasonsQty() {
       return this.defectiveQty() + this.okReasonsQty();
-    }
+    },
   };
 };
 
@@ -512,34 +509,39 @@ const baseLocState = {
 export { baseLocState };
 
 const baseReturnState = ({
-  sessionConfigs = {
-    negativeReturnVals: true,
-  },
   returnItems = [],
   totalReturnValue = new moneyObj({}),
   atomizedReturnItems = [],
-  replacementItems = [],
-  totalReplacementValue = new moneyObj({}),
+  newItems = [],
+  totalNewItemValue = new moneyObj({}),
   cashDeltaMO = new moneyObj({}),
   sessionInvos = {},
-  returnReasons = {},
   returnReasonsRepo = {},
-  returnItemDispos = [],
   oNavNodes = {},
   locSt = cloneDeep(baseLocState),
+  // old, deprecate once we're sure we don't need these.
+  totalReplacementValue = new moneyObj({}),
+  replacementItems = [],
+  returnReasons = {},
+  returnItemDispos = [],
 }) => {
   return {
     returnItems,
-    atomizedReturnItems,
     totalReturnValue,
-    replacementItems,
-    totalReplacementValue,
+    atomizedReturnItems,
+    newItems,
+    totalNewItemValue,
+
     cashDeltaMO,
     returnReasonsRepo,
-    returnItemDispos,
     sessionInvos,
     oNavNodes,
     locSt,
+    // old, deprecate once we're sure we don't need these.
+    returnItemDispos,
+    replacementItems,
+    returnReasons,
+    totalReplacementValue,
   };
 };
 

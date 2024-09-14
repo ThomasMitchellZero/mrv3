@@ -58,13 +58,33 @@ const LS_STRX_100_AddItemsAndInvos = {
 
 export { LS_STRX_100_AddItemsAndInvos };
 
+
+
 const LS_STRX_300_NewItems = {
   page: makeLocStFields({
     _keyStr: "page",
+    activeUI3: "ActionsSTRX",
     oErrorObjects: {
       noItems: new errorObj({
         key: "noItems",
         str: "No Items Added",
+      }),
+    },
+  }),
+  NewItemEntrySTRX: makeLocStFields({
+    _keyStr: "NewItemEntrySTRX",
+    oInputs: {
+      itemCode: "",
+      qty: "",
+    },
+    oErrorObjects: {
+      invalidItem: new errorObj({
+        key: "invalidItem",
+        str: "Invalid Item#",
+      }),
+      invalidQty: new errorObj({
+        key: "invalidQty",
+        str: "Invalid Qty",
       }),
     },
   }),

@@ -1,6 +1,9 @@
 import "./NewItems.css";
 
 import { ContinueBtnMRV } from "../../../../mrv/mrv-components/inputs/ContinueBtnMRV";
+import { ScanScreenMRV } from "../../../../mrv/mrv-components/DisplayOutputs/ScanScreenMRV";
+import { ActionsSTRX } from "./Sidesheet/ActionsSTRX";
+import { NewItemEntrySTRX } from "./Sidesheet/NewItemEntrySTRX";
 
 import { useLocStMethods_STRX } from "../../_resources/components/CompHooks_STRX";
 
@@ -20,37 +23,41 @@ import { useNodeNav } from "../../../../mrv/MRVhooks/MRVhooks";
 import { useOutletContext } from "react-router";
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//&&&&&&&&&&&&&&&     MAIN COMPONENT    &&&&&&&&&&&&&&&//
+//&&&&&&&&&&&&&&&     MAIN COMPONENT    &&&&&&&&&&&&&&&
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-const NewItemsSTRX = () => {
+function NewItemsSTRX(){
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
-  const nodeNav = useNodeNav();
   const locMethods = useLocStMethods_STRX();
 
   const activeMode = sessionMRV.locSt.page.activeMode1;
-  const activeUI = sessionMRV.locSt.page.activeUI3;
+  const activeUI3 = sessionMRV.locSt.page.activeUI3;
   const errorObjRt = sessionMRV.locSt.page.oErrorObjects;
   const activeError1 = sessionMRV.locSt.page.activeError1;
 
-  const oMode = {
-    item: {
-      s70label: "Items Being Returned",
-    },
-    receipt: {
-      s70label: "Receipts List",
-    },
+  const oMode = {};
+
+  // keys for elements displayed conditionally rather than by LS.
+  const active70key =
+    sessionMRV.newItems.length > 0 ? "newItemsList" : "scanScreen";
+
+  const o30panels = {
+    ActionsSTRX: <ActionsSTRX />,
+    NewItemEntrySTRX: <NewItemEntrySTRX />,
   };
 
-  // 30 panel is determined conditionally, so I will just do that here.
-  const active30key =
-    sessionMRV.locSt.page.activeKey1 && activeMode === "item"
-      ? "ItemDetails30"
-      : "AllEntry30";
-
-  const o30panels = {};
+  const o70panels = {
+    newItemsList: <div className={`newItemsList`}></div>,
+    scanScreen: (
+      <ScanScreenMRV
+        mainTitle={`Scan or Add New Items`}
+        subtitle={`Customer receives new items when exchange is complete.`}
+        iconStr={`cart`}
+      />
+    ),
+  };
 
   /* ---- SHARED FUNCTIONS ---- */
 
@@ -58,11 +65,6 @@ const NewItemsSTRX = () => {
     e.stopPropagation();
   };
 
-  /*
-
-
-
-*/
 
   return (
     <section className={`addItemsAndInvos mrvPage color__surface__subdued`}>
@@ -72,15 +74,14 @@ const NewItemsSTRX = () => {
           headerTitle={`New Items For Exchange`}
           showNavNodeBar={true}
         />
-        <div className={`main_content`}>All will be remade anew.</div>
+        <div className={`main_content`}>{o70panels[active70key]}</div>
 
         <div className={`footer_content`}>
           <CashTotalSTRX />
-          <ContinueBtnMRV
-            handleClick={(e) => handleContinue(e)}
-          />
+          <ContinueBtnMRV handleClick={(e) => handleContinue(e)} />
         </div>
       </main>
+      {o30panels[activeUI3]}
     </section>
   );
 };

@@ -4,6 +4,7 @@ import {
   MdReceipt,
   MdReceiptLong,
   MdShoppingCart,
+  MdOutlineShoppingCart,
   MdOutlineWarningAmber,
   MdCircle,
 } from "react-icons/md";
@@ -27,7 +28,7 @@ function DescriptorIcon({
     box: <FaBoxOpen {...styleObj} />,
     receipt: <MdReceipt {...styleObj} />,
     receiptLong: <MdReceiptLong {...styleObj} />,
-    cart: <MdShoppingCart {...styleObj} />,
+    cart: <MdOutlineShoppingCart {...styleObj} />,
     alert: <MdOutlineWarningAmber {...styleObj} />,
   };
 
@@ -35,14 +36,14 @@ function DescriptorIcon({
 
   return (
     <div
+      height={ctnrSize}
       style={{
         height: ctnrSize,
         width: ctnrSize,
         borderRadius: radius,
         color: color,
-        backgroundColor: backgroundColor,
       }}
-      className={`descriptorIcon ${color}`}
+      className={`descriptorIcon ${color} ${backgroundColor}`}
     >
       {outIcon}
     </div>

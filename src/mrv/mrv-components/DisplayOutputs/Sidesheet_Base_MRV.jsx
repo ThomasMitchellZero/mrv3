@@ -1,7 +1,5 @@
-import { pad } from "lodash";
-import { MdOutlineClose, MdArrowBack } from "react-icons/md";
 
-import { useResetLocStFields } from "../../MRVhooks/MRVhooks";
+import { MdOutlineClose, MdArrowBack } from "react-icons/md";
 
 function Sidesheet_Base_MRV({
   collapsed = false,

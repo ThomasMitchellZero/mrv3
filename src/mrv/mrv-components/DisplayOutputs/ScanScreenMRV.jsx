@@ -10,12 +10,8 @@ const ScanScreenMRV = ({
   subtitleJSX = null,
   imgStr = "",
   iconStr = "box",
+  REF_iconStr____circle__box__receipt__receiptLong__cart__alert = "",
 }) => {
-  const imgSrc = {
-    Universal,
-    Cart,
-    Receipt,
-  };
 
   const iconConfig = (
     <DescriptorIcon
@@ -23,6 +19,7 @@ const ScanScreenMRV = ({
       fontSize="6rem"
       color="color__primary__text"
       iconStr={iconStr}
+      backgroundColor="color__surface__default"
     />
   );
 
