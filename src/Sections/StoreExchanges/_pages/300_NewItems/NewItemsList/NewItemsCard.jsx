@@ -1,7 +1,6 @@
 import { NewItemsTileSTRX } from "./NewItemsTileSTRX";
 import { DeleteCardColMRV } from "../../../../../mrv/mrv-components/inputs/DeleteCardColMRV";
 
-
 import { useOutlet } from "react-router-dom";
 import { useOutletContext } from "react-router";
 import { useContext } from "react";
@@ -21,11 +20,12 @@ function NewItemCardSTRX({ itemAtom = new returnAtom({}) }) {
   const setSessionMRV = mrvCtx.setSessionMRV;
   const locMethods = useLocStMethods_STRX().NewItems();
 
-
-
   return (
-    <div className={`cardStyle`}>
-        <NewItemsTileSTRX key={itemAtom.atomItemNum} itemAtom={itemAtom} />
+    <div className={`spanCtnr cardStyle`}>
+      <NewItemsTileSTRX key={itemAtom.atomItemNum} itemAtom={itemAtom} />
+      <div className={`col deleteSpan`}>
+        <DeleteCardColMRV />
+      </div>
     </div>
   );
 }

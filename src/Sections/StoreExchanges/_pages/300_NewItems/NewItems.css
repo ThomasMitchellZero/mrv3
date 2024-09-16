@@ -5,58 +5,67 @@
     --innerPadding: 1rem;
     --bothPadding: calc(var(--outerPadding) + var(--innerPadding));
 
-    & .cols {
-      display: flex;
-      flex-direction: row;
-      gap: 0rem;
-
-      & .col {
-        /*common values for columns*/
-        display: flex;
-        gap: 0rem;
-      }
-
-      & .itemCol {
-        display: flex;
-        flex: 20 20 0rem;
-        background-color: lightgreen;
-      }
-
-      & .tileInfoCol {
-        display: flex;
-        flex: 30 30 0rem;
-        background-color: lightblue;
-        flex-direction: column;
-        gap: 0rem;
-
-        & .rtrnCol {
-          flex: 10 10 0rem;
-          background-color: coral;
-        }
-        & .qtyCol {
-          flex: 10 10 0rem;
-          background-color: bisque;
-        }
-        & .iconCol {
-          flex: 5 5 0rem;
-          background-color: aqua;
-        }
-      }
-
-      & .deleteCol {
-        flex: 5 5 0rem;
-        background-color: lightcoral;
-      }
-    }
-
     & .tile {
-      display: flex;
-      flex-direction: row;
-      padding: 0.5rem var(--innerPadding);
     }
 
     & .columnTitleRow {
-      padding: 0rem var(--bothPadding);
+    }
+
+    & .cardStyle {
+    }
+
+    & .spanCtnr {
+      display: flex;
+      flex-direction: row;
+      gap: 0rem;
+      width: 100%;
+      padding-left: var(--outerPadding);
+      padding-right: var(--outerPadding);
+
+      & .col {
+        /*shared values for columns*/
+      }
+
+      & .tileSpan {
+        display: flex;
+        flex-direction: row;
+        gap: 0rem;
+        flex: 80 80 0rem;
+        padding-left: var(--innerPadding);
+        padding-right: var(--innerPadding);
+
+        & .itemSpan {
+          display: flex;
+          flex: 20 20 0rem;
+          background-color: lightgreen;
+        }
+
+        & .tileInfoSpan {
+          display: flex;
+          flex: 30 30 0rem;
+          background-color: lightblue;
+          flex-direction: row;
+          gap: 0rem;
+
+          & .rtrnSpan {
+            flex: 10 10 0rem;
+            background-color: coral;
+          }
+          & .qtySpan {
+            flex: 10 10 0rem;
+            background-color: bisque;
+          }
+          & .iconSpan {
+            flex: 5 5 0rem;
+            background-color: aqua;
+          }
+        }
+      }
+
+      & .deleteSpan {
+        flex: 20 20 0rem;
+        background-color: lightcoral;
+      }
     }
   }
 }

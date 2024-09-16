@@ -17,14 +17,14 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
   const locMethods = useLocStMethods_STRX().NewItems();
 
   return (
-    <div className={`tile cols`}>
-      <div className={`col itemCol`}>
+    <div className={`tile tileSpan`}>
+      <div className={`col itemSpan`}>
         <MRVitemDetails thisItemAtom={itemAtom} />
       </div>
-      <div className={`col tileInfoCol`}>
-        <div className={`col rtrnCol`}></div>
-        <div className={`col qtyCol`}></div>
-        <div className={`col iconCol`}></div>
+      <div className={`col tileInfoSpan`}>
+        <div className={`col rtrnSpan`}></div>
+        <div className={`col qtySpan`}></div>
+        <div className={`col iconSpan`}></div>
       </div>
     </div>
   );

@@ -24,11 +24,12 @@ function NewItemsList() {
 
   return aNewItems.length ? (
     <div className={`cardContainer`}>
-      <div className={`columnTitleRow cols`}>
-        <div className={`itemCol`}>New Items Cart</div>
-        <div className={`rtrnCol`}></div>
-        <div className={`qtyCol`}></div>
-        <div className={`iconCol`}></div>
+      <div className={`columnTitleRow spanCtnr`}>
+        <div className={`tileSpan`}>
+          <div className={`itemSpan`}>New Items Cart</div>
+          <div className={`tileInfoSpan`}>New Items Cart</div>
+        </div>
+        <div className={`col deleteSpan`}>Return</div>
       </div>
       {uiTilesArr}
     </div>
