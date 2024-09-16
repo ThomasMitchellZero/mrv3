@@ -8240,6 +8240,7 @@ What to do today?
 
     Later tonight when I ensalidate, it could be fun to write a little manifesto where I crystalize my overall pattern for handling components in my MRV framework.  Could be VERY fun, actually.  Fun enough that I need to ensure I don't just start doing it now.
 
+
     1:05.
     OK, so here's a little puzzle.  How do I handle situations where the thing I display will change based on user interaction?  I'm thinking specifically the 30-panels, although I've run across this before in Return Items / Item Details / Return Reasons.
 
@@ -8251,12 +8252,29 @@ What to do today?
     7:40.
     Calling it a night.  I felt like I was working most of the day and it wasn't like I hit any terrible snags, but I just didn't get nearly as much done as I wanted today.  Gotta remember this when making timelines - even simple shit can take a lot longer than you think!
 
-    
-
-
-
     At this point I probably shouldn't worry about it.  Experience has taught me that trying to skip the rebus phase and foresee the future pattern before I have enough pieces to know what the pattern actually is will generally be a waste of time.  Let's just blast ahead like this.  
 
+
+16 Nov 2024
+    1:30.
+    I am back, I am home, I am ready to sling code.
+
+    So what is first?  
+
+    I guess before anything, I need to make sure that my plan for using flex columns instead of grids is going to work.  If that's not working then any additional effort around this is a waste.  But if my new Flexbox understanding is correct, this all should work as long as I correctly set min-width.
+
+    So let me try implementing the headers.  I feel like that will tell me a lot.
+
+    2:20.
+    And this is where I think I run into issues, because if I want to get all my shit lined up, I either need to do math or else have empty placeholder columns for everything.  So maybe grids is the correct answer?  
+
+    Well.  The other possible answer is that I nest my containers.  
+    
+    So in the ReturnItems example, I wouldn't have columns for each component of the invoice list, at least not at the top level.  I would just have an InvoiceList column, and then within that I would decompose further.
+
+    Why not give that a try, at least for now?  
+
+    
 
 
 

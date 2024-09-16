@@ -21,9 +21,11 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
       <div className={`col itemCol`}>
         <MRVitemDetails thisItemAtom={itemAtom} />
       </div>
-      <div className={`col rtrnCol`}></div>
-      <div className={`col qtyCol`}></div>
-      <div className={`col iconCol`}></div>
+      <div className={`col tileInfoCol`}>
+        <div className={`col rtrnCol`}></div>
+        <div className={`col qtyCol`}></div>
+        <div className={`col iconCol`}></div>
+      </div>
     </div>
   );
 }
