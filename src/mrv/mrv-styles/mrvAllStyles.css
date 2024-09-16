@@ -625,6 +625,28 @@
     }
   }
 
+  & .tile {
+    background-color: var(--color__surface__default);
+    border-radius: var(--radius__small);
+    box-sizing: border-box;
+    border: calc(3rem / 32) solid var(--color__border__subdued);
+    padding: 0.5rem 1rem;
+
+    &:hover {
+      background-color: var(--color__card__hover);
+    }
+
+    &.selected {
+      background-color: var(--color__card__selected);
+      border-color: var(--color__interactive);
+
+      &:hover {
+        background-color: var(--color__card__selected__hover);
+      }
+    }
+
+  }
+
   /* ---- MRV TABLE STYLES ---- */
 
   & table {

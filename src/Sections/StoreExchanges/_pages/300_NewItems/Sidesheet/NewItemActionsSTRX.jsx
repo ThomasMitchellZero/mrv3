@@ -5,7 +5,7 @@ import {
   useResetLocStFields,
 } from "../../../../../mrv/MRVhooks/MRVhooks";
 
-function ActionsSTRX() {
+function NewItemActionsSTRX() {
   const setPageLS = useSetLocStFields("page");
   const resetPageLS = useResetLocStFields("page");
   return (
@@ -25,4 +25,4 @@ function ActionsSTRX() {
   );
 }
 
-export { ActionsSTRX };
+export { NewItemActionsSTRX };

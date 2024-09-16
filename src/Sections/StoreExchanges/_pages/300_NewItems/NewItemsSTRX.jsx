@@ -2,7 +2,7 @@ import "./NewItems.css";
 
 import { ContinueBtnMRV } from "../../../../mrv/mrv-components/inputs/ContinueBtnMRV";
 import { ScanScreenMRV } from "../../../../mrv/mrv-components/DisplayOutputs/ScanScreenMRV";
-import { ActionsSTRX } from "./Sidesheet/ActionsSTRX";
+import { NewItemActionsSTRX } from "./Sidesheet/NewItemActionsSTRX";
 import { NewItemsList } from "./NewItemsList/NewItemsList";
 
 import { NewItemEntrySTRX } from "./Sidesheet/NewItemEntrySTRX";
@@ -46,7 +46,7 @@ function NewItemsSTRX() {
   const oMode = {};
 
   const o30panels = {
-    ActionsSTRX: <ActionsSTRX />,
+    ActionsSTRX: <NewItemActionsSTRX />,
     NewItemEntrySTRX: <NewItemEntrySTRX />,
   };
 
