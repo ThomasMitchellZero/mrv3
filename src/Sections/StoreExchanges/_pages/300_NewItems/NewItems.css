@@ -1,5 +1,4 @@
 .mrv {
-
   & .newItems {
     /* horizontal padding for consistency*/
     --outerPadding: 1rem;
@@ -7,10 +6,13 @@
     --bothPadding: calc(var(--outerPadding) + var(--innerPadding));
 
     & .cardContainer {
-        padding: 1rem 0rem;
+      padding: 1rem 0rem;
     }
 
+
+
     & .tile {
+
     }
 
     & .columnTitleRow {
@@ -29,6 +31,11 @@
 
       & .col {
         /*shared values for columns*/
+        display: flex;
+        flex-direction: column;
+        gap: 0rem;
+        flex: 1 1 0rem;
+        height: 100%;
       }
 
       & .tileSpan {
@@ -73,5 +80,6 @@
         background-color: lightcoral;
       }
     }
+    
   }
 }

@@ -804,7 +804,7 @@ const primaryAtomizer = ({
           mergedAtom: mergedAtomTemplate,
         });
 
-        // no error handling.  If the comparison fails, I want it to break.
+        // no validation.  If the comparison fails, I want it to break.
         const sharedQty = Math.min(
           repo1Atom[mergeUnitKey],
           repo2Atom[mergeUnitKey]
@@ -857,17 +857,14 @@ const newItemAtomizer = ({ atomizedReturnItemsArr = [], newItemsArr }) => {
     },
   });
 
-  /*
-
-  
-  */
-
+  // Any items that were not matched to a return item are new sales.
   const assignSaleTransType = oAtomizedByLikeExch.unmerged2.map((thisAtom) => {
     const refAtom = new returnAtom({});
     const newVals = { transactionType: "sale" };
     return { ...thisAtom, ...newVals };
   });
 
+  // We still want to see the new items that didn't match to a return item, so we merge the 2 arrays.
   outAtomizedNewItems = [
     ...oAtomizedByLikeExch.mergedRepo,
     ...assignSaleTransType,

@@ -3,6 +3,7 @@ import "./BigLabeledValue.css";
 function BigLabeledValue({
   labelStr = "NO LABEL",
   valueStr = "NO VALUE",
+  valueHeight = "auto",
   status = "defaultBlack",
   labelMatchesValue = true,
   size = "M",
@@ -77,7 +78,12 @@ function BigLabeledValue({
       style={oStyle}
     >
       <div className={`label ${oConfigs[size].labelSize}`}>{labelStr}</div>
-      <div className={`value ${oConfigs[size].valueSize}`}>{valueStr}</div>
+      <div
+        className={`value ${oConfigs[size].valueSize}`}
+        style={{ height: valueHeight }}
+      >
+        {valueStr}
+      </div>
     </div>
   );
 }

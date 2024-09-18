@@ -822,6 +822,11 @@
     align-items: flex-end;
   }
 
+  & .centerAll {
+    align-items: center;
+    justify-content: center;
+  }
+
   & .minFlex {
     flex: 0 0 auto;
   }
