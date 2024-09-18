@@ -513,6 +513,7 @@ const baseReturnState = ({
   totalReturnValue = new moneyObj({}),
   atomizedReturnItems = [],
   newItems = [],
+  atomizedNewItems = [],
   totalNewItemValue = new moneyObj({}),
   cashDeltaMO = new moneyObj({}),
   sessionInvos = {},
@@ -531,6 +532,7 @@ const baseReturnState = ({
     atomizedReturnItems,
     newItems,
     totalNewItemValue,
+    atomizedNewItems,
 
     cashDeltaMO,
     returnReasonsRepo,
@@ -564,6 +566,9 @@ class returnAtom {
     atomItemNum = "",
     atomItemQty = 0,
     bifrostKey = "",
+    transactionType = null,
+    peerItem = null,
+    REF_transactionType____sale__likeExch__unlikeExch__return = "",
   }) {
     this.atomItemNum = atomItemNum;
     this.parentKey = parentKey;
@@ -572,6 +577,8 @@ class returnAtom {
     this.atomDispoKey = atomDispoKey;
     this.atomItemQty = atomItemQty;
     this.bifrostKey = bifrostKey || this.atomItemNum;
+    this.transactionType = transactionType;
+    this.peerItem = peerItem;
   }
 
   get primaryKey() {

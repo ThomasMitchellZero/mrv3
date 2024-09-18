@@ -24,7 +24,7 @@ import {
   parentChildGroup,
 } from "../../globalFunctions/globalJS_classes";
 
-import { cloneDeep, isEmpty } from "lodash";
+import { clone, cloneDeep, isEmpty, isNaN, merge } from "lodash";
 
 //// Money Handlers ////
 
@@ -384,7 +384,7 @@ function useSetLocStFields(locStKey = "page") {
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
 
-  const setLocStFields = (oNewFields = {} ) => {
+  const setLocStFields = (oNewFields = {}) => {
     setSessionMRV((draft) => {
       draft.locSt[locStKey] = { ...draft.locSt[locStKey], ...oNewFields };
     });
@@ -725,6 +725,7 @@ const returnAtomizer = ({
 
         // Increment Output
         const outAtomXinvo = cloneDeep(thisInvoItemAtom);
+
         outAtomXinvo.atomItemQty = nMatchedQty;
 
         aAtomizedByInvoice.push(outAtomXinvo);
@@ -746,6 +747,124 @@ const returnAtomizer = ({
 
 const useReturnAtomizer = () => {
   return returnAtomizer;
+};
+
+const primaryAtomizer = ({
+  // takes 2 atom arrays and returns 3 - one for the merged atoms, and the leftovers from the 2 original repos.
+  // repos must be pre-atomized and iterable.
+  repo1 = [],
+  repo2 = [],
+
+  // Where we determine what counts as a match.
+  comparisonFn = ({ repo1Atom, repo2Atom }) => {
+    console.log("no comparison Fn");
+    return false;
+  },
+
+  // the format of the atoms in the merged array.  Normally a returnAtom.
+  mergedAtomTemplate = new returnAtom({}),
+
+  // Value to be decremented in repo atoms and incremented in merged atoms.  Normally qty or money.
+  mergeUnitKey = null,
+
+  // set other fiels of mergedAtom.
+  setMergedAtomFn = ({ repo1Atom, repo2Atom, mergedAtom }) => {
+    /*
+    If matched, this is the only point where we have access to both atoms being merged.  At least 1 will be destroyed.
+    Fields don't HAVE to be cloned from mergees.  Can be set directly, or not at all.  Returns unmodified by default.
+    */
+    return mergedAtom;
+  },
+}) => {
+  const unmerged1 = cloneDeep(repo1);
+  const unmerged2 = cloneDeep(repo2);
+  const mergedRepo = [];
+
+  for (let i1 = 0; i1 < unmerged1.length; i1++) {
+    // Object for the 3 Venn outputs of the loop's cycle.
+    const repo1Atom = unmerged1[i1];
+
+    for (let i2 = 0; i2 < unmerged2.length; i2++) {
+      const repo2Atom = unmerged2[i2];
+
+      if (comparisonFn({ repo1Atom, repo2Atom })) {
+        // User-defined fn to set other fields of the merged atom before clearing 1 or both depleted repoAtoms.
+        // Run before in/decrement so I can easily merge values.
+        let outMergedAtom = setMergedAtomFn({
+          repo1Atom,
+          repo2Atom,
+          mergedAtom: mergedAtomTemplate,
+        });
+
+        // no error handling.  If the comparison fails, I want it to break.
+        const sharedQty = Math.min(
+          repo1Atom[mergeUnitKey],
+          repo2Atom[mergeUnitKey]
+        );
+
+        repo1Atom[mergeUnitKey] -= sharedQty;
+        repo2Atom[mergeUnitKey] -= sharedQty;
+        outMergedAtom[mergeUnitKey] = sharedQty; // value might be set in setMergedAtomFn, so just assign the shared value.
+
+        /* 
+        If atom from either repo is depleted, delete it so it isn't re-counted in a future cycle.
+        At least one repoAtom will be deleted in each cycle.  
+        */
+        if (!repo1Atom[mergeUnitKey]) {
+          unmerged1.splice(i1, 1);
+        }
+
+        if (!repo2Atom[mergeUnitKey]) {
+          unmerged2.splice(i2, 1);
+        }
+        mergedRepo.push(outMergedAtom);
+      }
+    }
+  }
+  // Any additional assignment can be done afterwards, since this does not directly modify the state.
+  return { mergedRepo, unmerged1, unmerged2 };
+};
+
+const newItemAtomizer = ({ atomizedReturnItemsArr = [], newItemsArr }) => {
+  const baseComparisonFn = ({ repo1Atom, repo2Atom }) => {
+    return repo1Atom.atomItemNum === repo2Atom.atomItemNum;
+  };
+
+  let outAtomizedNewItems = [];
+
+  // Find Like Item Matches
+  let oAtomizedByLikeExch = primaryAtomizer({
+    repo1: atomizedReturnItemsArr,
+    repo2: newItemsArr,
+    comparisonFn: baseComparisonFn,
+    mergedAtomTemplate: new returnAtom({}),
+    mergeUnitKey: "atomItemQty",
+    setMergedAtomFn: ({ repo1Atom, repo2Atom, mergedAtom }) => {
+      const refAtom = new returnAtom({});
+
+      const newVals = {
+        peerItem: repo1Atom.atomItemNum,
+        transactionType: "likeExch",
+      };
+      const outMergedAtom = Object.assign(mergedAtom, repo1Atom, newVals);
+
+      return mergedAtom;
+    },
+  });
+
+  const assignSaleTransType = oAtomizedByLikeExch.unmerged2.map((thisAtom) => {
+    const refAtom = new returnAtom({});
+    return Object.assign(thisAtom, { transactionType: "sale" });
+  });
+
+  outAtomizedNewItems = [
+    ...oAtomizedByLikeExch.mergedRepo,
+    ...assignSaleTransType,
+  ];
+
+  // placeholder.  Define once we start covering other transaction types.
+
+  return outAtomizedNewItems;
 };
 
 const autoAddChildAtoms = (clonedDraft) => {
@@ -815,6 +934,12 @@ function returnAutoDeriver(clonedDraft) {
   outSessionState.atomizedReturnItems = returnAtomizer({
     sessionItemsArr: outSessionState.returnItems,
     sessionInvosObj: outSessionState.sessionInvos,
+  });
+
+  // atomize the newItems
+  outSessionState.atomizedNewItems = newItemAtomizer({
+    atomizedReturnItemsArr: outSessionState.atomizedReturnItems,
+    newItemsArr: outSessionState.newItems,
   });
 
   // calculate the sum of all atoms matched to invoices.
