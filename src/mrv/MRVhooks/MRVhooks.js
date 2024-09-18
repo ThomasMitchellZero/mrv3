@@ -848,10 +848,10 @@ const newItemAtomizer = ({ atomizedReturnItemsArr = [], newItemsArr }) => {
         transactionType: "likeExch",
       };
       const outMergedAtom = {
-      ...cloneDeep(mergedAtom),
-      ...cloneDeep(repo1Atom),
-      ...newVals,
-    };
+        ...cloneDeep(mergedAtom),
+        ...cloneDeep(repo1Atom),
+        ...newVals,
+      };
 
       return outMergedAtom;
     },
@@ -859,18 +859,18 @@ const newItemAtomizer = ({ atomizedReturnItemsArr = [], newItemsArr }) => {
 
   /*
 
-
-    const assignSaleTransType = oAtomizedByLikeExch.unmerged2.map((thisAtom) => {
-    const refAtom = new returnAtom({});
-    return Object.assign(thisAtom, { transactionType: "sale" });
-  });
-
   
   */
 
+  const assignSaleTransType = oAtomizedByLikeExch.unmerged2.map((thisAtom) => {
+    const refAtom = new returnAtom({});
+    const newVals = { transactionType: "sale" };
+    return { ...thisAtom, ...newVals };
+  });
+
   outAtomizedNewItems = [
     ...oAtomizedByLikeExch.mergedRepo,
-    //...assignSaleTransType,
+    ...assignSaleTransType,
   ];
 
   // placeholder.  Define once we start covering other transaction types.
