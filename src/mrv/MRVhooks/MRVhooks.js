@@ -776,18 +776,26 @@ const primaryAtomizer = ({
     return mergedAtom;
   },
 }) => {
-  const unmerged1 = cloneDeep(repo1);
-  const unmerged2 = cloneDeep(repo2);
-  const mergedRepo = [];
+  let unmerged1 = cloneDeep(repo1);
+  let unmerged2 = cloneDeep(repo2);
+  let mergedRepo = [];
 
-  for (let i1 = 0; i1 < unmerged1.length; i1++) {
-    // Object for the 3 Venn outputs of the loop's cycle.
-    const repo1Atom = unmerged1[i1];
+  // Checks if an atom has any value left.
+  const atomNotDepleted = (thisAtom) => {
+    return thisAtom[mergeUnitKey];
+  };
+  // Removes depleted atoms from the unmerged arrays.
+  const clearDepletedAtoms = () => {
+    // this lets me use For loops without worrying about the array length changing.
+    unmerged1 = unmerged1.filter(atomNotDepleted);
+    unmerged2 = unmerged2.filter(atomNotDepleted);
+  };
 
-    for (let i2 = 0; i2 < unmerged2.length; i2++) {
-      const repo2Atom = unmerged2[i2];
+  Loop_L1: for (const repo1Atom of unmerged1) {
+    Loop_L2: for (const repo2Atom of unmerged2) {
+      const isMatch = comparisonFn({ repo1Atom, repo2Atom });
 
-      if (comparisonFn({ repo1Atom, repo2Atom })) {
+      if (isMatch) {
         // User-defined fn to set other fields of the merged atom before clearing 1 or both depleted repoAtoms.
         // Run before in/decrement so I can easily merge values.
         let outMergedAtom = setMergedAtomFn({
@@ -806,18 +814,11 @@ const primaryAtomizer = ({
         repo2Atom[mergeUnitKey] -= sharedQty;
         outMergedAtom[mergeUnitKey] = sharedQty; // value might be set in setMergedAtomFn, so just assign the shared value.
 
-        /* 
-        If atom from either repo is depleted, delete it so it isn't re-counted in a future cycle.
-        At least one repoAtom will be deleted in each cycle.  
-        */
-        if (!repo1Atom[mergeUnitKey]) {
-          unmerged1.splice(i1, 1);
-        }
+        const L1_AtomDepleted = !repo1Atom?.[mergeUnitKey];
 
-        if (!repo2Atom[mergeUnitKey]) {
-          unmerged2.splice(i2, 1);
-        }
         mergedRepo.push(outMergedAtom);
+        clearDepletedAtoms();
+        if (L1_AtomDepleted) continue Loop_L1;
       }
     }
   }
@@ -846,20 +847,30 @@ const newItemAtomizer = ({ atomizedReturnItemsArr = [], newItemsArr }) => {
         peerItem: repo1Atom.atomItemNum,
         transactionType: "likeExch",
       };
-      const outMergedAtom = Object.assign(mergedAtom, repo1Atom, newVals);
+      const outMergedAtom = {
+      ...cloneDeep(mergedAtom),
+      ...cloneDeep(repo1Atom),
+      ...newVals,
+    };
 
-      return mergedAtom;
+      return outMergedAtom;
     },
   });
 
-  const assignSaleTransType = oAtomizedByLikeExch.unmerged2.map((thisAtom) => {
+  /*
+
+
+    const assignSaleTransType = oAtomizedByLikeExch.unmerged2.map((thisAtom) => {
     const refAtom = new returnAtom({});
     return Object.assign(thisAtom, { transactionType: "sale" });
   });
 
+  
+  */
+
   outAtomizedNewItems = [
     ...oAtomizedByLikeExch.mergedRepo,
-    ...assignSaleTransType,
+    //...assignSaleTransType,
   ];
 
   // placeholder.  Define once we start covering other transaction types.
