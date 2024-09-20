@@ -127,6 +127,14 @@
   & .color__green {
     background-color: var(--color__green);
   }
+
+  & .color__gold__text {
+    color: var(--color__gold);
+  }
+
+  & .color__gold {
+    background-color: var(--color__gold);
+  }
   & .color__white__text {
     color: var(--color__white);
   }
@@ -644,7 +652,6 @@
         background-color: var(--color__card__selected__hover);
       }
     }
-
   }
 
   /* ---- MRV TABLE STYLES ---- */
@@ -800,7 +807,6 @@
   & .gap0rem {
     gap: 0rem;
   }
-
 
   & .vw25 {
     width: var(--primaryColumn);

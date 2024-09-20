@@ -57,7 +57,7 @@
           flex: 30 30 0rem;
           background-color: lightblue;
           flex-direction: row;
-          min-width: 24rem;
+          min-width: 26rem;
           gap: 0rem;
 
           & .rtrnSpan {
@@ -66,8 +66,8 @@
             min-width: 8rem;
           }
           & .qtySpan {
-            min-width: 8rem;
-            flex: 0 0 8rem;
+            min-width: 10rem;
+            flex: 0 0 10rem;
             background-color: bisque;
             padding: 0rem var(--innerPadding);
           }
