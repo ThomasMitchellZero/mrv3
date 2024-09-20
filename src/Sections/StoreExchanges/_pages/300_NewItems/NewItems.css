@@ -34,7 +34,7 @@
         gap: 0rem;
         flex: 1 1 0rem;
         height: 100%;
-        padding: 0rem var(--innerPadding);
+
       }
 
       & .tileSpan {
@@ -47,7 +47,7 @@
 
         & .itemSpan {
           display: flex;
-          flex: 20 20 0rem;
+          flex: 30 30 0rem;
           background-color: lightgreen;
           min-width: 20rem;
         }
@@ -57,19 +57,22 @@
           flex: 30 30 0rem;
           background-color: lightblue;
           flex-direction: row;
+          min-width: 24rem;
           gap: 0rem;
 
           & .rtrnSpan {
             flex: 10 10 0rem;
             background-color: coral;
+            min-width: 8rem;
           }
           & .qtySpan {
             min-width: 8rem;
-            flex: 10 10 0rem;
+            flex: 0 0 8rem;
             background-color: bisque;
+            padding: 0rem var(--innerPadding);
           }
           & .iconSpan {
-            flex: 5 5 0rem;
+            min-width: 8rem;
             background-color: aqua;
           }
         }
@@ -78,6 +81,7 @@
       & .deleteSpan {
         flex: 20 20 0rem;
         background-color: lightcoral;
+        justify-content: end;
       }
     }
     

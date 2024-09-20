@@ -40,7 +40,7 @@ function NewItemsList() {
           <div className={`itemSpan`}>New Items Cart</div>
           <div className={`tileInfoSpan`}>New Items Cart</div>
         </div>
-        <div className={`col deleteSpan`}>Return</div>
+        <div className={`deleteSpan`}>Return</div>
       </div>
       {uiTilesArr}
     </div>
