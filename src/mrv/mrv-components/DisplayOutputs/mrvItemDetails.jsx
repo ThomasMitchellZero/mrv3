@@ -15,6 +15,7 @@ function MRVitemDetails({
   priceInCents = thisItemAtom.atomMoneyObj.unitTotal || undefined,
   showQty = true,
   qty = thisItemAtom.atomItemQty || undefined,
+  twoLineDescription = false,
   underArr = [],
   underArrWithContainer = null,
 }) {
@@ -35,6 +36,8 @@ function MRVitemDetails({
 
   const itemAndModelStr = `Item# ${thisItemAtom.atomItemNum}    Model# ${ctxItemInfo.modelNum}`;
 
+  const lineLimit = twoLineDescription ? "limitLines2" : ""
+
   ////CONFIGURABLE DEFAULT VALUES ////
 
   /*
@@ -51,7 +54,7 @@ function MRVitemDetails({
           <div className={`body prodDescription`}>{priceStr}</div>
         </div>
         <div className={`tinyText itemModel`}>{itemAndModelStr}</div>
-        <div className={`body__small description`}>
+        <div className={`body__small description ${lineLimit}`}>
           {ctxItemInfo.description}
         </div>
         <div className={`underArr`}>{underArr}</div>

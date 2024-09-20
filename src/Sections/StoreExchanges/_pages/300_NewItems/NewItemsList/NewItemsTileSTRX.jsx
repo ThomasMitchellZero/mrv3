@@ -93,6 +93,7 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
           showPrice={false}
           showQty={false}
           thisItemAtom={itemAtom}
+          twoLineDescription={true}
         />
       </div>
       <div className={`col tileInfoSpan`}>

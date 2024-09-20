@@ -327,7 +327,7 @@ const ProductContext = React.createContext({
     price: 1499,
     itemNum: "4400",
     modelNum: "DR3345",
-    description: "Eaton Arrow Hart 15-Amp 125-volt Residential/Commercial Duplex Outlet, Gray",
+    description: "Eaton Arrow Hart 15-Amp 125-volt Residential / Commercial Duplex Outlet, Gray",
   }),
 
   5500: new Product({
