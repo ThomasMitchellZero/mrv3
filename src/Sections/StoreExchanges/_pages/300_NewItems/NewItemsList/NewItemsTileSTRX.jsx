@@ -1,6 +1,7 @@
 import { MRVitemDetails } from "../../../../../mrv/mrv-components/DisplayOutputs/mrvItemDetails";
 import { BigLabeledValue } from "../../../../../mrv/mrv-components/DisplayOutputs/BigLabeledValue";
 import { MRVinput } from "../../../../../mrv/mrv-components/inputs/MRVinput";
+import { StatusIcon } from "../../../../../mrv/mrv-components/DisplayOutputs/IconComponents/StatusIcon";
 
 import { useOutlet } from "react-router-dom";
 import { useOutletContext } from "react-router";
@@ -36,7 +37,7 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
     ? "noReturn"
     : returnItemQty === tileQty
     ? "valid"
-    : "incomplete";
+    : "mismatchQty";
 
   // shared functions
 
@@ -73,16 +74,26 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
     noReturn: {
       returnQty: "None",
       status: "badRed",
+      iconStr: "critical"
     },
     valid: {
       returnQty: returnItemQty,
       status: "defaultBlack",
+      iconStr: "success"
     },
-    incomplete: {
+    mismatchQty: {
       returnQty: returnItemQty,
       status: "defaultBlack",
+      iconStr: "alert"
     },
   };
+
+  const uiStatusIcon = (
+    <StatusIcon
+      status={mvpConfigs[qtyStatus].iconStr}
+      fontSize={`3rem`}
+    />
+  );
 
   // Backup in case we are mega-crunched pre-demo and we need to get this working.
 
@@ -100,14 +111,16 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
         <div className={`col rtrnSpan centerAll`}>
           <BigLabeledValue
             labelStr={`Qty Returned`}
-            valueStr={returnItemQty || 0}
+            valueStr={`${mvpConfigs[qtyStatus].returnQty}`}
             size={`M`}
             status={`${mvpConfigs[qtyStatus].status}`}
             valueHeight="4rem"
           />
         </div>
         <div className={`col qtySpan centerAll`}>
-          <div className={`body__small minWidth color__primary__text`}>New Item Qty</div>
+          <div className={`body__small minWidth color__primary__text`}>
+            New Item Qty
+          </div>
           <MRVinput>
             <input
               type={`number`}
@@ -118,7 +131,9 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
             />
           </MRVinput>
         </div>
-        <div className={`col iconSpan`}></div>
+        <div className={`col iconSpan centerAll`}>
+          {uiStatusIcon}
+        </div>
       </div>
     </div>
   );
