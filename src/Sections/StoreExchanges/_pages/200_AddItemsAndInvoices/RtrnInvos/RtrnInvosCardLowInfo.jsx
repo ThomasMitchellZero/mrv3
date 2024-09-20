@@ -3,7 +3,7 @@ import { MRVitemDetails } from "../../../../../mrv/mrv-components/DisplayOutputs
 import { MRVinput } from "../../../../../mrv/mrv-components/inputs/MRVinput";
 import { DeleteCardColMRV } from "../../../../../mrv/mrv-components/inputs/DeleteCardColMRV";
 import { BigLabeledValue } from "../../../../../mrv/mrv-components/DisplayOutputs/BigLabeledValue";
-import { DescriptorIcon } from "../../../../../mrv/mrv-components/DisplayOutputs/DescriptorIcon";
+import { DescriptorIcon } from "../../../../../mrv/mrv-components/DisplayOutputs/IconComponents/DescriptorIcon";
 
 import {
   useSetSessionInvos,

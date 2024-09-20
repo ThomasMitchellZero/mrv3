@@ -514,7 +514,7 @@ function useSetSessionItems() {
 
   function setSessionItems({
     itemsArrRouteStr = "returnItems",
-    REF_routeStr____returnItems_replacementItems,
+    REF_routeStr____returnItems__newItems__replacementItemsIsDEPRECATED,
     itemAtom = new returnAtom({}),
     newQty = 0,
     actionType = "add",

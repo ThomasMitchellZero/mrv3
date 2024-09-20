@@ -6,6 +6,7 @@ import { useImmer } from "use-immer";
 import { useNodeNav } from "../../../../mrv/MRVhooks/MRVhooks";
 import { ProductImageMRV } from "../../../../mrv/mrv-components/DisplayOutputs/ProductImageMRV";
 import { returnAtom } from "../../../../globalFunctions/globalJS_classes";
+import { MessageRibbonMRV } from "../../../../mrv/mrv-components/DisplayOutputs/MessageRibbonMRV";
 
 function ReplacementCheck() {
   const nodeNav = useNodeNav();
@@ -80,6 +81,12 @@ function ReplacementCheck() {
           showNavNodeBar={true}
           headerTitle={"Replacement Items With Customer"}
         ></TitleBarSTRX>
+        <div className={`maxWidth`}>
+          <MessageRibbonMRV
+            message={`Currently, Return Items must be exchanged for identical New Items.`}
+            type="alert"
+          />
+        </div>
         <div className={`main_content gap2rem`}>
           {locStReplCheck.activePanel === "banishCustomer"
             ? banishCustomer
@@ -93,23 +100,5 @@ function ReplacementCheck() {
 export { ReplacementCheck };
 
 /*
-        <div className={`prodImgTest`}>
-          <ProductImageMRV
-            itemAtom={new returnAtom({ atomItemNum: "330" })}
-            size="L"
-          />
-          <ProductImageMRV
-            itemAtom={new returnAtom({ atomItemNum: "330" })}
-            size="M"
-            showChildArrow={false}
-            imageOnly={true}
-          />
-          <ProductImageMRV
-            itemAtom={new returnAtom({ atomItemNum: "330" })}
-            size="S"
-
-          />
-        </div>
-
 
 */

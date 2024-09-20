@@ -2,7 +2,7 @@ import "./ScanScreenMRV.css";
 import Universal from "../../../assets/lowes-icons/Picture-Icons/universal-scan.svg";
 import Cart from "../../../assets/lowes-icons/Picture-Icons/Cart.svg";
 import Receipt from "../../../assets/lowes-icons/Picture-Icons/Receipt.svg";
-import { DescriptorIcon } from "./DescriptorIcon";
+import { DescriptorIcon } from "./IconComponents/DescriptorIcon";
 
 const ScanScreenMRV = ({
   mainTitle = "Main Title",

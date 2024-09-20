@@ -9,7 +9,6 @@ function NewItemsList() {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const aNewItems = sessionMRV.newItems;
-  console.log(aNewItems);
 
   const uiScanScreen = (
     <ScanScreenMRV
@@ -22,8 +21,6 @@ function NewItemsList() {
   const uiTilesArr = aNewItems.map((itemAtom) => {
     return <NewItemCardSTRX key={itemAtom.atomItemNum} itemAtom={itemAtom} />;
   });
-
-  const uiBoldRibbonText = <span className={`bold`}>identical</span>;
 
   const uiRibbonStr = (
     <p className={`body color__primary__text`}>

@@ -1,5 +1,5 @@
 import { returnAtom } from "../../../../../globalFunctions/globalJS_classes";
-import { DescriptorIcon } from "../../../../../mrv/mrv-components/DisplayOutputs/DescriptorIcon";
+import { DescriptorIcon } from "../../../../../mrv/mrv-components/DisplayOutputs/IconComponents/DescriptorIcon";
 
 import { centsToDollars, greenify } from "../../../../../mrv/MRVhooks/MRVhooks";
 

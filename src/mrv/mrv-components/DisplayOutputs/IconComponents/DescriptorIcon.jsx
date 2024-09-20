@@ -1,11 +1,14 @@
 import "./DescriptorIcon.css";
 import { FaBoxOpen } from "react-icons/fa6";
 import {
-  MdReceipt,
   MdReceiptLong,
-  MdShoppingCart,
   MdOutlineShoppingCart,
   MdOutlineWarningAmber,
+  MdOutlineWarning,
+  MdSick,
+  MdInfo,
+  MdCheckCircle,
+  MdOutlineRemoveCircle,
   MdCircle,
 } from "react-icons/md";
 
@@ -13,10 +16,10 @@ function DescriptorIcon({
   iconStr = "circle",
   ctnrSize = "2.5rem",
   fontSize = "2rem",
-  backgroundColor = "color__surface__default",
+  backgroundColor = "",
   color = "color__primary__text",
   radius = "100%",
-  REF_iconStr____circle__box__receipt__receiptLong__cart__alert = "",
+  REF_iconStr____circle__box__receiptLong__cart__alert__info__success__critical,
 }) {
   const styleObj = {
     fontSize: fontSize,
@@ -24,15 +27,20 @@ function DescriptorIcon({
   };
 
   const iconsObj = {
+    sick: <MdSick {...styleObj} />,
     circle: <MdCircle {...styleObj} />,
     box: <FaBoxOpen {...styleObj} />,
-    receipt: <MdReceipt {...styleObj} />,
     receiptLong: <MdReceiptLong {...styleObj} />,
     cart: <MdOutlineShoppingCart {...styleObj} />,
-    alert: <MdOutlineWarningAmber {...styleObj} />,
+    alert: <MdOutlineWarning {...styleObj} />,
+    info: <MdInfo {...styleObj} />,
+    success: <MdCheckCircle {...styleObj} />,
+    critical: <MdOutlineRemoveCircle {...styleObj} />,
   };
 
   const outIcon = iconsObj[iconStr] || iconsObj.sick;
+
+  // I have no idea where the color for the icon is actually coming from.
 
   return (
     <div
