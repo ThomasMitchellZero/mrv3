@@ -79,7 +79,7 @@ function BigLabeledValue({
     >
       <div className={`label ${oConfigs[size].labelSize}`}>{labelStr}</div>
       <div
-        className={`value ${oConfigs[size].valueSize}`}
+        className={`value centerAll ${oConfigs[size].valueSize}`}
         style={{ height: valueHeight }}
       >
         {valueStr}

@@ -3,6 +3,7 @@ import { useOutletContext } from "react-router";
 import { ScanScreenMRV } from "../../../../../mrv/mrv-components/DisplayOutputs/ScanScreenMRV";
 import { NewItemsTileSTRX } from "./NewItemsTileSTRX";
 import { NewItemCardSTRX } from "./NewItemsCard";
+import { MessageRibbonMRV } from "../../../../../mrv/mrv-components/DisplayOutputs/MessageRibbonMRV";
 
 function NewItemsList() {
   const mrvCtx = useOutletContext();
@@ -22,8 +23,18 @@ function NewItemsList() {
     return <NewItemCardSTRX key={itemAtom.atomItemNum} itemAtom={itemAtom} />;
   });
 
+  const uiBoldRibbonText = <span className={`bold`}>identical</span>;
+
+  const uiRibbonStr = (
+    <p className={`body color__primary__text`}>
+      Currently, Return Items must be exchanged for
+      <span className={`bold`}> identical </span>New Items.
+    </p>
+  );
+
   return aNewItems.length ? (
     <div className={`cardContainer`}>
+      <MessageRibbonMRV message={uiRibbonStr} type="info" />
       <div className={`columnTitleRow spanCtnr`}>
         <div className={`tileSpan`}>
           <div className={`itemSpan`}>New Items Cart</div>

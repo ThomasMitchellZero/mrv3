@@ -102,9 +102,11 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
             valueStr={returnItemQty || 0}
             size={`M`}
             status={`${mvpConfigs[qtyStatus].status}`}
+            valueHeight="4rem"
           />
         </div>
         <div className={`col qtySpan centerAll`}>
+          <div className={`body__small minWidth color__primary__text`}>New Item Qty</div>
           <MRVinput>
             <input
               type={`number`}
