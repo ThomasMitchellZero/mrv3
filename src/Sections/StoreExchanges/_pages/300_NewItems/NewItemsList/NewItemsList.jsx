@@ -37,7 +37,7 @@ function NewItemsList() {
           <div className={`itemSpan`}>New Items Cart</div>
           <div className={`tileInfoSpan`}></div>
         </div>
-        <div className={`deleteSpan`}>Return</div>
+        <div className={`deleteSpan`}>New Item Cost</div>
       </div>
       {uiTilesArr}
     </div>
