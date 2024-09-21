@@ -5,7 +5,7 @@ import { greenify } from "../../MRVhooks/MRVhooks";
 
 const DeleteCardColMRV = ({
   greenifyVal = false,
-  onClick = () => {
+  handleClick = () => {
     console.log("No function");
   },
   bigValue,
@@ -21,9 +21,8 @@ const DeleteCardColMRV = ({
       <button
         className={`secondary deleteCardBtn`}
         onClick={(e) => {
-          if (onClick) {
-            onClick(e); // Pass the event object to the handler
-          }
+          console.log("DeleteCardColMRV onClick");
+          handleClick(e); // Pass the event object to the handler
         }}
       >
         {btnContent}

@@ -28,7 +28,7 @@ const CashTotalMRV = ({
   const totalCartDeltaMO = moneyObjDelta({
     refundMo: sessionMRV.totalReturnValue,
     replaceMo: sessionMRV.totalReplacementValue,
-  })
+  });
 
   // if it can be derived from info in the moneyObj, then make some fields to do it.
 
@@ -46,7 +46,11 @@ const CashTotalMRV = ({
     returnMinusReplace: {
       // THIS IS NOT SET UP YET
       aCashLines: [
-        { label: "Return Item Value", value: sessionMRV.totalReturnValue.unitTotal },
+        {
+          label: "Return Item Value",
+          value: sessionMRV.totalReturnValue.unitTotal,
+          sClasses: "color__green__text",
+        },
         {
           label: "New Item Cost",
           value: sessionMRV.totalReplacementValue.unitTotal,
@@ -60,7 +64,7 @@ const CashTotalMRV = ({
 
   const uiCashLineLabels = thisConfig.aCashLines.map((line) => {
     return (
-      <div key={line.label} className={`body`}>
+      <div key={line.label} className={`body ${line?.sClasses}`}>
         {`${line.label}:`}
       </div>
     );
@@ -68,7 +72,10 @@ const CashTotalMRV = ({
 
   const uiCashLineValues = thisConfig.aCashLines.map((line) => {
     return (
-      <div key={line.label} className={`body ${greenify(line.value)} bold `}>
+      <div
+        key={line.label}
+        className={`body ${line?.sClasses} ${greenify(line.value)} bold `}
+      >
         {`$${centsToDollars(line.value)}`}
       </div>
     );

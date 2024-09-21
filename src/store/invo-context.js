@@ -343,13 +343,6 @@ const invoiceObj = {
           unitBaseValue: 450,
         }),
       }),
-      new returnAtom({
-        atomItemNum: "330",
-        atomItemQty: 2,
-        atomMoneyObj: new moneyObj({
-          unitBaseValue: 2250,
-        }),
-      }),
     ],
   }),
   888222: new Invoice_SR({

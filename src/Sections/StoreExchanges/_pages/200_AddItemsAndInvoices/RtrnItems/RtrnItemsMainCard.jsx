@@ -22,6 +22,7 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
   const mrvCtx = useOutletContext();
   const resetReasonPickerLS = useResetLocStFields("ReasonPickerSC");
   const setPageLS = useSetLocStFields("page");
+  const resetPageLS = useResetLocStFields("page");
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const setSessionItems = useSetSessionItems();
@@ -138,6 +139,16 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
     return uiItemTile(thisAtom);
   });
 
+  const handleClearItem = (e) => {
+    e.stopPropagation();
+    console.log("trying to delete Return Item");
+    locMethods.resetKeysToo(); // need to clear the active item.
+    setSessionItems({
+      itemAtom: returnItemAtom,
+      actionType: "remove",
+    });
+  };
+
   // final UI output
 
   return (
@@ -155,15 +166,9 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
           bigValue={cardString}
           description={"Refund Value"}
           greenifyVal={cardTotalVal}
-          onClick={(e) => {
-            e.stopPropagation();
-            console.log('trying to delete Return Item');
-            locMethods.resetKeysToo(); // need to clear the active item.
-            setSessionItems({
-              itemAtom: returnItemAtom,
-              actionType: "remove",
-            });
-          }}
+          handleClick={
+            handleClearItem
+          }
         />
       </div>
     </div>
