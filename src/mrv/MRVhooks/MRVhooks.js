@@ -489,13 +489,12 @@ function useResetLocStFields(locStKey) {
         outLocSt[key] = init[key];
       }
     }
-
+    
     // shortcut to reset all fields.
     if (EVERYONE) {
       outLocSt = cloneDeep(init);
     }
 
-    console.log("outLocSt", outLocSt);
     setSessionMRV((draft) => {
       draft.locSt[locStKey] = { ...draft.locSt[locStKey], ...outLocSt };
     });

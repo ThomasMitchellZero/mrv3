@@ -30,21 +30,11 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
   const atomizedNewItems = sessionMRV.atomizedNewItems;
   const pageLSrt = sessionMRV.locSt.page;
   const itemExchStatus = lsMethods.itemExchStatus(itemAtom);
-  console.log("itemExchStatus", itemExchStatus);
+
 
   // In theory we should be able to get this from the atomizedNewItems array.
-  const returnItemQty = findAtom({
-    itemNum: itemAtom.atomItemNum,
-    itemsArr: sessionMRV.returnItems,
-    asIndex: false,
-  }).atomItemQty;
-
-  const tileQty = itemAtom.atomItemQty;
-  const qtyStatus = !returnItemQty
-    ? "noReturn"
-    : returnItemQty === tileQty
-    ? "valid"
-    : "mismatchQty";
+  const returnItemQty = itemExchStatus.returnItemQty;
+  const qtyStatus = itemExchStatus.qtyStatus;
 
   // shared functions
 
@@ -118,7 +108,7 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
           <MRVinput>
             <input
               type={`number`}
-              value={tileQty}
+              value={itemAtom.atomItemQty}
               onChange={(e) => {
                 lsMethods.handleItemQtyChange(e, itemAtom);
               }}
