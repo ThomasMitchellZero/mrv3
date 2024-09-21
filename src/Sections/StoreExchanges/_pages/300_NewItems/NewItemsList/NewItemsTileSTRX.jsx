@@ -18,7 +18,7 @@ import {
 
 function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
   const setSessionItems = useSetSessionItems();
-  const locMethods = useLocStMethods_STRX().NewItems();
+  const lsMethods = useLocStMethods_STRX().NewItems();
   const findAtom = useFindAtom();
   const setPageLS = useSetLocStFields("page");
   const resetPageLS = useResetLocStFields("page");
@@ -29,6 +29,8 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
   const newItems = sessionMRV.newItems;
   const atomizedNewItems = sessionMRV.atomizedNewItems;
   const pageLSrt = sessionMRV.locSt.page;
+  const itemExchStatus = lsMethods.itemExchStatus(itemAtom);
+  console.log("itemExchStatus", itemExchStatus);
 
   // In theory we should be able to get this from the atomizedNewItems array.
   const returnItemQty = findAtom({
@@ -46,20 +48,6 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
 
   // shared functions
 
-  const thisTileAtoms = atomizedNewItems.filter(
-    (atom) => atom.atomItemNum === itemAtom.atomItemNum
-  );
-
-  const handleItemQtyChange = (e) => {
-    const newQty = e.target.value;
-
-    setSessionItems({
-      itemsArrRouteStr: "newItems",
-      itemAtom: itemAtom,
-      newQty: newQty,
-      actionType: "edit",
-    });
-  };
 
   const handleTileClick = (e) => {
     e.stopPropagation();
@@ -132,7 +120,7 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
               type={`number`}
               value={tileQty}
               onChange={(e) => {
-                handleItemQtyChange(e);
+                lsMethods.handleItemQtyChange(e, itemAtom);
               }}
             />
           </MRVinput>

@@ -131,6 +131,30 @@ function useLocStMethods_STRX() {
         });
       },
 
+      itemExchStatus: (itemAtom) => {
+        // eventually this will use the atomizedNewItems array.
+        const outObj = {};
+
+        const returnItemQty =
+          findAtom({
+            itemNum: itemAtom.atomItemNum,
+            itemsArr: sessionMRV.returnItems,
+            asIndex: false,
+          }).atomItemQty || 0;
+        outObj.returnItemQty = returnItemQty;
+
+        const tileQty = itemAtom.atomItemQty;
+
+        outObj.qtyStatus =
+          returnItemQty === tileQty
+            ? "valid"
+            : !returnItemQty
+            ? "noReturn"
+            : "mismatchQty";
+
+        return outObj;
+      },
+
       continue: () => {
         console.log("No Continue Set");
       },
