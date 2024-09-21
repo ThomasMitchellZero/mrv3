@@ -109,10 +109,14 @@ function useLocStMethods_STRX() {
   const NewItems = () => {
     const mNewItemsHooks = {
       basicClear: () => {
-        console.log("Ya Basic");
-        resetPageLS({ activeErrorALL: true });
+        console.log("Set New Items");
+        resetPageLS({
+          activeErrorALL: true,
+          activeUI3: true,
+          activeKey1: true,
+          activeData1: true,
+        });
       },
-      
 
       continue: () => {
         console.log("No Continue Set");

@@ -72,7 +72,7 @@ function NewItemEntrySTRX() {
           activeErrorALL: true,
         });
       }}
-      btnIcon={`back`}
+      btnIcon={`close`}
       fNavBtnClick={() => {
         resetNewItemEntryLS({
           inputALL: true,

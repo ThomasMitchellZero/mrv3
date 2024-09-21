@@ -9,6 +9,7 @@ import {
 } from "../../../../globalFunctions/globalJS_classes";
 
 import { LS_MRV_ReasonPickerSC } from "../../../../mrv/mrv-components/CompLocStates_MRV";
+import { NewItemProdInfoSTRX } from "../../_pages/300_NewItems/Sidesheet/NewItemProdInfoSTRX";
 
 // Singleton Local States -------------------------------------
 
@@ -58,8 +59,6 @@ const LS_STRX_100_AddItemsAndInvos = {
 
 export { LS_STRX_100_AddItemsAndInvos };
 
-
-
 const LS_STRX_300_NewItems = {
   page: makeLocStFields({
     _keyStr: "page",
@@ -73,10 +72,20 @@ const LS_STRX_300_NewItems = {
   }),
   NewItemEntrySTRX: makeLocStFields({
     _keyStr: "NewItemEntrySTRX",
-    oInputs: {
-      itemCode: "",
-      qty: "",
+    oErrorObjects: {
+      invalidItem: new errorObj({
+        key: "invalidItem",
+        str: "Invalid Item#",
+      }),
+      invalidQty: new errorObj({
+        key: "invalidQty",
+        str: "Invalid Qty",
+      }),
     },
+  }),
+  NewItemProdInfoSTRX: makeLocStFields({
+    _keyStr: "NewItemProdInfoSTRX",
+
     oErrorObjects: {
       invalidItem: new errorObj({
         key: "invalidItem",

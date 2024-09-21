@@ -17,15 +17,20 @@ import {
 } from "../../../../../mrv/MRVhooks/MRVhooks";
 
 function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
-  const findAtom = useFindAtom();
-  const mrvCtx = useOutletContext();
   const setSessionItems = useSetSessionItems();
   const locMethods = useLocStMethods_STRX().NewItems();
+  const findAtom = useFindAtom();
+  const setPageLS = useSetLocStFields("page");
+  const resetPageLS = useResetLocStFields("page");
+
+  const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const newItems = sessionMRV.newItems;
   const atomizedNewItems = sessionMRV.atomizedNewItems;
+  const pageLSrt = sessionMRV.locSt.page;
 
+  // In theory we should be able to get this from the atomizedNewItems array.
   const returnItemQty = findAtom({
     itemNum: itemAtom.atomItemNum,
     itemsArr: sessionMRV.returnItems,
@@ -56,16 +61,14 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
     });
   };
 
-  // This complexity isn't needed yet, but it will be once we handle more transaction types.
-  const transTypeFilter = (transType) => {
-    return thisTileAtoms.filter((atom) => atom.atomTransType === transType);
-  };
-  const transTypeQty = (transTypeArr) => {
-    let outQty = 0;
-    outQty = transTypeArr.reduce((acc, curr) => {
-      return acc + curr.atomItemQty;
-    }, 0);
-    return outQty;
+  const handleTileClick = (e) => {
+    e.stopPropagation();
+    setPageLS({
+      activeUI3: "NewItemProdInfoSTRX",
+      activeKey1: itemAtom.atomItemNum,
+      activeData1: itemAtom,
+    });
+    resetPageLS({ activeErrorALL: true });
   };
 
   const oConfigs = {};
@@ -74,33 +77,34 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
     noReturn: {
       returnQty: "None",
       status: "badRed",
-      iconStr: "critical"
+      iconStr: "critical",
     },
     valid: {
       returnQty: returnItemQty,
       status: "defaultBlack",
-      iconStr: "success"
+      iconStr: "success",
     },
     mismatchQty: {
       returnQty: returnItemQty,
       status: "defaultBlack",
-      iconStr: "alert"
+      iconStr: "alert",
     },
   };
 
-  const uiStatusIcon = (
-    <StatusIcon
-      status={mvpConfigs[qtyStatus].iconStr}
-      fontSize={`3rem`}
-      
+  // Logic-derived values
 
-    />
+  const uiStatusIcon = (
+    <StatusIcon status={mvpConfigs[qtyStatus].iconStr} fontSize={`3rem`} />
   );
 
-  // Backup in case we are mega-crunched pre-demo and we need to get this working.
+  const isActive =
+    itemAtom.atomItemNum === pageLSrt.activeKey1 ? "selected" : "";
 
   return (
-    <div className={`tile tileSpan`}>
+    <div
+      onClick={(e) => handleTileClick(e)}
+      className={`tile tileSpan ${isActive}`}
+    >
       <div className={`col itemSpan`}>
         <MRVitemDetails
           showPrice={false}
@@ -133,9 +137,7 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
             />
           </MRVinput>
         </div>
-        <div className={`col iconSpan centerAll`}>
-          {uiStatusIcon}
-        </div>
+        <div className={`col iconSpan centerAll`}>{uiStatusIcon}</div>
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ function NewItemsList() {
       <div className={`columnTitleRow spanCtnr`}>
         <div className={`tileSpan`}>
           <div className={`itemSpan`}>New Items Cart</div>
-          <div className={`tileInfoSpan`}>New Items Cart</div>
+          <div className={`tileInfoSpan`}></div>
         </div>
         <div className={`deleteSpan`}>Return</div>
       </div>

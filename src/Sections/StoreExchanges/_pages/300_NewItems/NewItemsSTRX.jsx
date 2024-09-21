@@ -4,6 +4,7 @@ import { ContinueBtnMRV } from "../../../../mrv/mrv-components/inputs/ContinueBt
 import { ScanScreenMRV } from "../../../../mrv/mrv-components/DisplayOutputs/ScanScreenMRV";
 import { NewItemActionsSTRX } from "./Sidesheet/NewItemActionsSTRX";
 import { NewItemsList } from "./NewItemsList/NewItemsList";
+import { NewItemProdInfoSTRX } from "./Sidesheet/NewItemProdInfoSTRX";
 
 import { NewItemEntrySTRX } from "./Sidesheet/NewItemEntrySTRX";
 import ProductContext from "../../../../store/product-context";
@@ -35,7 +36,7 @@ function NewItemsSTRX() {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
-  const locMethods = useLocStMethods_STRX();
+  const locMethods = useLocStMethods_STRX().NewItems();
   const productCtx = useContext(ProductContext);
 
   const activeUI3 = sessionMRV.locSt.page.activeUI3;
@@ -48,6 +49,7 @@ function NewItemsSTRX() {
   const o30panels = {
     ActionsSTRX: <NewItemActionsSTRX />,
     NewItemEntrySTRX: <NewItemEntrySTRX />,
+    NewItemProdInfoSTRX: <NewItemProdInfoSTRX />,
   };
 
   const o70panels = {
@@ -69,7 +71,9 @@ function NewItemsSTRX() {
 
   return (
     <section className={`newItems mrvPage color__surface__subdued`}>
-      <main onClick={() => {}} className={`mrvPanel__main`}>
+      <main onClick={() => {
+        locMethods.basicClear();
+      }} className={`mrvPanel__main`}>
         <TitleBarSTRX
           showProductName={true}
           headerTitle={`New Items For Exchange`}
