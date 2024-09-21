@@ -21,21 +21,26 @@ function RtrnItemDetails30({}) {
   const activeItemKey = locStRt.page.activeKey1;
   const locMethods = useLocStMethods_STRX().AddItemsAndInvos();
 
-
   const productCtx = useContext(ProductContext);
 
   const refLocFields = makeLocStFields({});
 
-  const activeItem = findAtom({itemNum: activeItemKey, asIndex: false});
-  
+  const activeItem = findAtom({ itemNum: activeItemKey, asIndex: false });
+
+  const uiPanelContent = activeItem ? (
+    <div className={`itemDetails`}>
+      <div className="miniDetails">
+        <ProductImageMRV size="S" itemAtom={activeItem} imageOnly={true} />
+      </div>
+      <ReasonPickerSC_MRV
+        itemQtyBadge={<ReasonBadgeSTRX itemAtom={activeItem} />}
+      />
+    </div>
+  ) : null;
+
   return (
     <Sidesheet_Base_MRV title="Return Item Details">
-      <div className={`itemDetails`}>
-        <div className="miniDetails">
-          <ProductImageMRV size="S" itemAtom={activeItem} imageOnly={true} />
-        </div>
-        <ReasonPickerSC_MRV itemQtyBadge={<ReasonBadgeSTRX itemAtom={activeItem} />} />
-      </div>
+      {uiPanelContent}
     </Sidesheet_Base_MRV>
   );
 }

@@ -155,7 +155,9 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
           bigValue={cardString}
           description={"Refund Value"}
           greenifyVal={cardTotalVal}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
+            console.log('trying to delete Return Item');
             locMethods.resetKeysToo(); // need to clear the active item.
             setSessionItems({
               itemAtom: returnItemAtom,
