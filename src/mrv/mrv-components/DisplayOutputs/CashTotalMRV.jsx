@@ -16,7 +16,7 @@ import { useOutletContext } from "react-router";
 
 const CashTotalMRV = ({
   mode = "exchDelta",
-  modeVALS_exchDelta_returnMinusReplace,
+  REF_mode____exchDelta__returnMinusReplace,
 }) => {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
@@ -27,7 +27,7 @@ const CashTotalMRV = ({
   const stateDeltaMO = sessionMRV.cashDeltaMO;
   const totalCartDeltaMO = moneyObjDelta({
     refundMo: sessionMRV.totalReturnValue,
-    replaceMo: sessionMRV.totalReplacementValue,
+    chargeMo: sessionMRV.totalNewItemValue,
   });
 
   // if it can be derived from info in the moneyObj, then make some fields to do it.
@@ -53,7 +53,7 @@ const CashTotalMRV = ({
         },
         {
           label: "New Item Cost",
-          value: sessionMRV.totalReplacementValue.unitTotal,
+          value: sessionMRV.totalNewItemValue.unitTotal,
         },
       ],
       finalTotal: totalCartDeltaMO.unitTotal,

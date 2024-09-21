@@ -32,7 +32,7 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
   const itemExchStatus = lsMethods.itemExchStatus(itemAtom);
 
 
-  // In theory we should be able to get this from the atomizedNewItems array.
+  // For MVP we have to check ReturnItemQty because they might return more than they are getting and that is not allowed until we can do Unlike Exchanges.
   const returnItemQty = itemExchStatus.returnItemQty;
   const qtyStatus = itemExchStatus.qtyStatus;
 

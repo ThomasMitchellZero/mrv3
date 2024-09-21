@@ -955,13 +955,13 @@ function returnAutoDeriver(clonedDraft) {
     outSessionState.atomizedReturnItems
   );
 
-  outSessionState.totalReplacementValue = atomsMonetizer(
-    outSessionState.replacementItems
+  outSessionState.totalNewItemValue = atomsMonetizer(
+    outSessionState.atomizedNewItems
   );
 
   outSessionState.cashDeltaMO = moneyObjDelta({
     refundMo: outSessionState.totalReturnValue,
-    chargeMo: outSessionState.totalReplacementValue,
+    chargeMo: outSessionState.totalNewItemValue,
   });
 
   outSessionState.wholeBigNumber = outSessionState.totalReturnValue.unitTotal;
