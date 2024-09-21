@@ -59,6 +59,7 @@ function NewItemCardSTRX({ itemAtom = new returnAtom({}) }) {
             valueInCents: cardCashSum,
             zeroAs0: false,
           })}
+          description="New Item Cost"
           handleClick={handleClearItem}
         />
       </div>

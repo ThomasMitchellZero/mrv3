@@ -48,39 +48,36 @@
         & .itemSpan {
           display: flex;
           flex: 30 30 0rem;
-          background-color: lightgreen;
           min-width: 20rem;
         }
 
         & .tileInfoSpan {
           display: flex;
           flex: 30 30 0rem;
-          background-color: lightblue;
           flex-direction: row;
           min-width: 24rem;
           gap: 0rem;
 
           & .rtrnSpan {
             flex: 10 10 0rem;
-            background-color: coral;
+
             min-width: 8rem;
           }
           & .qtySpan {
             min-width: 10rem;
             flex: 0 0 10rem;
-            background-color: bisque;
+
             padding: 0rem var(--innerPadding);
           }
           & .iconSpan {
             min-width: 6rem;
-            background-color: aqua;
+
           }
         }
       }
 
       & .deleteSpan {
         flex: 20 20 0rem;
-        background-color: lightcoral;
         justify-content: end;
       }
     }

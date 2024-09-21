@@ -31,13 +31,11 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
   const pageLSrt = sessionMRV.locSt.page;
   const itemExchStatus = lsMethods.itemExchStatus(itemAtom);
 
-
   // For MVP we have to check ReturnItemQty because they might return more than they are getting and that is not allowed until we can do Unlike Exchanges.
   const returnItemQty = itemExchStatus.returnItemQty;
   const qtyStatus = itemExchStatus.qtyStatus;
 
   // shared functions
-
 
   const handleTileClick = (e) => {
     e.stopPropagation();
@@ -115,7 +113,10 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
             />
           </MRVinput>
         </div>
-        <div className={`col iconSpan centerAll`}>{uiStatusIcon}</div>
+        <div className={`col iconSpan centerAll`}>
+          <div className={`body__small minWidth color__white__text`}>.</div>
+          {uiStatusIcon}
+        </div>
       </div>
     </div>
   );
