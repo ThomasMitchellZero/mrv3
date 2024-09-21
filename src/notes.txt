@@ -8373,13 +8373,19 @@ What to do today?
     11:00.
     Good enough.  I had a few life tasks to clear out today and I was also craving a donut.  I tried out a few scenarios this morning and from what I can tell, it all seems to be working OK.  So once I just get Item Details working for New Items, I should have everything I NEED for the demo.
 
-    -Get an Item Details screen working.
-    -Get click handling to set the Active Item.
-    -Get BG clicking to clear the Active Item.
-    -Configure Tiles to change state when selected.
-    -Get the prices displaying correctly.
+    X -Get an Item Details screen working.
+    X -Get click handling to set the Active Item.
+    X -Get BG clicking to clear the Active Item.
+    X -Configure Tiles to change state when selected.
+    -Get tile prices displaying correctly.
+    -Get bottom bar values displaying correctly.
+    -Get item removal working.
 
-    
+    1:35.
+    I feel like I am really motoring along here.  I want to think more about this feeling tonight, because this is getting pretty close to what I had in mind for the ExTurns framework.  I've got pre-made solutions for most of the problems I am facing and a lot of the work today has just been using tools I've created previously.
+
+    3:05.
+    Still cruising.  All the LS-setting/clearing work is done.  Now gotta get the money rendering correctly, but AFAICT 
     
 
 

@@ -10,7 +10,7 @@ function ContinueBtnMRV({
       <button onClick={handleClick} className={`primary continueBtn`}>
         {btnText}
       </button>
-      <p className={`warning`}>{warningText}</p>
+      <div className={`warning`}>{warningText}</div>
     </div>
   );
 }
