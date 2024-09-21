@@ -14,6 +14,7 @@ import {
   useSetLocStFields,
   useFindAtom,
   useNodeNav,
+  useSetSessionItems,
 } from "../../../../mrv/MRVhooks/MRVhooks";
 
 import { useOutletContext } from "react-router";
@@ -25,6 +26,7 @@ function useLocStMethods_STRX() {
   const setSession = mrvCtx.setSessionMRV;
   const locStRt = sessionMRV.locSt;
   const pageLocSt = locStRt.page;
+  const setSessionItems = useSetSessionItems();
 
   const findAtom = useFindAtom();
   const outMethods = {};
@@ -115,6 +117,17 @@ function useLocStMethods_STRX() {
           activeUI3: true,
           activeKey1: true,
           activeData1: true,
+        });
+      },
+
+      handleItemQtyChange: (e, itemAtom) => {
+        const newQty = e.target.value;
+
+        setSessionItems({
+          itemsArrRouteStr: "newItems",
+          itemAtom: itemAtom,
+          newQty: newQty,
+          actionType: "edit",
         });
       },
 
