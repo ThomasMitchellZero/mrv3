@@ -28,15 +28,15 @@ function NewItemProdInfoSTRX() {
   // reads status evaluated by itemExchStatus()
   const oRibbonConfig = {
     valid: {
-      message: `This item is ready for exchange.`,
+      message: `Return Item quantity matches New Item quantity.`,
       type: `success`,
     },
     noReturn: {
-      message: `This item is not eligible for exchange.`,
+      message: `This New Item does not match any Return Item in the cart.`,
       type: `critical`,
     },
     mismatchQty: {
-      message: `The quantity of this item does not match the return item.`,
+      message: `Returned item quantity does not match New Item quantity.  Any unmatched items will be removed.`,
       type: `alert`,
     },
   };

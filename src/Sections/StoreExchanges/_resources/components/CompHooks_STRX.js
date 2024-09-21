@@ -109,6 +109,8 @@ function useLocStMethods_STRX() {
   outMethods.AddItemsAndInvos = AddItemsAndInvos;
 
   const NewItems = () => {
+    const resetNewItemEntryLS = useResetLocStFields("NewItemEntrySTRX");
+
     const mNewItemsHooks = {
       basicClear: () => {
         console.log("Set New Items");
@@ -118,6 +120,7 @@ function useLocStMethods_STRX() {
           activeKey1: true,
           activeData1: true,
         });
+        resetNewItemEntryLS({ activeErrorALL: true });
       },
 
       handleItemQtyChange: (e, itemAtom) => {
