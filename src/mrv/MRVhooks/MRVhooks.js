@@ -851,7 +851,8 @@ const newItemAtomizer = ({ atomizedReturnItemsArr = [], newItemsArr }) => {
         ...cloneDeep(repo1Atom),
         ...newVals,
       };
-
+      const refMoneyObj = new moneyObj({});
+      outMergedAtom.atomMoneyObj.invertValue();
       return outMergedAtom;
     },
   });

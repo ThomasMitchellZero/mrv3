@@ -1,6 +1,6 @@
 //---- Product ----
 
-import { cloneDeep, get } from "lodash";
+import { cloneDeep } from "lodash";
 
 class moneyObj {
   constructor({
@@ -23,6 +23,11 @@ class moneyObj {
   calcSalesTax() {
     const outSalesTax = Math.round(this.subTotal * this.salesTaxRate);
     return outSalesTax;
+  }
+
+  invertValue() {
+    this.unitBaseValue = -this.unitBaseValue;
+    this.salesTax = -this.salesTax;
   }
 
   // derived values are never modified directly so they are provided as getters.
