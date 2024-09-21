@@ -8274,6 +8274,126 @@ What to do today?
 
     Why not give that a try, at least for now?  
 
+    5:50.
+    OK, I think that is all working for now.  The next thing I know I need is a means of checking for identical items.  This will be a fun logic machine.  Let's think about where we want to get to, then figure out how to do MVP in a way that doesn't cockblock it.  And let's just prefix all of these with "Eventually we need to..."
+
+    -Look for exact matches in Return Items
+        -If it's an exact match, give it the value of its peer.
+    -Look for [whatever counts as an unlike exchange] in Return Items.
+        -Nothing happens here, except we might want to give it a category.
+    -if EITHER kind of match is found, assign it a Peer.
+        -We might want to check if it's got a peer already, since in XDTX a lot of this assignment happens manually.
+    -Any Return items with no matches get counted as Returns.
+    -Any New items with no matches get counted as Sales.
+
+    So this leads me to conclude that we need a second atomizer, one for the New Items.  Wondering where to assign the transaction type.  I could do it when the items are added to either basket, but I feel like I might want it within the loops.  Like, a 'returned' item doesn't actually count as a Return until we know it has a receipt.  And if I can filter based on the transaction type, that gives me options.
+
+    Might be time for a little garden-weeding.  I feel like there's a universal pattern I could use for atomizing.  I can see there's a shape there, I just can't describe it.
+
+    Intuition failing again.  Let's try classifying things.  It helps me to think of it as a Venn diagram.  Actually, it helps me a lot.  It's also kind of a Least Common Multiple situation.  
+
+    The purpose of an Atomizer loop is to take a series of records and then
+
+        -As I'm thinking about it, each iteration of a loop take 2 Records and produce three values:
+
+            A collection of atoms from the first record that were matched and merged with the second record.
+            A depleted copy of the first record.  
+            A depleted copy of the second record.  
+        
+
+        -Records.
+            Once the Atomizer starts, these things are fixed.  AFAICT, records should only ever be altered directly by the user.  Records can be USED by the atomizer, but they must always be cloned.  
+
+            Within a well-formed Record, the following rules apply:
+                -All elements share a given collection of attributes (e.g. InvoiceNum)
+                    -If the category is ephemeral, like 'Items in this return' then it doesn't have to be an explicit field.
+                -The record holds ALL elements system-wide that share that share the attribute.
+            It's probably misleading to think of Records as eternal.  Some records, like the intermediate stages of atomization, might even get destroyed once the Atomizer is complete.
+            
+        -Increments.
+            These are attributes that are fungible across Records.  The only two I'm aware of right now are Qty and money.
+
+        -Depleteables.
+            -These are copies of records.  They should be stored outside the loops, because otherwise they'd get reset every loop cycle.  It's OK to preserve them.  In fact, if we ever needed to update a record, this is what we would use.  The purpose of the Depletables is to ensure that during the atomizing, the contents of a Record aren't used more than once, so Depletables can never be added to.
+
+        -Outputs.
+            -OK, so this is where it gets tricky to define with rules.  Atomization doesn't necessarily produce a single, app-wide outcome.  For example, when it comes time to refund to different tender types, that will also be an atomization process, but it won't touch the items list.
+
+    So for Universal Atomization, I think these are the parameters I need:
+        -Record 1.
+        -Record 2.
+        -Comparison function by which we determine if an Atom from Record 1 matches an atom in Record 2.
+        -Unit of overlap (usually qty, occasionally money)
+        -Population Function to define what info is being assigned to R1, R2, and the intersection.
+
+    I'm wondering what is the easiest way to avoid double-counting array members.  I can't think of any circumstance where depletion wouldn't mean deletion.  
+
+    Looking at this, I'm now second-guessing the whole exercise.  There are a shitload of values in this beast, and I can imagine situations where I might want to adjust any or all of them based on conditions.  
+
+    OK.  Let's just consider what we have here.  For my specific situation, it wouldn't be difficult at all to assign either Sale or Return to the atoms as they are entering the Atomizer.  That's not really ideal because there would be atoms in the repo that have incorrect values.
+
+    Another thing I could do is store my primary inputs or outputs in an object, and make that object available.  In fact, I'm pretty sure my output is going to be an object, because the specifics of the Record I am going to try to create are gonna dictate a lot of what I do with the outputs.  DRY is supposed to be a time-saver, and nothing is more important than being able to CLEARLY comprehend what the code is doing.  
+
+18 Sep 2024
+    Still trying to wrap my head around this.  There's got to be a way to simplify this logic.
+
+    Unchecked 1 = CloneDeep([Arr1])
+    Unchecked 2 = CloneDeep([Arr1])
+
+    Unmatched 1 = []
+    Unmatched 2 = []
+    Matched = []
+
+    So in this model I check loop through 1x2 and... this is too much.  I just need to identify the matches.  As long as I'm depleting matches from Unsorted 1 and 2, whatever's left by definition is unmatched.
+
+    It also feels like the easiest version of this JUST searches for matches.  I can do any additional assigment once the loop has finished.  It's a little sloppier because if I do want to assign other values post-match I have to loop again, but at this scale that couldn't possibly make a difference.
+
+    OK, so that should be it.  Maybe I'll feel different later, but this feels pretty darn clean.  Now let's try it out.
+
+    One last maybe-stupid thing before I proceed: is Atomizer the correct terminology for this?  Because it kind of feels like an additive operation as much as a reductive operation.  Atomization, to me, is the process of making sure that a repo is sorted such that within each atom it contains, the entities represented by the unit are identical.  
+
+    And I guess that's kind of happening here.  We are in fact creating 3 new repos at the end of each run of the Atomizer, the intersection of which is now also atomized.
+
+    3:45.
+    OK.  Got a weird bug here.  The ReturnAtomizer is kind of working in the sense that it is indeed looping, matching, and assigning correct values, but it's having this strange bug where it seems to be overwriting old values.  Very strange.
+
+    I tried taking out the post-run function stuff, and I'm still getting bugs.  The bugs look a bit different, so it's possible there are other errors, but it feels like there's at least one error happening within the new Atomizer itself.  To the Dev Tools!
+
+    OK.  I can see at least one issue.  I'm basing my loops on indexes and array length, and array length is changing as I delete stuff.  
+
+19 Sep 2024
+
+    11:30. 
+    Finished with Let's Pretend and I should be clear for the rest of the day.  My goal is to have this ready to test by Monday.  Just gotta make a few choices first, and I think the correct move is to clear out the TRs.  
+
+    -Think about how to re-do the BigLabeledValue component.  Right now it is good enough, and it's also used in many other places so if I was smart I would just leave this.
+    
+
+20 Sep 2024
+    11:00.
+    Good enough.  I had a few life tasks to clear out today and I was also craving a donut.  I tried out a few scenarios this morning and from what I can tell, it all seems to be working OK.  So once I just get Item Details working for New Items, I should have everything I NEED for the demo.
+
+    -Get an Item Details screen working.
+    -Get click handling to set the Active Item.
+    -Get BG clicking to clear the Active Item.
+    -Configure Tiles to change state when selected.
+    -Get the prices displaying correctly.
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 
 

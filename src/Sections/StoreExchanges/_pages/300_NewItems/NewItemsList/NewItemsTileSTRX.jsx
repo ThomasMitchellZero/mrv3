@@ -92,6 +92,8 @@ function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
     <StatusIcon
       status={mvpConfigs[qtyStatus].iconStr}
       fontSize={`3rem`}
+      
+
     />
   );
 

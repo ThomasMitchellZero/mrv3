@@ -3,7 +3,7 @@ import { DescriptorIcon } from "./DescriptorIcon";
 function StatusIcon({
   status = "info",
   fontSize = "2rem",
-  ctnrSize = fontSize,
+  ctnrSize = null,
   REF_status____info__success__alert__critical,
 }) {
   const oConfigs = {
@@ -27,8 +27,8 @@ function StatusIcon({
   return (
     <DescriptorIcon
       iconStr={status}
-      ctnrSize={ctnrSize}
       fontSize={fontSize}
+      ctnrSize={ctnrSize || fontSize}
       color={oConfigs[status].color}
     />
   );
