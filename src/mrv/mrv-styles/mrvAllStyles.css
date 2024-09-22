@@ -808,6 +808,10 @@
     gap: 1rem;
   }
 
+  & .gap50pct {
+    gap: 0.5rem;
+  }
+
   & .gap25pct {
     gap: 0.25rem;
   }
@@ -833,6 +837,10 @@
   }
 
   & .alignRight {
+    align-items: flex-end;
+  }
+
+  & .alignEnd {
     align-items: flex-end;
   }
 

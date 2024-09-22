@@ -1,4 +1,5 @@
 import { TitleBarSTRX } from "../../_resources/components/CompConfigsSTRX";
+import { ColumnLabelMRV } from "../../../../mrv/mrv-components/DisplayOutputs/ColumnLabelMRV/ColumnLabelMRV";
 
 import { Sidesheet_Base_MRV } from "../../../../mrv/mrv-components/DisplayOutputs/Sidesheet_Base_MRV";
 
@@ -28,6 +29,7 @@ function StartSTRX() {
           >
             Test Scenario 1
           </button>
+          <ColumnLabelMRV iconStr="cart" bigLabel="" />
         </div>
       </section>
     </section>
