@@ -56,7 +56,7 @@ const MessageRibbonMRV = ({
   );
 
   return (
-    <div className={`msgRibbon ${oConfigs[ribbonType].bgColor}`}>
+    <div className={`msgRibbon maxWidth ${oConfigs[ribbonType].bgColor}`}>
       <div className={`colorBar ${oConfigs[ribbonType].accentColor}`} />
       <div className={`iconBox`}>{activeIcon}</div>
       <div className={`body color__primary__text`}>{message}</div>

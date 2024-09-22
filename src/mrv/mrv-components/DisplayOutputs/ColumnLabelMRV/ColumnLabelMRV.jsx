@@ -15,7 +15,7 @@ function ColumnLabelMRV({
         color="color__primary__text"
         backgroundColor={`color__surface__default`}
       />
-      <div className={`vBox alignStart gap50pct`}>
+      <div className={`vBox alignStart gap0rem`}>
         {bigLabel ? (
           <div className={`heading__small color__primary__text`}>
             {bigLabel}

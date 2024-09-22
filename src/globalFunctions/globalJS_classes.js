@@ -39,6 +39,17 @@ class moneyObj {
   }
 }
 
+class RejectionObj {
+  constructor({ keyStr = "", strLabel = "NO LABEL", rejectsArr = [] }) {
+    this.keyStr = keyStr;
+    this.strLabel = strLabel;
+    this.rejectsArr = rejectsArr;
+  }
+}
+
+export { RejectionObj };
+
+
 export { moneyObj };
 
 class SingleDispo {
