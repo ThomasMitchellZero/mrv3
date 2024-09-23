@@ -57,6 +57,18 @@ function StartSTRX() {
 
   console.log(reject1);
 
+  const uiRejectStuff = (
+    <>
+      <ColumnLabelMRV
+        iconStr="cart"
+        bigLabel="All Transactions Have Failed Completely"
+        smallLabel="Have you considered a career in politics?"
+      />
+      <RejectionCard rejectionObj={reject1} />
+      <RejectionCard rejectionObj={reject2} />
+    </>
+  );
+
   return (
     <section className={`mrvPage`}>
       <section className={`mrvPanel__main`}>
@@ -74,13 +86,6 @@ function StartSTRX() {
           >
             Test Scenario 1
           </button>
-          <ColumnLabelMRV
-            iconStr="cart"
-            bigLabel="All Transactions Have Failed Completely"
-            smallLabel="Have you considered a career in politics?"
-          />
-          <RejectionCard rejectionObj={reject1} />
-          <RejectionCard rejectionObj={reject2} />
         </div>
       </section>
     </section>

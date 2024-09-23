@@ -8377,9 +8377,9 @@ What to do today?
     X -Get click handling to set the Active Item.
     X -Get BG clicking to clear the Active Item.
     X -Configure Tiles to change state when selected.
-    -Get tile prices displaying correctly.
-    -Get bottom bar values displaying correctly.
-    -Get item removal working.
+    X -Get tile prices displaying correctly.
+    X -Get bottom bar values displaying correctly.
+    X -Get item removal working.
 
     1:35.
     I feel like I am really motoring along here.  I want to think more about this feeling tonight, because this is getting pretty close to what I had in mind for the ExTurns framework.  I've got pre-made solutions for most of the problems I am facing and a lot of the work today has just been using tools I've created previously.
@@ -8387,9 +8387,47 @@ What to do today?
     3:05.
     Still cruising.  All the LS-setting/clearing work is done.  Now gotta get the money rendering correctly, but AFAICT 
     
+    4:20.
+    OK.  I've hit this weird-ass snag where for some reason clicking the Delete button isn't clearing the ActiveKey from the 
 
+    6:20.
+    Well.  I had actually planned to go even later today, but it looks like it's all good.  Even with that weird-ass snag on the Return Items card deletion, I made a list and got everything on it done today and it wasn't terribly hard.  
 
+22 Sep 2024
 
+    Rawdog Sunday!  While the Total Review screen is more necessary to proceed, I kinda feel like working on the Rejection Screens today.  Let me start by sketching out the idea I have in mind.
+
+    The Universal Atomizer spits out an object that is essentially a Venn Diagram - the items common to the two repos, plus the leftovers from each repo.  So I don't actually have to *remove* anything from any repo during the transaction.  I just keep passing things through ever-more-stringent filter layers and only the items that satisfy all criteria - that is, the items remaining after all layers of atomization are complete - remain in the transaction.  So in scenarios where I am 'rejecting' items, nothing actually has to get deleted.  I just run the necessary atomizations and show whatever didn't make it through.
+
+    In that case, I think I need a Rejection class.  Just a sketch:
+
+    R1 = new Rejection({
+        reasonKey: "key"
+        sLabel: "Failure Explanation"
+        atoms: [atom1, atom2, ...]
+    })
+
+    Honestly, even that might be too heavy.  It could be just a key and an array.  IDK.  The idea would be to just make sure that every element in the rejection UI can expect a pre-packaged object that lets it pull in everything it needs.
+
+    So with that in mind, here's what I think I need to build:
+        X -A column label element, to be shared both by the Rejection UI and anything else with columns.
+        X -A Rejection Card that displays the Rejection reason and all the items in the array that were rejected on those grounds.
+        -A Column component that displays a label and some quantity of elements, maybe width-capped at 50%.
+            I don't think I need a component for this.  A CSS prop is probably fine.  
+
+23 Sep 2024
+    12:45.
+    Let's Pretend completed successfully, and now I have most of the afternoon to work :D  Rejection UI elements look good enough, so I can move on.  
+
+    The next big sticking point is back to atomization.  The New Items cart and the rejection scenarios are making me realize that I should have a system for how I handle stuff moving through the layers.
+
+    -Repos.  No issues with my current Repo philosophy.  The idea is that certain collections just store new information as it enters the system.  Collections like Return Items, Session Invoices, or Return Reasons contain information that can't be derived from any other source because it is being provided by the user.  These things are just stored in the transaction.
+
+    -The question is how to handle the layers of atomization, and it's got many factors.
+        
+        -What happens to the Lunes (new word!) left over from the Venn diagram?
+            -Do I just pitch them?  Is there some pattern that describes what should be stored and what can get tossed?
+            -There are times when the Lunes are of no more use in the transaction.  Thinking NRR items.  Certain elements must persist in a limbo state for a while because they are still potentially valid based on what the user does next.  
 
 
 
