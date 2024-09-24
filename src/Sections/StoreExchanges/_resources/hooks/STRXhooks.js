@@ -38,6 +38,11 @@ const defaultNavNodesSTRX = {
     routeStr: "/store-exchanges/choose-items-invos",
     locSt: LS_STRX_100_AddItemsAndInvos,
   }),
+  nrrRejection: navNode({
+    keyStr: "nrrRejection",
+    titleStr: "Missing Receipts",
+    routeStr: "/store-exchanges/no-receipt",
+  }),
   newitems: navNode({
     keyStr: "newitems",
     titleStr: "New Items",

@@ -29,7 +29,7 @@ function RejectionCard({ rejectionObj = new RejectionObj({}) }) {
   });
 
   return (
-    <div className="cardStyle vBox">
+    <div className="cardStyle vBox minFlex">
       <MessageRibbonMRV
         className={`maxWidth`}
         message={ribbonMsg}
