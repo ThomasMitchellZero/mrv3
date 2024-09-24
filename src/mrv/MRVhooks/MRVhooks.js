@@ -764,7 +764,7 @@ const primaryAtomizer = ({
   mergedAtomTemplate = new returnAtom({}),
 
   // Value to be decremented in repo atoms and incremented in merged atoms.  Normally qty or money.
-  mergeUnitKey = null,
+  mergeUnitKey = "atomItemQty",
 
   // set other fiels of mergedAtom.
   setMergedAtomFn = ({ repo1Atom, repo2Atom, mergedAtom }) => {
@@ -824,6 +824,8 @@ const primaryAtomizer = ({
   // Any additional assignment can be done afterwards, since this does not directly modify the state.
   return { mergedRepo, unmerged1, unmerged2 };
 };
+
+export { primaryAtomizer };
 
 const newItemAtomizer = ({ atomizedReturnItemsArr = [], newItemsArr }) => {
   const baseComparisonFn = ({ repo1Atom, repo2Atom }) => {
