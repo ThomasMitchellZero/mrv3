@@ -8429,6 +8429,69 @@ What to do today?
             -Do I just pitch them?  Is there some pattern that describes what should be stored and what can get tossed?
             -There are times when the Lunes are of no more use in the transaction.  Thinking NRR items.  Certain elements must persist in a limbo state for a while because they are still potentially valid based on what the user does next.  
 
+    -Just an idea - I could separate the atomization and filtration.  As long as the atomization produces atoms that are easy to filter for the rejection criteria, it doesn't feel like it hurts to throw 1 or both lunes back into the container.
+
+    -I think that one rule should be that a given repo only contains the same KIND of entities.  I could certainly have OBFR containing both Invoices and Items, but post-atomization they don't have any other interaction, so I can't really see what is gained by storing them together.  
+
+    -It feels like there's a special category of Intersections, and that's the one's that are still eligible according to the business logic and the information gathered so far.
+
+        -Record repos never change unless altered by the user.
+        -Eligible repos are always derived, and they are never directly altered by the user.
+        -Whenever we hit a point in the flow where no more information affecting eligibility will be produced, we can then safely trim certain repos.
+
+    -So now the question becomes how we deal with items leaving the cart.  
+        -I guess I COULD programmatically cut down Record repos.  In fact, that might be necessary, since the second principle of a repo is that a single atom contains ALL of the units that are indistinguishable within that context.  
+    -I think I have to do some kind of cart-cutting.  If the user goes to Add Items and then comes back, I don't want them seeing the items that were removed.
+    -I don't think I can just toss clear the Record repo and throw in all the post-filter atoms as-is.  They aren't consolidated, and the atoms now contain properties that make them non-identical.
+
+    Heh.  I wonder if I could just use my standard 'Add Item' hook.  That would be a hoot.  In fact, that could even be a pattern.  
+        -Any new Record repos being created during the transaction by definition are collecting the relevant info.
+        -The creation of those Record repos should already be handled by standard hooks, since doing otherwise would prevent me from re-using logic across the MRV framework.
+
+    So then maybe this is the simplest pattern.  
+
+    Pre-eligibility check:
+        -Store the record repos.
+        -Atomize repo buckets as needed.
+        -It's safe to store Lunes in the atomized output, provided the Lunes are easy to filter post-atomization.
+            -Is the re-mixing a good idea?
+                -It makes certain things easier.  If I don't do this, I have to store the Lunes separately.  I also have to reconstitute them for consumption in cases where items are currently ineligible but might become eligible on the basis of further user input, like L4L enforcement or 
+    
+    Then, at the point where no new eligibility can be produced:
+        -Filter the ineligible Lunes out.
+        -Recreate the Repo record using ONLY the Eligible items.
+        -At this point, I don't even need to preserve the Atomized list.  Once the ineligible items have been removed, running the Atomizer again would produce a result identical to the filtered list.
+    
+    -I'm now wondering further about Return Reasons.  We could definitely find ourselves in situations where Reasons are applied, but then receipts aren't found.  Which items are returned to the customer, and how are the extra Reasons distributed?
+
+25 Sep. 2024
+    Still thinking about this.  I don't truly consider this dithering because what I'm currently doing affects the global app state.  Damn near every hook I have written assumes that the current Records are where they need to be.  And I'm not re-writing that shit.  Maybe some other time when I blow this all up and rewrite it all in Typescript, but it's not worth it right now.  
+
+    Nothing bad happens if I stick a lot more records into the app global state.  Nothing bad actually happens immediately if I MODIFY the global app state, although that's probably not great from the perspective of component reusability.  
+
+    So I think where that leaves me is that if I have additional records to keep track of, I just add more fields to the global state.
+
+    As long as I am atomizing correctly, the Lunes are easy enough to re-derive.  So I think the pattern is: 
+        -Filter through as many layers of atomization as possible.
+        -If I don't need the lunes, get rid of them.  If I do need them, put them back in the atomizer.
+        -If I truly do need them separate, it's OK to store them in the app state.
+        -When no more items can become eligible:
+            -Filter and display the ineligibles
+            -Inform the user.
+            -Clear the associated Record repos in the transaction, either by cloning/bleaching the good atomized elements or just Atomizing the Record Repo with against the Atomized Repo and discarding the lunes.  
+
+    OK, so then.  What do?  
+
+    -I am pretty sure I can just make the NR rejection page now.  Once we get into Item Lookup, I can just change the routes.  It isn't hard.  
+
+    -Is there anywhere specific the rejection should live?  If I ever re-do Returns I guess I would want a hook to handle this?
+
+
+    
+
+    
+
+
 
 
 

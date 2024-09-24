@@ -54,14 +54,10 @@ function useLocStMethods_STRX() {
       continue: () => {
         const refAtom = new returnAtom({});
 
-        console.log(sessionMRV);
-
         const aNRRitems = sessionMRV.atomizedReturnItems.filter(
           // filter for any NRR items in Returns cart.
           (atom) => !Boolean(atom?.atomInvoNum)
         );
-
-        console.log(aNRRitems);
 
         // checks to see if all items are valid and receipted.
         const hasNRR = aNRRitems.length;
