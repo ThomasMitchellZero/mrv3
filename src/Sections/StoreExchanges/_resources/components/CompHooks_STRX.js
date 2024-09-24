@@ -56,18 +56,15 @@ function useLocStMethods_STRX() {
 
         console.log(sessionMRV);
 
-        const aNRRitems =
-          sessionMRV.atomizedReturnItems.filter(
-            // filter for any NRR items in Returns cart.
-            (atom) => {
-              return !atom?.atomInvoNum;
-            }
-          )[0] || [];
+        const aNRRitems = sessionMRV.atomizedReturnItems.filter(
+          // filter for any NRR items in Returns cart.
+          (atom) => !Boolean(atom?.atomInvoNum)
+        );
 
         console.log(aNRRitems);
 
         // checks to see if all items are valid and receipted.
-        const allReceipted = aNRRitems.length;
+        const hasNRR = aNRRitems.length;
         const allValid = Object.values(sessionMRV.returnItems).every(
           (itemAtom) => {
             return mrvMethods.isReasonQtyValid({
@@ -85,7 +82,7 @@ function useLocStMethods_STRX() {
           setPageLS({
             activeError1: pageLocSt.oErrorObjects["invalidReturnReasons"],
           });
-        } else if (!allReceipted) {
+        } else if (hasNRR) {
           //no-receipt
           console.log;
           resetPageLS({ EVERYONE: true });

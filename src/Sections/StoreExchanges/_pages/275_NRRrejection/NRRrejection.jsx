@@ -19,9 +19,6 @@ function NRRrejection() {
   const setSessionMRV = mrvCtx.setSessionMRV;
   const nodeNav = useNodeNav();
 
-  // we might have different reject types in the future.
-  const aAllRejections = [];
-
   const aNRRitems = sessionMRV.atomizedReturnItems.filter(
     (atom) => !Boolean(atom.atomInvoNum)
   );
@@ -30,7 +27,10 @@ function NRRrejection() {
     rejectsArr: aNRRitems,
     strLabel: "These items cannot be returned without receipts.",
   });
-  aAllRejections.push(oNRRrejections);
+
+  // fill with all rejection types.  Might have more in the future.
+  const aAllRejections = [oNRRrejections];
+
 
   const uiRejectionCards = aAllRejections.map((rej, i) => {
     return <RejectionCard key={i} rejectionObj={rej} />;
