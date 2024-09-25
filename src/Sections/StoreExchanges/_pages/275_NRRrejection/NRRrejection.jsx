@@ -41,8 +41,6 @@ function NRRrejection() {
       repo1Atom?.atomItemNum === repo2Atom?.atomItemNum,
   });
 
-  console.log("aReceiptedCart", aReceiptedCart);
-
   const oNRRrejections = new RejectionObj({
     rejectsArr: aNRRitems,
     strLabel: "These items cannot be returned without receipts.",
@@ -58,13 +56,21 @@ function NRRrejection() {
   const handleContinue = (e) => {
     // This is where the NRR items exit the transaction, so we set returnItems to ONLY the we have receipts for.
     // We don't want them containing fields from the atomized array, so returnItems is replaced.
-    const outSessionState = cloneDeep(sessionMRV);
+
+    /*
+
+    let currentSessionState = cloneDeep(sessionMRV);
     outSessionState.returnItems = aReceiptedCart;
+    const outSessionState = returnAutoDeriver(currentSessionState);
+
+        console.log(outSessionState);
 
     // NOT WORKING.
     setSessionMRV(() => {
       return returnAutoDeriver(outSessionState);
     });
+    
+    */
 
     nodeNav("newitems");
   };
