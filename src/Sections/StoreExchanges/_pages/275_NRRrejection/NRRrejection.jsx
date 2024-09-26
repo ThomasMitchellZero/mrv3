@@ -20,10 +20,11 @@ import {
 import { cloneDeep } from "lodash";
 
 function NRRrejection() {
+  const setSessionItems = useSetSessionItems();
+  const nodeNav = useNodeNav();
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
-  const nodeNav = useNodeNav();
 
   const aNRRitems = sessionMRV.atomizedReturnItems.filter(
     (atom) => !Boolean(atom.atomInvoNum)
@@ -33,13 +34,23 @@ function NRRrejection() {
     Boolean(atom.atomInvoNum)
   );
 
+  const aReceiptedReturnItems = cloneDeep(sessionMRV.returnItems);
+
   // New arr of ReturnItems with NRR items removed.  Will be new ReturnItems cart.
-  const aReceiptedCart = primaryAtomizer({
+
+  /*
+  
+    const aReceiptedCart = primaryAtomizer({
     repo1: aReceiptedItems,
     repo2: sessionMRV.returnItems,
     comparisonFn: ({ repo1Atom, repo2Atom }) =>
       repo1Atom?.atomItemNum === repo2Atom?.atomItemNum,
+    setMergedAtomFn: ({ repo1Atom, repo2Atom }) => {
+      return repo1Atom;
+    },
   });
+  
+  */
 
   const oNRRrejections = new RejectionObj({
     rejectsArr: aNRRitems,
@@ -58,19 +69,33 @@ function NRRrejection() {
     // We don't want them containing fields from the atomized array, so returnItems is replaced.
 
     /*
+    
+    */
 
+    /*
     let currentSessionState = cloneDeep(sessionMRV);
-    outSessionState.returnItems = aReceiptedCart;
+    currentSessionState.returnItems = aReceiptedCart.mergedRepo;
     const outSessionState = returnAutoDeriver(currentSessionState);
 
-        console.log(outSessionState);
+    console.log(outSessionState);
 
     // NOT WORKING.
     setSessionMRV(() => {
-      return returnAutoDeriver(outSessionState);
+      return outSessionState;
     });
+
+    
     
     */
+
+    for (const atom of aNRRitems) {
+      setSessionItems({
+        itemsArrRouteStr: "returnItems",
+        itemAtom: atom,
+        actionType: "subtract",
+        newQty: atom.atomItemQty,
+      });
+    }
 
     nodeNav("newitems");
   };

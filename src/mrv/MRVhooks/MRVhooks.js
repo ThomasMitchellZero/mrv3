@@ -24,7 +24,7 @@ import {
   parentChildGroup,
 } from "../../globalFunctions/globalJS_classes";
 
-import { clone, cloneDeep, isEmpty, isNaN, merge } from "lodash";
+import { clone, cloneDeep, isEmpty, isNaN, merge, subtract } from "lodash";
 
 //// Money Handlers ////
 
@@ -489,7 +489,7 @@ function useResetLocStFields(locStKey) {
         outLocSt[key] = init[key];
       }
     }
-    
+
     // shortcut to reset all fields.
     if (EVERYONE) {
       outLocSt = cloneDeep(init);
@@ -517,7 +517,7 @@ function useSetSessionItems() {
     itemAtom = new returnAtom({}),
     newQty = 0,
     actionType = "add",
-    REF_actionType____add_edit_remove = "add edit remove",
+    REF_actionType____add_edit_remove_subtract,
   }) {
     const refDefaultState = baseReturnState({});
     const refAtom = new returnAtom({});
@@ -526,11 +526,19 @@ function useSetSessionItems() {
     let outItemsArr = outSessionState[itemsArrRouteStr];
     const thisItemNum = itemAtom.atomItemNum;
 
-    // universal validity checks
+    // Record repos for items should only have 1 atom per itemNum.  If there are more, I done fucked up.
+    const qtyOfMatchingAtoms = outItemsArr.filter((atom) => {
+      return atom.atomItemNum === thisItemNum;
+    }).length;
+
+    // universal validity checks.  If something's wrong I need to terminate before any other logic runs.
     if (
       itemsCtx[itemAtom.bifrostKey] === undefined ||
-      !Array.isArray(outItemsArr)
+      !Array.isArray(outItemsArr) ||
+      // if there are >1 atoms with this itemNum, I fucked up somewhere because we only modify Record repos directly.
+      qtyOfMatchingAtoms > 1
     ) {
+      console.log("You're setting Session Items wrong.");
       return false;
     }
 
@@ -540,28 +548,54 @@ function useSetSessionItems() {
     });
 
     // this is OK for 'remove' because this itemNum will get filtered no matter what.
-    if (itemIndex === -1) {
-      outItemsArr.push(
-        new returnAtom({ atomItemNum: thisItemNum, atomItemQty: 0 })
-      );
-      itemIndex = outItemsArr.length - 1;
-    }
+    const createIfEmpty = () => {
+      if (itemIndex === -1) {
+        outItemsArr.push(
+          new returnAtom({ atomItemNum: thisItemNum, atomItemQty: 0 })
+        );
+        itemIndex = outItemsArr.length - 1;
+      }
+    };
 
+    // I just unintentionally reinvented CRUD operations.
     const actionMethods = {
       add: () => {
+        createIfEmpty()
         outItemsArr[itemIndex].atomItemQty += Number(newQty);
       },
       edit: () => {
+        createIfEmpty()
         outItemsArr[itemIndex].atomItemQty = Number(newQty);
       },
       remove: () => {
-        // Remove this item and any items with this item as a parent.
         outItemsArr = outItemsArr.filter((thisItem) => {
-          return thisItem.atomItemNum !== thisItemNum;
+          // Keep only atoms that don't match the itemNum or have the itemNum as a parent.
+          const keepThisAtom =
+            thisItem.atomItemNum !== thisItemNum &&
+            thisItem.parentKey !== thisItemNum;
+          return keepThisAtom;
         });
-        outItemsArr = outItemsArr.filter((thisItem) => {
+        // shouldn't need this anymore.
+
+        /*
+          outItemsArr = outItemsArr.filter((thisItem) => {
           return thisItem.parentKey !== thisItemNum;
         });
+        
+        */
+      },
+      subtract: () => {
+        // currently does not handle child items.  Not sure if it should.
+
+        outItemsArr[itemIndex].atomItemQty -= Number(newQty);
+        console.log("Deducted Qty:", outItemsArr[itemIndex].atomItemQty);
+        // if the atom has been depleted...
+        if (outItemsArr[itemIndex].atomItemQty <= 0) {
+          // remove it from the array.
+          outItemsArr = outItemsArr.filter((thisItem) => {
+            return thisItem.atomItemNum !== thisItemNum;
+          });
+        }
       },
     };
 
@@ -878,7 +912,6 @@ const newItemAtomizer = ({ atomizedReturnItemsArr = [], newItemsArr }) => {
 };
 
 const autoAddChildAtoms = (clonedDraft) => {
-  // what is the purpose of this function?
   // This function is to add child atoms from session invoices to the returnItems array if their parent is already in the array.
 
   // Papa?  Is it you?

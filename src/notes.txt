@@ -8486,6 +8486,51 @@ What to do today?
 
     -Is there anywhere specific the rejection should live?  If I ever re-do Returns I guess I would want a hook to handle this?
 
+25 Sep 2024
+    -Had some trouble yesterday.  I was able to replace the contents of the Return cart easily enough, but then I started getting crashes.  I think I figured out the problem - the Atomizer returns 3 arrays in an object - but the Atomizer only breaks down Atoms.  It does not reconstitute them.  So if I have:
+        {ItemNum: 100
+        Qty: 2},
+        {ItemNum: 100
+        Qty: 3},
+
+    in the same level, the Atomizer isn't going to re-combine them.  It's just going to have 2 different atoms representing the same thing.
+
+    So then there are 2 different ways I could handle this.  
+    
+    The first would be the inverse of an Atomizer.  A Moleculizer?  A Condenser?  The idea is that it would take an array and condense everything with the same key, incrementing qtys as it goes.  It would have to look for commonalities.  That could be useful.
+        -I could see needing that for other things, like payments and such.
+        -Feels like just having it might give me ideas on other places to use it.
+        -There's something slightly unsettling about de-adding items from the cart.  Some vague sense of one layer of abstraction too many.
+
+    The other would be to add one more capability the SetSessionItems function, which is a decrementer.  It's just the reverse of adding.  It would take an item out, and if the qty <= 0 it would clear the item.
+        -While it feels slightly silly to type this after my vague unsettledness above, something also feels good about this.  It feels like less to remember since it is a direct analog of Add Item.
+
+    OK, let's do it like this.  We will add the Decrementer, but we'll keep the idea of an AtomCondenser in mind for cases where it might be useful.
+
+26 Sep 2024
+    Teeny tiny little side project:  If I lost it all and was rebuilding from scratch, what would I do differently?
+        -I wouldn't use Immer.  Being unable to see the draft within logic is a pain in my ass.
+        -I'd try TS.  I think having enums would solve a few problems and I want to learn it anyways.
+        -Universal atoms, or at least definitions.
+        -Whatever I figure out for local state and component composition.
+        -Use Maps instead of Objects or Arrays.  
+
+    OK, let's do this.  Subtraction isn't working, so I need to figure out why.  If I ABSOLUTELY cannot make this work I have backup plans, but this feels like a fairly clean and legible solution.  
+
+    OK, so here is what I have observed when I advance and finalize the 'deduction'
+        -No atoms are getting their numbers reduced.
+        -The last element in the array is actually getting increased, and the increment appears to the the non-receipted qty.
+        -Also of interest, I put a console.log in the Subtract function and it didn't appear to fire at all.  
+        -I took out the Subtract call, which did not appear to be firing, and the quantity did not change up or down.
+    
+    OK, that's good.  I think we have at least identified where it's going wrong.  
+
+
+
+    
+
+
+
 
     
 
