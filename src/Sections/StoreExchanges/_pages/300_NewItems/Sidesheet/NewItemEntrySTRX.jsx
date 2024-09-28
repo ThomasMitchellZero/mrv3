@@ -22,7 +22,8 @@ function NewItemEntrySTRX() {
   const locMethods = useLocStMethods_STRX().NewItems();
   const activeError1 = locStRt.activeError1;
 
-  const setSessionItems = useSetSessionItems();
+  //setSessionItems
+  const setNewItems = useSetSessionItems({ targetStateArrKey: "newItems" });
   const productCtx = useContext(ProductContext);
 
   const activeErrorStr = locStRt?.activeError1?.str || "";
@@ -55,11 +56,10 @@ function NewItemEntrySTRX() {
         atomItemQty: locStRt.input2, // is this needed?
       });
 
-      setSessionItems({
+      setNewItems({
         itemAtom: outAtom,
         newQty: locStRt.input2,
         actionType: "add",
-        itemsArrRouteStr: "newItems",
       });
       resetNewItemEntryLS({ inputALL: true, activeErrorALL: true });
     }

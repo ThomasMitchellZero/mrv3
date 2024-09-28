@@ -25,7 +25,9 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
   const resetPageLS = useResetLocStFields("page");
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
-  const setSessionItems = useSetSessionItems();
+
+  // setSessionItems
+  const setReturnItems = useSetSessionItems({ targetStateArrKey: "returnItems" });
 
   const locMethods = useLocStMethods_STRX().AddItemsAndInvos();
 
@@ -55,8 +57,7 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
   // local function for handling qty changes.
   const handleQtyChange = (e, atomizedItem) => {
     const newQty = e.target.value;
-    setSessionItems({
-      itemsArrRouteStr: "returnItems",
+    setReturnItems({
       itemAtom: atomizedItem,
       newQty: newQty,
       actionType: "edit",
@@ -74,11 +75,7 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
       event.stopPropagation();
       console.log("tileItemAtom", tileItemAtom);
       setPageLS({ activeKey1: tileItemAtom.atomItemNum });
-      /*
-            setSessionMRV((draft) => {
-        draft.locSt.page.activeKey1 = tileItemAtom.atomItemNum;
-      });
-      */
+
 
       resetReasonPickerLS({ EVERYONE: true });
     };
@@ -143,7 +140,7 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
     e.stopPropagation();
     console.log("trying to delete Return Item");
     locMethods.resetKeysToo(); // need to clear the active item.
-    setSessionItems({
+    setReturnItems({
       itemAtom: returnItemAtom,
       actionType: "remove",
     });

@@ -518,11 +518,10 @@ function setSessionItem({
 
   // locate the corresponding atom in the routeStr in the session state.
 
-
   const thisItemNum = itemAtom.atomItemNum;
   console.log(thisItemNum);
 
-  const outItemsArr = cloneDeep(arrToSet);
+  let outItemsArr = cloneDeep(arrToSet);
 
   let targetAtomIndex = locateAtom({
     itemNum: thisItemNum,
@@ -538,7 +537,7 @@ function setSessionItem({
 
   // universal validity checks.  If something's wrong I need to terminate before any other logic runs.
 
-  // 
+  //
 
   const createIfEmpty = () => {
     if (targetAtomIndex === -1) {
@@ -600,14 +599,38 @@ function setSessionItem({
 
 export { setSessionItem };
 
-function useSetSessionItems() {
+function useSetSessionItems({ targetStateArrKey = "returnItems" }) {
   const itemsCtx = useContext(ProductContext);
 
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
 
-  function setSessionItems({
+  const outFn = ({ itemAtom, newQty, actionType }) => {
+    let outSessionState = cloneDeep(sessionMRV);
+
+    outSessionState[targetStateArrKey] = setSessionItem({
+      arrToSet: sessionMRV[targetStateArrKey],
+      itemAtom: itemAtom,
+      newQty: newQty,
+      actionType: actionType,
+    });
+
+    outSessionState = returnAutoDeriver(outSessionState);
+
+    setSessionMRV(() => {
+      return outSessionState;
+    });
+  };
+
+  return outFn;
+
+  /*
+
+  Blow this all away once I've validated the new function.
+  
+
+    function setSessionItems({
     itemsArrRouteStr = "returnItems",
     REF_routeStr____returnItems__newItems__replacementItemsIsDEPRECATED,
     itemAtom = new returnAtom({}),
@@ -697,6 +720,8 @@ function useSetSessionItems() {
     });
   }
   return setSessionItems;
+  
+  */
 }
 
 function locateAtom({

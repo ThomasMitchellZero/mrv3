@@ -21,14 +21,14 @@ import {
 
 function NewItemCardSTRX({ itemAtom = new returnAtom({}) }) {
   const mrvCtx = useOutletContext();
-  const setSessionItems = useSetSessionItems();
+  //setSessionItems
+  const setNewItems = useSetSessionItems({ targetStateArrKey: "newItems" });
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const locMethods = useLocStMethods_STRX().NewItems();
 
   const handleClearItem = () => {
-    setSessionItems({
-      itemsArrRouteStr: "newItems",
+    setNewItems({
       actionType: "remove",
       itemAtom: itemAtom,
     });

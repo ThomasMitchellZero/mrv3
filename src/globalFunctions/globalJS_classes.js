@@ -49,7 +49,6 @@ class RejectionObj {
 
 export { RejectionObj };
 
-
 export { moneyObj };
 
 class SingleDispo {

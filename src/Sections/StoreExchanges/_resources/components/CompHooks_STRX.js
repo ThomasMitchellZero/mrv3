@@ -26,7 +26,10 @@ function useLocStMethods_STRX() {
   const setSession = mrvCtx.setSessionMRV;
   const locStRt = sessionMRV.locSt;
   const pageLocSt = locStRt.page;
-  const setSessionItems = useSetSessionItems();
+
+  //setSessionItems
+  const setReturnItems = useSetSessionItems({targetStateArrKey: "returnItems"});
+  const setNewItems = useSetSessionItems({targetStateArrKey: "newItems"});
 
   const findAtom = useFindAtom();
   const outMethods = {};
@@ -138,8 +141,7 @@ function useLocStMethods_STRX() {
       handleItemQtyChange: (e, itemAtom) => {
         const newQty = e.target.value;
 
-        setSessionItems({
-          itemsArrRouteStr: "newItems",
+        setNewItems({
           itemAtom: itemAtom,
           newQty: newQty,
           actionType: "edit",

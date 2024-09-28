@@ -21,7 +21,7 @@ import {
 import { clone, cloneDeep } from "lodash";
 
 function NRRrejection() {
-  const setSessionItems = useSetSessionItems();
+
   const nodeNav = useNodeNav();
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;

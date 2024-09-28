@@ -17,7 +17,7 @@ import {
 } from "../../../../../mrv/MRVhooks/MRVhooks";
 
 function NewItemsTileSTRX({ itemAtom = new returnAtom({}) }) {
-  const setSessionItems = useSetSessionItems();
+
   const lsMethods = useLocStMethods_STRX().NewItems();
   const findAtom = useFindAtom();
   const setPageLS = useSetLocStFields("page");

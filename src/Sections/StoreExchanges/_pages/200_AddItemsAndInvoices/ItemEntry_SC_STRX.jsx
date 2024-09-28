@@ -32,7 +32,9 @@ const ItemEntry_SC_STRX = ({}) => {
   const locStRt = sessionMRV.locSt.AllEntry30;
   const locMethods = useLocStMethods_STRX().AddItemsAndInvos();
 
-  const setSessionItems = useSetSessionItems();
+  //setSessionItems
+  const setSessionItems = useSetSessionItems({ targetStateArrKey: "returnItems" });
+
   const productCtx = useContext(ProductContext);
 
 
@@ -74,7 +76,6 @@ const ItemEntry_SC_STRX = ({}) => {
         itemAtom: outAtom,
         newQty: locStRt.input2,
         actionType: "add",
-        itemsArrRouteStr: "returnItems",
       });
 
       locMethods.resetForm();
