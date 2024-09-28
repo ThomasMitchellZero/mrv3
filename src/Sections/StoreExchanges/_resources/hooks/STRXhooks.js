@@ -19,7 +19,6 @@ import {
   useNodeNav,
 } from "../../../../mrv/MRVhooks/MRVhooks";
 
-
 const defaultNavNodesSTRX = {
   testScenarios: navNode({
     keyStr: "testScenarios",
@@ -49,6 +48,11 @@ const defaultNavNodesSTRX = {
     breadcrumb: true,
     routeStr: "/store-exchanges/newitems",
     locSt: LS_STRX_300_NewItems,
+  }),
+  unpaired: navNode({
+    keyStr: "unpaired",
+    titleStr: "Unpaired Items",
+    routeStr: "/store-exchanges/unpaired",
   }),
   review: navNode({
     keyStr: "review",

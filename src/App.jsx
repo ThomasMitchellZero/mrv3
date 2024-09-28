@@ -43,6 +43,7 @@ import { ReplacementCheck } from "./Sections/StoreExchanges/_pages/150_ItemCheck
 import { AddItemsAndInvosSTRX } from "./Sections/StoreExchanges/_pages/200_AddItemsAndInvoices/AddItemsAndInvosSTRX";
 import { NewItemsSTRX } from "./Sections/StoreExchanges/_pages/300_NewItems/NewItemsSTRX";
 import { NRRrejection } from "./Sections/StoreExchanges/_pages/275_NRRrejection/NRRrejection";
+import { UnpairedRejection } from "./Sections/StoreExchanges/_pages/375_UnpairedRejection/UnpairedRejection";
 
 //XDTX
 import { XDTX } from "./Sections/XDTX/XDTX";
@@ -115,6 +116,7 @@ function App() {
             />
             <Route path="no-receipt" element={<NRRrejection />} />
             <Route path="newitems" element={<NewItemsSTRX />} />
+            <Route path="unpaired" element={<UnpairedRejection />} />
           </Route>
           <Route path="xdt-exchanges" element={<XDTX />}>
             <Route index element={<StartXDTX />} />

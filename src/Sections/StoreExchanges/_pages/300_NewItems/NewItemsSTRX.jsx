@@ -33,16 +33,21 @@ import { useOutletContext } from "react-router";
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 function NewItemsSTRX() {
+  const nodeNav = useNodeNav();
+  const locMethods = useLocStMethods_STRX().NewItems();
+  const productCtx = useContext(ProductContext);
+
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
-  const locMethods = useLocStMethods_STRX().NewItems();
-  const productCtx = useContext(ProductContext);
 
   const activeUI3 = sessionMRV.locSt.page.activeUI3;
   const activeError1 = sessionMRV.locSt.page.activeError1;
 
   const activeErrorStr = activeError1?.str || "";
+
+  // this doesn't actually reflect if all are matched, but it's a good enough indicator for now.
+  const allMatched = sessionMRV.cashDeltaMO.unitBaseValue === 0;
 
   const oMode = {};
 
@@ -67,13 +72,22 @@ function NewItemsSTRX() {
 
   const handleContinue = (e) => {
     e.stopPropagation();
+    if (!allMatched) {
+      locMethods.basicClear();
+      nodeNav("unpaired");
+    } else {
+      console.log("Perfectly balanced, as all things should be.");
+    }
   };
 
   return (
     <section className={`newItems mrvPage color__surface__subdued`}>
-      <main onClick={() => {
-        locMethods.basicClear();
-      }} className={`mrvPanel__main`}>
+      <main
+        onClick={() => {
+          locMethods.basicClear();
+        }}
+        className={`mrvPanel__main`}
+      >
         <TitleBarSTRX
           showProductName={true}
           headerTitle={`New Items For Exchange`}

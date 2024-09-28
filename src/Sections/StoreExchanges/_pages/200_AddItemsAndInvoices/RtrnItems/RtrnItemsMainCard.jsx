@@ -27,7 +27,9 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
   const setSessionMRV = mrvCtx.setSessionMRV;
 
   // setSessionItems
-  const setReturnItems = useSetSessionItems({ targetStateArrKey: "returnItems" });
+  const setReturnItems = useSetSessionItems({
+    targetStateArrKey: "returnItems",
+  });
 
   const locMethods = useLocStMethods_STRX().AddItemsAndInvos();
 
@@ -75,7 +77,6 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
       event.stopPropagation();
       console.log("tileItemAtom", tileItemAtom);
       setPageLS({ activeKey1: tileItemAtom.atomItemNum });
-
 
       resetReasonPickerLS({ EVERYONE: true });
     };
@@ -163,9 +164,7 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
           bigValue={cardString}
           description={"Refund Value"}
           greenifyVal={cardTotalVal}
-          handleClick={
-            handleClearItem
-          }
+          handleClick={handleClearItem}
         />
       </div>
     </div>
