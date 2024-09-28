@@ -8525,6 +8525,76 @@ What to do today?
     
     OK, that's good.  I think we have at least identified where it's going wrong.  
 
+    Fixed the subtraction problem.  Turns out I was using the wrong property name for the action argument, :/  Dumb dumb dumb.  Well, kind of.  I'm feeling pretty good about how I made observations and quickly isolated the problem.  Cool to see my toolkit improving.  
+    
+    However, I've still got the problem where it's only being applied to the last element.  Let's see what else we can observe.  
+        -I happened to notice that in a different hook, I'm logging the contents of the contents of the returnItems.  In the first log, it's showing the NRR qty (2) correctly deducted, leaving a Receipted Qty of 3.  So far so good.  But on the second log, deleting the second NRR qty, that value is back to 5.  And sure enough, when I checked the values in the component tree, the second item qty was correctly deducted, but the first was not.  
+
+    Here's my best guess.  I don't know enough about the true workings of state-setting to know for sure, but it feels like I am queueing multiple state changes, but each subsequent iteration of the state-change doesn't see the results of the previous runs, and so only the last one is actually being applied.  Hmm.  That actually might make sense.  I think they are all queued together, but the arguments are defined when the hook is queued, not when it is actually run.  So each instance of the state-setting sees only the draft it had when was queued.  The state is indeed being set, but each subsequent run is modifying the same original draft.  Remember, the draft is the WHOLE state being set, and it is fully replaced each time.  
+
+    OK.  That's interesting, and it's also good to know.  It's VERY good to know, because I frequently fire multiple state-setters.  
+
+    Is that right, though?  Surely I should have encountered this problem before, right?  I'm looking at a CompHooks file and I'm setting the shit out of my local states within a single function call.
+
+    The only thing I can think of that would be different is that I am calling the same hook multiple times.  That might be different.  I mean, normally if I am changing state, I don't call the same hook.  If I have multiple concurrent modifications, I SHOULD just do them in the same draft.  And while, for instance, my localState setters are all modifying the same global state, they're generally different named functions.  
+
+    OK.  So we should definitely be aware of that.  It also feels like in instances where the same hook might go onto the stack more than once, I should design my hooks to accept multiple values.  That ensures that every change I want happens within one scope so they don't get lost.
+
+    OK.  So what should I do for my current problem?  A while ago, I had an idea to set my SetSessionItems function to take an array instead of an object.  That would let me do a whole batch of items at once if I wanted.  So maybe we just do that?  Honestly that whole function looks kinda hairy.  Maybe this is the kick in the ass I need.
+
+    Ahh.  I think I see why I didn't do it.  I only have one input for qty.  
+
+    Cool.  So let's think about this.  What would be a clear, logical way to handle this?
+
+    I guess I COULD make a new class to hold both the atom and the new Qty, but that feels clunky AF.  Besides, I'm trying to make MORE things use atoms, not less.
+
+    What if I just passed in an atom containing the value I want?  Let's think about the scenarios.  In most cases, I need to know which atom to affect, and I need to know a value.  
+
+        [
+            {atom1
+            atomQty: 2},
+
+            {atom2,
+            atomQty: 8}
+        ]
+
+    So it kinda feels like I don't really need the atom, because I'm not really affecting the atom.  I really just need a way of identifying the atom.  A whole damn lot of my logic is just "Getting to the atom I need". 
+
+    Really wondering 
+
+    BTW, the other way to handle this would be to have the modification live outside a hook.  Then I could run it as many times as I feel like.  
+
+28 Sep 2024
+    12:00.
+    A little late start, but I had to get a haircut and do some house chores, plus my requisite time-wasting, so here I am.  
+
+    -First order of business is to get the automatic deductions working.  I am about 75% sure I understand why my process was failing before:  I'm pretty sure that the arguments for the state-setters, including the draft state, are passed when they are queued, so those arguments don't reflect that the state has changed as each layer of the stack resolves.  Only the first function call is using valid inputs.  The inputs of every subsequent call are stale.  
+
+    So no matter what, I'm looping.  Either within the scope of SetSessionItems, or else with repeated iterations of the de-hooked inner function.  
+
+    If I do the second option, I don't have to figure out anything new with the function's parameters.  I just use the function I have multiple times to produce the result, run it through the auto-deriver, and then entirely replace the old state.  
+    
+    And I don't think implementing a true primary key does a whole lot for me.  In basically every case, I am selecting my targets based on the values of their fields.  No matter what, I've got to check those fields to find targets, and once I've got the target identified, I can set its values based on index just as well as through a primary key.  
+
+    I guess what a true primary key lets me do is to separate the target-finding from the target-modifying - I just pass the modifier the key of the target.  
+
+    OK.  So then.  Do I want to do this now?  I feel like the smart answer is 'no'.  If I do, I could easily see it taking up my whole day and feeling dumb.  Let's be smart.  I can always come back and wrangle that shit later. 
+
+    3:30.
+    Function seems to be working in that it it is updating the array with the correct values, but the the array being populated by the cycles doesn't seem to be changing.  
+
+    4:10.  
+    OK.  Sweet.  It's working.  Turns out the problem was my old nemesis this past month or so - hallucinated field names.  So now what?  I feel like it's going to be a PITD, but I should probably refactor SetSessionItems to use the new code.  Otherwise I could find myself chasing bugs throughout the app.  Let's just handle that shit and be done.  
+
+    6:00.  
+    Gonna call it a night.  Gotta be up fairly early tomorrow for grass VB :D  All in all, not a bad day.  Solved my primary issue, cleaned up an Everywhere function, and got nav to Unpaired Rejection working correctly.
+
+    
+
+
+
+    
+
 
 
     
