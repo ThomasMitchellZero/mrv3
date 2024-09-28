@@ -16,8 +16,9 @@ import {
   useSetSessionItems,
   primaryAtomizer,
   returnAutoDeriver,
+  setSessionItem,
 } from "../../../../mrv/MRVhooks/MRVhooks";
-import { cloneDeep } from "lodash";
+import { clone, cloneDeep } from "lodash";
 
 function NRRrejection() {
   const setSessionItems = useSetSessionItems();
@@ -34,23 +35,7 @@ function NRRrejection() {
     Boolean(atom.atomInvoNum)
   );
 
-  const aReceiptedReturnItems = cloneDeep(sessionMRV.returnItems);
-
-  // New arr of ReturnItems with NRR items removed.  Will be new ReturnItems cart.
-
-  /*
-  
-    const aReceiptedCart = primaryAtomizer({
-    repo1: aReceiptedItems,
-    repo2: sessionMRV.returnItems,
-    comparisonFn: ({ repo1Atom, repo2Atom }) =>
-      repo1Atom?.atomItemNum === repo2Atom?.atomItemNum,
-    setMergedAtomFn: ({ repo1Atom, repo2Atom }) => {
-      return repo1Atom;
-    },
-  });
-  
-  */
+  console.log(aReceiptedItems);
 
   const oNRRrejections = new RejectionObj({
     rejectsArr: aNRRitems,
@@ -64,38 +49,33 @@ function NRRrejection() {
     return <RejectionCard key={i} rejectionObj={rej} />;
   });
 
+  let outReturnItems = [];
+
+  // Re-add all receipted items to the returnItems array.  Could technically subtract, but I'm pretty sure this works.
+  for (const receiptedAtom of aReceiptedItems) {
+    console.log(receiptedAtom);
+    const outArray = setSessionItem({
+      arrToSet: outReturnItems,
+      itemAtom: receiptedAtom,
+      actionType: "add",
+      newQty: receiptedAtom.atomItemQty,
+    });
+
+    outReturnItems = outArray;
+  }
+
   const handleContinue = (e) => {
     // This is where the NRR items exit the transaction, so we set returnItems to ONLY the we have receipts for.
     // We don't want them containing fields from the atomized array, so returnItems is replaced.
 
-    /*
-    
-    */
+    let outSessionState = cloneDeep(sessionMRV);
 
-    /*
-    let currentSessionState = cloneDeep(sessionMRV);
-    currentSessionState.returnItems = aReceiptedCart.mergedRepo;
-    const outSessionState = returnAutoDeriver(currentSessionState);
+    outSessionState.returnItems = outReturnItems;
+    outSessionState = returnAutoDeriver(outSessionState);
 
-    console.log(outSessionState);
-
-    // NOT WORKING.
     setSessionMRV(() => {
       return outSessionState;
     });
-
-    
-    
-    */
-
-    for (const atom of aNRRitems) {
-      setSessionItems({
-        itemsArrRouteStr: "returnItems",
-        itemAtom: atom,
-        actionType: "subtract",
-        newQty: atom.atomItemQty,
-      });
-    }
 
     nodeNav("newitems");
   };

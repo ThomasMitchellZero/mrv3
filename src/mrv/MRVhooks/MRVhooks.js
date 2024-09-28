@@ -504,6 +504,102 @@ function useResetLocStFields(locStKey) {
 
 export { useResetLocStFields };
 
+function setSessionItem({
+  arrToSet = [],
+  REF_routeStr____returnItems__newItems__replacementItemsIsDEPRECATED,
+  itemAtom = new returnAtom({}),
+  newQty = 0,
+  actionType = "add",
+  REF_actionType____add_edit_remove_subtract,
+  customMatchignFn = null,
+}) {
+  const refDefaultState = baseReturnState({});
+  const refAtom = new returnAtom({});
+
+  // locate the corresponding atom in the routeStr in the session state.
+
+
+  const thisItemNum = itemAtom.atomItemNum;
+  console.log(thisItemNum);
+
+  const outItemsArr = cloneDeep(arrToSet);
+
+  let targetAtomIndex = locateAtom({
+    itemNum: thisItemNum,
+    arrToSearch: outItemsArr,
+    asIndex: true,
+    customMatchignFn: customMatchignFn,
+  });
+
+  // Record repos for items should only have 1 atom per itemNum.  If there are more, I done fucked up.
+  const qtyOfMatchingAtoms = outItemsArr.filter((atom) => {
+    return atom.atomItemNum === thisItemNum;
+  }).length;
+
+  // universal validity checks.  If something's wrong I need to terminate before any other logic runs.
+
+  // 
+
+  const createIfEmpty = () => {
+    if (targetAtomIndex === -1) {
+      outItemsArr.push(
+        new returnAtom({ atomItemNum: thisItemNum, atomItemQty: 0 })
+      );
+      targetAtomIndex = outItemsArr.length - 1;
+    }
+  };
+
+  const actionMethods = {
+    add: () => {
+      createIfEmpty();
+      outItemsArr[targetAtomIndex].atomItemQty += Number(newQty);
+    },
+    edit: () => {
+      createIfEmpty();
+      outItemsArr[targetAtomIndex].atomItemQty = Number(newQty);
+    },
+    remove: () => {
+      outItemsArr = outItemsArr.filter((thisItem) => {
+        // Keep only atoms that don't match the itemNum or have the itemNum as a parent.
+        const keepThisAtom =
+          thisItem.atomItemNum !== thisItemNum &&
+          thisItem.parentKey !== thisItemNum;
+        return keepThisAtom;
+      });
+    },
+    subtract: () => {
+      // currently does not handle child items.  Not sure if it should.
+
+      outItemsArr[targetAtomIndex].atomItemQty -= Number(newQty);
+      console.log("Deducted Qty:", outItemsArr[targetAtomIndex].atomItemQty);
+      // if the atom has been depleted...
+      if (outItemsArr[targetAtomIndex].atomItemQty <= 0) {
+        // remove it from the array.
+        outItemsArr = outItemsArr.filter((thisItem) => {
+          return thisItem.atomItemNum !== thisItemNum;
+        });
+      }
+    },
+
+    failFunc: () => {
+      console.log("You're setting Session Items wrong.");
+      return false;
+    },
+  };
+
+  // if the user didn't specify a valid action, warn and terminate.
+  const methodToUse = actionMethods?.[actionType] || actionMethods.failFunc;
+
+  // perform the provided action.
+  methodToUse();
+
+  console.log("outItemsArr", outItemsArr);
+
+  return outItemsArr;
+}
+
+export { setSessionItem };
+
 function useSetSessionItems() {
   const itemsCtx = useContext(ProductContext);
 
@@ -560,11 +656,11 @@ function useSetSessionItems() {
     // I just unintentionally reinvented CRUD operations.
     const actionMethods = {
       add: () => {
-        createIfEmpty()
+        createIfEmpty();
         outItemsArr[itemIndex].atomItemQty += Number(newQty);
       },
       edit: () => {
-        createIfEmpty()
+        createIfEmpty();
         outItemsArr[itemIndex].atomItemQty = Number(newQty);
       },
       remove: () => {
@@ -575,14 +671,6 @@ function useSetSessionItems() {
             thisItem.parentKey !== thisItemNum;
           return keepThisAtom;
         });
-        // shouldn't need this anymore.
-
-        /*
-          outItemsArr = outItemsArr.filter((thisItem) => {
-          return thisItem.parentKey !== thisItemNum;
-        });
-        
-        */
       },
       subtract: () => {
         // currently does not handle child items.  Not sure if it should.
@@ -611,9 +699,39 @@ function useSetSessionItems() {
   return setSessionItems;
 }
 
+function locateAtom({
+  itemNum = "",
+  asIndex = false,
+  arrToSearch = [],
+  customMatchignFn = false,
+  REF__customMatchignFnParam____arrAtom,
+}) {
+  // returns the index of the atom in the array, or the atom itself.
+  const refAtom = new returnAtom({});
+  const refDefaultState = baseReturnState({});
+
+  // most of hte time we will just be looking for the atomItemNum.
+  const matchingFn = customMatchignFn
+    ? customMatchignFn
+    : ({ arrAtom }) => {
+        return arrAtom.atomItemNum === itemNum;
+      };
+
+  const atomIndex = arrToSearch.findIndex((arrAtom) => {
+    return matchingFn({ arrAtom: arrAtom });
+  });
+
+  const outAtom = atomIndex !== -1 ? arrToSearch[atomIndex] : false;
+  return asIndex ? atomIndex : outAtom;
+}
+
+export { locateAtom };
+
 function useFindAtom() {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
+
+  // TODO - getAtomIndex is a cleaner, de-hooked version of this function.  I should refactor this to use getAtomIndex.
 
   const findAtom = ({
     itemNum = "",
