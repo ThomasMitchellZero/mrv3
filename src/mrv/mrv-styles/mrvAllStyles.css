@@ -331,6 +331,7 @@
     }
 
     & .main_content {
+      padding: var(--PrimaryPadding__vertical) 0rem;
       flex: 1 1 0rem;
       display: flex;
       flex-direction: column;
@@ -398,7 +399,7 @@
       width: 33%;
       padding: 0rem 0rem 0rem var(--PrimaryPadding__horizontal);
 
-      & div{
+      & div {
         display: flex;
         flex-direction: row;
         padding-top: 0.24rem;
@@ -867,6 +868,14 @@
 
   & .maxWidth {
     width: 100%;
+  }
+
+  & .maxWidth_100pct {
+    max-width: 100%;
+  }
+
+  & .maxWidth_50pct {
+    max-width: 50%;
   }
 
   & .minHeight {

@@ -103,7 +103,7 @@
         grid-template-columns:
           [detail] 1fr
           [totalQty] 7rem
-          [receipt] 9rem
+          [receipt] 12rem
           [unitPrice] 7rem
           [totalPrice] 8rem
           [trash] var(--DeleteColWidth);
@@ -192,6 +192,7 @@
       & .unitPriceCol {
         grid-column: unitPrice / span 1;
         justify-content: flex-end;
+        gap: 0.25rem;
       }
 
       & .totalPriceCol {

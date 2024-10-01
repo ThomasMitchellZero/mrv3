@@ -21,7 +21,6 @@ import {
 import { clone, cloneDeep } from "lodash";
 
 function NRRrejection() {
-
   const nodeNav = useNodeNav();
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
@@ -89,12 +88,14 @@ function NRRrejection() {
           showNavNodeBar={true}
         />
         <div className={`main_content`}>
-          <ColumnLabelMRV
-            iconStr={`box`}
-            bigLabel={`No Receipts Found`}
-            smallLabel={`These items cannot be returned without receipts.`}
-          />
-          {uiRejectionCards}
+          <div className={`vBox maxWidth_50pct`}>
+            <ColumnLabelMRV
+              iconStr={`box`}
+              bigLabel={`No Receipts Found`}
+              smallLabel={`These items cannot be returned without receipts.`}
+            />
+            {uiRejectionCards}
+          </div>
         </div>
         <div className={`footer_content`}>
           <CashTotalSTRX />
