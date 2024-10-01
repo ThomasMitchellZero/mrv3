@@ -44,6 +44,7 @@ import { AddItemsAndInvosSTRX } from "./Sections/StoreExchanges/_pages/200_AddIt
 import { NewItemsSTRX } from "./Sections/StoreExchanges/_pages/300_NewItems/NewItemsSTRX";
 import { NRRrejection } from "./Sections/StoreExchanges/_pages/275_NRRrejection/NRRrejection";
 import { UnpairedRejection } from "./Sections/StoreExchanges/_pages/375_UnpairedRejection/UnpairedRejection";
+import { TotalReviewSTRX } from "./Sections/StoreExchanges/_pages/500_TotalReview/TotalReviewSTRX";
 
 //XDTX
 import { XDTX } from "./Sections/XDTX/XDTX";
@@ -117,6 +118,7 @@ function App() {
             <Route path="no-receipt" element={<NRRrejection />} />
             <Route path="newitems" element={<NewItemsSTRX />} />
             <Route path="unpaired" element={<UnpairedRejection />} />
+            <Route path="total-review" element={<TotalReviewSTRX />} />
           </Route>
           <Route path="xdt-exchanges" element={<XDTX />}>
             <Route index element={<StartXDTX />} />

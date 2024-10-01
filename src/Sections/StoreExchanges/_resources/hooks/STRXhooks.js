@@ -54,11 +54,11 @@ const defaultNavNodesSTRX = {
     titleStr: "Unpaired Items",
     routeStr: "/store-exchanges/unpaired",
   }),
-  review: navNode({
-    keyStr: "review",
-    titleStr: "Review",
+  totalReview: navNode({
+    keyStr: "totalReview",
+    titleStr: "Total Review",
     breadcrumb: true,
-    routeStr: "/store-exchanges/review",
+    routeStr: "/store-exchanges/total-review",
   }),
 };
 

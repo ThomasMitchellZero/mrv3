@@ -22,7 +22,7 @@ import {
   returnAtom,
 } from "../../../../globalFunctions/globalJS_classes";
 
-import { useNodeNav } from "../../../../mrv/MRVhooks/MRVhooks";
+import { useNodeNav, primaryAtomizer } from "../../../../mrv/MRVhooks/MRVhooks";
 
 import { useContext } from "react";
 
@@ -70,14 +70,29 @@ function NewItemsSTRX() {
 
   /* ---- SHARED FUNCTIONS ---- */
 
+  // check for unpaired items.  This affects the route for the Continue button.
+  const atomizedForPeers = primaryAtomizer({
+    repo1: sessionMRV.returnItems,
+    repo2: sessionMRV.newItems,
+    comparisonFn: ({ repo1Atom, repo2Atom }) => {
+      return repo1Atom.atomItemNum === repo2Atom.atomItemNum;
+    },
+  });
+
+  console.log(atomizedForPeers);
+
+  const returnUnpaired = atomizedForPeers.unmerged1;
+  const newUnpaired = atomizedForPeers.unmerged2;
+  const hasUnpaired = returnUnpaired.length > 0 || newUnpaired.length > 0;
+
+  const navRt = hasUnpaired ? "unpaired" : "totalReview";
+
   const handleContinue = (e) => {
     e.stopPropagation();
-    if (!allMatched) {
+    if (hasUnpaired) {
       locMethods.basicClear();
-      nodeNav("unpaired");
-    } else {
-      console.log("Perfectly balanced, as all things should be.");
     }
+    nodeNav(navRt);
   };
 
   return (

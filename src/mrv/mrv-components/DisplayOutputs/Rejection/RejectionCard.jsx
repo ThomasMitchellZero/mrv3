@@ -16,7 +16,7 @@ function RejectionCard({ rejectionObj = new RejectionObj({}) }) {
       <div key={atom.atomItemNum} className={`hBox minFlex maxWidth`}>
         <MRVitemDetails thisItemAtom={atom} showPrice={false} showQty={false} />
         <BigLabeledValue
-          labelStr="Rejected Qty"
+          labelStr="Qty Removed"
           valueStr={atom.atomItemQty}
           size="M"
         />

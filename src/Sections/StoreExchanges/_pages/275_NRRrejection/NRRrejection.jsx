@@ -84,15 +84,15 @@ function NRRrejection() {
       <main className={`mrvPanel__main`}>
         <TitleBarSTRX
           showProductName={true}
-          headerTitle={`No Receipts Found For items`}
+          headerTitle={`Return items removed from exchange`}
           showNavNodeBar={true}
         />
         <div className={`main_content`}>
           <div className={`vBox maxWidth_50pct`}>
             <ColumnLabelMRV
               iconStr={`box`}
-              bigLabel={`No Receipts Found`}
-              smallLabel={`These items cannot be returned without receipts.`}
+              bigLabel={`Return Items Removed`}
+              smallLabel={`Items may be eligible for a return in a separate transaction.`}
             />
             {uiRejectionCards}
           </div>
