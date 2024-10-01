@@ -126,7 +126,7 @@ const RtrnInvosCardFull = ({ parLocState, setParLocState }) => {
     return (
       <div
         key={invoObj.invoNum}
-        className={`cardStyle entryCard invos_grid`}
+        className={`cardStyle invos_grid`}
         onClick={(e) => {
           e.stopPropagation();
         }}

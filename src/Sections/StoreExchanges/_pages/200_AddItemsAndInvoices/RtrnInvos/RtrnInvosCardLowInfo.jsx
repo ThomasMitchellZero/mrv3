@@ -26,7 +26,7 @@ const RtrnInvosCardLowInfo = ({ invoice = new Invoice_SR({}) }) => {
   return (
     <div
       key={invoice.invoNum}
-      className={`cardStyle entryCard invos_grid`}
+      className={`cardStyle invos_grid`}
       onClick={(e) => {
         e.stopPropagation();
       }}

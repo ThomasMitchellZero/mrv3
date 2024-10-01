@@ -31,7 +31,15 @@ function UnpairedRejection() {
   const setNewItems = useSetSessionItems({ targetStateArrKey: "newItems" });
 
 
+
+
   /*
+
+    const atomizedForPeers = primaryAtomizer({
+    repo1: sessionMRV.returnItems,
+  });
+
+  ---
 
     const aNRRitems = sessionMRV.atomizedReturnItems.filter(
     (atom) => !Boolean(atom.atomInvoNum)

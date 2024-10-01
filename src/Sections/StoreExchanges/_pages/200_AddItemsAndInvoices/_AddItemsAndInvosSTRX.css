@@ -78,10 +78,7 @@
       padding: 0rem 1rem;
     }
 
-    & .entryCard {
-      flex: 0 0 auto;
-      padding: 1rem;
-    }
+
 
     & .field {
       display: flex;

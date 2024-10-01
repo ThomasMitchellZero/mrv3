@@ -152,7 +152,7 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
   return (
     <div
       key={`${returnItemAtom.atomItemNum}card`}
-      className={`cardStyle entryCard items_grid`}
+      className={`cardStyle items_grid`}
       onClick={(e) => {
         e.stopPropagation();
       }}
