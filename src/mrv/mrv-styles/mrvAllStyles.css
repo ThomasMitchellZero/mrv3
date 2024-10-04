@@ -845,6 +845,10 @@
     align-items: flex-end;
   }
 
+  & .justifyCenter {
+    justify-content: center;
+  }
+
   & .centerAll {
     align-items: center;
     justify-content: center;

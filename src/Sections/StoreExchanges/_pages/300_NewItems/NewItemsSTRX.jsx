@@ -46,9 +46,6 @@ function NewItemsSTRX() {
 
   const activeErrorStr = activeError1?.str || "";
 
-  // this doesn't actually reflect if all are matched, but it's a good enough indicator for now.
-  const allMatched = sessionMRV.cashDeltaMO.unitBaseValue === 0;
-
   const oMode = {};
 
   const o30panels = {
