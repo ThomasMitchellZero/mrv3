@@ -8589,34 +8589,35 @@ What to do today?
     6:00.  
     Gonna call it a night.  Gotta be up fairly early tomorrow for grass VB :D  All in all, not a bad day.  Solved my primary issue, cleaned up an Everywhere function, and got nav to Unpaired Rejection working correctly.
 
-    
+1 Oct 2024
+    5:25.  Man.  Just one of those days where you don't win.  All of a sudden I have a trainload of work, everybody wants it done now, and lots of stuff I wanted is stuff I'm not gonna get.  
 
+    Let's just sling some code and maybe we can get out of today feeling like we accomplished something.  
 
+    Here's what I would consider a good day:
+    X -50% width class
+    X -Function to identify items without a mate in the other cart.  *SHOULD* just be Lunes of the UniAtomizer?
+    X -Conditional route to rejection screen.
+    X -Basics of a rejection screen.
 
-    
+    7:30.
+    Amazingly, I got further than I expected.  The only thing I still have left to do on the Rejection Screen is to clear the unmatched items, and I am like 80% sure I just need to set the Matched array to both Return and New and then run the AutoDeriver.  I could probably do that now, but my sense is that would be a really good First Task.
 
+4 Oct 2024
+    1:20.
+    Let's sling some code and make sure that everything is working as expected for our test.  Today we shall:
 
+    X -Get in the ability to delete an invoice.
+    -Populate the Return and Exchange carts.
+        - Verify that the AutoDeriver assigns prices.
+        - Clone the local state
+        - Populate both carts with the matching items.
+        - Run the AutoDeriver
 
-    
+    -Build out the Total Review page.
 
+    Upon tonight's ensaladation, we should meditate on how cool it is that we can code now.  Not Michael Bloomberg doing some HTML Hello World shit, not Anthony copypasting from Claude - we know how to write a fucking application.  That is rad.  
 
-
-
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    
 
 
 

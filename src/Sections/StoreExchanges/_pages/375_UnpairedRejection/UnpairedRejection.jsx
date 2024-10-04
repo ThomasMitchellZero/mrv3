@@ -78,6 +78,7 @@ function UnpairedRejection() {
         <RejectionCard rejectionObj={returnRejects} />
       </div>
     ) : null;
+
   const uiUnpairedNewItems =
     newUnpaired.length > 0 ? (
       <div className={`vBox maxWidth_50pct`}>
@@ -91,51 +92,22 @@ function UnpairedRejection() {
     ) : null;
 
   /*
-
-
-
-  ---
-
-    const aNRRitems = sessionMRV.atomizedReturnItems.filter(
-    (atom) => !Boolean(atom.atomInvoNum)
-  );
-
-  const aReceiptedItems = sessionMRV.atomizedReturnItems.filter((atom) =>
-    Boolean(atom.atomInvoNum)
-  );
-
-  console.log(aReceiptedItems);
-
-  const oUnpairedRejections = new RejectionObj({
-    rejectsArr: aNRRitems,
-    strLabel: "These items cannot be returned without receipts.",
-  });
-
-  // fill with all rejection types.  Might have more in the future.
-  const aAllRejections = [oUnpairedRejections];
-
-  const uiRejectionCards = aAllRejections.map((rej, i) => {
-    return <RejectionCard key={i} rejectionObj={rej} />;
-  });
-
-  let outReturnItems = [];
-
-  // Re-add all receipted items to the returnItems array.  Could technically subtract, but I'm pretty sure this works.
-  for (const receiptedAtom of aReceiptedItems) {
-    console.log(receiptedAtom);
-    const outArray = setSessionItem({
-      arrToSet: outReturnItems,
-      itemAtom: receiptedAtom,
-      actionType: "add",
-      newQty: receiptedAtom.atomItemQty,
-    });
-
-    outReturnItems = outArray;
-  }
   
   */
 
   const handleContinue = (e) => {
+    let outLocState = cloneDeep(sessionMRV);
+
+    // Only paired items are kept in the transaction, so the same value is assigned to Return and New Items.
+    outLocState.returnItems = paired;
+    outLocState.newItems = paired;
+
+    outLocState = returnAutoDeriver(outLocState);
+
+    setSessionMRV(() => {
+      return outLocState;
+    });
+
     nodeNav("totalReview");
   };
 
