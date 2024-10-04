@@ -831,6 +831,30 @@ const useReturnAtomizer = () => {
   return returnAtomizer;
 };
 
+//// Basic utility functions for the Universal Atomizer. ////
+
+const baseAtomizerComparison = ({ repo1Atom, repo2Atom }) => {
+  return repo1Atom.atomItemNum === repo2Atom.atomItemNum;
+};
+const baseAtomizerSetMerged = ({ repo1Atom, repo2Atom, mergedAtom }) => {
+  const refAtom = new returnAtom({});
+
+  const newVals = {
+    peerItem: repo1Atom.atomItemNum,
+    transactionType: "likeExch",
+  };
+  const outMergedAtom = {
+    ...cloneDeep(mergedAtom),
+    ...cloneDeep(repo1Atom),
+    ...newVals,
+  };
+  const refMoneyObj = new moneyObj({});
+  outMergedAtom.atomMoneyObj.invertValue();
+  return outMergedAtom;
+};
+
+export { baseAtomizerComparison, baseAtomizerSetMerged };
+
 const primaryAtomizer = ({
   // takes 2 atom arrays and returns 3 - one for the merged atoms, and the leftovers from the 2 original repos.
   // repos must be pre-atomized and iterable.
@@ -838,10 +862,7 @@ const primaryAtomizer = ({
   repo2 = [],
 
   // Where we determine what counts as a match.
-  comparisonFn = ({ repo1Atom, repo2Atom }) => {
-    console.log("no comparison Fn");
-    return false;
-  },
+  comparisonFn = baseAtomizerComparison,
 
   // the format of the atoms in the merged array.  Normally a returnAtom.
   mergedAtomTemplate = new returnAtom({}),
@@ -850,13 +871,8 @@ const primaryAtomizer = ({
   mergeUnitKey = "atomItemQty",
 
   // set other fiels of mergedAtom.
-  setMergedAtomFn = ({ repo1Atom, repo2Atom, mergedAtom }) => {
-    /*
-    If matched, this is the only point where we have access to both atoms being merged.  At least 1 will be destroyed.
-    Fields don't HAVE to be cloned from mergees.  Can be set directly, or not at all.  Returns unmodified by default.
-    */
-    return mergedAtom;
-  },
+  setMergedAtomFn = baseAtomizerSetMerged,
+  
 }) => {
   let unmerged1 = cloneDeep(repo1);
   let unmerged2 = cloneDeep(repo2);

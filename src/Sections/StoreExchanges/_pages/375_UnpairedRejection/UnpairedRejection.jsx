@@ -45,6 +45,8 @@ function UnpairedRejection() {
   const newUnpaired = atomizedForPeers.unmerged2;
   const paired = atomizedForPeers.mergedRepo;
 
+  console.log(paired);
+
   const returnRejects = new RejectionObj({
     rejectsArr: returnUnpaired,
     strLabel: (

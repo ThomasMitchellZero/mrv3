@@ -8618,6 +8618,11 @@ What to do today?
 
     Upon tonight's ensaladation, we should meditate on how cool it is that we can code now.  Not Michael Bloomberg doing some HTML Hello World shit, not Anthony copypasting from Claude - we know how to write a fucking application.  That is rad.  
 
+    4:25.
+    Looks like the repopulation isn't working, and it looks very much like I'm just not populating my lens items with itemNums.  At a glance, it feels like that would produce everything I observe.  
+
+    Looks like that was it :D
+
 
 
 
