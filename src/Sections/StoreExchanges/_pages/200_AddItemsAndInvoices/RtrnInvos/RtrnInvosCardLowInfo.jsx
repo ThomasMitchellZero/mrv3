@@ -58,7 +58,8 @@ const RtrnInvosCardLowInfo = ({ invoice = new Invoice_SR({}) }) => {
 
       <div className={`deleteCol field`}>
         <DeleteCardColMRV
-          onClick={(e) => {
+          handleClick={(e) => {
+            console.log("Clicked Invoice Delete");
             setSessionInvosMRV({
               invosRtStr: "sessionInvos",
               invoNum: invoice.invoNum,
