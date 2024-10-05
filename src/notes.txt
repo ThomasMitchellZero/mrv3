@@ -8616,12 +8616,78 @@ What to do today?
 
     -Build out the Total Review page.
 
-    Upon tonight's ensaladation, we should meditate on how cool it is that we can code now.  Not Michael Bloomberg doing some HTML Hello World shit, not Anthony copypasting from Claude - we know how to write a fucking application.  That is rad.  
+    Upon tonight's ensaladation, we should meditate on how cool it is that we can code now.  Not Michael Bloomberg doing some HTML Hello World shit, not copypasting from Claude - we know how to write a fucking application.  That is rad.  We tried to learn to code at least twice before - once in ~2014 when we were living in Charlotte (web apps and Ruby) and then again when we were living in CT (UI5 and our first taste of React) but this is when we finally got over the hump.  
 
     4:25.
     Looks like the repopulation isn't working, and it looks very much like I'm just not populating my lens items with itemNums.  At a glance, it feels like that would produce everything I observe.  
 
     Looks like that was it :D
+
+5 Oct 2024
+    10:55.
+    Would really like to have the Total Review page up and running.  
+
+    Gotta think about how I want to handle reconstituting items.
+        -Each card is going to be populated from an array of items, though that array will contain just one item in the vast majority of cases.  
+        -Since this is something we're going to have to do a lot, it would be nice to have some shared logic for it.
+            -That shared object will grow, especially in DELX, so the solution needs to be scalable.
+        
+    This might also be really dumb.  How about this?  Let's just design with the assumption that the card will take groups.  Then we can fill out the specifics later.  
+
+    So what does each card need?
+        -The card itself displays no cumulative values.  AFAICT it's just a holder.  I could display a total card value, but we're already crunched for space and they've seen the breakdowns in the prior steps.  
+
+        -The rows within the card will represent all units of an item we consider to be The Same, and display 2 different cumulative values:
+            - The total qty (not a breakdown)
+            - The total dollar value
+
+    -The $ value will have to come from the Atomized lists because that's where we have prices.
+    -The quantities could come from any source, but I'm kinda thinking that they should originate from atomized sources as well.  For child items or services I could see a situation where items with the same ItemNum aren't actually distinct.
+
+    And so I feel like, despite my best intentions, I'm kind of coming back to some universal hooks because the aggregation is going to require logic.  
+
+    Wondering how to think about this.  We should only ever be aggregating atoms we've already filtered.  In other words, we should never be re-combining atoms unless we've already determined that they're alike within the scope we care about.  
+
+    That means we're only dealing with incrementable values, and the only two I'm currently aware of are $ value and quantity.
+
+    2:00.
+    The usual afternoon disruptions.
+
+    OK.  So I currently have:
+        -A class to represent a cluster of items that are related.
+        -A function that sorts a collection of atoms into buckets.
+        -A function that merges a collection of identical atoms into one.
+    
+    But it feels like I am missing a piece, and that piece is how to determine WHAT atoms can be combined in a way that doesn't cause repeats.  
+
+    Like, here's the very rough idea I have in mind.  A function that:
+        -Accepts a collection of fields to determine identicality.
+        -Accepts an array of atoms to check for identicality.
+    
+    Then it:
+        -Creates an object of unique keystrings
+
+        -Loops through the array of atoms and:
+            -Creates a keyStr out of the specified props.
+            -Checks if that keyStr exists in the parent and creates an empty if not.
+            -Dumps this atom into that keyStr.
+
+    2:45.
+    Wondering how I should do the fusing.  There's a case to be made for just re-using the atomMonetizer and then incrementing the atoms separately, but that feels kind of clunky and I'll probably regret it later.  Let's just do the thing we want.  
+
+    5:20.
+    Man, this is a weird one.  Classes are apparently prioritized in the order they are DEFINED, not the order they are applied.  
+
+    OK.  I can fuck around with this later.  Let's get 'Good Enough' and then we can fiddle with 'Perfect'
+
+
+
+
+
+
+
+
+
 
 
 

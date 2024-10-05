@@ -1,4 +1,4 @@
-
+import { ReviewItemCardSTRX } from "./ItemCards/ReviewItemCardSTRX";
 
 import { TitleBarSTRX } from "../../_resources/components/CompConfigsSTRX";
 import { ColumnLabelMRV } from "../../../../mrv/mrv-components/DisplayOutputs/ColumnLabelMRV/ColumnLabelMRV";
@@ -11,11 +11,11 @@ import {
   atomRelationizer,
 } from "../../../../mrv/MRVhooks/MRVhooks";
 
-import { RejectionObj } from "../../../../globalFunctions/globalJS_classes";
-import { RejectionCard } from "../../../../mrv/mrv-components/DisplayOutputs/Rejection/RejectionCard";
+
 import {
   returnAtom,
   moneyObj,
+  atomRelatives,
 } from "../../../../globalFunctions/globalJS_classes";
 
 import { useOutletContext } from "react-router";
@@ -28,7 +28,7 @@ function TotalReviewSTRX() {
   const setSessionMRV = mrvCtx.setSessionMRV;
 
   // re-aggregate the atomized Return and New items
-  const sharedIdenticalityKeys = ["atomItemNum", "parentKey"];
+  const sharedIdenticalityKeys = ["atomItemNum", "parentKey", "bifrostKey"];
 
   const oFusedReturnAtoms = atomFuser({
     aAtomsToFuse: sessionMRV.atomizedReturnItems,
@@ -47,17 +47,51 @@ function TotalReviewSTRX() {
   const aReturnRelations = Object.values(oFusedNewAtoms);
   const aNewRelations = Object.values(oFusedNewAtoms);
 
-  const cardMaker = ({ atom = new returnAtom({}) }) => {
+  const cardMaker = ({ atom = new returnAtom({}), cart }) => {
+    // Take this out once the atomRelationizer is working
+    const atomAndRelatives = new atomRelatives({
+      mainAtom: atom,
+    });
+
     return (
-      <div className={`itemRow subCardStyle`} key={atom.atomItemNum}>
-        <ColumnLabelMRV
-          labelStr={atom.atomItemName}
-          valueStr={atom.atomItemQty}
-          size={"S"}
-        />
-      </div>
+      <ReviewItemCardSTRX
+        cart={cart}
+        oRelatedAtoms={atomAndRelatives}
+        key={atomAndRelatives.mainAtom.atomItemNum}
+      ></ReviewItemCardSTRX>
     );
   };
+
+  const uiReturnCards = aReturnRelations.map((atom) =>
+    cardMaker({ atom, cart: "return" })
+  );
+  const uiNewCards = aNewRelations.map((atom) =>
+    cardMaker({ atom, cart: "new" })
+  );
+
+  const uiReturnItemsCol =
+    aReturnRelations.length > 0 ? (
+      <div className={`vBox maxWidth_50pct`}>
+        <ColumnLabelMRV
+          iconStr={`box`}
+          bigLabel={`Items Returned`}
+          smallLabel={`Take items from customer.`}
+        />
+        {uiReturnCards}
+      </div>
+    ) : null;
+
+  const uiNewItemsCol =
+    aNewRelations.length > 0 ? (
+      <div className={`vBox maxWidth_50pct`}>
+        <ColumnLabelMRV
+          iconStr={`box`}
+          bigLabel={`New Items`}
+          smallLabel={`Customer receives these New Items.`}
+        />
+        {uiNewCards}
+      </div>
+    ) : null;
   //
 
   return (
@@ -67,7 +101,12 @@ function TotalReviewSTRX() {
           showNavNodeBar={true}
           headerTitle={"Total Review"}
         ></TitleBarSTRX>
-        <div className={`main_content`}>Total Review Placeholder</div>
+        <div className={`main_content`}>
+          <div className={`hBox gap2rem alignStart justifyCenter`}>
+            {uiReturnItemsCol}
+            {uiNewItemsCol}
+          </div>
+        </div>
       </section>
     </section>
   );

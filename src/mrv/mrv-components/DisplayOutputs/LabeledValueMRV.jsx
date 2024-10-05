@@ -22,6 +22,8 @@ function LabeledValueMRV({
     },
   };
 
+  const sLabelStyle = `${oConfigs[size]?.labelSize || null} ${sLabelClasses}`;
+  const sValueStyle = `${oConfigs[size]?.valueSize || null} ${sValueClasses}`;
 
   const oStyle = {};
 
@@ -40,10 +42,10 @@ function LabeledValueMRV({
         {labelStr}
       </div>
       <div
-        className={`value centerAll color__primary__text ${oConfigs[size].valueSize} ${sValueClasses}`}
+        className={`value centerAll color__primary__text`}
         style={{ height: valueHeight }}
       >
-        {valueStr}
+        <div className={`inner ${sValueStyle}`}>{valueStr}</div>
       </div>
     </div>
   );
