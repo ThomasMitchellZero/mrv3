@@ -32,6 +32,8 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
   });
 
   const locMethods = useLocStMethods_STRX().AddItemsAndInvos();
+  const mrvMethods = useCompHooks_MRV().oReasonPicker_SC();
+  const activeError1 = sessionMRV.locSt.page.activeError1;
 
   const aReturnItems = sessionMRV.returnItems;
   const aAtomizedItems = sessionMRV.atomizedReturnItems;
@@ -71,6 +73,17 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
   ///////////////////////////////////////////////////////////////////
 
   const uiItemTile = (tileItemAtom) => {
+    // if user tries to proceed with invalid reasons, we use this to apply the error class.
+    const validReasonQty = mrvMethods.isReasonQtyValid({
+      itemAtom: tileItemAtom,
+      validCondition: "notOver",
+    });
+
+    const sReasonError =
+      !validReasonQty && activeError1?.key === "invalidReturnReasons"
+        ? "error"
+        : "";
+
     const refAtom = new returnAtom({});
 
     const handleClick = (event) => {
@@ -102,7 +115,7 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
     return (
       <div
         key={`${tileItemAtom.primaryKey}tile`}
-        className={`itemRow subCardStyle ${activeClass}`}
+        className={`itemRow tile ${activeClass} ${sReasonError}`}
         onClick={(e) => handleClick(e)}
       >
         <div className={"rowCol detailCol"}>

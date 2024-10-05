@@ -611,6 +611,11 @@
       background-color: var(--color__card__hover);
     }
 
+    &.error {
+      background-color: var(color__red__inverse);
+      border-color: var(--color__red);
+    }
+
     &.selected {
       background-color: var(--color__card__selected);
       border-color: var(--color__interactive);
@@ -658,7 +663,15 @@
       border-color: var(--color__interactive);
 
       &:hover {
-        background-color: var(--color__card__selected__hover);
+        opacity: 80%;
+      }
+    }
+
+    &.error {
+      background-color: var(--color__red__inverse);
+      border-color: var(--color__red);
+      &:hover {
+        opacity: 80%;
       }
     }
   }
