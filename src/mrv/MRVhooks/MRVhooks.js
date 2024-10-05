@@ -927,6 +927,8 @@ const primaryAtomizer = ({
 export { primaryAtomizer };
 
 function atomAggregator({
+  // Don't think we need this anymore.  Created and deprecated in the same day?
+
   // Atomization deconstructs atoms by every possible differentiator.  This function re-aggregates atoms for cases where certain differentiators are not relevant.  Incoming atoms should be pre-filtered for identicality in the relevant fields.
 
   // This function aggregates all incrementable fields but assigns no other values.
@@ -941,13 +943,69 @@ function atomAggregator({
   for (const thisAtom of aAtomsToAggregate) {
     outAggregatedAtom.atomItemQty += thisAtom.atomItemQty;
   }
-
   return outAggregatedAtom;
 }
 
 export { atomAggregator };
 
+function atomFuser({
+  // takes an array of atoms, fuses those that share vals in aIdenticalityKeys, and returns an object of fused atoms.
+  aIdenticalityKeys = [], // field keys to identify identical atoms.  If empty, fuses all atoms.
+  REF__identicalityFields____atomItemNum__parentKey__bifrostKey,
+  aAtomsToFuse = [],
+}) {
+  // Atomization deconstructs atoms by every possible differentiator.  This function re-aggregates atoms for cases where certain differentiators are not relevant.  Incoming atoms should be pre-filtered for identicality in the relevant fields.
+
+  // Overall philosophy is that we store record repos, derive a single fully atomized repo per cart, then fuse atoms as needed at the point of consumption.
+  const oFusedAtoms = {};
+
+  for (const thisAtom of aAtomsToFuse) {
+    // get the values of the fields that identify identical atoms.
+    const aIdenticalityVals = aIdenticalityKeys.map((thisField) => {
+      return thisAtom[thisField];
+    });
+
+    const thisKey =
+      aIdenticalityKeys.length === 0 ? "ALL" : aIdenticalityVals.join("_");
+
+    // if the atom doesn't exist, create it.
+    if (!oFusedAtoms[thisKey]) {
+      // salesTaxRate is undefined because we can't guarantee it's the same for all atoms.
+      oFusedAtoms[thisKey] = new returnAtom({
+        atomMoneyObj: new moneyObj({ salesTaxRate: undefined }),
+      });
+      // Since the values of these fields determine identicality, they'll be shared by any atoms getting fused to this key.
+      for (const thisField of aIdenticalityKeys) {
+        oFusedAtoms[thisKey][thisField] = thisAtom[thisField];
+      }
+    }
+
+    // Increment quantity.
+    const atomQty = thisAtom.atomItemQty;
+    oFusedAtoms[thisKey].atomItemQty += atomQty;
+
+    // Increment money values.
+    const scaledMoneyObj = mo_multiply({
+      targetMO: thisAtom.atomMoneyObj,
+      factor: atomQty,
+    });
+
+    const cashRt = oFusedAtoms[thisKey].atomMoneyObj;
+
+    cashRt.unitBaseValue += scaledMoneyObj.unitBaseValue;
+    cashRt.salesTax += scaledMoneyObj.salesTax;
+  }
+
+  return oFusedAtoms;
+}
+
+export { atomFuser };
+
 function atomRelationizer({ mainAtom = new returnAtom({}), searchArray = [] }) {
+  if (mainAtom.parentKey) {
+    // Any child atom is going to end up in its parent collection, so we need to terminate or we'll get duplicates.
+    return false;
+  }
   // identifies all atoms in searchArray that share common relationships with mainAtom.
   const outAtomRelatives = new atomRelatives({
     mainAtom: mainAtom,
