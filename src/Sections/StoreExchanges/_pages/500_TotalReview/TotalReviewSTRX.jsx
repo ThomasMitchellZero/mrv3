@@ -2,6 +2,8 @@ import { ReviewItemCardSTRX } from "./ItemCards/ReviewItemCardSTRX";
 
 import { TitleBarSTRX } from "../../_resources/components/CompConfigsSTRX";
 import { ColumnLabelMRV } from "../../../../mrv/mrv-components/DisplayOutputs/ColumnLabelMRV/ColumnLabelMRV";
+import { CashTotalSTRX } from "../../_resources/components/CompConfigsSTRX";
+import { ContinueBtnMRV } from "../../../../mrv/mrv-components/inputs/ContinueBtnMRV";
 
 import { Sidesheet_Base_MRV } from "../../../../mrv/mrv-components/DisplayOutputs/Sidesheet_Base_MRV";
 
@@ -10,7 +12,6 @@ import {
   atomFuser,
   atomRelationizer,
 } from "../../../../mrv/MRVhooks/MRVhooks";
-
 
 import {
   returnAtom,
@@ -44,7 +45,7 @@ function TotalReviewSTRX() {
   console.log("oFusedNewAtoms", oFusedNewAtoms);
 
   // these will eventually need to go through the atomRelationizer, but for now, we'll just use the fused atoms
-  const aReturnRelations = Object.values(oFusedNewAtoms);
+  const aReturnRelations = Object.values(oFusedReturnAtoms);
   const aNewRelations = Object.values(oFusedNewAtoms);
 
   const cardMaker = ({ atom = new returnAtom({}), cart }) => {
@@ -106,6 +107,10 @@ function TotalReviewSTRX() {
             {uiReturnItemsCol}
             {uiNewItemsCol}
           </div>
+        </div>
+        <div className={`footer_content`}>
+          <CashTotalSTRX />
+          <ContinueBtnMRV btnText="Finish" />
         </div>
       </section>
     </section>
