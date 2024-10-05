@@ -9,6 +9,7 @@ import {
   sessionItem,
   InvoProduct,
   returnAtom,
+  atomRelatives,
   singleDispo,
   moneyObj,
   baseReturnState,
@@ -24,7 +25,7 @@ import {
   parentChildGroup,
 } from "../../globalFunctions/globalJS_classes";
 
-import { clone, cloneDeep, isEmpty, isNaN, merge, subtract } from "lodash";
+import { at, clone, cloneDeep, isEmpty, isNaN, merge, subtract } from "lodash";
 
 //// Money Handlers ////
 
@@ -872,7 +873,6 @@ const primaryAtomizer = ({
 
   // set other fiels of mergedAtom.
   setMergedAtomFn = baseAtomizerSetMerged,
-  
 }) => {
   let unmerged1 = cloneDeep(repo1);
   let unmerged2 = cloneDeep(repo2);
@@ -925,6 +925,46 @@ const primaryAtomizer = ({
 };
 
 export { primaryAtomizer };
+
+function atomAggregator({
+  // Atomization deconstructs atoms by every possible differentiator.  This function re-aggregates atoms for cases where certain differentiators are not relevant.  Incoming atoms should be pre-filtered for identicality in the relevant fields.
+
+  // This function aggregates all incrementable fields but assigns no other values.
+  aAtomsToAggregate = [],
+  // Use this to assign the fields all incoming atoms share so they can be represented in the aggregated atom.
+  atomWithSharedValues = new returnAtom({}),
+}) {
+  let outAggregatedAtom = cloneDeep(atomWithSharedValues);
+  // I might eventually put all the atomsMonetizer logic in here, but for now this is fine.
+  outAggregatedAtom.atomMoneyObj = atomsMonetizer(aAtomsToAggregate);
+
+  for (const thisAtom of aAtomsToAggregate) {
+    outAggregatedAtom.atomItemQty += thisAtom.atomItemQty;
+  }
+
+  return outAggregatedAtom;
+}
+
+export { atomAggregator };
+
+function atomRelationizer({ mainAtom = new returnAtom({}), searchArray = [] }) {
+  // identifies all atoms in searchArray that share common relationships with mainAtom.
+  const outAtomRelatives = new atomRelatives({
+    mainAtom: mainAtom,
+  });
+
+  outAtomRelatives.aAllChildren = searchArray.filter((thisAtom) => {
+    return thisAtom.parentKey === mainAtom.atomItemNum;
+  });
+
+  // add in more filtered relationships as needed.
+
+  return outAtomRelatives;
+}
+
+export { atomRelationizer };
+
+// Specific applications of the primaryAtomizer function.  These are the most common use cases.
 
 const newItemAtomizer = ({ atomizedReturnItemsArr = [], newItemsArr }) => {
   const baseComparisonFn = ({ repo1Atom, repo2Atom }) => {

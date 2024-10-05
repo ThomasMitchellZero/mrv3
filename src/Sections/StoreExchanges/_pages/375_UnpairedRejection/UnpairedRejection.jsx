@@ -18,18 +18,13 @@ import {
   returnAutoDeriver,
   setSessionItem,
 } from "../../../../mrv/MRVhooks/MRVhooks";
-import { clone, cloneDeep } from "lodash";
+import { cloneDeep } from "lodash";
 
 function UnpairedRejection() {
   const nodeNav = useNodeNav();
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
-
-  const setReturnItems = useSetSessionItems({
-    targetStateArrKey: "returnItems",
-  });
-  const setNewItems = useSetSessionItems({ targetStateArrKey: "newItems" });
 
   const atomizedForPeers = primaryAtomizer({
     repo1: sessionMRV.returnItems,

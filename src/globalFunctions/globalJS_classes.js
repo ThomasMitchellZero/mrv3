@@ -601,6 +601,25 @@ class returnAtom {
   }
 }
 
+class atomRelatives {
+  // Standard container for a main atom and all its children, accessories, and services.
+  // Does NOT contain any filtering logic.  That is handled by atomRelationizer.
+  constructor({
+    mainAtom = new returnAtom({}),
+    aAllChildren = [],
+    aAccessories = [],
+    aServices = [],
+  }) {
+    this.mainAtom = mainAtom;
+    this.aAllChildren = aAllChildren;
+    this.aAccessories = aAccessories;
+    this.aServices = aServices;
+    this.parentAndChildren = [mainAtom, ...aAllChildren];
+  }
+}
+
+export { atomRelatives };
+
 const navNode = ({
   keyStr = "",
   routeStr = "",
