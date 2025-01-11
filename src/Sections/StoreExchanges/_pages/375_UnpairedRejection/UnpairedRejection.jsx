@@ -80,7 +80,7 @@ function UnpairedRejection() {
     newUnpaired.length > 0 ? (
       <div className={`vBox maxWidth_50pct`}>
         <ColumnLabelMRV
-          iconStr={`box`}
+          iconStr={`cart`}
           bigLabel={`New Items Removed`}
           smallLabel={`Customer will not receive these items in this exchange.`}
         />

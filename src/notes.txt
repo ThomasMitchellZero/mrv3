@@ -8680,6 +8680,16 @@ What to do today?
 
     OK.  I can fuck around with this later.  Let's get 'Good Enough' and then we can fiddle with 'Perfect'
 
+7 Oct 2024
+    3:35.
+
+    Just got back from our first round of testing.  Wondering if there's anything I can do to goose the test results a little bit.  
+
+    -Check cart icons to make sure they are correct
+    -See if there is an easy way to make the tab label Red 
+
+
+
 
 
 

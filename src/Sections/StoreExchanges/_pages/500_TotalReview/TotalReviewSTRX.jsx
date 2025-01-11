@@ -86,7 +86,7 @@ function TotalReviewSTRX() {
     aNewRelations.length > 0 ? (
       <div className={`vBox maxWidth_50pct`}>
         <ColumnLabelMRV
-          iconStr={`box`}
+          iconStr={`cart`}
           bigLabel={`New Items`}
           smallLabel={`Customer receives these New Items.`}
         />
