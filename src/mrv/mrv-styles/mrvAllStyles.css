@@ -1,6 +1,8 @@
 @font-face {
   font-family: "Fellix";
-  src: url("../../assets/fonts/fellix/Fellix-Regular.otf") format("otf");
+  src:
+    local("Fellix"),
+    url("../../assets/fonts/fellix/Fellix-Regular.otf") format("opentype");
 }
 
 .mrv {
