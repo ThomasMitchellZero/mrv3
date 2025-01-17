@@ -1,15 +1,29 @@
 @font-face {
-  font-family: "Fellix";
-  src:
-    url("../../assets/fonts/fellix/Fellix-Regular.otf") format("opentype");
+  font-family: "Fellix-Regular";
+  src: url("../../assets/fonts/fellix/Fellix-Regular.otf") format("opentype");
 }
+
+@font-face {
+  font-family: "Fellix-Medium";
+  src: url("../../assets/fonts/fellix/Fellix-Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Fellix-Bold";
+  src: url("../../assets/fonts/fellix/Fellix-Bold.otf") format("opentype");
+}
+
+
+
+
+
 
 .mrv {
   display: flex;
   flex-direction: column;
   flex: 1 1 0rem;
   width: 100%;
-  font-family: "Fellix";
+  font-family: "Fellix-Regular";
 
   /* MRV vars */
 
@@ -173,7 +187,7 @@
   /* ---- MRV STANDARD HTML STYLES ---- */
 
   & input {
-    font-family: "Fellix";
+    font-family: "Fellix-Regular";
   }
 
   /* ---- MRV TEXT STYLES ---- */
@@ -181,19 +195,19 @@
   & .heading__small {
     font-size: 1.5rem;
     line-height: 2rem;
-    font-weight: 600;
+    font-family: "Fellix-Medium";
   }
 
   & .heading__medium {
+    font-family: "Fellix-Bold";
     font-size: 2rem;
     line-height: 2.5rem;
-    font-weight: 600;
   }
 
   & .heading__large {
+    font-family: "Fellix-Bold";
     font-size: 2.5rem;
     line-height: 3rem;
-    font-weight: 600;
   }
 
   & .body {
@@ -223,7 +237,7 @@
   /*  Modifiers  */
 
   & .bold {
-    font-weight: 600;
+    font-family: "Fellix-Medium";
   }
 
   & .regular {
@@ -441,7 +455,7 @@
     background-color: var(--color__meltdown__magenta);
     text-decoration: none;
 
-    font-family: "Fellix";
+    font-family: "Fellix-Regular";
     font-size: 1.25rem;
     font-weight: 500;
 

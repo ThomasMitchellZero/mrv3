@@ -8689,7 +8689,16 @@ What to do today?
     -See if there is an easy way to make the tab label Red 
 
 
+13 Jan 2025
+    5:25.
+    Couple quick notes:
+    If I want to run the dev mode app, the command is " npm run dev "
 
+    OK.  Originally, I had my font-family format set to "otf".  It worked exactly as expected on Chrome and not at all on Safari.  When I changed it to "opentype" both browsers showed it as Fellix, but the font weight was much smaller.  Changing font-weight from 500 to 600 made it just a tiny bit heavier, and even an increase to 900 made very little difference.
+
+    OK, so here's what I think.  I think "opentype" is probably the move, because it works the same on both, and it is showing up as Fellix so it's not like the browsers are failing to render it.  My guess is that for the bold weights, I need to get in a second font-family and import the actual OTF file with the weight I want.  
+
+    Oh, AND... it looks like in Figma there are actually 3 different font-weights.  The Large headings are the true Bold font-weight.  Everything else is Semi-Bold or Medium.  
 
 
 
