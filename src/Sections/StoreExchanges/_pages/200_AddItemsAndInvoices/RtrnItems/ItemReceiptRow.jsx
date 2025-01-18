@@ -3,7 +3,7 @@ import { DescriptorIcon } from "../../../../../mrv/mrv-components/DisplayOutputs
 
 import { centsToDollars, greenify } from "../../../../../mrv/MRVhooks/MRVhooks";
 
-function ItemReceiptRow({atomizedItem}) {
+function ItemReceiptRow({ atomizedItem }) {
   // invoStatus will eventually include NRR Lifetime Warranty.
   const invoStatus = atomizedItem.atomInvoNum ? "receipted" : "needsReceipt";
   const moneyObj = atomizedItem.atomMoneyObj;
@@ -48,9 +48,12 @@ function ItemReceiptRow({atomizedItem}) {
       <div className={`body__small field receiptCol`}>
         <div className={`receiptNum body color__primary__text`}>
           <DescriptorIcon {...iconStyle} />
-          <p className={`truncate ${config.invoColor}`}>{`${config.invoStr}`}</p>
+          <p
+            className={`truncate ${config.invoColor}`}
+          >{`${config.invoStr}`}</p>
         </div>
-
+      </div>
+      <div className={`rcptQtyCol field body alignRight`}>
         <div className={`qty_x body color__primary__text`}>
           {`${itemQty}`}
           <p>x</p>
@@ -61,7 +64,6 @@ function ItemReceiptRow({atomizedItem}) {
         {config.unitVal}
         <div className={`tinyText color__secondary__text`}>ea.</div>
       </div>
-
     </div>
   );
 }

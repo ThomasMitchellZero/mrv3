@@ -2,6 +2,7 @@ import { useOutletContext } from "react-router";
 import { useSetSessionItems } from "../../../../../mrv/MRVhooks/MRVhooks";
 import { ScanScreenMRV } from "../../../../../mrv/mrv-components/DisplayOutputs/ScanScreenMRV";
 import { RtrnItemsMainCard } from "./RtrnItemsMainCard";
+import { RtrnItemCard } from "./RtrnItemCard";
 import { DescriptorIcon } from "../../../../../mrv/mrv-components/DisplayOutputs/IconComponents/DescriptorIcon";
 
 const RtrnItemsList = () => {
@@ -29,22 +30,24 @@ const RtrnItemsList = () => {
     <div className={`columnTitleRow items_grid`}>
       <div className={`columnTitle detailCol`}>Item</div>
       <div className={`columnTitle totalQtyCol`}>Qty Returned</div>
-      <div className={`columnTitle mergedReceiptCol`}>
+      <div className={`columnTitle receiptCol`}>
         <DescriptorIcon
           iconStr="receiptLong"
           ctnrSize="1.5rem"
           fontSize="1rem"
           backgroundColor=""
         />
-        Refund By Receipt
+        Item Receipts
       </div>
+      <div className={`columnTitle rcptQtyCol`}>Qty</div>
+      <div className={`columnTitle unitPriceCol`}>Unit Price</div>
       <div className={`columnTitle trashCol`}>Return Value</div>
     </div>
   );
 
   const uiCardArr = aMainItems.map((thisReturnItem) => {
     return (
-      <RtrnItemsMainCard
+      <RtrnItemCard
         key={thisReturnItem.atomItemNum}
         returnItemAtom={thisReturnItem}
       />

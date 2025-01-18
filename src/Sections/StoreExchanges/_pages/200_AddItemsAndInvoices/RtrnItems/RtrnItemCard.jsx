@@ -18,7 +18,7 @@ import { greenify } from "../../../../../mrv/MRVhooks/MRVhooks";
 import { DeleteCardColMRV } from "../../../../../mrv/mrv-components/inputs/DeleteCardColMRV";
 import { returnAtom } from "../../../../../globalFunctions/globalJS_classes";
 
-const RtrnItemsMainCard = ({ returnItemAtom }) => {
+const RtrnItemCard = ({ returnItemAtom }) => {
   const mrvCtx = useOutletContext();
   const resetReasonPickerLS = useResetLocStFields("ReasonPickerSC");
   const setPageLS = useSetLocStFields("page");
@@ -165,7 +165,7 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
   return (
     <div
       key={`${returnItemAtom.atomItemNum}card`}
-      className={`cardStyle items_grid`}
+      className={`cardStyle rtrnItemCard items_grid`}
       onClick={(e) => {
         e.stopPropagation();
       }}
@@ -184,4 +184,4 @@ const RtrnItemsMainCard = ({ returnItemAtom }) => {
   );
 };
 
-export { RtrnItemsMainCard };
+export { RtrnItemCard };

@@ -78,8 +78,6 @@
       padding: 0rem 1rem;
     }
 
-
-
     & .field {
       display: flex;
       flex: 1 1 0rem;
@@ -100,8 +98,9 @@
         grid-template-columns:
           [detail] 1fr
           [totalQty] 7rem
-          [receipt] 12rem
-          [unitPrice] 7rem
+          [receipt] 9rem
+          [rcptQty] 4rem
+          [unitPrice] 9rem
           [trash] var(--DeleteColWidth);
         flex: 0 0 auto;
         gap: var(--stdGap);
@@ -163,7 +162,6 @@
 
       & .receiptCol {
         grid-column: receipt / span 1;
-        justify-content: flex-end;
 
         & .receiptNum {
           display: flex;
@@ -175,22 +173,24 @@
           align-items: center;
           justify-content: flex-start;
         }
+      }
 
+      & .rcptQtyCol {
+        grid-column: rcptQty / span 1;
+        justify-content: flex-start;
         & .qty_x {
           display: flex;
           flex-direction: row;
           flex-wrap: nowrap;
-          gap: 1rem;
-          padding-left: var(--stdGap);
+          gap: 0.5rem;
         }
       }
 
       & .unitPriceCol {
         grid-column: unitPrice / span 1;
-        justify-content: flex-end;
+        justify-content: flex-start;
         gap: 0.25rem;
       }
-
 
       & .fullInfoCol {
         grid-column: receipt / span 4;
@@ -235,11 +235,6 @@
         grid-template-columns: subgrid;
         grid-column: invoItemDetails / trash;
         gap: var(--stdGap);
-
-        &:last-child {
-          border-bottom: none;
-          gap: var(--stdGap);
-        }
       }
 
       & .invoItemSubcard {
@@ -286,4 +281,3 @@
     }
   }
 }
-

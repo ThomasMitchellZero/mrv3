@@ -8712,6 +8712,9 @@ What to do today?
 
     OK.  I think I'm gonna devote my 20 to hacking.  If it isn't going well, I will blow it out and rebuild it.  
 
+    11:10.
+    Ok, hold up.  It's actually working the way I wanted now.  Hmm.  OK.  The smart thing to do would be to quickly check if I can get the columns working and if so, to MOVE ON.  Remember, this has no downstream dependencies.  Fine.  I'm taking another 20.
+
 
 
 

@@ -14,6 +14,8 @@ import {
   useSetLocStFields,
 } from "../../../../../mrv/MRVhooks/MRVhooks";
 
+// THIS IS OLD AND DEPRECATED.  Get rid of it once we know we don't need it.
+
 import { greenify } from "../../../../../mrv/MRVhooks/MRVhooks";
 import { DeleteCardColMRV } from "../../../../../mrv/mrv-components/inputs/DeleteCardColMRV";
 import { returnAtom } from "../../../../../globalFunctions/globalJS_classes";
