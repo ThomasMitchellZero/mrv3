@@ -61,11 +61,7 @@ function ItemReceiptRow({atomizedItem}) {
         {config.unitVal}
         <div className={`tinyText color__secondary__text`}>ea.</div>
       </div>
-      <div
-        className={`totalPriceCol field alignRight body bold ${config.color}`}
-      >
-        {config.totalVal}
-      </div>
+
     </div>
   );
 }

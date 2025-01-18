@@ -8700,8 +8700,17 @@ What to do today?
 
     Oh, AND... it looks like in Figma there are actually 3 different font-weights.  The Large headings are the true Bold font-weight.  Everything else is Semi-Bold or Medium.  
 
+18 Jan 2025
+    10:40.
 
+    Short term goal is to get CWEX app up to speed so I can use it in folio videos and in testing for LW.  What does that entail?
+        -I need to make sure my columns for the Return Items cards are correct.
+            -I wouldn't mind going through and re-building it in a more logical way.
+            -If I can just hack something working together, it doesn't cause any downstream problems.  Maybe the smart move is to devote like 30 minutes trying to hack, and if it doesn't look like a solution is immenent, just start fresh.
+        -I need to have a universal scrim overlay component.
+        -Once I have the scrim, I can start working on LW.  
 
+    OK.  I think I'm gonna devote my 20 to hacking.  If it isn't going well, I will blow it out and rebuild it.  
 
 
 

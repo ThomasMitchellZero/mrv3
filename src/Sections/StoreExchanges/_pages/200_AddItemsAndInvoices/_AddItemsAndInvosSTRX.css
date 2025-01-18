@@ -102,7 +102,6 @@
           [totalQty] 7rem
           [receipt] 12rem
           [unitPrice] 7rem
-          [totalPrice] 8rem
           [trash] var(--DeleteColWidth);
         flex: 0 0 auto;
         gap: var(--stdGap);
@@ -192,14 +191,6 @@
         gap: 0.25rem;
       }
 
-      & .totalPriceCol {
-        grid-column: totalPrice / span 1;
-        justify-content: flex-end;
-
-        &.columnTitle {
-          padding-right: 1rem;
-        }
-      }
 
       & .fullInfoCol {
         grid-column: receipt / span 4;
@@ -296,4 +287,3 @@
   }
 }
 
-/* // .totalPriceCol deleteCol */

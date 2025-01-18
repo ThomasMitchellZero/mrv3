@@ -4,7 +4,6 @@ import { ScanScreenMRV } from "../../../../../mrv/mrv-components/DisplayOutputs/
 import { RtrnItemsMainCard } from "./RtrnItemsMainCard";
 import { DescriptorIcon } from "../../../../../mrv/mrv-components/DisplayOutputs/IconComponents/DescriptorIcon";
 
-
 const RtrnItemsList = () => {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
@@ -30,23 +29,26 @@ const RtrnItemsList = () => {
     <div className={`columnTitleRow items_grid`}>
       <div className={`columnTitle detailCol`}>Item</div>
       <div className={`columnTitle totalQtyCol`}>Qty Returned</div>
-      <div className={`columnTitle invoInfoColumn`}>
-        <div className={`columnTitle invoInfoRow merged`}>
-          <DescriptorIcon
-            iconStr="receiptLong"
-            ctnrSize="1.5rem"
-            fontSize="1rem"
-            backgroundColor=""
-          />
-          Refund By Receipt
-        </div>
+      <div className={`columnTitle mergedReceiptCol`}>
+        <DescriptorIcon
+          iconStr="receiptLong"
+          ctnrSize="1.5rem"
+          fontSize="1rem"
+          backgroundColor=""
+        />
+        Refund By Receipt
       </div>
       <div className={`columnTitle trashCol`}>Return Value</div>
     </div>
   );
 
   const uiCardArr = aMainItems.map((thisReturnItem) => {
-    return <RtrnItemsMainCard key={thisReturnItem.atomItemNum} returnItemAtom={thisReturnItem} />;
+    return (
+      <RtrnItemsMainCard
+        key={thisReturnItem.atomItemNum}
+        returnItemAtom={thisReturnItem}
+      />
+    );
   });
 
   // final UI output
