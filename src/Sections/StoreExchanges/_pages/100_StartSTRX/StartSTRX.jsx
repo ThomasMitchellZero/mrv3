@@ -1,7 +1,7 @@
 import { TitleBarSTRX } from "../../_resources/components/CompConfigsSTRX";
 import { ColumnLabelMRV } from "../../../../mrv/mrv-components/DisplayOutputs/ColumnLabelMRV/ColumnLabelMRV";
 
-import { Sidesheet_Base_MRV } from "../../../../mrv/mrv-components/DisplayOutputs/Sidesheet_Base_MRV";
+import { ScrimOverlay } from "../../../../mrv/mrv-components/DisplayOutputs/ScrimOverlay/ScrimOverlay";
 
 import { useNodeNav } from "../../../../mrv/MRVhooks/MRVhooks";
 
@@ -71,6 +71,7 @@ function StartSTRX() {
 
   return (
     <section className={`mrvPage`}>
+      <ScrimOverlay />
       <section className={`mrvPanel__main`}>
         <TitleBarSTRX
           showNavNodeBar={true}

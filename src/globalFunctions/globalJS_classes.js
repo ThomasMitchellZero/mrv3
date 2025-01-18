@@ -413,6 +413,15 @@ class errorObj {
 
 export { errorObj };
 
+class overlayObj {
+  constructor({ key = "", str = "", bgClickClears = true }) {
+    this.key = key;
+    this.str = str;
+  }
+}
+
+export { overlayObj };
+
 const clearedInputs = {
   input1: "",
   input2: "",
@@ -472,6 +481,7 @@ const makeLocStFields = ({
   input4 = "",
   activeError1 = null,
   activeError2 = null,
+  activeOverlay1 = null,
   activeKey1 = "",
   activeKey2 = "",
   activeMode1 = "",
@@ -482,6 +492,7 @@ const makeLocStFields = ({
   activeUI2 = "",
   activeUI3 = "",
   oErrorObjects = {},
+  oOverlayObjects = {},
 }) => {
   const locStFields = {
     _keyStr,
@@ -500,7 +511,9 @@ const makeLocStFields = ({
     activeUI1,
     activeUI2,
     activeUI3,
+    activeOverlay1,
     oErrorObjects,
+    oOverlayObjects,
   };
   const init = structuredClone(locStFields);
   delete init.oErrorObjects;

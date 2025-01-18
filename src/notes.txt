@@ -8715,8 +8715,23 @@ What to do today?
     11:10.
     Ok, hold up.  It's actually working the way I wanted now.  Hmm.  OK.  The smart thing to do would be to quickly check if I can get the columns working and if so, to MOVE ON.  Remember, this has no downstream dependencies.  Fine.  I'm taking another 20.
 
+    11:50.
+    OK.  It's not great, but it works.  I'm proud of myself for being willing to not dig in deep to something unimportant.  Kinda feels bad though.  
 
+    12:20.
+    So now, the next thing to do is to figure out how to have an overlay.  Let's do this.  First, let's just see if we can get an overlay to fill a given container over the top of the on-screen contents.
 
+    Actually, come to think of it, I'm wondering if I could just do the Scrim Overlay as a CSS property.  Then I could compose the components however I want.
+
+    Looks like I'm able to position it how I want.  Now for some more complicated questions.
+        -Where does it live in the DOM tree?
+        -How is it shown/hidden?
+        -How do I fill it with children?
+    
+    I think what I should do is create:
+        -a default overlay property to the LocSt
+        -a global method that clears the local state.  
+        -a locSt class, similar to errorState.  There's the possibility that I've got multiple potential overlays.
 
 
 
