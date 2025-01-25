@@ -15,13 +15,24 @@ import {
 function useCompHooks_MRV() {
   const mrvCtx = useOutletContext();
   const findAtom = useFindAtom();
-
+  const setPageLS = useSetLocStFields("page");
+  const resetPageLS = useResetLocStFields("page");
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
 
   const outMethods = {}; // the object to return
 
-  const universal = () => {};
+  const universal = () => {
+    const pageLS = sessionMRV.locSt.page;
+
+    const universalMethods = {
+      clearScrim: () => {
+        resetPageLS({activeOverlay1: true});
+      },
+    };
+
+    return universalMethods;
+  };
   outMethods.universal = universal();
 
   const oReasonPicker_SC = () => {
@@ -29,9 +40,7 @@ function useCompHooks_MRV() {
     const activeItem = findAtom({ itemNum: activeItemKey, asIndex: false });
     const errorsObj = sessionMRV.locSt.ReasonPickerSC.oErrorObjects;
     const setReasonPickerLS = useSetLocStFields("ReasonPickerSC");
-    const resetReasonPickerLS = useResetLocStFields({
-      locSt: "ReasonPickerSC",
-    });
+    const resetReasonPickerLS = useResetLocStFields("ReasonPickerSC");
 
     // route shortcuts
     const activeReasonKey = sessionMRV.locSt.ReasonPickerSC.activeKey1;

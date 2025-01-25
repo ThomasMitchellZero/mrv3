@@ -71,7 +71,7 @@ function StartSTRX() {
 
   return (
     <section className={`mrvPage`}>
-      <ScrimOverlay />
+
       <section className={`mrvPanel__main`}>
         <TitleBarSTRX
           showNavNodeBar={true}

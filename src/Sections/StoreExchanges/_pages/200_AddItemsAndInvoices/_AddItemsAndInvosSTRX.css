@@ -200,6 +200,12 @@
         grid-column: trash / span 1;
         justify-content: flex-end;
       }
+
+
+      /* For the Lifetime Warranty Overlay*/
+      & .lw__overlay{
+        flex-direction: row;
+      }
     }
 
     /* --------------------------------------------- */

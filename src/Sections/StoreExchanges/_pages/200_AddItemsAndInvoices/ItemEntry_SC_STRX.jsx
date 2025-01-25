@@ -15,12 +15,11 @@ import {
   clearedErrors,
 } from "../../../../globalFunctions/globalJS_classes";
 
-import {
-  useSetSessionItems,
-} from "../../../../mrv/MRVhooks/MRVhooks";
+import { useSetSessionItems } from "../../../../mrv/MRVhooks/MRVhooks";
 
 import InvoContext from "../../../../store/invo-context";
 import ProductContext from "../../../../store/product-context";
+import LifetimeWarrantyOverlay from "./components/LwRtrnForm/LwRtrnForm";
 
 /* &&&&&&&&&&&&&&   Item Entry Cluster    &&&&&&&&&&&&&&&&&&& */
 
@@ -33,13 +32,13 @@ const ItemEntry_SC_STRX = ({}) => {
   const locMethods = useLocStMethods_STRX().AddItemsAndInvos();
 
   //setSessionItems
-  const setSessionItems = useSetSessionItems({ targetStateArrKey: "returnItems" });
+  const setSessionItems = useSetSessionItems({
+    targetStateArrKey: "returnItems",
+  });
 
   const productCtx = useContext(ProductContext);
 
-
   const activeErrorStr = locStRt?.activeError1?.str || "";
-
 
   const errorInItemForm = () => {
     const itemNumInput = locStRt.input1;
@@ -55,7 +54,6 @@ const ItemEntry_SC_STRX = ({}) => {
 
     return outFormError;
   };
-  
 
   const handleAddItem = (event) => {
     event.preventDefault();
@@ -81,6 +79,10 @@ const ItemEntry_SC_STRX = ({}) => {
       locMethods.resetForm();
     }
   };
+
+
+
+  
 
   return (
     <form
@@ -129,8 +131,14 @@ const ItemEntry_SC_STRX = ({}) => {
         <button form="addItemForm" type="submit" className={`secondary`}>
           Add Item
         </button>
+        <div className={`hBox maxFlex`}></div>
       </div>
       <p className={`warning`}>{activeErrorStr}</p>
+
+      <div className={`divider horizontal`}/>
+      <div className={`hBox maxFlex`}>
+        <button>Lifetime Warranty Item</button>
+      </div>
     </form>
   );
 };

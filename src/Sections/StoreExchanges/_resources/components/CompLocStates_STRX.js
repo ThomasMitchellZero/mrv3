@@ -10,6 +10,7 @@ import {
 
 import { LS_MRV_ReasonPickerSC } from "../../../../mrv/mrv-components/CompLocStates_MRV";
 import { NewItemProdInfoSTRX } from "../../_pages/300_NewItems/Sidesheet/NewItemProdInfoSTRX";
+import { LwRtrnForm__LS } from "../../_pages/200_AddItemsAndInvoices/components/LwRtrnForm/LwRtrnForm__Hooks";
 
 // Singleton Local States -------------------------------------
 
@@ -55,6 +56,7 @@ const LS_STRX_100_AddItemsAndInvos = {
   }),
   [LS_STRX_100_AllEntry30._keyStr]: LS_STRX_100_AllEntry30,
   [LS_MRV_ReasonPickerSC._keyStr]: LS_MRV_ReasonPickerSC,
+  [LwRtrnForm__LS._keyStr]: LwRtrnForm__LS,
 };
 
 export { LS_STRX_100_AddItemsAndInvos };

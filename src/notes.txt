@@ -8733,8 +8733,49 @@ What to do today?
         -a global method that clears the local state.  
         -a locSt class, similar to errorState.  There's the possibility that I've got multiple potential overlays.
 
+    2:30.  Not doing great, not focused, dithering around some of the choices I have to make.  
+
+26 Jan 2025
+    12:15.
+
+    I had actually planned to take the day off, but I feel like working today.
+
+    What stands between me and being well on my way to having LW up and working?
+        -I'm worried about my component structure.  Actually don't need any more bullets.  That's at the bottom of everything.
+
+    First, let's describe our component structure.
+        LocSt methods are all stored together, ideally at the most specific node that covers everywhere it is used.  App-wide hooks are stored in MRV hooks, logic for app-wide components is stored in CompHooks MRV, and so on.  Each component with state-altering logic has a corresponding function that returns an object containing all its methods.
+
+    Local States
+        Each component with an interactive local state gets its own (separate) object containing all its methods.  At the moment, I am storing multiples of these together.
+
+        The decision I would be least surprised to learn was wrong is that I have all local states stored in state, in a separate LS object at the top level.  
+
+        Why do I do this?  My thinking, especially for global components, is that I don't know in advance where they will be used.  
+        
+            State-setting for lower-level components should be handled in the top-level container.  OK, fine.  It's something about the parent.  For something like a modal, I don't necessarily know what the parent will be.  Something something parent-child conflicts.  
+
+            Why is that bad?
+
+            Or, more specifically, what is bad about not knowing the parent?  
+
+        I am missing something here.  Let's try a different approach.  Let's think about Return Reasons, since we actually have used that in multiple places.
+
+    I should pay attention to this problem when I vist the garden tonight, because this is an excellent instance of the problem I want to be good at solving.  
+
+    Gut feel:
+        - I think each component with either a local state OR local hooks should have its own separate logic file.  
+        - I think having a standardized LocSt class is a winner.  
+    
+    OK, last thing and then I really will get coding.  It has occurred to me that there's value in having more info passed via props because it makes the relationship between parent and child more obvious.  
+
+    4:15.
+    JUST missed a volleyball game and Instacart is about to arrive.  This is actually a better outcome.  I feel like I've got a decent plan.  I also do not intend to do a whole big refactor here.  Let's try the new pattern out, and if we like it then we can refactor later.  
+    
+    
 
 
+        
 
 
 
