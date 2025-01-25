@@ -80,9 +80,9 @@ const ItemEntry_SC_STRX = ({}) => {
     }
   };
 
-
-
-  
+  const handleLwBtn = () => {
+    locMethods.setPageOverlay({ overlayKeyStr: "LwRtrnForm" });
+  };
 
   return (
     <form
@@ -135,9 +135,11 @@ const ItemEntry_SC_STRX = ({}) => {
       </div>
       <p className={`warning`}>{activeErrorStr}</p>
 
-      <div className={`divider horizontal`}/>
+      <div className={`divider horizontal`} />
       <div className={`hBox maxFlex`}>
-        <button>Lifetime Warranty Item</button>
+        <button type="button" onClick={handleLwBtn}>
+          Lifetime Warranty Item
+        </button>
       </div>
     </form>
   );

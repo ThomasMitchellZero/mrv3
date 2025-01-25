@@ -1,4 +1,3 @@
-import { find, set } from "lodash";
 import {
   returnAtom,
   baseLocState,
@@ -28,8 +27,10 @@ function useLocStMethods_STRX() {
   const pageLocSt = locStRt.page;
 
   //setSessionItems
-  const setReturnItems = useSetSessionItems({targetStateArrKey: "returnItems"});
-  const setNewItems = useSetSessionItems({targetStateArrKey: "newItems"});
+  const setReturnItems = useSetSessionItems({
+    targetStateArrKey: "returnItems",
+  });
+  const setNewItems = useSetSessionItems({ targetStateArrKey: "newItems" });
 
   const findAtom = useFindAtom();
   const outMethods = {};
@@ -111,6 +112,11 @@ function useLocStMethods_STRX() {
         setPageLS({ activeMode1: keyStr });
         resetAllEntry30LS({ activeErrorALL: true, inputALL: true });
         resetPageLS({ activeErrorALL: true });
+      },
+
+      setPageOverlay: ({ overlayKeyStr = "LwRtrnEntry" }) => {
+        console.log("Set Page Overlay Truggered");
+        setPageLS({ activeOverlay1: overlayKeyStr });
       },
 
       setPageError: ({ errorKeyStr = "" }) => {

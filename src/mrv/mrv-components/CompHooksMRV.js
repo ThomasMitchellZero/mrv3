@@ -26,9 +26,6 @@ function useCompHooks_MRV() {
     const pageLS = sessionMRV.locSt.page;
 
     const universalMethods = {
-      clearScrim: () => {
-        resetPageLS({activeOverlay1: true});
-      },
     };
 
     return universalMethods;
