@@ -65,7 +65,7 @@
   --color__red__inverse: #f19caa;
   --color__disabled__text: #00000052;
   --color__white: #ffffff;
-  --color__meltdown__magenta: #ff00ff;
+  --color__meltdown__magenta: magenta; /*  #ff00ff */
 
   --color__card__selected: #e7f1fd;
   --color__card__hover: #f0f0f0;
@@ -936,8 +936,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #17191f16;
+    background-color: red;
     display: flex;
-    z-index: 10; /* Ensure it overlays the contents */
+    z-index: 13; /* Ensure it overlays the contents  #17191f16; */
   }
 }

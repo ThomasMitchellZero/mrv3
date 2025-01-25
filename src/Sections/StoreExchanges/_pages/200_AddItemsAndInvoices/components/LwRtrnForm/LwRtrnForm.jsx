@@ -14,7 +14,9 @@ function LwRtrnForm() {
       }}
       className={`scrimOverlay`}
     >
-      <div className={`body__large color__green__text`}>Fartrell Cluggins</div>
+      <div className={`body__large color__green__text`}>
+        Fartrell Cluggins, Mississippi State
+      </div>
     </div>
   );
 }
