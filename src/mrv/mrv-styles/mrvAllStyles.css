@@ -85,12 +85,12 @@
     background-color: var(--color__border);
 
     &.horizontal {
-      height: 0.125rem;
+      height: 1px;
       width: 100%;
     }
     &.vertical {
       height: 100%;
-      width: 0.125rem;
+      width: 1px;
     }
   }
 
@@ -875,6 +875,10 @@
 
   & .justifyCenter {
     justify-content: center;
+  }
+
+  & .justifyEnd {
+    justify-content: flex-end;
   }
 
   & .centerAll {

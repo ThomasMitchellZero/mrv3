@@ -130,12 +130,11 @@ const ItemEntry_SC_STRX = ({}) => {
         <button form="addItemForm" type="submit" className={`secondary`}>
           Add Item
         </button>
-        <div className={`hBox maxFlex`}></div>
       </div>
       <p className={`warning`}>{activeErrorStr}</p>
 
       <div className={`divider horizontal`} />
-      <div className={`hBox maxFlex`}>
+      <div className={`hBox maxFlex justifyEnd`}>
         <button type="button" onClick={handleLwBtn}>
           Lifetime Warranty Item
         </button>
