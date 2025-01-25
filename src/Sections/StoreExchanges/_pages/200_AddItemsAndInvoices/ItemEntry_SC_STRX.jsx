@@ -19,7 +19,6 @@ import { useSetSessionItems } from "../../../../mrv/MRVhooks/MRVhooks";
 
 import InvoContext from "../../../../store/invo-context";
 import ProductContext from "../../../../store/product-context";
-import LifetimeWarrantyOverlay from "./components/LwRtrnForm/LwRtrnForm";
 
 /* &&&&&&&&&&&&&&   Item Entry Cluster    &&&&&&&&&&&&&&&&&&& */
 

@@ -3,20 +3,18 @@ import {
   useSetLocStFields,
 } from "../../../../../../mrv/MRVhooks/MRVhooks";
 
-function LifetimeWarrantyOverlay() {
+function LwRtrnForm() {
   const resetPageLS = useResetLocStFields("page");
   const setPageLS = useSetLocStFields("page");
 
+  console.log("LifetimeWarrantyOverlay");
   return (
     <div
-      onClick={resetPageLS({
-        activeOverlay1: true,
-      })}
-      className={`scrimOverlay lw__overlay`}
+      className={`scrimOverlay`}
     >
       <div className={`body__large color__green__text`}>Fartrell Cluggins</div>
     </div>
   );
 }
 
-export default LifetimeWarrantyOverlay;
+export { LwRtrnForm };

@@ -1,13 +1,8 @@
 import "./_AddItemsAndInvosSTRX.css";
-
+import { useOutletContext } from "react-router";
 import { ContinueBtnMRV } from "../../../../mrv/mrv-components/inputs/ContinueBtnMRV";
 
 import { useLocStMethods_STRX } from "../../_resources/components/CompHooks_STRX";
-
-import {
-  TitleBarSTRX,
-  CashTotalSTRX,
-} from "../../_resources/components/CompConfigsSTRX";
 
 import {
   baseLocState,
@@ -15,14 +10,18 @@ import {
   returnAtom,
 } from "../../../../globalFunctions/globalJS_classes";
 
-import { AllEntry30 } from "./AllEntry30";
-import { RtrnItemDetails30 } from "./RtrnItems/RtrnItemDetails30";
-
 import { useNodeNav } from "../../../../mrv/MRVhooks/MRVhooks";
 
+import {
+  TitleBarSTRX,
+  CashTotalSTRX,
+} from "../../_resources/components/CompConfigsSTRX";
+import { AllEntry30 } from "./AllEntry30";
+import { RtrnItemDetails30 } from "./RtrnItems/RtrnItemDetails30";
 import { RtrnItemsList } from "./RtrnItems/RtrnItemsList";
 import { RtrnInvosList } from "./RtrnInvos/RtrnInvosList";
-import { useOutletContext } from "react-router";
+import { LwRtrnForm } from "./components/LwRtrnForm/LwRtrnForm";
+
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //&&&&&&&&&&&&&&&     MAIN COMPONENT    &&&&&&&&&&&&&&&//
@@ -31,14 +30,13 @@ import { useOutletContext } from "react-router";
 function AddItemsAndInvosSTRX() {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
-  const setSessionMRV = mrvCtx.setSessionMRV;
-  const nodeNav = useNodeNav();
   const locMethods = useLocStMethods_STRX().AddItemsAndInvos();
 
   const activeMode = sessionMRV.locSt.page.activeMode1;
   const activeUI = sessionMRV.locSt.page.activeUI3;
   const errorObjRt = sessionMRV.locSt.page.oErrorObjects;
   const activeError1 = sessionMRV.locSt.page.activeError1;
+  const activeOverlay1 = sessionMRV.locSt.page.activeOverlay1;
 
   const oMode = {
     item: {
@@ -62,14 +60,17 @@ function AddItemsAndInvosSTRX() {
     ItemDetails30: <RtrnItemDetails30 />,
   };
 
+  const oOverlays = {
+    LwRtrnForm: <LwRtrnForm />,
+  };
+  const uiActiveOverlay = activeOverlay1 ? oOverlays[activeOverlay1] : null;
+
   const uiContinueWarning =
     activeError1?.key === "noItems"
       ? errorObjRt?.noItems?.str
       : activeError1?.key === "invalidReturnReasons"
       ? errorObjRt?.invalidReturnReasons?.str
       : "";
-
-
 
   /* ---- SHARED FUNCTIONS ---- */
 
@@ -82,25 +83,28 @@ function AddItemsAndInvosSTRX() {
   /* ---- OUTPUT JSX ---- */
 
   return (
-    <section className={`addItemsAndInvos mrvPage color__surface__subdued`}>
-      <main onClick={locMethods.resetKeysToo} className={`mrvPanel__main`}>
-        <TitleBarSTRX
-          showProductName={true}
-          headerTitle={oMode[activeMode].s70label}
-          showNavNodeBar={true}
-        />
-        <div className={`main_content`}>{oMode[activeMode].s70panel}</div>
-
-        <div className={`footer_content`}>
-          <CashTotalSTRX />
-          <ContinueBtnMRV
-            warningText={uiContinueWarning}
-            handleClick={(e) => handleContinue(e)}
+    <>
+      {uiActiveOverlay}
+      <section className={`addItemsAndInvos mrvPage color__surface__subdued`}>
+        <main onClick={locMethods.resetKeysToo} className={`mrvPanel__main`}>
+          <TitleBarSTRX
+            showProductName={true}
+            headerTitle={oMode[activeMode].s70label}
+            showNavNodeBar={true}
           />
-        </div>
-      </main>
-      {o30panels[active30key]}
-    </section>
+          <div className={`main_content`}>{oMode[activeMode].s70panel}</div>
+
+          <div className={`footer_content`}>
+            <CashTotalSTRX />
+            <ContinueBtnMRV
+              warningText={uiContinueWarning}
+              handleClick={(e) => handleContinue(e)}
+            />
+          </div>
+        </main>
+        {o30panels[active30key]}
+      </section>
+    </>
   );
 }
 
