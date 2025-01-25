@@ -936,7 +936,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: red;
+    background-color: #17191f16;
+    backdrop-filter: blur(.5rem);
     display: flex;
     z-index: 13; /* Ensure it overlays the contents  #17191f16; */
   }

@@ -1,8 +1,6 @@
 import { TitleBarSTRX } from "../../_resources/components/CompConfigsSTRX";
 import { ColumnLabelMRV } from "../../../../mrv/mrv-components/DisplayOutputs/ColumnLabelMRV/ColumnLabelMRV";
 
-import { ScrimOverlay } from "../../../../mrv/mrv-components/DisplayOutputs/ScrimOverlay/ScrimOverlay";
-
 import { useNodeNav } from "../../../../mrv/MRVhooks/MRVhooks";
 
 import { RejectionObj } from "../../../../globalFunctions/globalJS_classes";
