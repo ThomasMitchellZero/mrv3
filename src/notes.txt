@@ -8816,6 +8816,9 @@ What to do today?
     Ok.  Here's a weird question.  Wondering if the chips should be activeKey or ActiveInput.  Right this very moment I am feeling Input, but I've gone back and fourth like 4 times in the last 5 minutes.  
 
     IDK.  Feels a little closer to an input to me.
+        I have a solution that I like.  I'm gonna start using input keys like 1, 11, 21, etc.
+        That lets me break them apart if I need to.
+    
 
 
 
