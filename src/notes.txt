@@ -8771,8 +8771,54 @@ What to do today?
 
     4:15.
     JUST missed a volleyball game and Instacart is about to arrive.  This is actually a better outcome.  I feel like I've got a decent plan.  I also do not intend to do a whole big refactor here.  Let's try the new pattern out, and if we like it then we can refactor later.  
+
+    6:20.
+    Against all odds I have had a pretty good day.  I think I am gonna just keep on rolling for as long as I am having fun, but seriously, no pressure.  I'm also at a REALLY good starting point for next time, because everything ahead should be fun and progress-y.  
+
+    I'm also proud of myself for figuring out the scrim issue.  I did some checks, realized that other CSS changes were happening just fine, and something triggered my suspicion that it was getting trumped by another class with the same name elsewhere in the ecosystem.
     
+    Clicking each of the chips is gonna set its corresponding LS property.  
+    Clicking the wrong chip at each level will set the corresponding error state.  
+
+    So I will need:
+        - a chip click handler that sets some LS property to its own value.
     
+    I'm now kinda wondering if they need to be true error states at all.  They aren't gonna behave like error states.  They won't clear on click.  
+
+    The logic for each is pretty simple:
+        if( valid answer ){ show next query }
+        else if ( invalid answer ){ show error str }
+        else ( null )
+    
+27 Jan 2025
+    3:40.
+    Somewhat hilariously, it looks like the CSS might be the hardest part of all of this.  
+
+28 Jan 2025
+
+    10:30.
+    OK, first we got some frog-eating to do.
+
+    X - Get the lease signed.
+    X - Talk to Kristin about research.
+    X -Call the pharmacy.  
+    X -Get as far as I can with NC DMV
+    -Talk to Kumar.
+
+    11:45.
+    OK.  Now for the fun stuff.
+
+    I feel like I've started using the oConfigs pattern a lot, and I want to have something similar for what I am about to do in LW.  Some standard pattern, almost like a reducer, for handling several multi-factor evaluations.  Maybe oEvals?
+
+    That I like.  That I'm looking forwward to.  I'm not looking forward to the decision on keeping/breaking components.  I've heard other people do this, but I just don't see the benefit.  Fuck it.  I'm doing it my way.
+
+    1:10
+    Ok.  Here's a weird question.  Wondering if the chips should be activeKey or ActiveInput.  Right this very moment I am feeling Input, but I've gone back and fourth like 4 times in the last 5 minutes.  
+
+    IDK.  Feels a little closer to an input to me.
+
+
+
 
 
         

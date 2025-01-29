@@ -328,7 +328,6 @@
       overflow-x: hidden;
       overflow-y: auto;
       background-color: var(--color__surface__default);
-      border-left: var(--standardBorder);
       padding: var(--PrimaryPadding__both);
 
       &.collapsed {

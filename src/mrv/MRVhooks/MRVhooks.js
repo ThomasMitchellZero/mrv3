@@ -413,6 +413,10 @@ function useResetLocStFields(locStKey) {
     activeOverlay1 = false,
     activeKey1 = false,
     activeKey2 = false,
+    activeKey3 = false,
+    activeKey4 = false,
+    activeKey5 = false,
+    activeKey6 = false,
     activeKeyALL = false,
     activeMode1 = false,
     activeMode2 = false,
@@ -445,6 +449,10 @@ function useResetLocStFields(locStKey) {
       activeOverlay1,
       activeKey1,
       activeKey2,
+      activeKey3,
+      activeKey4,
+      activeKey5,
+      activeKey6,
       activeMode1,
       activeMode2,
       activeData1,
@@ -469,7 +477,14 @@ function useResetLocStFields(locStKey) {
     }
 
     if (activeKeyALL) {
-      [args.activeKey1, args.activeKey2] = [true, true];
+      [
+        args.activeKey1,
+        args.activeKey2,
+        args.activeKey3,
+        args.activeKey4,
+        args.activeKey5,
+        args.activeKey6,
+      ] = [true, true, true, true, true, true];
     }
 
     if (activeModeALL) {

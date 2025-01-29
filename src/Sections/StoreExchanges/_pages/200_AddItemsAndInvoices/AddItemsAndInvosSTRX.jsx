@@ -22,7 +22,6 @@ import { RtrnItemsList } from "./RtrnItems/RtrnItemsList";
 import { RtrnInvosList } from "./RtrnInvos/RtrnInvosList";
 import { LwRtrnForm } from "./components/LwRtrnForm/LwRtrnForm";
 
-
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //&&&&&&&&&&&&&&&     MAIN COMPONENT    &&&&&&&&&&&&&&&//
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -84,8 +83,8 @@ function AddItemsAndInvosSTRX() {
 
   return (
     <>
-      {uiActiveOverlay}
       <section className={`addItemsAndInvos mrvPage color__surface__subdued`}>
+        {uiActiveOverlay}
         <main onClick={locMethods.resetKeysToo} className={`mrvPanel__main`}>
           <TitleBarSTRX
             showProductName={true}

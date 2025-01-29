@@ -1,6 +1,7 @@
 //---- Product ----
 
 import { cloneDeep } from "lodash";
+import { act } from "react";
 
 class moneyObj {
   constructor({
@@ -413,20 +414,17 @@ class errorObj {
 
 export { errorObj };
 
-class overlayObj {
-  constructor({ key = "", str = "", bgClickClears = true }) {
-    this.key = key;
-    this.str = str;
-  }
-}
 
-export { overlayObj };
 
 const clearedInputs = {
   input1: "",
   input2: "",
   input3: "",
   input4: "",
+  input11: "",
+  input12: "",
+  input21: "",
+  input22: "",
 };
 
 export { clearedInputs };
@@ -441,6 +439,8 @@ export { clearedErrors };
 const clearedActiveKeys = {
   activeKey1: "",
   activeKey2: "",
+  activeKey3: "",
+  activeKey4: "",
 };
 
 export { clearedActiveKeys };
@@ -479,11 +479,17 @@ const makeLocStFields = ({
   input2 = "",
   input3 = "",
   input4 = "",
+  input11 = "",
+  input12 = "",
+  input21 = "",
+  input22 = "",
   activeError1 = null,
   activeError2 = null,
   activeOverlay1 = null,
   activeKey1 = "",
   activeKey2 = "",
+  activeKey3 = "",
+  activeKey4 = "",
   activeMode1 = "",
   activeMode2 = "",
   activeData1 = null,
@@ -500,10 +506,16 @@ const makeLocStFields = ({
     input2,
     input3,
     input4,
+    input11,
+    input12,
+    input21,
+    input22,
     activeError1,
     activeError2,
     activeKey1,
     activeKey2,
+    activeKey3,
+    activeKey4,
     activeMode1,
     activeMode2,
     activeData1,
