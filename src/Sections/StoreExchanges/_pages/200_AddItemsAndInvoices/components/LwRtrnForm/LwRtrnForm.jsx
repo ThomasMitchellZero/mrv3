@@ -60,7 +60,11 @@ function LwRtrnForm() {
     const aUiChip = array.map((oChip) => {
       return uiLwChip({ oChip, lsKey });
     });
-    return <div className={`chipCtnr`}>{aUiChip}</div>;
+    return (
+      <div className={`vBox`}>
+        <div className={`chipCtnr`}>{aUiChip}</div>
+      </div>
+    );
   };
 
   const uiBrandChips = arrayChipper({ array: aBrandChips, lsKey: "input1" });
