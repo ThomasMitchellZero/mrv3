@@ -18,66 +18,75 @@ function LwRtrnForm() {
   const setLwRtrnFormLS = useSetLocStFields("LwRtrnForm");
   const resetLwRtrnFormLS = useResetLocStFields("LwRtrnForm");
 
-  const oEvals = {
-    
-  };
+  const oEvals = {};
 
   // Chips in UI ///////////////////////
 
+  const oBrand = {
+    aChips: [
+      { label: "Kobalt", chipKey: "kobalt", lwValid: true },
+      { label: "Craftsman", chipKey: "craftsman", lwValid: true },
+      { label: "Other", chipKey: "other", lwValid: false },
+    ],
+    lsKey: "input1",
+    sIneligible: "This brand isn't eligible for Lifetime Warranty replacement.",
+    isVisible: true,
+  };
 
-  const aBrandChips = [
-    { label: "Kobalt", chipKey: "kobalt", lwValid: true },
-    { label: "Craftsman", chipKey: "craftsman", lwValid: true },
-    { label: "Other", chipKey: "other", lwValid: false },
-  ];
-  const sBrandIneligible =
-    "This brand isn't eligible for Lifetime Warranty replacement.";
-
-  const aElectricalChips = [
-    { label: "Yes", chipKey: "yes", lwValid: false },
-    { label: "No", chipKey: "no", lwValid: true },
-  ];
-  const sElectricalIneligible =
-    "Electrical items aren't eligible for Lifetime Warranty replacement.";
-
-  const handleChipClick = ({ oChip, lsKey }) => {
-    const outLsValue = lwLocSt[lsKey]?.chipKey === oChip.chipKey ? "" : oChip;
-    setLwRtrnFormLS({ [lsKey]: outLsValue });
+  const oElectrical = {
+    aChips: [
+      { label: "Yes", chipKey: "yes", lwValid: false },
+      { label: "No", chipKey: "no", lwValid: true },
+    ],
+    lsKey: "input2",
+    sIneligible:
+      "Electrical items aren't eligible for Lifetime Warranty replacement.",
+    isVisible: lwLocSt?.input1.lwValid,
   };
 
   const uiLwChip = ({ oChip, lsKey }) => {
     const selectedLsKey = lwLocSt[lsKey]?.chipKey;
     const isSelected = selectedLsKey === oChip.chipKey ? "selected" : "";
+
+    const handleChipClick = (oChip) => {
+      const outLsValue = lwLocSt[lsKey]?.chipKey === oChip.chipKey ? "" : oChip;
+      setLwRtrnFormLS({ [lsKey]: outLsValue });
+    };
+
     return (
       <button
         key={oChip.chipKey}
         className={`chip ${isSelected}`}
-        onClick={() => handleChipClick({ oChip, lsKey })}
+        onClick={() => handleChipClick(oChip)}
       >
         {oChip.label}
       </button>
     );
   };
 
-  const arrayChipper = ({ array, lsKey, sIneligible = "EMPTY" }) => {
-    const aUiChip = array.map((oChip) => {
+  const arrayChipper = ({ chipsObj }) => {
+    const lsKey = chipsObj.lsKey;
+    // If a chip is selected && invalid, show the invalid message.
+    const invalidSelection = lwLocSt?.[lsKey]?.lwValid === false;
+
+    const aUiChip = chipsObj.aChips.map((oChip) => {
       return uiLwChip({ oChip, lsKey });
     });
-    const lwValidMsg = lwLocSt?.[lsKey].lwValid ? null : (
-      <MessageRibbonMRV message={sIneligible} />
-    );
+
+    const uiInvalidMsg = invalidSelection ? (
+      <MessageRibbonMRV message={chipsObj.sIneligible} />
+    ) : null;
+
     return (
       <div className={`vBox`}>
         <div className={`chipCtnr`}>{aUiChip}</div>
-        {lwValidMsg}
+        {uiInvalidMsg}
       </div>
     );
   };
 
   const uiBrandChips = arrayChipper({
-    array: aBrandChips,
-    lsKey: "input1",
-    sIneligible: sBrandIneligible,
+    chipsObj: oBrand,
   });
 
   return (
