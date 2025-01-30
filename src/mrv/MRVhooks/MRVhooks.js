@@ -499,6 +499,32 @@ function useResetLocStFields(locStKey) {
       activeUI3,
     };
 
+    // the ALLs are for convenience.  They will override any other values.
+    if (inputALL) {
+
+      setAllTrue(oInputs);
+    }
+
+    if (activeErrorALL) {
+      setAllTrue(oActiveErrors);
+    }
+
+    if (activeKeyALL) {
+      setAllTrue(oActiveKeys);
+    }
+
+    if (activeModeALL) {
+      setAllTrue(oActiveModes);
+    }
+
+    if (activeDataALL) {
+      setAllTrue(oActiveDatas);
+    }
+
+    if (activeUIALL) {
+      setAllTrue(oActiveUIs);
+    }
+
     let args = {
       ...oInputs,
       ...oActiveErrors,
@@ -508,47 +534,6 @@ function useResetLocStFields(locStKey) {
       ...oActiveDatas,
       ...oActiveUIs,
     };
-
-    // the ALLs are for convenience.  They will override any other values.
-    if (inputALL) {
-      /*
-            [args.input1, args.input2, args.input3, args.input4] = [
-        true,
-        true,
-        true,
-        true,
-      ];
-      */
-
-      args = { ...args, ...setAllTrue(oInputs) };
-    }
-
-    if (activeErrorALL) {
-      [args.activeError1, args.activeError2] = [true, true];
-    }
-
-    if (activeKeyALL) {
-      [
-        args.activeKey1,
-        args.activeKey2,
-        args.activeKey3,
-        args.activeKey4,
-        args.activeKey5,
-        args.activeKey6,
-      ] = [true, true, true, true, true, true];
-    }
-
-    if (activeModeALL) {
-      [args.activeMode1, args.activeMode2] = [true, true];
-    }
-
-    if (activeDataALL) {
-      [args.activeData1, args.activeData2] = [true, true];
-    }
-
-    if (activeUIALL) {
-      [args.activeUI1, args.activeUI2, args.activeUI3] = [true, true, true];
-    }
 
     let outLocSt = {};
     const init = sessionMRV.locSt[locStKey].init;
