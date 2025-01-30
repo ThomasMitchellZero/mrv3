@@ -13,11 +13,6 @@
   src: url("../../assets/fonts/fellix/Fellix-Bold.otf") format("opentype");
 }
 
-
-
-
-
-
 .mrv {
   display: flex;
   flex-direction: column;
@@ -42,6 +37,7 @@
 
   --primaryBorder: 0.125rem solid var(--color__border);
   --clearBorder: 0.125rem solid transparent;
+  --border__focus: 0.125rem solid var(--color__interactive);
 
   /* Colors */
 
@@ -184,11 +180,7 @@
     color: var(--color__meltdown__magenta);
   }
 
-  /* ---- MRV STANDARD HTML STYLES ---- */
 
-  & input {
-    font-family: "Fellix-Regular";
-  }
 
   /* ---- MRV TEXT STYLES ---- */
 
@@ -609,6 +601,56 @@
     gap: 1rem;
   }
 
+    /* ---- Input Styling ---- */
+
+    & input {
+      font-family: "Fellix-Regular";
+      display: flex;
+  
+      box-sizing: border-box;
+      padding: 0rem 0.5rem 0rem 1rem;
+      font-size: 1.25rem;
+  
+      border: var(--primaryBorder);
+      border-radius: 0.5rem;
+  
+      &:focus {
+        outline: transparent;
+        border: var(--border__focus);
+      }
+  
+      &:disabled {
+        color: var(--color__disabled__text);
+      }
+  
+      &.error {
+        border-color: var(--color__red);
+  
+        & p {
+          color: var(--color__red);
+        }
+      }
+    }
+  
+    & .qtyInputPlusMinusCtnr {
+      display: flex;
+      flex: 0 0 auto;
+      flex-direction: row;
+      gap: 0.125rem;
+      min-width: 0rem;
+  
+      & input {
+        width: 5rem;
+      }
+  
+      & button {
+        width: 4rem;
+        height: 4rem;
+        font-size: 2.5rem;
+        font-family: "Fellix-Medium";
+      }
+    }
+
   /* ---- MRV CARD STYLES ---- */
 
   & .cardStyle {
@@ -940,7 +982,7 @@
     right: 0;
     bottom: 0;
     background-color: #17191f16;
-    backdrop-filter: blur(.5rem);
+    backdrop-filter: blur(0.5rem);
     display: flex;
     z-index: 13; /* Ensure it overlays the contents  #17191f16; */
   }

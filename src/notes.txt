@@ -8818,7 +8818,34 @@ What to do today?
     IDK.  Feels a little closer to an input to me.
         I have a solution that I like.  I'm gonna start using input keys like 1, 11, 21, etc.
         That lets me break them apart if I need to.
+
+    2:00.
+    OK.  Gotta think about how to handle the evals.  It is possible to handle the ineligible msgs within the component.  That's pretty straightforward, and all the info I need is right there.  
+
+    I think for the showing of each subesquent component, that I want to handle in evals.
     
+
+    3:10.
+    Just wanna see if there's a concise way I can describe this.  
+
+    If no chip is selected, show nothing.
+    If a valid chip is selected, show the next section.
+    If an invalid chip is selected, show invalid message.
+
+    OK.  So I think I have three conditions no matter what.  
+
+    That itself is fairly easy and I might end up doing it.  I guess my only qualm is that I want the Invalid message to live within its respective object, and 
+
+30 Jan 2025
+    10:40.
+    Gonna start by making a reusable MRV input with buttons.  I need it for LW and I use it in a lot of other places, so I might as well.
+
+    Kind of second-guessing myself here.  I could imagine a LOT of potential scenarios where I would want to do different shit.  Well, if it gets truly awful I always have the option of just rolling my own for that application.
+
+    It could also be possible to move ALL the logic out.  Like if I were to use this for changing Return Item qty, I'm not really setting a local state, I'm using the Edit Item Qty hooks.
+
+    Yeah.  I'm just not sure I can standardize this.  Between local css, error handling, logic for interaction, I'm just not sure this is doing a whole lot.  
+
 
 
 
