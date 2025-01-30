@@ -501,26 +501,20 @@ function useResetLocStFields(locStKey) {
 
     // the ALLs are for convenience.  They will override any other values.
     if (inputALL) {
-
       setAllTrue(oInputs);
     }
-
     if (activeErrorALL) {
       setAllTrue(oActiveErrors);
     }
-
     if (activeKeyALL) {
       setAllTrue(oActiveKeys);
     }
-
     if (activeModeALL) {
       setAllTrue(oActiveModes);
     }
-
     if (activeDataALL) {
       setAllTrue(oActiveDatas);
     }
-
     if (activeUIALL) {
       setAllTrue(oActiveUIs);
     }

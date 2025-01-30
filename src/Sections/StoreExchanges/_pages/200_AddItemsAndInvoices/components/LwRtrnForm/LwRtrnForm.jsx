@@ -20,15 +20,25 @@ function LwRtrnForm() {
   const setLwRtrnFormLS = useSetLocStFields("LwRtrnForm");
   const resetLwRtrnFormLS = useResetLocStFields("LwRtrnForm");
 
-
   // validity conditions to set visibility.
   const bBrandValid = lwLocSt?.input1?.lwValid === true;
   const bElectricityValid = lwLocSt?.input2?.lwValid === true;
-  const bRtrnQtyValid = bElectricityValid && true;
+  const bRtrnQtyValid = bElectricityValid && Number(lwLocSt?.input3) > 0;
   const bReplacementInputVisible = bBrandValid && bElectricityValid;
 
   const handleRtrnInput = (event) => {
+    const newQty = event.target.value;
+    setLwRtrnFormLS({ input3: newQty });
+  };
 
+  const handlePlus = () => {
+    const newQty = Number(lwLocSt.input3) + 1;
+    setLwRtrnFormLS({ input3: newQty });
+  };
+
+  const handleMinus = () => {
+    const newQty = Math.max(Number(lwLocSt.input3) - 1, 0);
+    setLwRtrnFormLS({ input3: newQty });
   };
 
   const uiReturnInput = bElectricityValid && (
@@ -37,20 +47,34 @@ function LwRtrnForm() {
         Return Item Qty
       </div>
       <div className={`qtyInputPlusMinusCtnr`}>
-        <button className={`ghost`}>-</button>
-        <input type="number" value={lwLocSt} onChange={(e)=>{handleRtrnInput(e)}} />
-        <button className={`ghost`}>+</button>
+        <button
+          onClick={handleMinus}
+          disabled={!bRtrnQtyValid}
+          className={`ghost`}
+        >
+          -
+        </button>
+        <input
+          type="number"
+          value={lwLocSt.input3}
+          min={0}
+          onChange={(e) => {
+            handleRtrnInput(e);
+          }}
+        />
+        <button onClick={handlePlus} className={`ghost`}>
+          +
+        </button>
       </div>
     </div>
   );
 
-    // Final Output
+  // Final Output
   return (
     <div
       onClick={() => {
         resetPageLS({ activeOverlay1: true });
         resetLwRtrnFormLS({ inputALL: true });
-
       }}
       className={`LwRtrnForm scrimOverlay justifyEnd`}
     >
