@@ -27,14 +27,7 @@ function ReplacementInput({
     // Checks if prerequisite condition is met before returning.
     showOnlyIf && (
       <div className={`vBox minFlex`}>
-        <div className={`hBox`}>
-          <div className={`hBox body__small color__primary__text`}>Return Item Qty</div>
-          <div className={`qtyInputPlusMinusCtnr`}>
-            <button className={`ghost`}>-</button>
-            <input />
-            <button className={`ghost`}>+</button>
-          </div>
-        </div>
+        
       </div>
     )
   );

@@ -406,6 +406,12 @@ function useResetLocStFields(locStKey) {
     input2 = false,
     input3 = false,
     input4 = false,
+    input11 = false,
+    input12 = false,
+    input13 = false,
+    input21 = false,
+    input22 = false,
+    input23 = false,
     inputALL = false,
     activeError1 = false,
     activeError2 = false,
@@ -439,37 +445,82 @@ function useResetLocStFields(locStKey) {
       return false; // I might reuse some functions and this lets me dip out if the locStKey is invalid.
     }
 
-    const args = {
+    const setAllTrue = (oFields) => {
+      for (const key of Object.keys(oFields)) {
+        oFields[key] = true;
+      }
+      return oFields;
+    };
+
+    const oInputs = {
       input1,
       input2,
       input3,
       input4,
+      input11,
+      input12,
+      input13,
+      input21,
+      input22,
+      input23,
+    };
+
+    const oActiveErrors = {
       activeError1,
       activeError2,
-      activeOverlay1,
+    };
+
+    const oActiveKeys = {
       activeKey1,
       activeKey2,
       activeKey3,
       activeKey4,
       activeKey5,
       activeKey6,
+    };
+
+    const oActiveModes = {
       activeMode1,
       activeMode2,
+    };
+
+    const oActiveOverlays = {
+      activeOverlay1,
+    };
+
+    const oActiveDatas = {
       activeData1,
       activeData2,
+    };
+
+    const oActiveUIs = {
       activeUI1,
       activeUI2,
       activeUI3,
     };
 
+    let args = {
+      ...oInputs,
+      ...oActiveErrors,
+      ...oActiveKeys,
+      ...oActiveModes,
+      ...oActiveOverlays,
+      ...oActiveDatas,
+      ...oActiveUIs,
+    };
+
     // the ALLs are for convenience.  They will override any other values.
     if (inputALL) {
-      [args.input1, args.input2, args.input3, args.input4] = [
+      /*
+            [args.input1, args.input2, args.input3, args.input4] = [
         true,
         true,
         true,
         true,
       ];
+      */
+
+      args = { ...args, ...setAllTrue(oInputs) };
     }
 
     if (activeErrorALL) {

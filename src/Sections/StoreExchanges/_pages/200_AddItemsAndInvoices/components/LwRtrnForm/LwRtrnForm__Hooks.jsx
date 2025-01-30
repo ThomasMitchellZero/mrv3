@@ -34,8 +34,12 @@ function useLwRtrnForm__Hooks() {
   const setLwRtrnFormLS = useSetLocStFields("LwRtrnForm");
   const resetLwRtrnFormLS = useResetLocStFields("LwRtrnForm");
 
+
+  // Right now, I'm not using any of this.
+
   const closeLwRtrnForm = () => {
     // LwRtrnForm is going away, so reset its LS and clear ActiveOverlay1 from page.
+    console.log("Closing LwRtrnForm");
     resetLwRtrnFormLS({ EVERYONE: true });
     resetPageLS({ activeOverlay1: true });
   };

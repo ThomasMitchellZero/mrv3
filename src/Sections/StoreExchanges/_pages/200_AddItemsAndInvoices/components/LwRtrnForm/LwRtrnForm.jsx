@@ -20,18 +20,39 @@ function LwRtrnForm() {
   const setLwRtrnFormLS = useSetLocStFields("LwRtrnForm");
   const resetLwRtrnFormLS = useResetLocStFields("LwRtrnForm");
 
-  // Final Output
 
+  // validity conditions to set visibility.
   const bBrandValid = lwLocSt?.input1?.lwValid === true;
   const bElectricityValid = lwLocSt?.input2?.lwValid === true;
+  const bRtrnQtyValid = bElectricityValid && true;
   const bReplacementInputVisible = bBrandValid && bElectricityValid;
 
+  const handleRtrnInput = (event) => {
+
+  };
+
+  const uiReturnInput = bElectricityValid && (
+    <div className={`hBox minFlex`}>
+      <div className={`hBox body__small color__primary__text`}>
+        Return Item Qty
+      </div>
+      <div className={`qtyInputPlusMinusCtnr`}>
+        <button className={`ghost`}>-</button>
+        <input type="number" value={lwLocSt} onChange={(e)=>{handleRtrnInput(e)}} />
+        <button className={`ghost`}>+</button>
+      </div>
+    </div>
+  );
+
+    // Final Output
   return (
     <div
       onClick={() => {
         resetPageLS({ activeOverlay1: true });
+        resetLwRtrnFormLS({ inputALL: true });
+
       }}
-      className={`LwRtrnForm scrimOverlay justifyEnd`} 
+      className={`LwRtrnForm scrimOverlay justifyEnd`}
     >
       <Sidesheet_Base_MRV title="Lifetime Warranty Item">
         <div className={`vBox minFlex`}>
@@ -57,6 +78,7 @@ function LwRtrnForm() {
             showOnlyIf={lwLocSt?.input1.lwValid === true}
           />
         </div>
+        {uiReturnInput}
         <ReplacementInput showOnlyIf={bReplacementInputVisible} />
       </Sidesheet_Base_MRV>
     </div>
