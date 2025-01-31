@@ -58,7 +58,7 @@ function ChipInput({
   return (
     // Checks if prerequisite condition is met before returning.
     showOnlyIf && (
-      <div className={`vBox minFlex`}>
+      <div className={`vBox gap50pct minFlex`}>
         <p className={`body__small color__secondary__text`}>{sQuery}</p>
         <div className={`chipCtnr`}>{aUiChip}</div>
         {uiInvalidMsg}

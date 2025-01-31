@@ -1,8 +1,9 @@
 
 .mrv{
     & .LwRtrnForm{
-        & .qtyInputPlusMinusCtnr{
-            
+        & .replacementInput{
+            padding-top: 2rem;
+            border-top: var(--primaryBorder);
         }
     }
 }

@@ -8,7 +8,7 @@ import {
 import { Sidesheet_Base_MRV } from "../../../../../../mrv/mrv-components/DisplayOutputs/Sidesheet_Base_MRV";
 
 import { ChipInput } from "./subcomponents/ChipInput";
-import { ReplacementInput } from "./subcomponents/ReplacementInput";
+import { ReplacementCluster } from "./subcomponents/ReplacementCluster";
 
 function LwRtrnForm() {
   const mrvCtx = useOutletContext();
@@ -22,9 +22,8 @@ function LwRtrnForm() {
 
   // validity conditions to set visibility.
   const bBrandValid = lwLocSt?.input1?.lwValid === true;
-  const bElectricityValid = lwLocSt?.input2?.lwValid === true;
+  const bElectricityValid = bBrandValid && lwLocSt?.input2?.lwValid === true;
   const bRtrnQtyValid = bElectricityValid && Number(lwLocSt?.input3) > 0;
-  const bReplacementInputVisible = bBrandValid && bElectricityValid;
 
   const handleRtrnInput = (event) => {
     const newQty = event.target.value;
@@ -42,7 +41,7 @@ function LwRtrnForm() {
   };
 
   const uiReturnInput = bElectricityValid && (
-    <div className={`hBox minFlex`}>
+    <div className={`vBox minFlex gap50pct`}>
       <div className={`hBox body__small color__primary__text`}>
         Return Item Qty
       </div>
@@ -74,36 +73,38 @@ function LwRtrnForm() {
     <div
       onClick={() => {
         resetPageLS({ activeOverlay1: true });
-        resetLwRtrnFormLS({ inputALL: true });
+        resetLwRtrnFormLS({ EVERYONE: true });
       }}
       className={`LwRtrnForm scrimOverlay justifyEnd`}
     >
       <Sidesheet_Base_MRV title="Lifetime Warranty Item">
-        <div className={`vBox minFlex`}>
-          {/*Chip Inputs*/}
-          <ChipInput
-            sQuery="Return Item Brand"
-            aChips={[
-              { label: "Kobalt", chipKey: "kobalt", lwValid: true },
-              { label: "Craftsman", chipKey: "craftsman", lwValid: true },
-              { label: "Other", chipKey: "other", lwValid: false },
-            ]}
-            lsKey="input1"
-            sIneligible="This brand isn't eligible for Lifetime Warranty replacement."
-          />
-          <ChipInput
-            sQuery="Does item use electricity?"
-            aChips={[
-              { label: "Yes", chipKey: "yes", lwValid: false },
-              { label: "No", chipKey: "no", lwValid: true },
-            ]}
-            lsKey="input2"
-            sIneligible="Electrical items aren't eligible for Lifetime Warranty replacement."
-            showOnlyIf={lwLocSt?.input1.lwValid === true}
-          />
+        <div className={`vBox minFlex gap2rem`}>
+          <div className={`vBox minFlex gap2rem`}>
+            {/*Chip Inputs*/}
+            <ChipInput
+              sQuery="Return Item Brand"
+              aChips={[
+                { label: "Kobalt", chipKey: "kobalt", lwValid: true },
+                { label: "Craftsman", chipKey: "craftsman", lwValid: true },
+                { label: "Other", chipKey: "other", lwValid: false },
+              ]}
+              lsKey="input1"
+              sIneligible="This brand isn't eligible for Lifetime Warranty replacement."
+            />
+            <ChipInput
+              sQuery="Does item use electricity?"
+              aChips={[
+                { label: "Yes", chipKey: "yes", lwValid: false },
+                { label: "No", chipKey: "no", lwValid: true },
+              ]}
+              lsKey="input2"
+              sIneligible="Electrical items aren't eligible for Lifetime Warranty replacement."
+              showOnlyIf={lwLocSt?.input1.lwValid === true}
+            />
+            {uiReturnInput}
+          </div>
+          <ReplacementCluster showOnlyIf={bRtrnQtyValid} />
         </div>
-        {uiReturnInput}
-        <ReplacementInput showOnlyIf={bReplacementInputVisible} />
       </Sidesheet_Base_MRV>
     </div>
   );

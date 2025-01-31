@@ -538,6 +538,7 @@
       font-size: 1rem;
       line-height: 1.5rem;
       background-color: var(--color__surface__default);
+      min-width: 5rem;
 
       &.active {
         border-color: var(--color__interactice__inverse);
@@ -605,14 +606,13 @@
 
     & input {
       font-family: "Fellix-Regular";
+      height: 4rem;
       display: flex;
-  
-      box-sizing: border-box;
       padding: 0rem 0.5rem 0rem 1rem;
       font-size: 1.25rem;
-  
       border: var(--primaryBorder);
       border-radius: 0.5rem;
+      min-width: 0rem;
   
       &:focus {
         outline: transparent;
