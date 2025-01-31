@@ -26,7 +26,6 @@ function Sidesheet_Base_MRV({
   const icon = oIcons[btnIcon] || null;
 
   const handleBGClick = (e) => {
-    console.log("Generic Sidesheet BG Click");
     e.stopPropagation();
     fBgClick();
   };

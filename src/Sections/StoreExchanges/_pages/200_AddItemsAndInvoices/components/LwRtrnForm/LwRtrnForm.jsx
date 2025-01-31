@@ -20,13 +20,17 @@ function LwRtrnForm() {
   const setLwRtrnFormLS = useSetLocStFields("LwRtrnForm");
   const resetLwRtrnFormLS = useResetLocStFields("LwRtrnForm");
 
+  const handleBGClick = (e) => {
+    resetLwRtrnFormLS({ activeErrorALL: true });
+  };
+
   // validity conditions to set visibility.
   const bBrandValid = lwLocSt?.input1?.lwValid === true;
   const bElectricityValid = bBrandValid && lwLocSt?.input2?.lwValid === true;
   const bRtrnQtyValid = bElectricityValid && Number(lwLocSt?.input3) > 0;
 
   const handleRtrnInput = (event) => {
-    const newQty = event.target.value;
+    const newQty = Number(event.target.value);
     setLwRtrnFormLS({ input3: newQty });
   };
 
@@ -77,7 +81,10 @@ function LwRtrnForm() {
       }}
       className={`LwRtrnForm scrimOverlay justifyEnd`}
     >
-      <Sidesheet_Base_MRV title="Lifetime Warranty Item">
+      <Sidesheet_Base_MRV
+        fBgClick={handleBGClick}
+        title="Lifetime Warranty Item"
+      >
         <div className={`vBox minFlex gap2rem`}>
           <div className={`vBox minFlex gap2rem`}>
             {/*Chip Inputs*/}

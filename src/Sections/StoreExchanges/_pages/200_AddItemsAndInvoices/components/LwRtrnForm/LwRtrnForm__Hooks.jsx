@@ -5,6 +5,7 @@ import {
   clearedErrors,
   clearedInputs,
   makeLocStFields,
+  errorObj,
 } from "../../../../../../globalFunctions/globalJS_classes";
 
 import {
@@ -19,6 +20,16 @@ import { useOutletContext } from "react-router";
 // base local state
 const LwRtrnForm__LS = makeLocStFields({
   _keyStr: "LwRtrnForm",
+  oErrorObjects: {
+    invalidItemNum: new errorObj({
+      key: "invalidItemNum",
+      str: "Invalid Item Number",
+    }),
+    invalidQty: new errorObj({
+      key: "invalidQty",
+      str: "Return Qty must match Replacement Qty",
+    }),
+  },
 });
 
 // Hooks
@@ -33,7 +44,6 @@ function useLwRtrnForm__Hooks() {
   const setPageLS = useSetLocStFields("page");
   const setLwRtrnFormLS = useSetLocStFields("LwRtrnForm");
   const resetLwRtrnFormLS = useResetLocStFields("LwRtrnForm");
-
 
   // Right now, I'm not using any of this.
 

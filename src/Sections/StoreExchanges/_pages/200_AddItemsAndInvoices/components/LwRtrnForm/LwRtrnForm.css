@@ -1,9 +1,7 @@
 
 .mrv{
     & .LwRtrnForm{
-        & .replacementInput{
-            padding-top: 2rem;
-            border-top: var(--primaryBorder);
+        & .replacementCluster{
         }
     }
 }
