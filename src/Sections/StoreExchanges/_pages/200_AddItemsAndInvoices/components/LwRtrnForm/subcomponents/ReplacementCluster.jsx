@@ -61,7 +61,7 @@ function ReplacementCluster({ showOnlyIf = true }) {
           type="text"
           value={lwLocSt.input11}
           placeholder="Replacement Item #"
-          className={`maxFlex`}
+          className={`maxFlex ${sItemNumError ? "error" : ""}`}
           onChange={(e) => setLwRtrnFormLS({ input11: e.target.value })}
         />
       </div>
