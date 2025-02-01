@@ -9,6 +9,7 @@ import { MdClose } from "react-icons/md";
 
 import {
   returnAtom,
+  moneyObj,
   locStFields,
 } from "../../../../../../../globalFunctions/globalJS_classes";
 
@@ -22,6 +23,7 @@ function ReplacementCluster({ showOnlyIf = true }) {
   const lwLocSt = sessionMRV.locSt.LwRtrnForm;
   const bifrostCtx = useContext(ProductContext);
 
+  const resetPageLS = useResetLocStFields("page");
   const setLwRtrnFormLS = useSetLocStFields("LwRtrnForm");
   const resetLwRtrnFormLS = useResetLocStFields("LwRtrnForm");
   const oActiveError = lwLocSt.activeError1;
@@ -37,7 +39,11 @@ function ReplacementCluster({ showOnlyIf = true }) {
       const outItemAtom = new returnAtom({
         atomItemNum: replacementItemNum,
         atomItemQty: 1,
+        atomMoneyObj: new moneyObj({
+          unitBaseValue: bifrostCtx[replacementItemNum].price,
+        }),
       });
+      outItemAtom.atomMoneyObj.invertValue();
       setLwRtrnFormLS({ activeData1: outItemAtom });
       resetLwRtrnFormLS({ activeErrorALL: true });
     } else {
@@ -91,13 +97,37 @@ function ReplacementCluster({ showOnlyIf = true }) {
     setLwRtrnFormLS({ input12: newQty });
   };
 
+  const handleConfirmAdd = (e) => {
+    e.stopPropagation();
+    // Add the replacement item to the returnItems array
+    const qtyMatch = lwLocSt.input3 === lwLocSt.input12;
+    if (qtyMatch) {
+      resetLwRtrnFormLS({ EVERYONE: true });
+      resetPageLS({ activeOverlay1: true });
+    } else {
+      console.log(`Qty mismatch ${lwLocSt.oErrorObjects["invalidQty"]}`);
+      setLwRtrnFormLS({
+        activeError1: lwLocSt.oErrorObjects["invalidQty"],
+      });
+    }
+  };
+
+  const sQtyError = oActiveError?.key === "invalidQty" ? oActiveError.str : "";
+
   const uiReplacementItem = (
     <div className={`vBox minFlex`}>
       <div className={`hBox minFlex body__small color__primary__text`}>
         Replacement Item
       </div>
       {lwLocSt.activeData1 && (
-        <MRVitemDetails showQty={false} thisItemAtom={lwLocSt.activeData1} />
+        <MRVitemDetails
+          descriptionLineLimit={1}
+          showQty={false}
+          thisItemAtom={lwLocSt.activeData1}
+          size="M"
+          showPrice={true}
+          showChildArrow={false}
+        />
       )}
       <div className={`vBox minFlex gap50pct`}>
         <div className={`hBox body__small color__primary__text`}>
@@ -116,6 +146,7 @@ function ReplacementCluster({ showOnlyIf = true }) {
               type="number"
               value={lwLocSt.input12}
               min={0}
+              className={`${sQtyError ? "error" : ""}`}
               onChange={(e) => {
                 handleQtyInput(e);
               }}
@@ -135,7 +166,11 @@ function ReplacementCluster({ showOnlyIf = true }) {
           </button>
         </div>
       </div>
-      <div className={`hBox minFlex`}></div>
+      <div className={`divider horizontal`} />
+      <div className={`hBox minFlex`}>
+        <div className={`hBox warning maxFlex`}>{sQtyError}</div>
+        <button onClick={handleConfirmAdd} className={`primary`}>Confirm & Add</button>
+      </div>
     </div>
   );
 

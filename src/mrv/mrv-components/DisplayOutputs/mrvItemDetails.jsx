@@ -12,12 +12,17 @@ import { ProductImageMRV } from "./ProductImageMRV";
 function MRVitemDetails({
   thisItemAtom = new returnAtom({ atomItemNum: "noProduct" }),
   showPrice = true,
+  showItemNum = true,
+  showModelNum = true,
   priceInCents = thisItemAtom.atomMoneyObj.unitTotal || undefined,
   showQty = true,
   qty = thisItemAtom.atomItemQty || undefined,
-  twoLineDescription = false,
+  descriptionLineLimit = 0,
   underArr = [],
   underArrWithContainer = null,
+  showChildArrow = false,
+  size = "L",
+  REF__size____L_M_S,
 }) {
   if (thisItemAtom.atomItemNum === "noProduct") {
     console.log("no product passed to MRVitemDetails");
@@ -25,36 +30,69 @@ function MRVitemDetails({
   const productContext = useContext(ProductContext);
   const centsToDollars = useCentsToDollars();
 
+  const oConfig = {
+    L: {
+      imgSize: "L",
+      price_qty: "body__large bold",
+      item_model: "body__small",
+      body: "body__large",
+      gap: "gap25pct",
+    },
+    M: {
+      imgSize: "M",
+      price_qty: "body bold",
+      item_model: "tinyText",
+      body: "body",
+      gap: "gap0rem",
+    },
+  };
+
   const ctxItemInfo = productContext[thisItemAtom.bifrostKey];
 
   // price is normally the unitTotal, but if priceInCents is passed, it will use that instead
-  const priceStr =
-    showPrice && priceInCents ? `$${centsToDollars(priceInCents)}` : null;
+  const uiPrice =
+    showPrice && priceInCents ? (
+      <div className={`${oConfig[size].price_qty}`}>{`$${centsToDollars(
+        priceInCents
+      )}`}</div>
+    ) : null;
 
   // qty is normally the atomItemQty, but if qty is passed, it will use that instead
-  const qtyStr = showQty && qty ? `${qty}      x` : null;
+  const uiQty =
+    showQty && qty ? <div className={`body`}>{`${qty}    x`}</div> : null;
 
-  const itemAndModelStr = `Item# ${thisItemAtom.atomItemNum}    Model# ${ctxItemInfo.modelNum}`;
+  const uiItemNum =
+    showItemNum && thisItemAtom?.atomItemNum ? (
+      <div className={`fart`}>{`Item# ${thisItemAtom.atomItemNum}`}</div>
+    ) : null;
 
-  const lineLimit = twoLineDescription ? "limitLines2" : ""
-
-  ////CONFIGURABLE DEFAULT VALUES ////
-
-  /*
-  
-  */
+  const uiModelNum =
+    showModelNum && ctxItemInfo?.modelNum ? (
+      <div className={`fart`}>{`Model# ${ctxItemInfo.modelNum}`}</div>
+    ) : null;
 
   return (
-    <section className={`mrvProdInfo`}>
-      <ProductImageMRV itemAtom={thisItemAtom} size="L" />
+    <section className={`mrvProdInfo ${size}`}>
+      <ProductImageMRV
+        itemAtom={thisItemAtom}
+        size={oConfig[size].imgSize}
+        showChildArrow={showChildArrow}
+      />
 
-      <section className={`textColumn`}>
-        <div className={`textRow`}>
-          <div className={`body prodDescription`}>{qtyStr}</div>
-          <div className={`body prodDescription`}>{priceStr}</div>
+      <section className={`textColumn ${oConfig[size].gap}`}>
+        <div
+          className={`textRow ${oConfig[size].price_qty} color__primary__text`}
+        >
+          {uiQty}
+          {uiPrice}
         </div>
-        <div className={`tinyText itemModel`}>{itemAndModelStr}</div>
-        <div className={`body__small description ${lineLimit}`}>
+        <div
+          className={`textRow ${oConfig[size].item_model} color__tertiary__text`}
+        >
+          {uiItemNum}
+          {uiModelNum}
+        </div>
+        <div className={`${oConfig[size].body} limitLines${descriptionLineLimit}`}>
           {ctxItemInfo.description}
         </div>
         <div className={`underArr`}>{underArr}</div>

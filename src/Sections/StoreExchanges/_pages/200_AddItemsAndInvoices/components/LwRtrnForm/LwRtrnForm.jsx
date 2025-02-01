@@ -85,8 +85,8 @@ function LwRtrnForm() {
         fBgClick={handleBGClick}
         title="Lifetime Warranty Item"
       >
-        <div className={`vBox minFlex gap2rem`}>
-          <div className={`vBox minFlex gap2rem`}>
+        <div className={`vBox minFlex gap1rem`}>
+          <div className={`vBox minFlex gap1rem`}>
             {/*Chip Inputs*/}
             <ChipInput
               sQuery="Return Item Brand"

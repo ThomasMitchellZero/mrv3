@@ -6,17 +6,8 @@
     box-sizing: border-box;
     padding: 0rem;
     gap: 1rem;
-
-    & .tinyText {
-      line-height: 2rem;
-    }
-
-    & .productImage {
-      display: flex;
-      height: 5.5rem;
-      width: 5.5rem;
-      border-radius: 0.5rem;
-    }
+    justify-content: flex-start;
+    align-items: flex-start;
 
     & .textColumn {
       display: flex;
@@ -41,7 +32,7 @@
       display: flex;
       flex-direction: row;
       flex: 0 0 auto;
-      gap: 2rem;
+      gap: 1rem;
     }
 
     & .limitLines2 {
@@ -52,7 +43,20 @@
       text-overflow: ellipsis;
     }
 
+    & .limitLines1 {
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     & .itemModel {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      row-gap: 0rem;
+      column-gap: 1rem;
       color: var(--color__tertiary);
     }
 
