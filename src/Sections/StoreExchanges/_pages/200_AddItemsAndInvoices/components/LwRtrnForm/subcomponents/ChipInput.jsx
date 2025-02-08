@@ -22,6 +22,13 @@ function ChipInput({
 
   // Chips in UI ///////////////////////
 
+  /* Component that represents:
+    -A question about the nature of the item to determine eligibility
+    -An array of possible answers, converted to chips.
+    -Eligibility is set within the oChip, so no logic is needed here.
+    -A message to display if the answer indicates ineligibility.
+  */
+
   const ref_oChip = { label: "Str", chipKey: "str", lwValid: true };
 
   const uiLwChip = ({ oChip, lsKey }) => {

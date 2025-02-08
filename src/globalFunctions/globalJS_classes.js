@@ -40,6 +40,8 @@ class moneyObj {
   }
 }
 
+export { moneyObj };
+
 class RejectionObj {
   constructor({ keyStr = "", strLabel = "NO LABEL", rejectsArr = [] }) {
     this.keyStr = keyStr;
@@ -50,7 +52,7 @@ class RejectionObj {
 
 export { RejectionObj };
 
-export { moneyObj };
+
 
 class SingleDispo {
   // keys don't match values, refactor this.
@@ -606,8 +608,9 @@ class returnAtom {
     atomItemNum = "",
     atomItemQty = 0,
     bifrostKey = "",
-    transactionType = null,
     peerItem = null,
+    customDescription = "",
+    transactionType = null,
     REF_transactionType____sale__likeExch__unlikeExch__return = "",
   }) {
     this.atomItemNum = atomItemNum;
@@ -617,8 +620,10 @@ class returnAtom {
     this.atomDispoKey = atomDispoKey;
     this.atomItemQty = atomItemQty;
     this.bifrostKey = bifrostKey || this.atomItemNum;
-    this.transactionType = transactionType;
     this.peerItem = peerItem;
+    this.customDescription = customDescription;
+    this.transactionType = transactionType;
+
   }
 
   get primaryKey() {

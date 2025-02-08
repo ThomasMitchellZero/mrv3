@@ -29,11 +29,14 @@ import { MdSubdirectoryArrowRight } from "react-icons/md";
 import walloutlet from "../assets/product-images/walloutlet.png";
 import paintstick from "../assets/product-images/paintstick.png";
 import windowscraper from "../assets/product-images/windowscraper.png"; 
+import lifetime_warranty from "../assets/product-images/lifetime_warranty.png";
 import {
   Product,
 } from "../globalFunctions/globalJS_classes";
 
 const ProductContext = React.createContext({
+
+  
   100: {
     img: faucet_img,
     price: 5599,
@@ -129,6 +132,14 @@ const ProductContext = React.createContext({
   },
 
   // For use in Exchanges
+
+  "0100": new Product({
+    img: lifetime_warranty,
+    price: 0,
+    itemNum: "0100",
+    modelNum: "LW100",
+    description: "Lifetime Warranty Replacement",
+  }),
 
   330: new Product({
     img: hoses_img,

@@ -8846,12 +8846,89 @@ What to do today?
 
     Yeah.  I'm just not sure I can standardize this.  Between local css, error handling, logic for interaction, I'm just not sure this is doing a whole lot.  
 
+31 Jan 2025
+    2:15
+    We seem to be doing OK here.  Got all the conditionals and inputs working correctly.  To wrap this beast up, I will need:
+        -Error Handling
+            -Error condition for invalid item#
+            -Error condition for non-matching qty
+            -Logic for showing errors based on error state
+            -Logic for clearing errors.
+        -Item Display
+            -Smaller versions of mrvProductDetails, probably as a prop.
+            -Map the Bifrost price into the display.
+        -Actually add the item.
+            -Some way of representing the LW new item.
+            -Add the LW item to the Return Cart
+            -Add the New Item to the New cart.
+    
+    I'm gonna be playing volleyball at 3, but I could probably make a dent in error handling.  
 
+1 Feb 2025
+    2:35
+    No ragrets, I played a lot of volleyball with really good players.  Let's see what we can do today.  I'm gonna start with the Item Details because I'm hoping that gets me into the groove quickly.  
 
+    4:20.
+    Well, it's not exactly beautiful but I think it's Good Enough.  
 
+2 Feb 2025
+    3:20.
+    Looks like I don't have anything pressing this afternoon and I will probably need this soon, so here's my chance.  First, let's think of all the things I'll need to handle differently in this situation.
 
-
+        -The LW items are not going to have receipts.
+            -I either create a ghost receipt for them, or else some kind of exception for LW items.
+            -I guess we technically don't "create" the receipt until after the NRR Rejection phase.  
+        -There's no Lifetime Warranty item in the Items list and most of my logic reads product details from the list.
+        -Some kind of special treatment for the LW replacements.  
+            -Might pre-add to cart because they've already been scanned.
+            -Some way of enforcing L4L on LW replacements.
         
+    OK.  Now for the big question.  What is the value of the LW item?  Is it $0 plus automatic 100% discounts for the new item?  Or is it just mapping the replacement's price?
+
+    If we do go the route of enforcing receipt lookup for NRR items (which I do agree with) then the return items are going to be $0.00 regardless.  It feels like it isn't a huge difference either way.  I'm going to eventually have some means for applying discounts.  I'm going to need some way to handle creation of receipts for the LW return items, even if they are $0.00.  
+
+    OK.  So I think the biggest, nearest chunk is that I need a means of adding the LW atoms.
+        -I will need some kind of basic LW item in Bifrost to populate with images and any description I choose to include.  
+        -Reference is easy, because AtomItemNum is separate from Bifrost key.
+        -I would *like* to have some part of the description refer to the substitute item.  That means the description cannot originate from Bifrost.  
+            If I don't have this, it isn't the end of the world, as multiple LW items are unlikely.
+        -I shouldn't need to assign the price.  That will come from the invoice, and all the LW returns will use the normal state-setting logic.
+    
+    So then that leaves 2 real questions:  
+        -Do I bother with custom descriptions?
+        -If so, how is that accomplished?
+    
+    If 1 is easy, the answer is clearly yes.  If it's a nightmare, then it's no.  So let's answer 2 first.  Whatever it is, I'm going to have to either create some link to its counterpart Return item, 
+
+8 Feb 2025
+
+    11:10.
+
+    Been kinda holding off on this because I don't actually know what to do here.  It's not that I can't solve the problem - I could think of a couple solutions off the top of my head.  It's more that I'm unsure of the downstream implications.  
 
 
+    Here are a few options.
+        -Add in a custom text field to the atoms that overrides the Bifrost description if truthy.
+            -It's a little strange and I don't normally like creating customization, especially in something as universal as the Atoms, but I might just have to deal with it.  I'm going to be creating a custom ItemNum for them.  
+        I think that as long as it lives on the Return Atom we are fine.
+    
+    So then, we will need:
+        X -Change invo input to accept strings, not just numbers.
+        -Modify Bifrost item class to include a LifetimeWarranty property.  (Necessary?  Could I just use the itemNum?)  
+        X -Modify the ItemAtom class to accept a custom text string.
+        -Modify mrvProductDetails to use custom description instead of Bifrost description if present.  
+        -Create a Bifrost item
+            -Image
+        -Logic to add the Return Item Atom to the cart
+            -Create a custom itemNum based on the Bifrost replacement.
+            -Create the custom description based on Bifrost replacement.
+            -Set the Bifrost itemNum to the Bifrost item.
+        -When the NRR page is reached:
+            -Create an Exceptions function for anything that doesn't follow the normal rules.
+            -Include LW items in that function.
+            -Visually show LW items separately.
+        On continue to New Items:
+            -auto-add the LW replacements.
+            
+        Not sure how to handle the return item's value.  Could either create a special custom receipt or else add 100% discounts to some quantity of the new items.  
 
