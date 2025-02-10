@@ -27,6 +27,7 @@ function MRVitemDetails({
   if (thisItemAtom.atomItemNum === "noProduct") {
     console.log("no product passed to MRVitemDetails");
   }
+  console.log(descriptionLineLimit);
   const productContext = useContext(ProductContext);
   const centsToDollars = useCentsToDollars();
 
@@ -49,6 +50,8 @@ function MRVitemDetails({
 
   const ctxItemInfo = productContext[thisItemAtom.bifrostKey];
 
+  const sDescription = thisItemAtom.customDescription || ctxItemInfo.description;
+
   // price is normally the unitTotal, but if priceInCents is passed, it will use that instead
   const uiPrice =
     showPrice && priceInCents ? (
@@ -57,7 +60,7 @@ function MRVitemDetails({
       )}`}</div>
     ) : null;
 
-  // qty is normally the atomItemQty, but if qty is passed, it will use that instead
+  // qty is normally the atomItemQty, but if this prop is passed, it will use that instead
   const uiQty =
     showQty && qty ? <div className={`body`}>{`${qty}    x`}</div> : null;
 
@@ -93,7 +96,7 @@ function MRVitemDetails({
           {uiModelNum}
         </div>
         <div className={`${oConfig[size].body} limitLines${descriptionLineLimit}`}>
-          {ctxItemInfo.description}
+          {sDescription}
         </div>
         <div className={`underArr`}>{underArr}</div>
         {underArrWithContainer}

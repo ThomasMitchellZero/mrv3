@@ -123,6 +123,8 @@ const RtrnItemCard = ({ returnItemAtom }) => {
             showPrice={false}
             showQty={false}
             thisItemAtom={tileItemAtom}
+            descriptionLineLimit={2}
+            
           />
         </div>
         <div className={"rowCol totalQtyCol"}>

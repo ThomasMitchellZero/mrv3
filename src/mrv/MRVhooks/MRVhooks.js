@@ -554,7 +554,6 @@ export { useResetLocStFields };
 
 function setSessionItem({
   arrToSet = [],
-  REF_routeStr____returnItems__newItems__replacementItemsIsDEPRECATED,
   itemAtom = new returnAtom({}),
   newQty = 0,
   actionType = "add",
@@ -566,7 +565,6 @@ function setSessionItem({
 
   // locate the corresponding atom in the routeStr in the session state.
   const thisItemNum = itemAtom.atomItemNum;
-  console.log(thisItemNum);
 
   let outItemsArr = cloneDeep(arrToSet);
 
@@ -580,8 +578,11 @@ function setSessionItem({
   // if this is the first instance of this item, create a new atom with a qty of 0.
   const createIfEmpty = () => {
     if (targetAtomIndex === -1) {
+      // Set the atomItemQty to 0 if it doesn't already exist.  This way, 'add' method can just unconditionally increment the quantity.  
+      itemAtom.atomItemQty = 0;
       outItemsArr.push(
-        new returnAtom({ atomItemNum: thisItemNum, atomItemQty: 0 })
+        //new returnAtom({ atomItemNum: thisItemNum, atomItemQty: 0 })
+        itemAtom
       );
       targetAtomIndex = outItemsArr.length - 1;
     }
@@ -605,6 +606,8 @@ function setSessionItem({
         return keepThisAtom;
       });
     },
+
+    // Don't remember what this was for.
     subtract: () => {
       // currently does not handle child items.  Not sure if it should.
 
@@ -637,7 +640,10 @@ function setSessionItem({
 
 export { setSessionItem };
 
-function useSetSessionItems({ targetStateArrKey = "returnItems" }) {
+function useSetSessionItems({
+  targetStateArrKey = "returnItems",
+  REF_targetStateArrKey____returnItems__newItems,
+}) {
   const itemsCtx = useContext(ProductContext);
 
   const mrvCtx = useOutletContext();
@@ -963,7 +969,6 @@ const primaryAtomizer = ({
 };
 
 export { primaryAtomizer };
-
 
 function atomFuser({
   // takes an array of atoms, fuses those that share vals in aIdenticalityKeys, and returns an object of fused atoms.
