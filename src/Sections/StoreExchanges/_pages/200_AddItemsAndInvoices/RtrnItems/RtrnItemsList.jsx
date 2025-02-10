@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router";
 import { useSetSessionItems } from "../../../../../mrv/MRVhooks/MRVhooks";
 import { ScanScreenMRV } from "../../../../../mrv/mrv-components/DisplayOutputs/ScanScreenMRV";
-import { RtrnItemsMainCard } from "./RtrnItemsMainCard";
+
 import { RtrnItemCard } from "./RtrnItemCard";
 import { DescriptorIcon } from "../../../../../mrv/mrv-components/DisplayOutputs/IconComponents/DescriptorIcon";
 

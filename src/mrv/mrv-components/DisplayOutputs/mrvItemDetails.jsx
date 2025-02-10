@@ -27,7 +27,7 @@ function MRVitemDetails({
   if (thisItemAtom.atomItemNum === "noProduct") {
     console.log("no product passed to MRVitemDetails");
   }
-  console.log(descriptionLineLimit);
+
   const productContext = useContext(ProductContext);
   const centsToDollars = useCentsToDollars();
 

@@ -20,7 +20,7 @@ import {
 } from "../../../../mrv/MRVhooks/MRVhooks";
 import { clone, cloneDeep } from "lodash";
 
-function NRRrejection() {
+function ReturnRejection() {
   const nodeNav = useNodeNav();
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
@@ -106,4 +106,4 @@ function NRRrejection() {
   );
 }
 
-export { NRRrejection };
+export { ReturnRejection };

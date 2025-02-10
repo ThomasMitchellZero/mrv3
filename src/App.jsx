@@ -42,7 +42,7 @@ import { StartSTRX } from "./Sections/StoreExchanges/_pages/100_StartSTRX/StartS
 import { ReplacementCheck } from "./Sections/StoreExchanges/_pages/150_ItemCheck/ReplacementCheck";
 import { AddItemsAndInvosSTRX } from "./Sections/StoreExchanges/_pages/200_AddItemsAndInvoices/AddItemsAndInvosSTRX";
 import { NewItemsSTRX } from "./Sections/StoreExchanges/_pages/300_NewItems/NewItemsSTRX";
-import { NRRrejection } from "./Sections/StoreExchanges/_pages/275_NRRrejection/NRRrejection";
+import { ReturnRejection } from "./Sections/StoreExchanges/_pages/275_ReturnRejection/ReturnRejection";
 import { UnpairedRejection } from "./Sections/StoreExchanges/_pages/375_UnpairedRejection/UnpairedRejection";
 import { TotalReviewSTRX } from "./Sections/StoreExchanges/_pages/500_TotalReview/TotalReviewSTRX";
 
@@ -115,7 +115,7 @@ function App() {
               path="choose-items-invos"
               element={<AddItemsAndInvosSTRX />}
             />
-            <Route path="no-receipt" element={<NRRrejection />} />
+            <Route path="return-rejection" element={<ReturnRejection />} />
             <Route path="newitems" element={<NewItemsSTRX />} />
             <Route path="unpaired" element={<UnpairedRejection />} />
             <Route path="total-review" element={<TotalReviewSTRX />} />

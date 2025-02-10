@@ -86,7 +86,7 @@ function useLocStMethods_STRX() {
           //no-receipt
           console.log;
           resetPageLS({ EVERYONE: true });
-          nodeNav("nrrRejection");
+          nodeNav("returnRejection");
         } else {
           resetPageLS({ activeErrorALL: true });
           resetAllEntry30LS({ activeErrorALL: true });
