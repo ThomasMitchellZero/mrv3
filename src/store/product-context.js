@@ -133,10 +133,10 @@ const ProductContext = React.createContext({
 
   // For use in Exchanges
 
-  "0100": new Product({
+  "00100": new Product({
     img: lifetime_warranty,
     price: 0,
-    itemNum: "0100",
+    itemNum: "00100",
     modelNum: "LW100",
     description: "Lifetime Warranty Replacement",
   }),

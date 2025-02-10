@@ -8932,3 +8932,21 @@ What to do today?
             
         Not sure how to handle the return item's value.  Could either create a special custom receipt or else add 100% discounts to some quantity of the new items.  
 
+    1:00.
+        So this all worked surprisingly well.  It looks like the custom text wasn't inherited, but I'll deal with that later because people are playing volleyball and I have a problem.  
+    
+    5:45
+        Welp.  That was a LOT of volleyball and a long time trying to convince myself to work.  I'm just gonna work for as long as I am having fun.
+
+        OK.  So here's my problem.  Right now, the 'Add Items' function doesn't clone any fields from the atom passed in, which means my custom string isn't getting picked up.  That feels like it could be a problem, since there are other fields, like parent or Bifrost key that could be important.  
+
+        And another problem, it looks like I never actually set up the ReturnAtomizer to use the PrimaryAtomizer.  
+
+        OK.  I don't think I'm fixing this tonight.  
+
+10 Feb 2025
+    1:35.
+    Got a mostly-clear day so I would like to mostly-clear this problem.  Let's commit, then make the change, try some operations, and see if anything breaks.  
+
+    
+

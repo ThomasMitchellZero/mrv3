@@ -3,6 +3,7 @@ import { useContext } from "react";
 import {
   useResetLocStFields,
   useSetLocStFields,
+  useSetSessionItems,
 } from "../../../../../../../mrv/MRVhooks/MRVhooks";
 
 import { MdClose } from "react-icons/md";
@@ -23,6 +24,9 @@ function ReplacementCluster({ showOnlyIf = true }) {
   const lwLocSt = sessionMRV.locSt.LwRtrnForm;
   const bifrostCtx = useContext(ProductContext);
 
+  const setSessionItems = useSetSessionItems({
+    targetStateArrKey: "returnItems",
+  });
   const resetPageLS = useResetLocStFields("page");
   const setLwRtrnFormLS = useSetLocStFields("LwRtrnForm");
   const resetLwRtrnFormLS = useResetLocStFields("LwRtrnForm");
@@ -99,13 +103,25 @@ function ReplacementCluster({ showOnlyIf = true }) {
 
   const handleConfirmAdd = (e) => {
     e.stopPropagation();
-    // Add the replacement item to the returnItems array
+
     const qtyMatch = lwLocSt.input3 === lwLocSt.input12;
+
     if (qtyMatch) {
+      // description of the replacement item.
+      const repBifrostText =
+        bifrostCtx[lwLocSt.activeData1.atomItemNum].description;
+      // creating the LW Return item.
+      const outItemAtom = new returnAtom({
+        atomItemNum: "00100",
+        atomItemQty: lwLocSt.input12,
+        bifrostKey: lwLocSt.activeData1.bifrostKey,
+        customDescription: `Lifetime Warranty Replacement: ${repBifrostText}`,
+      });
+      setSessionItems({ itemAtom: outItemAtom, actionType: "add" });
+
       resetLwRtrnFormLS({ EVERYONE: true });
       resetPageLS({ activeOverlay1: true });
     } else {
-      console.log(`Qty mismatch ${lwLocSt.oErrorObjects["invalidQty"]}`);
       setLwRtrnFormLS({
         activeError1: lwLocSt.oErrorObjects["invalidQty"],
       });
@@ -169,7 +185,9 @@ function ReplacementCluster({ showOnlyIf = true }) {
       <div className={`divider horizontal`} />
       <div className={`hBox minFlex`}>
         <div className={`hBox warning maxFlex`}>{sQtyError}</div>
-        <button onClick={handleConfirmAdd} className={`primary`}>Confirm & Add</button>
+        <button onClick={handleConfirmAdd} className={`primary`}>
+          Confirm & Add
+        </button>
       </div>
     </div>
   );

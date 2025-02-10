@@ -565,7 +565,6 @@ function setSessionItem({
   const refAtom = new returnAtom({});
 
   // locate the corresponding atom in the routeStr in the session state.
-
   const thisItemNum = itemAtom.atomItemNum;
   console.log(thisItemNum);
 
@@ -578,15 +577,7 @@ function setSessionItem({
     customMatchignFn: customMatchignFn,
   });
 
-  // Record repos for items should only have 1 atom per itemNum.  If there are more, I done fucked up.
-  const qtyOfMatchingAtoms = outItemsArr.filter((atom) => {
-    return atom.atomItemNum === thisItemNum;
-  }).length;
-
-  // universal validity checks.  If something's wrong I need to terminate before any other logic runs.
-
-  //
-
+  // if this is the first instance of this item, create a new atom with a qty of 0.
   const createIfEmpty = () => {
     if (targetAtomIndex === -1) {
       outItemsArr.push(
@@ -618,7 +609,6 @@ function setSessionItem({
       // currently does not handle child items.  Not sure if it should.
 
       outItemsArr[targetAtomIndex].atomItemQty -= Number(newQty);
-      console.log("Deducted Qty:", outItemsArr[targetAtomIndex].atomItemQty);
       // if the atom has been depleted...
       if (outItemsArr[targetAtomIndex].atomItemQty <= 0) {
         // remove it from the array.
@@ -884,6 +874,7 @@ const useReturnAtomizer = () => {
 const baseAtomizerComparison = ({ repo1Atom, repo2Atom }) => {
   return repo1Atom.atomItemNum === repo2Atom.atomItemNum;
 };
+
 const baseAtomizerSetMerged = ({ repo1Atom, repo2Atom, mergedAtom }) => {
   const refAtom = new returnAtom({});
 
@@ -904,7 +895,7 @@ const baseAtomizerSetMerged = ({ repo1Atom, repo2Atom, mergedAtom }) => {
 export { baseAtomizerComparison, baseAtomizerSetMerged };
 
 const primaryAtomizer = ({
-  // takes 2 atom arrays and returns 3 - one for the merged atoms, and the leftovers from the 2 original repos.
+  // takes 2 repos of atoms and returns 3 - one for the merged atoms, and the leftovers from the 2 original repos.
   // repos must be pre-atomized and iterable.
   repo1 = [],
   repo2 = [],
@@ -921,8 +912,8 @@ const primaryAtomizer = ({
   // set other fiels of mergedAtom.
   setMergedAtomFn = baseAtomizerSetMerged,
 }) => {
-  let unmerged1 = cloneDeep(repo1);
-  let unmerged2 = cloneDeep(repo2);
+  let aUnmerged1 = cloneDeep(repo1);
+  let aUnmerged2 = cloneDeep(repo2);
   let mergedRepo = [];
 
   // Checks if an atom has any value left.
@@ -932,12 +923,12 @@ const primaryAtomizer = ({
   // Removes depleted atoms from the unmerged arrays.
   const clearDepletedAtoms = () => {
     // this lets me use For loops without worrying about the array length changing.
-    unmerged1 = unmerged1.filter(atomNotDepleted);
-    unmerged2 = unmerged2.filter(atomNotDepleted);
+    aUnmerged1 = aUnmerged1.filter(atomNotDepleted);
+    aUnmerged2 = aUnmerged2.filter(atomNotDepleted);
   };
 
-  Loop_L1: for (const repo1Atom of unmerged1) {
-    Loop_L2: for (const repo2Atom of unmerged2) {
+  Loop_L1: for (const repo1Atom of aUnmerged1) {
+    Loop_L2: for (const repo2Atom of aUnmerged2) {
       const isMatch = comparisonFn({ repo1Atom, repo2Atom });
 
       if (isMatch) {
@@ -968,32 +959,11 @@ const primaryAtomizer = ({
     }
   }
   // Any additional assignment can be done afterwards, since this does not directly modify the state.
-  return { mergedRepo, unmerged1, unmerged2 };
+  return { mergedRepo, aUnmerged1, aUnmerged2 };
 };
 
 export { primaryAtomizer };
 
-function atomAggregator({
-  // Don't think we need this anymore.  Created and deprecated in the same day?
-
-  // Atomization deconstructs atoms by every possible differentiator.  This function re-aggregates atoms for cases where certain differentiators are not relevant.  Incoming atoms should be pre-filtered for identicality in the relevant fields.
-
-  // This function aggregates all incrementable fields but assigns no other values.
-  aAtomsToAggregate = [],
-  // Use this to assign the fields all incoming atoms share so they can be represented in the aggregated atom.
-  atomWithSharedValues = new returnAtom({}),
-}) {
-  let outAggregatedAtom = cloneDeep(atomWithSharedValues);
-  // I might eventually put all the atomsMonetizer logic in here, but for now this is fine.
-  outAggregatedAtom.atomMoneyObj = atomsMonetizer(aAtomsToAggregate);
-
-  for (const thisAtom of aAtomsToAggregate) {
-    outAggregatedAtom.atomItemQty += thisAtom.atomItemQty;
-  }
-  return outAggregatedAtom;
-}
-
-export { atomAggregator };
 
 function atomFuser({
   // takes an array of atoms, fuses those that share vals in aIdenticalityKeys, and returns an object of fused atoms.
@@ -1104,7 +1074,7 @@ const newItemAtomizer = ({ atomizedReturnItemsArr = [], newItemsArr }) => {
   });
 
   // Any items that were not matched to a return item are new sales.
-  const assignSaleTransType = oAtomizedByLikeExch.unmerged2.map((thisAtom) => {
+  const assignSaleTransType = oAtomizedByLikeExch.aUnmerged2.map((thisAtom) => {
     const refAtom = new returnAtom({});
     const newVals = { transactionType: "sale" };
     return { ...thisAtom, ...newVals };
