@@ -32,7 +32,7 @@ import { useOutletContext } from "react-router";
 //&&&&&&&&&&&&&&&     MAIN COMPONENT    &&&&&&&&&&&&&&&
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-function NewItemsSTRX() {
+function NewItems() {
   const nodeNav = useNodeNav();
   const locMethods = useLocStMethods_STRX().NewItems();
   const productCtx = useContext(ProductContext);
@@ -78,8 +78,8 @@ function NewItemsSTRX() {
 
   console.log(atomizedForPeers);
 
-  const returnUnpaired = atomizedForPeers.unmerged1;
-  const newUnpaired = atomizedForPeers.unmerged2;
+  const returnUnpaired = atomizedForPeers.aUnmerged1;
+  const newUnpaired = atomizedForPeers.aUnmerged2;
   const hasUnpaired = returnUnpaired.length > 0 || newUnpaired.length > 0;
 
   const navRt = hasUnpaired ? "unpaired" : "totalReview";
@@ -119,4 +119,4 @@ function NewItemsSTRX() {
   );
 }
 
-export { NewItemsSTRX };
+export { NewItems };

@@ -41,7 +41,7 @@ import { StoreExchanges } from "./Sections/StoreExchanges/StoreExchanges";
 import { StartSTRX } from "./Sections/StoreExchanges/_pages/100_StartSTRX/StartSTRX";
 import { ReplacementCheck } from "./Sections/StoreExchanges/_pages/150_ItemCheck/ReplacementCheck";
 import { AddItemsAndInvosSTRX } from "./Sections/StoreExchanges/_pages/200_AddItemsAndInvoices/AddItemsAndInvosSTRX";
-import { NewItemsSTRX } from "./Sections/StoreExchanges/_pages/300_NewItems/NewItemsSTRX";
+import { NewItems } from "./Sections/StoreExchanges/_pages/300_NewItems/NewItems";
 import { ReturnRejection } from "./Sections/StoreExchanges/_pages/275_ReturnRejection/ReturnRejection";
 import { UnpairedRejection } from "./Sections/StoreExchanges/_pages/375_UnpairedRejection/UnpairedRejection";
 import { TotalReviewSTRX } from "./Sections/StoreExchanges/_pages/500_TotalReview/TotalReviewSTRX";
@@ -116,7 +116,7 @@ function App() {
               element={<AddItemsAndInvosSTRX />}
             />
             <Route path="return-rejection" element={<ReturnRejection />} />
-            <Route path="newitems" element={<NewItemsSTRX />} />
+            <Route path="newitems" element={<NewItems />} />
             <Route path="unpaired" element={<UnpairedRejection />} />
             <Route path="total-review" element={<TotalReviewSTRX />} />
           </Route>
