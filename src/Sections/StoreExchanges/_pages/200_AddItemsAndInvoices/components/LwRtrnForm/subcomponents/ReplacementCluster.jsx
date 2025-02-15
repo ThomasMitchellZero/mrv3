@@ -32,6 +32,8 @@ function ReplacementCluster({ showOnlyIf = true }) {
   const resetLwRtrnFormLS = useResetLocStFields("LwRtrnForm");
   const oActiveError = lwLocSt.activeError1;
 
+  const sInvalidItemNum = oActiveError?.key === "invalidItemNum" ? "Invalid Item Number" : "";
+
   // Cluster for adding a replacement item
   const handleAddReplacement = (e) => {
     e.stopPropagation();
@@ -51,6 +53,7 @@ function ReplacementCluster({ showOnlyIf = true }) {
       setLwRtrnFormLS({ activeData1: outItemAtom });
       resetLwRtrnFormLS({ activeErrorALL: true });
     } else {
+      console.log("Invalid Item Number");
       setLwRtrnFormLS({
         activeError1: lwLocSt.oErrorObjects["invalidItemNum"],
       });
@@ -68,12 +71,12 @@ function ReplacementCluster({ showOnlyIf = true }) {
           type="text"
           value={lwLocSt.input11}
           placeholder="Replacement Item #"
-          className={`maxFlex`}
+          className={`maxFlex ${sInvalidItemNum ? "error" : ""}`}
           onChange={(e) => setLwRtrnFormLS({ input11: e.target.value })}
         />
       </div>
       <div className={`hBox minFlex`}>
-        <div className={`hBox`}></div>
+        <div className={`hBox warning justifyEnd`}>{sInvalidItemNum}</div>
         <button className={`secondary`} onClick={handleAddReplacement}>
           Apply
         </button>
