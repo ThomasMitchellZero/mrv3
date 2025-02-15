@@ -608,6 +608,7 @@ class returnAtom {
     atomItemNum = "",
     atomItemQty = 0,
     bifrostKey = "",
+    bifrostEquivalent = "", //certain items (like LW) are equivalent to items other than themselves.
     peerItem = null,
     customDescription = "",
     transactionType = null,
@@ -620,6 +621,7 @@ class returnAtom {
     this.atomDispoKey = atomDispoKey;
     this.atomItemQty = atomItemQty;
     this.bifrostKey = bifrostKey || this.atomItemNum;
+    this.bifrostEquivalent = bifrostEquivalent;
     this.peerItem = peerItem;
     this.customDescription = customDescription;
     this.transactionType = transactionType;

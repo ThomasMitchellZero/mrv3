@@ -8911,24 +8911,6 @@ What to do today?
         -Add in a custom text field to the atoms that overrides the Bifrost description if truthy.
             -It's a little strange and I don't normally like creating customization, especially in something as universal as the Atoms, but I might just have to deal with it.  I'm going to be creating a custom ItemNum for them.  
         I think that as long as it lives on the Return Atom we are fine.
-    
-    So then, we will need:
-        X -Change invo input to accept strings, not just numbers.
-        -Modify Bifrost item class to include a LifetimeWarranty property.  (Necessary?  Could I just use the itemNum?)  
-        X -Modify the ItemAtom class to accept a custom text string.
-        -Modify mrvProductDetails to use custom description instead of Bifrost description if present.  
-        -Create a Bifrost item
-            -Image
-        -Logic to add the Return Item Atom to the cart
-            -Create a custom itemNum based on the Bifrost replacement.
-            -Create the custom description based on Bifrost replacement.
-            -Set the Bifrost itemNum to the Bifrost item.
-        -When the NRR page is reached:
-            -Create an Exceptions function for anything that doesn't follow the normal rules.
-            -Include LW items in that function.
-            -Visually show LW items separately.
-        On continue to New Items:
-            -auto-add the LW replacements.
             
         Not sure how to handle the return item's value.  Could either create a special custom receipt or else add 100% discounts to some quantity of the new items.  
 
@@ -8948,5 +8930,88 @@ What to do today?
     1:35.
     Got a mostly-clear day so I would like to mostly-clear this problem.  Let's commit, then make the change, try some operations, and see if anything breaks.  
 
+    2:15.
+    It seems to be working.  Cool.  Now let's get into the work for the actual item.  First, I think I should change LW items to use the LW item Bifrost key.  
+
+    2:55.
+    OK, so far so good.  Items are now being added correctly and item details are now rendering correctly.  
+
+
+        So then, we will need:
+        X -Change invo input to accept strings, not just numbers.
+        X -Modify the ItemAtom class to accept a custom text string.
+        X -Modify mrvProductDetails to use custom description instead of Bifrost description if present.  
+        X -Create a Bifrost item
+            X -Image
+        X -Logic to add the Return Item Atom to the cart
+            X -Create a custom itemNum based on the Bifrost replacement.
+            X -Create the custom description based on Bifrost replacement.
+            X -Set the Bifrost itemNum to the Bifrost item.
+        -On Continue from AddItemsAndInvos
+            -XXX
+        On continue to New Items:
+            -auto-add the LW replacements.
+
+
+11 Feb 2025
+    4:40.
+    It's a beautiful, rainy day.  I've got a completely unscheduled evening in front of me.  Let's sling some code and have a good time.  I'm kinda itching to visit the garden, but I'm gonna commit to 60 minutes of real work here.  
+
+    How to handle the continuation logic?  
+        -There will come a point where we need to create phony receipts for the LTW items.  For a true OoS item, I don't think it will matter.
+
+    I actually have a decent idea of how to write the code I wanna write.  My big question is where to put it, and while I can load a module from anywhere, I would like to start systematizing where my code lives.  
+
+    I think that overall, I want things to live where they are consumed.  My fear is that I will step away from this shit for a while, come back, and have no idea how the app actually works.  Here's one wild idea.  What if every 'context' (definition TBD) has a pre-load function that handles all the necessary logic required by the new context?  AFAICT there's no actual 'pre-render' hook, but I could configure nodeNav to accept a function that runs prior to the actual navigation.  
+
+14 Feb 2025
+    Happy Valentine's Day, coding.  I love you and I'm not ashamed to say it.  You had me at "Hello World!"
+
+    The last big hurdle in front of me is to populate the New Items.  What do I need?
+
+    -Prevent ALL LW items (not just OoS) from getting kicked out of the cart for NRR.
+
+    -For OoS items, populate the cart with the chosen New items.
+        -I would kind of like to do this as late as possible, ideally after item selection so as to minimize weirdness.
+        -Whatever loop I use needs to CHECK the cart for items that already exist.
+        -Since it's probably happening after replacement selection, I need OoS LW Return items to contain some reference to the replacement.
+            -The logical place to do this is with the Peer property.
     
+    I don't remember exactly what I set up for the Peer property or if anything interacts with the replacement's Peer item.  Well, let's stop being little bitches and go take a look.  
+
+    At first glance, it does not appear so.  
+
+15 Feb 2025
+
+    1:00.
+    I slept in late and took a little while to politely expel my guest.  I'm fine with this.  It's a beautiful rainy day and I am gonna crack this sucker.
+
+    My intuition at this moment is that I should have a different property for 'item this item is simulating'
+
+        -ItemNum:
+            -Unique descriptor within the transaction.
+            -Needed because certain entities (LPP, LW, etc.) aren't necessarily identical and shouldn't be treated as such.
+
+        -Bifrost Key:
+            -Link to the description of the item in the item catelog.
+            -Needed because we need a way of linking items with non-fixed item #s to a shared description.
+
+        -PeerItem:
+            -Designates a relationship between items in different carts
+            -Needed because that relationship is important in certain contexts.
+
+        -BifrostEquivalent:
+            -For items that draw certain characteristics from a different Bifrost item than itself.
+            -Needed because this represents a slightly different concept than the first three.  
+
+    I don't like the idea of creating a shitload of new properties, but it really is a different concept than the other three and trying to equivocate concepts that aren't actually the same tends to lead to trouble.
+
+    OK.  Let's just name it.  I am hestitating because it feels VERY similar to a Peer item, but not identical.  If the distinction doesn't matter I have introduced additional complexity for no reason.  If the distinction does matter, I'll have to refactor everything I'm about to do.  
+
+    Since I'm struggling a bit to get traction, I think I am first going to clear out the second item qty.  That should be pretty easy and it needs to happen anyways.  
+
+
+
+
+
 

@@ -57,9 +57,6 @@ function ReplacementCluster({ showOnlyIf = true }) {
     }
   };
 
-  const sItemNumError =
-    oActiveError?.key === "invalidItemNum" ? oActiveError.str : "";
-
   const uiReplacementInput = (
     <div className={`vBox minFlex`}>
       <div className={`hBox minFlex body__small color__primary__text`}>
@@ -71,12 +68,12 @@ function ReplacementCluster({ showOnlyIf = true }) {
           type="text"
           value={lwLocSt.input11}
           placeholder="Replacement Item #"
-          className={`maxFlex ${sItemNumError ? "error" : ""}`}
+          className={`maxFlex`}
           onChange={(e) => setLwRtrnFormLS({ input11: e.target.value })}
         />
       </div>
       <div className={`hBox minFlex`}>
-        <div className={`hBox warning`}>{sItemNumError}</div>
+        <div className={`hBox`}></div>
         <button className={`secondary`} onClick={handleAddReplacement}>
           Apply
         </button>
@@ -86,47 +83,29 @@ function ReplacementCluster({ showOnlyIf = true }) {
 
   // Valid Replacement Item provided
 
-  const handleQtyInput = (event) => {
-    const newQty = Number(event.target.value);
-    setLwRtrnFormLS({ input12: newQty });
-  };
-
-  const handleQtyPlus = () => {
-    const newQty = Number(lwLocSt.input12) + 1;
-    setLwRtrnFormLS({ input12: newQty });
-  };
-
-  const handleQtyMinus = () => {
-    const newQty = Math.max(Number(lwLocSt.input12) - 1, 0);
-    setLwRtrnFormLS({ input12: newQty });
-  };
-
   const handleConfirmAdd = (e) => {
     e.stopPropagation();
 
-    const qtyMatch = lwLocSt.input3 === lwLocSt.input12;
+    // description of the replacement item.
+    const repBifrostText =
+      bifrostCtx[lwLocSt.activeData1.atomItemNum].description;
+    // creating the LW Return item.
+    // XXX at the moment, this contains no reference to the replacement.
+    const outItemAtom = new returnAtom({
+      atomItemNum: `00100X${lwLocSt.activeData1.bifrostKey}`,
+      //atomItemQty: lwLocSt.input3,
+      bifrostKey: `00100`,
+      customDescription: `Lifetime Warranty Replacement: ${repBifrostText}`,
+      bifrostEquivalent: lwLocSt.activeData1.bifrostKey,
+    });
+    setSessionItems({
+      itemAtom: outItemAtom,
+      actionType: "add",
+      newQty: lwLocSt.input3,
+    });
 
-    if (qtyMatch) {
-      // description of the replacement item.
-      const repBifrostText =
-        bifrostCtx[lwLocSt.activeData1.atomItemNum].description;
-      // creating the LW Return item.
-      // XXX at the moment, this contains no reference to the replacement.  
-      const outItemAtom = new returnAtom({
-        atomItemNum: `00100X${lwLocSt.activeData1.bifrostKey}`,
-        atomItemQty: lwLocSt.input12,
-        bifrostKey: `00100`,
-        customDescription: `Lifetime Warranty Replacement: ${repBifrostText}`,
-      });
-      setSessionItems({ itemAtom: outItemAtom, actionType: "add", newQty: lwLocSt.input12 });
-
-      resetLwRtrnFormLS({ EVERYONE: true });
-      resetPageLS({ activeOverlay1: true });
-    } else {
-      setLwRtrnFormLS({
-        activeError1: lwLocSt.oErrorObjects["invalidQty"],
-      });
-    }
+    resetLwRtrnFormLS({ EVERYONE: true });
+    resetPageLS({ activeOverlay1: true });
   };
 
   const sQtyError = oActiveError?.key === "invalidQty" ? oActiveError.str : "";
@@ -146,46 +125,18 @@ function ReplacementCluster({ showOnlyIf = true }) {
           showChildArrow={false}
         />
       )}
-      <div className={`vBox minFlex gap50pct`}>
-        <div className={`hBox body__small color__primary__text`}>
-          Replacement Qty
-        </div>
-        <div className={`hBox minFlex`}>
-          <div className={`qtyInputPlusMinusCtnr`}>
-            <button
-              onClick={handleQtyMinus}
-              disabled={lwLocSt.input12 < 1}
-              className={`ghost`}
-            >
-              -
-            </button>
-            <input
-              type="number"
-              value={lwLocSt.input12}
-              min={0}
-              className={`${sQtyError ? "error" : ""}`}
-              onChange={(e) => {
-                handleQtyInput(e);
-              }}
-            />
-            <button onClick={handleQtyPlus} className={`ghost`}>
-              +
-            </button>
-          </div>
-          <div className={`hBox maxFlex`} />
-          <button
-            className={`secondary`}
-            onClick={() => {
-              resetLwRtrnFormLS({ activeDataALL: true });
-            }}
-          >
-            <MdClose fontSize="1.5rem" />
-          </button>
-        </div>
-      </div>
       <div className={`divider horizontal`} />
       <div className={`hBox minFlex`}>
-        <div className={`hBox warning maxFlex`}>{sQtyError}</div>
+        <button
+          className={`secondary`}
+          onClick={() => {
+            resetLwRtrnFormLS({ activeDataALL: true });
+          }}
+        >
+          Clear Item
+        </button>
+        <div className={`hBox maxFlex`} />
+
         <button onClick={handleConfirmAdd} className={`primary`}>
           Confirm & Add
         </button>

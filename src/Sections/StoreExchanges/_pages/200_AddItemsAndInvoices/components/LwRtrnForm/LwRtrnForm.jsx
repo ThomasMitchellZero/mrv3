@@ -24,11 +24,12 @@ function LwRtrnForm() {
     resetLwRtrnFormLS({ activeErrorALL: true });
   };
 
-  // validity conditions to set visibility.
+  // validity conditions to set visibility of various elements.
   const bBrandValid = lwLocSt?.input1?.lwValid === true;
   const bElectricityValid = bBrandValid && lwLocSt?.input2?.lwValid === true;
   const bRtrnQtyValid = bElectricityValid && Number(lwLocSt?.input3) > 0;
 
+  // Handlers and UI components to confirm that the return item is LW-eligible.
   const handleRtrnInput = (event) => {
     const newQty = Number(event.target.value);
     setLwRtrnFormLS({ input3: newQty });
@@ -47,7 +48,7 @@ function LwRtrnForm() {
   const uiReturnInput = bElectricityValid && (
     <div className={`vBox minFlex gap50pct`}>
       <div className={`hBox body__small color__primary__text`}>
-        Return Item Qty
+        Qty To Exchange:
       </div>
       <div className={`qtyInputPlusMinusCtnr`}>
         <button
