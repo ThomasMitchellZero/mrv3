@@ -18,7 +18,7 @@ import {
   returnAutoDeriver,
   setSessionItem,
 } from "../../../../mrv/MRVhooks/MRVhooks";
-import { clone, cloneDeep } from "lodash";
+import { cloneDeep } from "lodash";
 
 function ReturnRejection() {
   const nodeNav = useNodeNav();

@@ -9010,6 +9010,54 @@ What to do today?
 
     Since I'm struggling a bit to get traction, I think I am first going to clear out the second item qty.  That should be pretty easy and it needs to happen anyways.  
 
+    3:20.
+    OK.  Got the UI updates completed, and created a BifrostEquivalent field in ItemAtom.  Now for the fun / hard part.
+
+    First things first, where should it live?
+
+    I don't think it belongs in the AutoDeriver.  Unless I get a real good reason to do otherwise, I want to scope it to CWEX.  
+
+    This sounds crazy, but I am actually thinking it belongs in the hooks for NewItems.  My pattern for the foreseeable future is to have pre-load scripts live in the Hooks file for each context.  They won't be called in that context - they'll actually be called in whatever causes that context to be loaded - but that's their home.  
+
+19 Feb 2025
+
+    5:05.  It's all coming back to me now.  Let's figure out where we are.  
+
+    LW Items Returned:
+        -In Bifrost:
+            -I need to prevent them from getting kicked out for NRR
+            -I need to kick out any instances that don't have corresponding New items.
+        -OoS
+            -I need to prevent them from getting kicked out as NRR.
+            -I need to add the same qty of the corresponding item into the New items.
+            -Pair those New items with their corresponding Return items.
+    
+22 Feb 2025
+    2:20.
+    OK.  Definitely not my best start.  But I can still control how I finish.  Let's start with the full 69420.  
+
+    I want to spend my 20 and even my next hour nailing down what I intend to do.  I really do feel like once the conceptual model is created, the coding itself should be smooth sailing.  
+
+    The real kicker for me is the adding / clearing of the LW counterparts.  
+        -I guess the VERY easiest way would be that, on preceeding, I just SET the quantity of the New Items to the quantity of LW items.  Hmm.  That's actually not bad.  Actually, I could do a check on the New Item qty, and if it's less than the LW Return qty, I just replace it.  
+            -The downside of this approach is that if the user goes back and changes the LW item to a different one, the old ones are still in the cart.
+            -This also feels like I am not *quite* capturing what is actually happening.  
+
+    The other thing I could do would be to add the LW Replacements into the cart as separate entities.  I would have to make the keys unique upon creation.  That isn't terrible.  I have the BifrostKey property for exactly this situation, and I can check the Bifrost keys for commonality if I want to combine all 'identical' items.  
+
+    
+
+    
+
+    
+
+    
+    
+
+
+
+
+
 
 
 

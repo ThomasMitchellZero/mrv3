@@ -578,7 +578,7 @@ function setSessionItem({
   // if this is the first instance of this item, create a new atom with a qty of 0.
   const createIfEmpty = () => {
     if (targetAtomIndex === -1) {
-      // Set the atomItemQty to 0 if it doesn't already exist.  This way, 'add' method can just unconditionally increment the quantity.  
+      // Set the atomItemQty to 0 if it doesn't already exist.  This way, 'add' method can just unconditionally increment the quantity.
       itemAtom.atomItemQty = 0;
       outItemsArr.push(
         //new returnAtom({ atomItemNum: thisItemNum, atomItemQty: 0 })
@@ -1044,7 +1044,9 @@ function atomRelationizer({ mainAtom = new returnAtom({}), searchArray = [] }) {
 
 export { atomRelationizer };
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 // Specific applications of the primaryAtomizer function.  These are the most common use cases.
+//////////////////////////////////////////////////////////////////////////////////////////////
 
 const newItemAtomizer = ({ atomizedReturnItemsArr = [], newItemsArr }) => {
   const baseComparisonFn = ({ repo1Atom, repo2Atom }) => {
