@@ -9,7 +9,7 @@ import {
 } from "../../../../globalFunctions/globalJS_classes";
 
 import { LS_MRV_ReasonPickerSC } from "../../../../mrv/mrv-components/CompLocStates_MRV";
-import { NewItemProdInfoSTRX } from "../../_pages/300_NewItems/Sidesheet/NewItemProdInfoSTRX";
+import { NewItemProdInfoSTRX } from "../../_pages/300_L4LnewItems/Sidesheet/NewItemProdInfoSTRX";
 import { LwRtrnForm__LS } from "../../_pages/200_AddItemsAndInvoices/components/LwRtrnForm/LwRtrnForm__Hooks";
 
 // Singleton Local States -------------------------------------

@@ -9039,13 +9039,57 @@ What to do today?
     I want to spend my 20 and even my next hour nailing down what I intend to do.  I really do feel like once the conceptual model is created, the coding itself should be smooth sailing.  
 
     The real kicker for me is the adding / clearing of the LW counterparts.  
-        -I guess the VERY easiest way would be that, on preceeding, I just SET the quantity of the New Items to the quantity of LW items.  Hmm.  That's actually not bad.  Actually, I could do a check on the New Item qty, and if it's less than the LW Return qty, I just replace it.  
-            -The downside of this approach is that if the user goes back and changes the LW item to a different one, the old ones are still in the cart.
-            -This also feels like I am not *quite* capturing what is actually happening.  
 
-    The other thing I could do would be to add the LW Replacements into the cart as separate entities.  I would have to make the keys unique upon creation.  That isn't terrible.  I have the BifrostKey property for exactly this situation, and I can check the Bifrost keys for commonality if I want to combine all 'identical' items.  
+    -I guess the VERY easiest way would be that, on preceeding, I just SET the quantity of the New Items to the quantity of LW items.  Hmm.  That's actually not bad.  Actually, I could do a check on the New Item qty, and if it's less than the LW Return qty, I just replace it.  
+        -The downside of this approach is that if the user goes back and changes the LW item to a different one, the old ones are still in the cart.
+        -This also feels like I am not *quite* capturing what is actually happening.  
 
-    
+    - The other thing I could do would be to add the LW Replacements into the cart as separate entities.  I would have to make the keys unique upon creation.  That isn't terrible.  I have the BifrostKey property for exactly this situation, and I can check the Bifrost keys for commonality if I want to combine all 'identical' items.  
+
+        -I guess my issue here is that this also feels leaky.  The items themselves are not distinct, and misrepresenting reality usually leads to trouble.
+
+        -It's the relationship that is distinct, but I don't know of a great way to represent that.  I feel like a walk.  
+
+    OK.  I think the correct move is to treat them like any other item.  I think that's the most honest, and my approach so far has been to derive relationships based on applying rules to the inputs.  
+
+    OK.  So let's do that.  
+        -That still leaves me with the problem of leftover items if the user deletes the inputs.
+            -First of all, this is a super minor problem that I am perfectly capable of structuring my tests to avoid.
+        -I wonder if it makes sense to separate user inputs from derived 'inputs'.  My issue is that once the items go into the cart I have no good way of determining if they were added by me or by the logic.  
+
+22 Feb 2025 []
+
+    I stunk today.  I played Slay The Spire when I knew damn well that a start like that normally leads to a result like this.  I just couldn't focus.  I wasn't interested.
+
+    Illinois is playing Duke tonight and I'm anxious.  I fear my tribe is about to make a poor showing.  
+
+    I think the correct course for programming is: produce the easiest thing that lets me do the Lifetime Warranty test.  Once that's out of the way I can refactor MRV to my heart's content.
+
+    Here are a few things I'd like to do different.
+        -I want to design all classes around the expectation that everything is going through the LuneLenser.
+            -It should be very easy to compare and merge classes that share a common factor.
+        
+        -I want to do objects and I want them to have true primary keys.  The idea I had was to have a standard naming convention for instance keys:  
+
+            history_of_equality_checks.  Each segment is the chronology of differentiators checked.  So it would be:
+                itemNum_returnReason_invoiceNum, where each segment is the differentiator in the repo it came from.  
+
+        And I think oldest => newest makes sense.  First, it should all line up, allowing me to see where it all actually diverged.  It's also really a really easy function that creates it.  Just a template literal that takes the existing key and concatenates the most recent one.  
+        
+        -I feel like the idea of having objects as the universal format makes sense.  IIRC all string keys are stored in insertion order.  
+
+        OK.  Here's what it is.  I feel like I've identified enough commonalities that I can use the same configurable solution to a lot of my problems.  And that's why I'm dragging my feet, because I'm feeling more and more annoyed by my past architecture decisions and I kinda wanna stop working so hard.  
+
+        It's a more refined version of the instinct that led me to start with ReturnAtoms in the first place.  It's hard to connect the data because it wasn't structured with connection in mind.  
+
+
+
+    I DO NOT like working on my portfolio.  I can think of 3 ID and 1 big UX runthroughs and it sucks balls every time and the reason this sucks balls is that I have no idea what my counterparts want to see.  I am proud of my work and I want to explain it well and I hate the feeling of rejection and I think I'm subconsciously flinching away from it.  
+
+
+
+
+
 
     
 
