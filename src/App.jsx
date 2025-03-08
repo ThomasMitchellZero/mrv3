@@ -16,10 +16,9 @@ import { Route, Routes } from "react-router-dom";
 import Main from "./components/UI/PageLayout/Main";
 import Placeholder from "./Sections/Placeholder/Placeholder";
 
-
 //CWEX
 import { CWEX } from "./mrv_apps/CWEX/CWEX_index";
-import { StartCWEX } from "./mrv_apps/CWEX/nodes/1000_StartSTRX/StartCWEX_index";
+import { StartCWEX } from "./mrv_apps/CWEX/nodes/1000_StartCEWX/StartCWEX_index";
 
 ///////////// Deprecate all these once no longer needed ////////////////
 
@@ -44,8 +43,7 @@ import { ExchTotalReview } from "./Sections/Exchanges/_pages/60_TotalReview/Tota
 import { ExchReceiptPage } from "./Sections/Exchanges/_pages/70_ReceiptPage/ReceiptPage";
 
 //STRX
-import { StoreExchanges } from "./Sections/StoreExchanges/StoreExchanges";
-import { StartSTRX } from "./Sections/StoreExchanges/_pages/100_StartSTRX/StartSTRX";
+
 import { ReplacementCheck } from "./Sections/StoreExchanges/_pages/150_ItemCheck/ReplacementCheck";
 import { AddItemsAndInvosSTRX } from "./Sections/StoreExchanges/_pages/200_AddItemsAndInvoices/AddItemsAndInvosSTRX";
 import { NewItems } from "./Sections/StoreExchanges/_pages/300_L4LnewItems/NewItems";
@@ -111,9 +109,8 @@ function App() {
             <Route path="receipt" element={<ExchReceiptPage />} />
           </Route>
           {/* CWEX */}
-          <Route path="store-exchanges" element={<CWEX />}>
+          <Route path="cwex" element={<CWEX />}>
             <Route index element={<StartCWEX />} />
-            <Route path="replacement-check" element={<ReplacementCheck />} />
             <Route path="replacement-check" element={<ReplacementCheck />} />
             <Route
               path="choose-items-invos"

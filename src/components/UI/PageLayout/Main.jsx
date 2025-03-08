@@ -22,7 +22,7 @@ const Main = () => {
         <NavLink to="exchanges" className={linkStyle}>
           Exchanges
         </NavLink>
-        <NavLink to="store-exchanges" className={linkStyle}>
+        <NavLink to="cwex" className={linkStyle}>
           Store Exchanges
         </NavLink>
         <NavLink to="xdt-exchanges" className={linkStyle}>
