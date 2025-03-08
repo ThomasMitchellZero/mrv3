@@ -1,0 +1,984 @@
+@font-face {
+  font-family: "Fellix-Regular";
+  src: url("../../assets/fonts/fellix/Fellix-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Fellix-Medium";
+  src: url("../../assets/fonts/fellix/Fellix-Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Fellix-Bold";
+  src: url("../../assets/fonts/fellix/Fellix-Bold.otf") format("opentype");
+}
+
+.mrv_style {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0rem;
+  width: 100%;
+  font-family: "Fellix-Regular";
+
+  /* MRV vars */
+
+  --PrimaryPadding__vertical: 1rem;
+  --PrimaryPadding__horizontal: 2rem;
+  --PrimaryPadding__both: var(--PrimaryPadding__vertical)
+    var(--PrimaryPadding__horizontal);
+  --DeleteColWidth: 8rem;
+  --radius__small: 0.25rem;
+  --radius__medium: 0.5rem;
+
+  --tablePadding__vertical: 0rem;
+  --tablePadding__horizontal: 1rem;
+  --tablePadding__both: var(--PrimaryPadding__vertical)
+    var(--tablePadding__horizontal);
+
+  --primaryBorder: 0.125rem solid var(--color__border);
+  --clearBorder: 0.125rem solid transparent;
+  --border__focus: 0.125rem solid var(--color__interactive);
+
+  /* Colors */
+
+  --color__surface__default: #ffffff;
+  --color__surface__subdued: #f4f6fa;
+  --color__surface__darkblue: #012169;
+  --color__surface__lightgreen: #ebfce3;
+  --color__surface__lightgrey: #dddddd;
+
+  --color__primary: #001544;
+  --color__primary__inverse: #ebf1ff;
+  --color__secondary: #001544d6;
+  --color__tertiary: #565e5a;
+  --color__interactive: #0072ce;
+  --color__interactive__pressed: #0e52a4;
+  --color__interactice__inverse: #51aaf2;
+  --color__green: #007a33;
+  --color__green__inverse: #37c271;
+  --color__gold: #f5b62f;
+  --color__red: #971b2f;
+  --color__red__inverse: #f19caa;
+  --color__disabled__text: #00000052;
+  --color__white: #ffffff;
+  --color__meltdown__magenta: magenta; /*  #ff00ff */
+
+  --color__card__selected: #e7f1fd;
+  --color__card__hover: #f0f0f0;
+  --color__card__selected__hover: #d9e9fc;
+
+  --color__border: #9ea4b2;
+  --color__border__th: #d8d8d8;
+  --color__border__subdued: #dddddd;
+
+  --color__ribbon__alert: #fff4db;
+  --color__ribbon__critical: #fbdee3;
+  --color__ribbon__info: #d4ebfe;
+  --color__ribbon__success: #ebfce3;
+
+  .divider {
+    display: flex;
+    background-color: var(--color__border);
+
+    &.horizontal {
+      height: 1px;
+      width: 100%;
+    }
+    &.vertical {
+      height: 100%;
+      width: 1px;
+    }
+  }
+
+  & .color__surface__subdued {
+    background-color: var(--color__surface__subdued);
+  }
+
+  & .color__surface__default {
+    background-color: var(--color__surface__default);
+  }
+
+  & .color__surface__lightgrey {
+    background-color: var(--color__surface__lightgrey);
+  }
+
+  & .color__lightgrey__text {
+    color: var(--color__surface__lightgrey);
+  }
+
+  & .color__primary__text {
+    color: var(--color__primary);
+  }
+  & .color__primary {
+    background-color: var(--color__primary);
+  }
+  & .color__secondary__text {
+    color: var(--color__secondary);
+  }
+  & .color__secondary {
+    background-color: var(--color__secondary);
+  }
+  & .color__tertiary__text {
+    color: var(--color__tertiary);
+  }
+  & .color__tertiary {
+    background-color: var(--color__tertiary);
+  }
+
+  & .color__interactive__text {
+    color: var(--color__interactive);
+  }
+
+  & .color__interactive {
+    background-color: var(--color__interactive);
+  }
+  & .color__green__text {
+    color: var(--color__green);
+  }
+  & .color__green {
+    background-color: var(--color__green);
+  }
+
+  & .color__gold__text {
+    color: var(--color__gold);
+  }
+
+  & .color__gold {
+    background-color: var(--color__gold);
+  }
+  & .color__white__text {
+    color: var(--color__white);
+  }
+  & .color__red__text {
+    color: var(--color__red);
+  }
+  & .color__red {
+    background-color: var(--color__red);
+  }
+
+  & .color__ribbon__alert {
+    background-color: var(--color__ribbon__alert);
+  }
+  & .color__ribbon__critical {
+    background-color: var(--color__ribbon__critical);
+  }
+  & .color__ribbon__info {
+    background-color: var(--color__ribbon__info);
+  }
+  & .color__ribbon__success {
+    background-color: var(--color__ribbon__success);
+  }
+
+  & .color__transparent {
+    background-color: transparent;
+  }
+
+  & .color__meltdown__magenta {
+    background-color: var(--color__meltdown__magenta);
+  }
+  & .color__meltdown__magenta__text {
+    color: var(--color__meltdown__magenta);
+  }
+
+  /* ---- MRV TEXT STYLES ---- */
+
+  & .heading__small {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-family: "Fellix-Medium";
+  }
+
+  & .heading__medium {
+    font-family: "Fellix-Bold";
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+
+  & .heading__large {
+    font-family: "Fellix-Bold";
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+
+  & .body {
+    font-size: 1.25rem;
+    line-height: 2rem;
+  }
+
+  & .body__large {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  & .body__small {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  & .tinyText {
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+  }
+
+  /*  Modifiers  */
+
+  & .bold {
+    font-family: "Fellix-Medium";
+  }
+
+  & .regular {
+    font-weight: 500;
+  }
+
+  & .keepSpace {
+    white-space: pre-wrap;
+  }
+
+  & .warning {
+    color: var(--color__red);
+  }
+
+  & .truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+
+  & .panel30__section__label {
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    color: var(--color__tertiary);
+    width: 100%;
+  }
+
+  /* &&&&&&&&&&&&    UI ELEMENT STYLES   &&&&&&&&&&&&&&*/
+
+  /* ---- MRV Containers ---- */
+
+  & .hBox {
+    display: flex;
+    flex: 1 1 0rem;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  & .vBox {
+    display: flex;
+    flex: 1 1 0rem;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  & .mrvPage {
+    height: 100%;
+    display: flex;
+    flex: 1 1 0rem;
+    flex-direction: row;
+    box-sizing: border-box;
+    background-color: var(--color__surface__subdued);
+    align-items: flex-start;
+    --standardBorder: calc(1.5rem / 16) solid var(--color__border);
+    --primaryColumn: 25vw;
+
+    --sideColumn: "TBD";
+
+    /* ---- Column Sizes ---- */
+    & .mrvPanel__main {
+      box-sizing: border-box;
+      flex: 1 1 0rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: var(--PrimaryPadding__both);
+    }
+
+    & .mrvPanel__side {
+      height: 100%;
+      flex: 0 0 var(--primaryColumn);
+      display: flex;
+      flex-direction: column;
+      min-width: 0rem;
+    }
+
+    & .mrvSidesheet {
+      height: 100%;
+      width: 25%;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background-color: var(--color__surface__default);
+      padding: var(--PrimaryPadding__both);
+
+      &.collapsed {
+        width: 4rem;
+      }
+    }
+
+    /* ---- Row Sizes ---- */
+    & .header {
+      flex: 0 0 5rem;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    & .main_content {
+      padding: var(--PrimaryPadding__vertical) 0rem;
+      flex: 1 1 0rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow-y: auto;
+    }
+
+    & .footer_text {
+      flex: 0 0 auto;
+      padding: 0rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+      & p {
+        text-align: center;
+      }
+    }
+
+    & .footer_content {
+      flex: 0 0 7rem;
+      padding-top: var(--PrimaryPadding__vertical);
+      justify-content: flex-end;
+      display: flex;
+      flex-direction: row;
+    }
+
+    /* ---- Utility ---- */
+
+    & .cardContainer {
+      box-sizing: border-box;
+      flex: 1 1 0rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    /* this should ONLY be used to mimic the 25% column in the main/70 panel.*/
+    & .buttonBox {
+      height: 100%;
+      flex: 0 0 var(--primaryColumn);
+      display: flex;
+      flex-direction: column;
+      padding: 0rem 0rem 0rem var(--PrimaryPadding__horizontal);
+    }
+
+    /* same but more descriptive b/c I don't want to hunt for the other one..*/
+    & .buttonBox25 {
+      height: 100%;
+      width: var(--primaryColumn);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0rem 0rem 0rem var(--PrimaryPadding__horizontal);
+      justify-content: center;
+    }
+
+    & .continueBtnBox {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 33%;
+      padding: 0rem 0rem 0rem var(--PrimaryPadding__horizontal);
+
+      & div {
+        display: flex;
+        flex-direction: row;
+        padding-top: 0.24rem;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+
+  & .mrvPage .border__left {
+    border-left: var(--standardBorder);
+  }
+
+  & .mrvPage .border__right {
+    border-right: var(--standardBorder);
+  }
+
+  & .mrvPage .blankback {
+    background-color: transparent;
+  }
+
+  /* ---- MRV BUTTON STYLES ---- */
+
+  & button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+
+    height: 4rem;
+    padding: 0rem 1rem;
+    margin: 0rem;
+    gap: 0.25rem;
+
+    border: 0.125rem solid;
+    border-radius: var(--radius__medium);
+    background-color: var(--color__meltdown__magenta);
+    text-decoration: none;
+
+    font-family: "Fellix-Regular";
+    font-size: 1.25rem;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 25%;
+      cursor: not-allowed;
+
+      &:hover {
+        opacity: 25%;
+      }
+    }
+
+    &:hover {
+      opacity: 80%;
+    }
+
+    &.padding__0 {
+      padding: 0rem;
+    }
+
+    &.primary {
+      color: var(--color__primary__inverse);
+      border-color: transparent;
+      background-color: var(--color__interactive);
+    }
+
+    &.secondary {
+      color: var(--color__interactive);
+      border-color: var(--color__interactive);
+      background-color: transparent;
+    }
+
+    &.ghost {
+      color: var(--color__interactive);
+      border-color: transparent;
+      background-color: transparent;
+
+      &.disabled {
+        color: var(--color__tertiary);
+      }
+      &.selected {
+        border-bottom: 0.125rem solid var(--color__interactive);
+        background-color: var(--color__card__selected);
+      }
+    }
+
+    &.jumbo {
+      height: 6rem;
+      font-size: 1.75rem;
+    }
+
+    &.continueBtn {
+      font-size: 1.75rem;
+      flex: 1 1 0rem;
+      width: 100%;
+    }
+
+    &.miniBtn {
+      height: 2.5rem;
+      font-size: 1rem;
+      padding: 0rem 0.5rem;
+      gap: 0.125rem;
+      border-radius: 0rem;
+
+      &.padding__0 {
+        padding: 0rem;
+      }
+    }
+
+    &.fullWidth {
+      flex: 1 1 0rem;
+    }
+
+    &.focused {
+      color: var(--color__primary__inverse);
+      background-color: var(--color__interactive__pressed);
+      border: calc(3rem / 16) solid white;
+      outline: calc(3rem / 16) solid var(--color__interactive__pressed);
+    }
+
+    &.chip {
+      height: 2.5rem;
+      border-color: var(--color__border);
+      border-radius: 1.25rem;
+      color: var(--color__text__primary);
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      background-color: var(--color__surface__default);
+      min-width: 5rem;
+
+      &.active {
+        border-color: var(--color__interactice__inverse);
+        background-color: var(--color__card__selected);
+      }
+
+      &.selected {
+        border-color: var(--color__interactive);
+        background-color: var(--color__interactive);
+        color: var(--color__white);
+      }
+    }
+    &.tab {
+      height: 3.5rem;
+      background-color: transparent;
+      font-weight: 500;
+      font-size: 1.25rem;
+      line-height: 2rem;
+      color: var(--color__tertiary);
+      text-transform: capitalize;
+      border: none;
+      border-bottom: var(--clearBorder);
+      border-radius: 0rem;
+      text-overflow: ellipsis;
+
+      &.active {
+        color: var(--color__primary);
+        border-bottom: 0.125rem solid var(--color__interactive);
+        background-color: var(--color__card__selected);
+      }
+
+      &.body__small {
+        font-size: 1rem;
+        line-height: 1.5rem;
+      }
+    }
+  }
+
+  & .actionBtn {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+
+  & .tabCtnr {
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  & .chipCtnr {
+    display: flex;
+    flex: 0 0 auto;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  /* ---- Input Styling ---- */
+
+  & input {
+    font-family: "Fellix-Regular";
+    height: 4rem;
+    display: flex;
+    padding: 0rem 0.5rem 0rem 1rem;
+    font-size: 1.25rem;
+    border: var(--primaryBorder);
+    border-radius: 0.5rem;
+    min-width: 0rem;
+
+    &:focus {
+      outline: transparent;
+      border: var(--border__focus);
+    }
+
+    &:disabled {
+      color: var(--color__disabled__text);
+    }
+
+    &.error {
+      border-color: var(--color__red);
+
+      & p {
+        color: var(--color__red);
+      }
+    }
+  }
+
+  & .qtyInputPlusMinusCtnr {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    gap: 0.125rem;
+    min-width: 0rem;
+
+    & input {
+      width: 5rem;
+    }
+
+    & button {
+      width: 4rem;
+      height: 4rem;
+      font-size: 2.5rem;
+      font-family: "Fellix-Medium";
+    }
+  }
+
+  /* ---- MRV CARD STYLES ---- */
+
+  & .cardStyle {
+    /* more specific flex in additional class, since we can't know what's needed in advance*/
+    --dropShadow__01: 0px 2px 2px 0px #00000012;
+    background-color: var(--color__surface__default);
+    box-shadow: var(--dropShadow__01);
+    border-radius: var(--radius__medium);
+    box-sizing: border-box;
+    border: calc(0.125rem) solid transparent;
+    padding: 0.5rem 1rem;
+
+    &.hasHover:hover {
+      background-color: var(--color__card__hover);
+    }
+
+    &.error {
+      background-color: var(color__red__inverse);
+      border-color: var(--color__red);
+    }
+
+    &.selected {
+      background-color: var(--color__card__selected);
+      border-color: var(--color__interactive);
+
+      &:hover {
+        background-color: var(--color__card__selected__hover);
+      }
+    }
+  }
+
+  & .subCardStyle {
+    background-color: var(--color__surface__default);
+    border-radius: var(--radius__small);
+    box-sizing: border-box;
+    border: calc(3rem / 32) solid var(--color__border__subdued);
+    padding: 0.5rem 1rem;
+
+    &:hover {
+      background-color: var(--color__card__hover);
+    }
+
+    &.selected {
+      background-color: var(--color__card__selected);
+      border-color: var(--color__interactive);
+
+      &:hover {
+        background-color: var(--color__card__selected__hover);
+      }
+    }
+  }
+
+  & .tile {
+    background-color: var(--color__surface__default);
+    border-radius: var(--radius__small);
+    box-sizing: border-box;
+    border: calc(3rem / 32) solid var(--color__border__subdued);
+    padding: 0.5rem 1rem;
+
+    &:hover {
+      background-color: var(--color__card__hover);
+    }
+
+    &.selected {
+      background-color: var(--color__card__selected);
+      border-color: var(--color__interactive);
+
+      &:hover {
+        opacity: 80%;
+      }
+    }
+
+    &.error {
+      background-color: var(--color__red__inverse);
+      border-color: var(--color__red);
+      &:hover {
+        opacity: 80%;
+      }
+    }
+  }
+
+  /* ---- MRV TABLE STYLES ---- */
+
+  & table {
+    background-color: transparent;
+    table-layout: fixed;
+  }
+
+  & .tableContainer {
+    display: flex;
+    flex: 1 1 0rem;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+    overflow-y: auto;
+  }
+
+  & tr {
+    border: unset;
+    border-top: var(--primaryBorder);
+  }
+
+  & table .tdCenter {
+    text-align: center;
+  }
+
+  & thead {
+    height: 3rem;
+    background-color: #f5f5f5;
+  }
+
+  & thead.clear {
+    background-color: transparent;
+  }
+
+  & thead > tr {
+    border-radius: var(--radius__medium) var(--radius__medium) 0rem 0rem;
+    border: var(--clearBorder);
+  }
+
+  & td {
+    padding: 1rem 0rem 1rem var(--tablePadding__horizontal);
+    color: var(--color__primary);
+  }
+
+  & th {
+    font-size: 1rem;
+    font-weight: 600;
+    padding-left: var(--tablePadding__horizontal);
+  }
+
+  & tbody tr.active {
+    background-color: var(--color__card__selected);
+  }
+
+  & tbody tr:hover {
+    background-color: var(--color__card__hover);
+  }
+
+  & tbody tr.active:hover {
+    background-color: var(--color__card__selected__hover);
+  }
+
+  /* ----Not literally tables, but table-like ---- */
+
+  & .columnTitle {
+    display: flex;
+    height: 2.5rem;
+    flex-direction: row;
+    color: var(--color__primary);
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    align-items: center;
+  }
+
+  & .columnTitleRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: var(--primaryBorder);
+
+    & div {
+      display: flex;
+      height: 2.5rem;
+      flex-direction: row;
+      color: var(--color__primary);
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      align-items: center;
+    }
+  }
+
+  /* ---- MRV RADIO INPUT STYLES ---- */
+
+  & label.radio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 0 0 2.5rem;
+    width: 100%;
+  }
+
+  & .radio input {
+    flex: 0 0 1rem;
+    height: 1rem;
+    margin: 0rem;
+  }
+
+  & .radio p {
+    color: var(--color__primary);
+  }
+
+  & input[type="radio" i]:focus-visible {
+    outline-offset: 0rem;
+    outline: none 0rem transparent;
+  }
+
+  /* ---- Utility Classes ----*/
+
+  & .padding__vertical {
+    padding-top: var(--PrimaryPadding__vertical);
+    padding-bottom: var(--PrimaryPadding__vertical);
+  }
+  & .padding__horizontal {
+    padding-left: var(--PrimaryPadding__horizontal);
+    padding-right: var(--PrimaryPadding__horizontal);
+  }
+
+  & .padding__both {
+    padding: var(--PrimaryPadding__both);
+  }
+
+  & .padding__0 {
+    padding: 0rem;
+  }
+
+  & .gap2rem {
+    gap: 2rem;
+  }
+
+  & .gap1rem {
+    gap: 1rem;
+  }
+
+  & .gap50pct {
+    gap: 0.5rem;
+  }
+
+  & .gap25pct {
+    gap: 0.25rem;
+  }
+
+  & .gap0rem {
+    gap: 0rem;
+  }
+
+  & .vw25 {
+    width: var(--primaryColumn);
+  }
+
+  & .alignLeft {
+    align-items: flex-start;
+  }
+
+  & .alignStart {
+    align-items: flex-start;
+  }
+
+  & .alignCenter {
+    align-items: center;
+  }
+
+  & .alignRight {
+    align-items: flex-end;
+  }
+
+  & .alignEnd {
+    align-items: flex-end;
+  }
+
+  & .justifyCenter {
+    justify-content: center;
+  }
+
+  & .justifyEnd {
+    justify-content: flex-end;
+  }
+
+  & .centerAll {
+    align-items: center;
+    justify-content: center;
+  }
+
+  & .minFlex {
+    flex: 0 0 auto;
+  }
+
+  & .maxFlex {
+    flex: 1 1 0rem;
+  }
+
+  & .minWidth {
+    width: fit-content;
+  }
+
+  & .minWidth__0 {
+    min-width: 0rem;
+  }
+
+  & .maxWidth {
+    width: 100%;
+  }
+
+  & .maxWidth_100pct {
+    max-width: 100%;
+  }
+
+  & .maxWidth_50pct {
+    max-width: 50%;
+  }
+
+  & .minHeight {
+    height: fit-content;
+  }
+
+  & .minHeight__0 {
+    min-height: 0rem;
+  }
+
+  & .height2rem {
+    height: 2rem;
+  }
+
+  & .nohover {
+    pointer-events: none;
+  }
+
+  & .nohover_bg:hover {
+    background-color: initial;
+  }
+
+  & .scrimOverlay {
+    position: absolute;
+    top: 3rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #17191f16;
+    backdrop-filter: blur(0.5rem);
+    display: flex;
+    z-index: 13; /* Ensure it overlays the contents  #17191f16; */
+  }
+}
