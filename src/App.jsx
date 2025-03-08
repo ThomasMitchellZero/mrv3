@@ -16,6 +16,13 @@ import { Route, Routes } from "react-router-dom";
 import Main from "./components/UI/PageLayout/Main";
 import Placeholder from "./Sections/Placeholder/Placeholder";
 
+
+//CWEX
+import { CWEX } from "./mrv_apps/CWEX/CWEX_index";
+import { StartCWEX } from "./mrv_apps/CWEX/nodes/1000_StartSTRX/StartCWEX_index";
+
+///////////// Deprecate all these once no longer needed ////////////////
+
 // Returns
 import Returns from "./Sections/Returns/Returns";
 import ReturnsIndex from "./Sections/Returns/Index/ReturnsIndex";
@@ -68,10 +75,6 @@ function App() {
           <Route index element={<Placeholder titleText="Home" />} />
           <Route path="home" element={<Placeholder titleText="Home" />} />
           <Route path="orders" element={<Placeholder titleText="Orders" />} />
-          <Route
-            path="showroom"
-            element={<Placeholder titleText="Showroom" />}
-          />
           <Route path="returns" element={<Returns />}>
             <Route index element={<ReturnsIndex></ReturnsIndex>} />
             <Route
@@ -107,9 +110,10 @@ function App() {
             <Route path="totalreview" element={<ExchTotalReview />} />
             <Route path="receipt" element={<ExchReceiptPage />} />
           </Route>
-          <Route path="store-exchanges" element={<StoreExchanges />}>
-            <Route index element={<StartSTRX />} />
-            <Route path="mrv-menu" element={<AddItemsAndInvosSTRX />} />
+          {/* CWEX */}
+          <Route path="store-exchanges" element={<CWEX />}>
+            <Route index element={<StartCWEX />} />
+            <Route path="replacement-check" element={<ReplacementCheck />} />
             <Route path="replacement-check" element={<ReplacementCheck />} />
             <Route
               path="choose-items-invos"
