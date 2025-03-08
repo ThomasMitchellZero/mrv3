@@ -62,6 +62,7 @@
   --color__disabled__text: #00000052;
   --color__white: #ffffff;
   --color__meltdown__magenta: magenta; /*  #ff00ff */
+  --color__shart__chartreuse: chartreuse; /* #7fff00 */
 
   --color__card__selected: #e7f1fd;
   --color__card__hover: #f0f0f0;
@@ -200,7 +201,7 @@
     line-height: 3rem;
   }
 
-  & .body {
+  & .body_medium {
     font-size: 1.25rem;
     line-height: 2rem;
   }
@@ -215,8 +216,7 @@
     line-height: 1.5rem;
   }
 
-  & .tinyText {
-    font-weight: 500;
+  & .body__tiny {
     font-size: 0.875rem;
     line-height: 1.5rem;
   }
@@ -438,7 +438,7 @@
 
     border: 0.125rem solid;
     border-radius: var(--radius__medium);
-    background-color: var(--color__meltdown__magenta);
+    background-color: var(--color__shart__chartreuse);
     text-decoration: none;
 
     font-family: "Fellix-Regular";
