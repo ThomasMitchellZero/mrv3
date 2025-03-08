@@ -6,8 +6,8 @@ const baseStateCWEX = () => {
       itemCheck: navNode({
         keyStr: "itemCheck",
         sRoute: "/cwex/item-check",
-        selected: true,
-        disabled: false,
+        sTitle: "Item Check",
+        preloadSessionState: {Fartrell: "Cluggins"},
       }),
     },
   });
