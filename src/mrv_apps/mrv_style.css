@@ -227,10 +227,6 @@
     font-family: "Fellix-Medium";
   }
 
-  & .regular {
-    font-weight: 500;
-  }
-
   & .keepSpace {
     white-space: pre-wrap;
   }
