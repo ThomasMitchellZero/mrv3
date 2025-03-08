@@ -32,7 +32,10 @@ function useNodeNav() {
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
 
-  const nodeNav = (targetNodeKey = "" ) => {
+  const nodeNav = (targetNodeKey = "") => {
+    /**
+     * test function to navigate to a target node.
+     */
     const refNavNode = navNode({});
 
     const thisTargetNode = sessionMRV.oNavNodes[targetNodeKey];
@@ -46,7 +49,7 @@ function useNodeNav() {
     //Otherwise, we can proceed with the navigation.
 
     const preloadState = thisTargetNode.preloadSessionState;
-    let outSessionState = {...cloneDeep(sessionMRV), ...preloadState};
+    let outSessionState = { ...cloneDeep(sessionMRV), ...preloadState };
     const outNavNodesObj = outSessionState.oNavNodes;
 
     // all nodes prior to the target remain enabled.
@@ -61,7 +64,6 @@ function useNodeNav() {
       if (thisNode.keyStr === targetNodeKey) {
         nodeAfterTarget = true;
       }
-
     }
 
     // activate the target node and make it available.
@@ -72,8 +74,9 @@ function useNodeNav() {
 
     outSessionState.oNavNodes = outNavNodesObj;
     setSessionMRV(outSessionState);
+    console.log("attempting navihation to", outNavNodesObj[targetNodeKey].sRoute);
 
-    navigate(outNavNodesObj[targetNodeKey].routeStr);
+    navigate(outNavNodesObj[targetNodeKey].sRoute);
   };
 
   return nodeNav;

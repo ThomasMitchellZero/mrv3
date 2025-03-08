@@ -5,7 +5,7 @@ const baseStateCWEX = () => {
     oNavNodes: {
       itemCheck: navNode({
         keyStr: "itemCheck",
-        sRoute: "/itemCheck",
+        sRoute: "/cwex/item-check",
         selected: true,
         disabled: false,
       }),

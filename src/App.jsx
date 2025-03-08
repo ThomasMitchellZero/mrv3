@@ -19,6 +19,7 @@ import Placeholder from "./Sections/Placeholder/Placeholder";
 //CWEX
 import { CWEX } from "./mrv_apps/CWEX/CWEX_index";
 import { StartCWEX } from "./mrv_apps/CWEX/nodes/1000_StartCEWX/StartCWEX_index";
+import { ItemCheck } from "./mrv_apps/CWEX/nodes/1500_ItemCheck/ItemCheck_index";
 
 ///////////// Deprecate all these once no longer needed ////////////////
 
@@ -111,7 +112,7 @@ function App() {
           {/* CWEX */}
           <Route path="cwex" element={<CWEX />}>
             <Route index element={<StartCWEX />} />
-            <Route path="replacement-check" element={<ReplacementCheck />} />
+            <Route path="item-check" element={<ItemCheck />} />
             <Route
               path="choose-items-invos"
               element={<AddItemsAndInvosSTRX />}
