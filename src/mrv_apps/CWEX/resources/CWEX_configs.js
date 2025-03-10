@@ -9,6 +9,11 @@ const baseStateCWEX = () => {
         sTitle: "Item Check",
         preloadSessionState: {Fartrell: "Cluggins"},
       }),
+      returnPhase: navNode({
+        keyStr: "returnPhase",
+        sRoute: "/cwex/return-phase",
+        sTitle: "Return Phase",
+      }),
     },
   });
   return returnState;
