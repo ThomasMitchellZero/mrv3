@@ -1,4 +1,4 @@
-import { baseStateExTurns, navNode } from "../../mrv_data_structures";
+import { baseStateExTurns, navNode } from "../../mrv_data_types";
 
 const baseStateCWEX = () => {
   const returnState = baseStateExTurns({

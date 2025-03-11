@@ -3,7 +3,7 @@ import { useOutletContext, useNavigate } from "react-router";
 import { useContext } from "react";
 
 import { cloneDeep, isEmpty, isNaN, merge, set, subtract } from "lodash";
-import { navNode } from "./mrv_data_structures";
+import { navNode } from "./mrv_data_types";
 
 //// Money Handlers ////
 
@@ -22,7 +22,22 @@ const greenify = (numberVal) => {
 export { greenify };
 
 /////////////////////////////////////////////////////////////////
-////////             Node Navigation                     ////////
+////////             Data Handlers                   
+/////////////////////////////////////////////////////////////////
+
+function keymaker({  }) {
+    // need an array of props to consider in the key.
+    // Get the value of each prop and concatenate them into the key.
+    // Cumulativity?
+    // What to do if the key sources are coming from multiple objects?
+    // What if the key sources are nested?
+    // what if key values are empty?  Because that can definitely happen.  
+    
+    // Kinda feels like keygen needs to follow the creation of an object rather than precede it.
+}
+
+/////////////////////////////////////////////////////////////////
+////////             Node Navigation                     
 /////////////////////////////////////////////////////////////////
 
 function useNodeNav() {

@@ -1,4 +1,4 @@
-import { atomizedProduct } from "../../../mrv_data_structures";
+import { dsProduct_full } from "../../../mrv_data_types";
 import {
   testMoney,
   testProduct,
@@ -6,9 +6,6 @@ import {
 } from "../../../Copilot_Copy_Delete_After";
 
 function ItemCheck() {
-  const refAtomizedProduct = atomizedProduct();
-  refAtomizedProduct.iUnitBaseCost = 10;
-  refAtomizedProduct.iUnitTax = 2;
 
   const refTestMoney = testMoney({
     iUnitBaseCost: 100,
