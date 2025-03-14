@@ -1,6 +1,6 @@
 import { useOutletContext } from "react-router-dom";
 import { useNodeNav } from "../../../mrv_controller";
-import { navNode } from "../../../mrv_data_types";
+
 
 const StartCWEX = () => {
   const mrvCtx = useOutletContext();
@@ -8,7 +8,6 @@ const StartCWEX = () => {
   const setSessionMRV = mrvCtx.setSessionMRV;
   const nodeNav = useNodeNav();
 
-  const refNavNode = navNode({});
 
   return (
     <main>

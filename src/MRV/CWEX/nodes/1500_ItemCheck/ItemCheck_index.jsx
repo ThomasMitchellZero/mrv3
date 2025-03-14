@@ -1,5 +1,5 @@
-import { dsProduct_session } from "../../../mrv_data_types";
 
+import { dsMoney } from "../../../mrv_data_types";
 
 function ItemCheck() {
 

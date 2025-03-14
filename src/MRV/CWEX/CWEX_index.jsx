@@ -21,23 +21,6 @@ function CWEX() {
 
 export { CWEX };
 
-function StoreExchanges() {
-  const [sessionMRV, setSessionMRV] = useImmer(baseStateSTRX());
-
-  return (
-    <section className={`mrv STRX_top`}>
-      <Outlet
-        context={{
-          sessionMRV,
-          setSessionMRV,
-        }}
-      />
-    </section>
-  );
-}
-
-export { StoreExchanges };
-
 /*
 
 

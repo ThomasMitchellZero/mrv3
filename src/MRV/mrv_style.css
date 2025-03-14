@@ -1,11 +1,13 @@
-@font-face {
-  font-family: "Fellix-Regular";
-  src: url("../../assets/fonts/fellix/Fellix-Regular.otf") format("opentype");
-}
+
 
 @font-face {
   font-family: "Fellix-Medium";
   src: url("../../assets/fonts/fellix/Fellix-Medium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Fellix-Regular";
+  src: url("../../assets/fonts/fellix/Fellix-Regular.otf") format("opentype");
 }
 
 @font-face {

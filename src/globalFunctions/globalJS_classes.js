@@ -1,7 +1,6 @@
 //---- Product ----
 
 import { cloneDeep } from "lodash";
-import { act } from "react";
 
 class moneyObj {
   constructor({
