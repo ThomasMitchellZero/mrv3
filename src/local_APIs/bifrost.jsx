@@ -1,4 +1,4 @@
-
+import { dsProduct_bifrost } from "../MRV/mrv_data_types";
 
 import React from "react";
 
@@ -38,6 +38,11 @@ import {
 } from "../globalFunctions/globalJS_classes";
 
 const BifrostAPI = React.createContext({
+
+    "3300" : dsProduct_bifrost({
+        sKey: "3300",
+        sImgKey: paintstick,
+    }),
   
   100: {
     img: faucet_img,

@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom";
-import { useNodeNav } from "../../../mrv_logic";
+import { useNodeNav } from "../../../mrv_controller";
 import { navNode } from "../../../mrv_data_types";
 
 const StartCWEX = () => {

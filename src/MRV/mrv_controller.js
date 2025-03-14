@@ -13,9 +13,8 @@ const centsToDollars = (priceInCents = 4200) => {
 export { centsToDollars };
 
 const greenify = (numberVal) => {
-  // This JUST returns a class.  Not the number, not a UI element.  Just a class.
+  // This JUST returns a CSS class.  Not the number, not a UI element.  Just a class.
   const isNeg = typeof numberVal === "number" && numberVal < 0;
-
   return isNeg ? "color__green__text" : "";
 };
 
@@ -25,16 +24,19 @@ export { greenify };
 ////////             Data Handlers                   
 /////////////////////////////////////////////////////////////////
 
-function keymaker({  }) {
-    // need an array of props to consider in the key.
-    // Get the value of each prop and concatenate them into the key.
-    // Cumulativity?
-    // What to do if the key sources are coming from multiple objects?
-    // What if the key sources are nested?
-    // what if key values are empty?  Because that can definitely happen.  
-    
-    // Kinda feels like keygen needs to follow the creation of an object rather than precede it.
+function keymaker({ aDistinctKeys = [], oObjectToKey = {} }) {
+
+    let sOutKey = "";
+    for (const thisKey of aDistinctKeys) {
+        const thisVal = oKeyObj[thisKey];
+        let sOutSegment = thisVal || `NONE`;
+        sOutSegment += `{${thisKey}_${sOutSegment}__}`;
+    }
+    return sOutKey; 
 }
+
+export { keymaker };
+
 
 /////////////////////////////////////////////////////////////////
 ////////             Node Navigation                     

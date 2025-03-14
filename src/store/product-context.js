@@ -28,15 +28,12 @@ import washer_2_img from "../assets/product-images/washer_2.png";
 import { MdSubdirectoryArrowRight } from "react-icons/md";
 import walloutlet from "../assets/product-images/walloutlet.png";
 import paintstick from "../assets/product-images/paintstick.png";
-import windowscraper from "../assets/product-images/windowscraper.png"; 
+import windowscraper from "../assets/product-images/windowscraper.png";
 import lifetime_warranty from "../assets/product-images/lifetime_warranty.png";
-import {
-  Product,
-} from "../globalFunctions/globalJS_classes";
+
+import { dsProduct_bifrost } from "../MRV/mrv_data_types";  
 
 const ProductContext = React.createContext({
-
-  
   100: {
     img: faucet_img,
     price: 5599,
@@ -185,7 +182,6 @@ const ProductContext = React.createContext({
     itemNum: "3333",
     modelNum: "3YY",
     description: "3 Year LPP",
-
   }),
 
   9900: new Product({
@@ -242,7 +238,6 @@ const ProductContext = React.createContext({
     description: "Bosch 4.5-cu ft. High Efficiency Washing Machine",
     inStock: 99,
     dcLocations: ["BBB"],
-
   }),
 
   20110: new Product({
@@ -266,7 +261,6 @@ const ProductContext = React.createContext({
     restockFee: 0.2,
     inStock: 99,
     dcLocations: ["BBB"],
-
   }),
 
   20210: new Product({
@@ -280,7 +274,6 @@ const ProductContext = React.createContext({
     restockFee: 0.2,
     inStock: 99,
     dcLocations: ["BBB"],
-
   }),
 
   20900: new Product({
@@ -291,7 +284,6 @@ const ProductContext = React.createContext({
     description: "8-inch Diamater Galvanized Steel Duct Clamp",
     inStock: 99,
     dcLocations: ["BBB"],
-
   }),
 
   20910: new Product({
@@ -302,7 +294,6 @@ const ProductContext = React.createContext({
     description: "8-Inch x 36-Inch Flexible Dryer Duct",
     inStock: 99,
     dcLocations: ["BBB"],
-
   }),
 
   20920: new Product({
@@ -313,7 +304,6 @@ const ProductContext = React.createContext({
     description: "1/4” x 48” steel-braided hose",
     inStock: 99,
     dcLocations: ["BBB"],
-
   }),
 
   20333: new Product({
@@ -322,7 +312,6 @@ const ProductContext = React.createContext({
     itemNum: "20333",
     modelNum: "3YY",
     description: "3 Year LPP",
-
   }),
 
   3300: new Product({
@@ -338,7 +327,8 @@ const ProductContext = React.createContext({
     price: 1499,
     itemNum: "4400",
     modelNum: "DR3345",
-    description: "Eaton Arrow Hart 15-Amp 125-volt Residential / Commercial Duplex Outlet, Gray",
+    description:
+      "Eaton Arrow Hart 15-Amp 125-volt Residential / Commercial Duplex Outlet, Gray",
   }),
 
   5500: new Product({

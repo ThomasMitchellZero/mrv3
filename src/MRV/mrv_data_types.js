@@ -1,5 +1,4 @@
-import { cloneDeep } from "lodash";
-import { useNavigate } from "react-router";
+
 
 // Shared parameter schema
 
@@ -29,26 +28,30 @@ function dsMoney(params = {}) {
     //destructuring assignment just assigns the values of the object to the object keys with the same name.
     { ...sharedParamsSchema, ...params }; // If the object doesn't have a key with the same name, it assigns the default value from sharedParamsSchema.
 
-  return {
-    // this returns the object with the keys of the same name and their values.  Since these are the only keys assigned, no other keys from sharedParamsSchema are present in the return object.
-    iUnitBaseValue,
-    iUnitTax,
-  };
+    const outObj = {
+      iUnitBaseValue,
+      iUnitTax,
+    };
+
+  return outObj;
 }
 
 export { dsMoney };
 
 function dsProduct_input(params = {}) {
-  const { sKey, iQty, sBifrostKey, sProxyKey } = {
+  const { sKey, iQty, sItemNum, sBifrostKey, sProxyKey } = {
     ...sharedParamsSchema,
     ...params,
   };
-  return {
+  const outObj = {
     sKey,
     iQty,
-    sBifrostKey,
+    sItemNum,
+    sBifrostKey: sBifrostKey || sItemNum,
     sProxyKey,
   };
+  return outObj;
+
 }
 
 export { dsProduct_input };
