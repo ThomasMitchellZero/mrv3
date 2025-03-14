@@ -1,18 +1,22 @@
 
+@font-face {
+  font-family: "Fellix-Black";
+  src: url("../assets/fonts/fellix/Fellix-Black.otf");
+}
 
 @font-face {
   font-family: "Fellix-Medium";
-  src: url("../../assets/fonts/fellix/Fellix-Medium.otf") format("opentype");
+  src: url("../assets/fonts/fellix/Fellix-Medium.otf") format("opentype");
 }
 
 @font-face {
   font-family: "Fellix-Regular";
-  src: url("../../assets/fonts/fellix/Fellix-Regular.otf") format("opentype");
+  src: url("../assets/fonts/fellix/Fellix-Regular.otf") format("opentype");
 }
 
 @font-face {
   font-family: "Fellix-Bold";
-  src: url("../../assets/fonts/fellix/Fellix-Bold.otf") format("opentype");
+  src: url("../assets/fonts/fellix/Fellix-Bold.otf") format("opentype");
 }
 
 .mrv_style {
