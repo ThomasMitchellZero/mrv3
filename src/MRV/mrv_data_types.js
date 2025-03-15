@@ -1,18 +1,32 @@
-
-
 // Shared parameter schema
 
+import { saleRecordTypes } from "../globalFunctions/globalJS_classes";
+
 const sharedParamsSchema = {
-  iUnitBaseValue: 0,
-  iUnitTax: 0,
+  // universal parameters
   sKey: "",
   iQty: 0,
+
+  // money parameters
+  iUnitBaseValue: 0,
+  iUnitTax: 0,
+
+  // product parameters
   sBifrostKey: "",
   sProxyKey: "",
   sItemNum: "",
   sModelNum: "",
   sImgKey: "no-image",
   sDescription: "NO DESCRIPTION",
+
+  // return reason parameters
+  sReturnReason: "",
+
+
+  // sale record parameters
+  sInvoNum: "",
+  sRecordType: "",
+  oItemsSold: {},
 };
 
 export { sharedParamsSchema };
@@ -21,74 +35,87 @@ export { sharedParamsSchema };
 ////    Input Data Structures
 /////////////////////////////////////////////////////////////
 
-function dsMoney(params = {}) {
+function dMoney(params = {}) {
   // single object parameter
 
+  //destructuring assignment >> fewer const declarations.
   let { iUnitBaseValue, iUnitTax } =
-    //destructuring assignment just assigns the values of the object to the object keys with the same name.
-    { ...sharedParamsSchema, ...params }; // If the object doesn't have a key with the same name, it assigns the default value from sharedParamsSchema.
+    //  shared parameter schema & defaults unless overridden by params.
+    { ...sharedParamsSchema, ...params };
 
-    const outObj = {
-      iUnitBaseValue,
-      iUnitTax,
-    };
-
-  return outObj;
-}
-
-export { dsMoney };
-
-function dsProduct_input(params = {}) {
-  const { sKey, iQty, sItemNum, sBifrostKey, sProxyKey } = {
-    ...sharedParamsSchema,
-    ...params,
-  };
+  // return obj lets me auto-assign default values as needed.
   const outObj = {
-    sKey,
-    iQty,
-    sItemNum,
-    sBifrostKey: sBifrostKey || sItemNum,
-    sProxyKey,
+    iUnitBaseValue,
+    iUnitTax,
   };
-  return outObj;
 
+  return outObj;
 }
 
-export { dsProduct_input };
+export { dMoney };
 
 /////////////////////////////////////////////////////////////
 ////    Session Data Structures (for derived data)
 /////////////////////////////////////////////////////////////
 
-function dsProduct_session(params = {}) {
-  return {
-    ...dsProduct_input(params),
-    ...dsMoney(params),
+function dProduct(params = {}) {
+  const { sKey, iQty, sItemNum, sBifrostKey, sProxyKey, sInvoNum, sReturnReason } = {
+    ...sharedParamsSchema,
+    ...params,
   };
+  const outObj = {
+    sKey: sKey || sItemNum,
+    iQty,
+    sItemNum,
+    sBifrostKey: sBifrostKey || sItemNum,
+    sProxyKey,
+    sReturnReason,
+    sInvoNum,
+    ...dMoney(params),
+  };
+  return outObj;
 }
 
-export { dsProduct_session };
+export { dProduct };
 
 /////////////////////////////////////////////////////////////
 ////    Mock Server Data Types
 /////////////////////////////////////////////////////////////
 
-function dsProduct_bifrost(params = {}) {
+function dProduct_bifrost(params = {}) {
   const { sKey, sImgKey, sDescription, sModelNum, sItemNum } = {
     ...sharedParamsSchema,
     ...params,
   };
-
-  return {
+  const outObj = {
     sKey,
     sImgKey,
     sDescription,
     sModelNum,
     sItemNum,
+    ...dMoney(params),
   };
+  return outObj;
 }
 
-export { dsProduct_bifrost };
+export { dProduct_bifrost };
+
+function dSaleRecord(params = {}) {
+  const { sKey, sInvoNum, sRecordType, oItemsSold } = {
+    ...sharedParamsSchema,
+    ...params,
+  };
+  const outObj = {
+    sKey: sKey || sInvoNum,
+    sRecordType,
+    sInvoNum,
+    oItemsSold,
+  };
+
+  return outObj;
+}
+
+export { dSaleRecord };
 
 //// App Logic Objects
 

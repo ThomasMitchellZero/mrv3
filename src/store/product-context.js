@@ -31,7 +31,6 @@ import paintstick from "../assets/product-images/paintstick.png";
 import windowscraper from "../assets/product-images/windowscraper.png";
 import lifetime_warranty from "../assets/product-images/lifetime_warranty.png";
 
-import { dsProduct_bifrost } from "../MRV/mrv_data_types";  
 
 const ProductContext = React.createContext({
   100: {
