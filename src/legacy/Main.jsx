@@ -1,8 +1,8 @@
 import classes from "./Main.module.css";
 
 import { NavLink, Outlet } from "react-router-dom";
+import pagoda from "../assets/lowes-logo.svg";
 
-import pagoda from "../../../assets/lowes-logo.svg"
 
 const Main = () => {
   const linkStyle = ({ isActive }) =>
@@ -24,9 +24,6 @@ const Main = () => {
         </NavLink>
         <NavLink to="cwex" className={linkStyle}>
           Store Exchanges
-        </NavLink>
-        <NavLink to="xdt-exchanges" className={linkStyle}>
-          XDT Exchanges
         </NavLink>
         <NavLink to="test" className={linkStyle}>
           Tests

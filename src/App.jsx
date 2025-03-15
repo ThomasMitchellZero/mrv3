@@ -1,8 +1,7 @@
-
 import { Route, Routes } from "react-router-dom";
 
 // Global
-import Main from "./components/UI/PageLayout/Main";
+import Main from "./legacy/Main";
 import Placeholder from "./Sections/Placeholder/Placeholder";
 
 //CWEX
@@ -11,8 +10,6 @@ import { StartCWEX } from "./MRV/CWEX/nodes/1000_StartCEWX/StartCWEX_index";
 import { ItemCheck } from "./MRV/CWEX/nodes/1500_ItemCheck/ItemCheck_index";
 
 ///////////// Deprecate all these once no longer needed ////////////////
-
-
 
 //Store Exchanges
 
@@ -23,13 +20,18 @@ function App() {
         <Route path="/" element={<Main />}>
           <Route index element={<Placeholder titleText="Home" />} />
           <Route path="home" element={<Placeholder titleText="Home" />} />
-          <Route path="orders" element={<Placeholder titleText="Orders" />} />
+          <Route path="returns" element={<Placeholder titleText="Returns" />} />
+          <Route
+            path="exchanges"
+            element={<Placeholder titleText="Exchanges" />}
+          />
 
           {/* CWEX */}
           <Route path="cwex" element={<CWEX />}>
             <Route index element={<StartCWEX />} />
             <Route path="item-check" element={<ItemCheck />} />
           </Route>
+          <Route path="test" element={<Placeholder titleText="Tests" />} />
         </Route>
       </Routes>
     </div>
