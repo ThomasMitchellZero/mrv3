@@ -28,7 +28,7 @@ function keymaker({ aDistinctKeys = [], oObjectToKey = {} }) {
 
     let sOutKey = "";
     for (const thisKey of aDistinctKeys) {
-        const thisVal = oKeyObj[thisKey];
+        const thisVal = oObjectToKey?.[thisKey];
         let sOutSegment = thisVal || `NONE`;
         sOutSegment += `{${thisKey}_${sOutSegment}__}`;
     }

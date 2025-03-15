@@ -1,4 +1,3 @@
-
 @font-face {
   font-family: "Fellix-Black";
   src: url("../assets/fonts/fellix/Fellix-Black.otf");
@@ -19,7 +18,27 @@
   src: url("../assets/fonts/fellix/Fellix-Bold.otf") format("opentype");
 }
 
-.mrv_style {
+@layer L0, L1;
+
+
+
+@layer L0 {
+  .testBox {
+    display: flex;
+    width: 8rem;
+    height: 8rem;
+    background-color: red;
+  }
+}
+
+@layer L1 {
+  .blueBox {
+    background-color: blue;
+  }
+}
+
+
+.mrv3 {
   display: flex;
   flex-direction: column;
   flex: 1 1 0rem;
@@ -82,20 +101,6 @@
   --color__ribbon__critical: #fbdee3;
   --color__ribbon__info: #d4ebfe;
   --color__ribbon__success: #ebfce3;
-
-  .divider {
-    display: flex;
-    background-color: var(--color__border);
-
-    &.horizontal {
-      height: 1px;
-      width: 100%;
-    }
-    &.vertical {
-      height: 100%;
-      width: 1px;
-    }
-  }
 
   & .color__surface__subdued {
     background-color: var(--color__surface__subdued);
@@ -248,17 +253,23 @@
     min-width: 0;
   }
 
-  & .panel30__section__label {
-    font-weight: 500;
-    font-size: 0.875rem;
-    line-height: 1.5rem;
-    color: var(--color__tertiary);
-    width: 100%;
-  }
-
   /* &&&&&&&&&&&&    UI ELEMENT STYLES   &&&&&&&&&&&&&&*/
 
   /* ---- MRV Containers ---- */
+
+  .divider {
+    display: flex;
+    background-color: var(--color__border);
+
+    &.horizontal {
+      height: 1px;
+      width: 100%;
+    }
+    &.vertical {
+      height: 100%;
+      width: 1px;
+    }
+  }
 
   & .hBox {
     display: flex;
@@ -303,14 +314,6 @@
 
     & .mrvPanel__side {
       height: 100%;
-      flex: 0 0 var(--primaryColumn);
-      display: flex;
-      flex-direction: column;
-      min-width: 0rem;
-    }
-
-    & .mrvSidesheet {
-      height: 100%;
       width: 25%;
       display: flex;
       flex-direction: column;
@@ -333,7 +336,7 @@
       justify-content: center;
     }
 
-    & .main_content {
+    & .body {
       padding: var(--PrimaryPadding__vertical) 0rem;
       flex: 1 1 0rem;
       display: flex;
@@ -343,85 +346,24 @@
       overflow-y: auto;
     }
 
-    & .footer_text {
-      flex: 0 0 auto;
-      padding: 0rem;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-end;
-      & p {
-        text-align: center;
-      }
-    }
-
-    & .footer_content {
+    & .footer {
       flex: 0 0 7rem;
       padding-top: var(--PrimaryPadding__vertical);
       justify-content: flex-end;
       display: flex;
       flex-direction: row;
     }
-
-    /* ---- Utility ---- */
-
-    & .cardContainer {
-      box-sizing: border-box;
-      flex: 1 1 0rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      width: 100%;
-    }
-
-    /* this should ONLY be used to mimic the 25% column in the main/70 panel.*/
-    & .buttonBox {
-      height: 100%;
-      flex: 0 0 var(--primaryColumn);
-      display: flex;
-      flex-direction: column;
-      padding: 0rem 0rem 0rem var(--PrimaryPadding__horizontal);
-    }
-
-    /* same but more descriptive b/c I don't want to hunt for the other one..*/
-    & .buttonBox25 {
-      height: 100%;
-      width: var(--primaryColumn);
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 0rem 0rem 0rem var(--PrimaryPadding__horizontal);
-      justify-content: center;
-    }
-
-    & .continueBtnBox {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 33%;
-      padding: 0rem 0rem 0rem var(--PrimaryPadding__horizontal);
-
-      & div {
-        display: flex;
-        flex-direction: row;
-        padding-top: 0.24rem;
-        align-items: center;
-        justify-content: center;
-      }
-    }
   }
 
-  & .mrvPage .border__left {
-    border-left: var(--standardBorder);
-  }
+  /* ---- Utility ---- */
 
-  & .mrvPage .border__right {
-    border-right: var(--standardBorder);
-  }
-
-  & .mrvPage .blankback {
-    background-color: transparent;
+  & .cardContainer {
+    box-sizing: border-box;
+    flex: 1 1 0rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
   }
 
   /* ---- MRV BUTTON STYLES ---- */
@@ -449,21 +391,8 @@
 
     cursor: pointer;
 
-    &:disabled {
-      opacity: 25%;
-      cursor: not-allowed;
-
-      &:hover {
-        opacity: 25%;
-      }
-    }
-
     &:hover {
       opacity: 80%;
-    }
-
-    &.padding__0 {
-      padding: 0rem;
     }
 
     &.primary {
@@ -482,14 +411,6 @@
       color: var(--color__interactive);
       border-color: transparent;
       background-color: transparent;
-
-      &.disabled {
-        color: var(--color__tertiary);
-      }
-      &.selected {
-        border-bottom: 0.125rem solid var(--color__interactive);
-        background-color: var(--color__card__selected);
-      }
     }
 
     &.jumbo {
@@ -497,33 +418,12 @@
       font-size: 1.75rem;
     }
 
-    &.continueBtn {
-      font-size: 1.75rem;
-      flex: 1 1 0rem;
-      width: 100%;
-    }
-
-    &.miniBtn {
+    &.mini {
       height: 2.5rem;
       font-size: 1rem;
       padding: 0rem 0.5rem;
       gap: 0.125rem;
       border-radius: 0rem;
-
-      &.padding__0 {
-        padding: 0rem;
-      }
-    }
-
-    &.fullWidth {
-      flex: 1 1 0rem;
-    }
-
-    &.focused {
-      color: var(--color__primary__inverse);
-      background-color: var(--color__interactive__pressed);
-      border: calc(3rem / 16) solid white;
-      outline: calc(3rem / 16) solid var(--color__interactive__pressed);
     }
 
     &.chip {
@@ -548,10 +448,10 @@
         color: var(--color__white);
       }
     }
+
     &.tab {
       height: 3.5rem;
       background-color: transparent;
-      font-weight: 500;
       font-size: 1.25rem;
       line-height: 2rem;
       color: var(--color__tertiary);
@@ -566,21 +466,7 @@
         border-bottom: 0.125rem solid var(--color__interactive);
         background-color: var(--color__card__selected);
       }
-
-      &.body__small {
-        font-size: 1rem;
-        line-height: 1.5rem;
-      }
     }
-  }
-
-  & .actionBtn {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1rem;
   }
 
   & .tabCtnr {
@@ -629,28 +515,9 @@
     }
   }
 
-  & .qtyInputPlusMinusCtnr {
-    display: flex;
-    flex: 0 0 auto;
-    flex-direction: row;
-    gap: 0.125rem;
-    min-width: 0rem;
-
-    & input {
-      width: 5rem;
-    }
-
-    & button {
-      width: 4rem;
-      height: 4rem;
-      font-size: 2.5rem;
-      font-family: "Fellix-Medium";
-    }
-  }
-
   /* ---- MRV CARD STYLES ---- */
 
-  & .cardStyle {
+  & .card {
     /* more specific flex in additional class, since we can't know what's needed in advance*/
     --dropShadow__01: 0px 2px 2px 0px #00000012;
     background-color: var(--color__surface__default);
@@ -667,27 +534,6 @@
     &.error {
       background-color: var(color__red__inverse);
       border-color: var(--color__red);
-    }
-
-    &.selected {
-      background-color: var(--color__card__selected);
-      border-color: var(--color__interactive);
-
-      &:hover {
-        background-color: var(--color__card__selected__hover);
-      }
-    }
-  }
-
-  & .subCardStyle {
-    background-color: var(--color__surface__default);
-    border-radius: var(--radius__small);
-    box-sizing: border-box;
-    border: calc(3rem / 32) solid var(--color__border__subdued);
-    padding: 0.5rem 1rem;
-
-    &:hover {
-      background-color: var(--color__card__hover);
     }
 
     &.selected {
@@ -729,68 +575,6 @@
     }
   }
 
-  /* ---- MRV TABLE STYLES ---- */
-
-  & table {
-    background-color: transparent;
-    table-layout: fixed;
-  }
-
-  & .tableContainer {
-    display: flex;
-    flex: 1 1 0rem;
-    flex-direction: column;
-    box-sizing: border-box;
-    width: 100%;
-    overflow-y: auto;
-  }
-
-  & tr {
-    border: unset;
-    border-top: var(--primaryBorder);
-  }
-
-  & table .tdCenter {
-    text-align: center;
-  }
-
-  & thead {
-    height: 3rem;
-    background-color: #f5f5f5;
-  }
-
-  & thead.clear {
-    background-color: transparent;
-  }
-
-  & thead > tr {
-    border-radius: var(--radius__medium) var(--radius__medium) 0rem 0rem;
-    border: var(--clearBorder);
-  }
-
-  & td {
-    padding: 1rem 0rem 1rem var(--tablePadding__horizontal);
-    color: var(--color__primary);
-  }
-
-  & th {
-    font-size: 1rem;
-    font-weight: 600;
-    padding-left: var(--tablePadding__horizontal);
-  }
-
-  & tbody tr.active {
-    background-color: var(--color__card__selected);
-  }
-
-  & tbody tr:hover {
-    background-color: var(--color__card__hover);
-  }
-
-  & tbody tr.active:hover {
-    background-color: var(--color__card__selected__hover);
-  }
-
   /* ----Not literally tables, but table-like ---- */
 
   & .columnTitle {
@@ -822,33 +606,24 @@
     }
   }
 
-  /* ---- MRV RADIO INPUT STYLES ---- */
-
-  & label.radio {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-    flex: 0 0 2.5rem;
-    width: 100%;
-  }
-
-  & .radio input {
-    flex: 0 0 1rem;
-    height: 1rem;
-    margin: 0rem;
-  }
-
-  & .radio p {
-    color: var(--color__primary);
-  }
-
-  & input[type="radio" i]:focus-visible {
-    outline-offset: 0rem;
-    outline: none 0rem transparent;
-  }
-
   /* ---- Utility Classes ----*/
+
+  & .test1 {
+    background-color: red;
+  }
+  & .test3 {
+    background-color: orange;
+  }
+  &#m {
+    & .test3 {
+      background-color: yellow;
+    }
+  }
+  &.o.d.s {
+    & .test4 {
+      background-color: var(--color__surface__subdued);
+    }
+  }
 
   & .padding__vertical {
     padding-top: var(--PrimaryPadding__vertical);
@@ -982,5 +757,83 @@
     backdrop-filter: blur(0.5rem);
     display: flex;
     z-index: 13; /* Ensure it overlays the contents  #17191f16; */
+  }
+}
+
+/*****************************************************************************/
+/*******                 NOT VALIDATED                     *******************/
+/*****************************************************************************/
+.nv {
+  & .qtyInputPlusMinusCtnr {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    gap: 0.125rem;
+    min-width: 0rem;
+
+    & input {
+      width: 5rem;
+    }
+
+    & button {
+      width: 4rem;
+      height: 4rem;
+      font-size: 2.5rem;
+      font-family: "Fellix-Medium";
+    }
+  }
+
+  /* same but more descriptive b/c I don't want to hunt for the other one..*/
+  & .buttonBox25 {
+    height: 100%;
+    width: var(--primaryColumn);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0rem 0rem 0rem var(--PrimaryPadding__horizontal);
+    justify-content: center;
+  }
+
+  & .continueBtnBox {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 33%;
+    padding: 0rem 0rem 0rem var(--PrimaryPadding__horizontal);
+
+    & div {
+      display: flex;
+      flex-direction: row;
+      padding-top: 0.24rem;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  /* ---- MRV RADIO INPUT STYLES ---- */
+
+  & label.radio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 0 0 2.5rem;
+    width: 100%;
+  }
+
+  & .radio input {
+    flex: 0 0 1rem;
+    height: 1rem;
+    margin: 0rem;
+  }
+
+  & .radio p {
+    color: var(--color__primary);
+  }
+
+  & input[type="radio" i]:focus-visible {
+    outline-offset: 0rem;
+    outline: none 0rem transparent;
   }
 }
