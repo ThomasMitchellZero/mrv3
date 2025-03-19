@@ -288,7 +288,7 @@
         height: 100%;
         display: flex;
         flex-direction: column;
-        padding: var(--PrimaryPadding__both);
+        padding: 0rem var(--PrimaryPadding__horizontal);
       }
 
       & .mrvPanel__side {
@@ -308,11 +308,11 @@
 
       /* ---- Row Sizes ---- */
       & .header {
-        flex: 0 0 5rem;
+        flex: 0 0 auto;
         display: flex;
         flex-direction: row;
         align-items: flex-end;
-        justify-content: center;
+        padding: var(--PrimaryPadding__vertical) 0rem;
       }
 
       & .body {

@@ -1,5 +1,6 @@
 import { useOutletContext } from "react-router-dom";
 import { useNodeNav } from "../../../../mrv_controller";
+import { HeaderMRV } from "../../../../components/layout/header/HeaderMRV";
 
 const StartCWEX = () => {
   const mrvCtx = useOutletContext();
@@ -10,16 +11,14 @@ const StartCWEX = () => {
   return (
     <main className={`mrvPage`}>
       <div className={`mrvPanel__main `}>
-        <h1>StartSTRX</h1>
-        <div className={`vBox align__center`}>
-          <button className={`primary`} onClick={() => nodeNav("itemCheck")}>
-            CWEX Test 1
-          </button>
+        <HeaderMRV title={"Start Carry With Exchanges"} />
+        <div className={`body`}>
+          <div className={`vBox align__center`}>
+            <button className={`primary`} onClick={() => nodeNav("itemCheck")}>
+              CWEX Test 1
+            </button>
+          </div>
         </div>
-
-        <div className="testBox"></div>
-        <div className="testBox redBox"></div>
-        <div className="testBox redBox blueBox"></div>
       </div>
     </main>
   );
