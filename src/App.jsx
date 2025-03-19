@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 // Global
 import Main from "./legacy/Main";
 import Placeholder from "./Sections/Placeholder/Placeholder";
+import "./App.css";
 
 //CWEX
 import { CWEX } from "./MRV/apps/CWEX/CWEX_index";

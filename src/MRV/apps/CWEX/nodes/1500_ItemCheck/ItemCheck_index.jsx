@@ -11,7 +11,7 @@ function ItemCheck() {
   const saleCtx = useContext(SaleRecordsAPI);  
 
   return (
-    <main>
+    <main className={`mrvPage`}>
       <h1>Item Check</h1>
     </main>
   );

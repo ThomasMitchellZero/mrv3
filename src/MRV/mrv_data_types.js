@@ -1,6 +1,5 @@
 // Shared parameter schema
 
-import { saleRecordTypes } from "../globalFunctions/globalJS_classes";
 
 const sharedParamsSchema = {
   // universal parameters

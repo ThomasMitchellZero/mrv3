@@ -8,12 +8,19 @@ const StartCWEX = () => {
   const nodeNav = useNodeNav();
 
   return (
-    <main>
-      <h1>StartSTRX</h1>
-      <button onClick={() => nodeNav("itemCheck")}>Test</button>
-      <div className="testBox"></div>
-      <div className="testBox redBox"></div>
-      <div className="testBox redBox blueBox"></div>
+    <main className={`mrvPage`}>
+      <div className={`mrvPanel__main `}>
+        <h1>StartSTRX</h1>
+        <div className={`vBox align__center`}>
+          <button className={`primary`} onClick={() => nodeNav("itemCheck")}>
+            CWEX Test 1
+          </button>
+        </div>
+
+        <div className="testBox"></div>
+        <div className="testBox redBox"></div>
+        <div className="testBox redBox blueBox"></div>
+      </div>
     </main>
   );
 };
