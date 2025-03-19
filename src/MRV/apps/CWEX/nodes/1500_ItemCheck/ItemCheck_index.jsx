@@ -1,19 +1,14 @@
 
 
-import { bifrostAPI } from "../../../../local_APIs/bifrost";
-import { SaleRecordsAPI } from "../../../../local_APIs/sale_records";
+import { bifrostAPI } from "../../../../../local_APIs/bifrost";
+import { SaleRecordsAPI } from "../../../../../local_APIs/sale_records";
 import { useOutlet, useOutletContext } from "react-router-dom";
 import { useContext } from "react";
 
 function ItemCheck() {
 
   const productCtx = useContext(bifrostAPI);
-  const saleCtx = useContext(SaleRecordsAPI);
-  console.log(saleCtx["888111"].oItemsSold);
-
-  console.log(productCtx["3300"]);
-  
-
+  const saleCtx = useContext(SaleRecordsAPI);  
 
   return (
     <main>

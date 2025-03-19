@@ -5,9 +5,9 @@ import Main from "./legacy/Main";
 import Placeholder from "./Sections/Placeholder/Placeholder";
 
 //CWEX
-import { CWEX } from "./MRV/CWEX/CWEX_index";
-import { StartCWEX } from "./MRV/CWEX/nodes/1000_StartCEWX/StartCWEX_index";
-import { ItemCheck } from "./MRV/CWEX/nodes/1500_ItemCheck/ItemCheck_index";
+import { CWEX } from "./MRV/apps/CWEX/CWEX_index";
+import { StartCWEX } from "./MRV/apps/CWEX/nodes/1000_StartCEWX/StartCWEX_index";
+import { ItemCheck } from "./MRV/apps/CWEX/nodes/1500_ItemCheck/ItemCheck_index";
 
 ///////////// Deprecate all these once no longer needed ////////////////
 
