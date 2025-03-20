@@ -8,10 +8,13 @@ const StartCWEX = () => {
   const setSessionMRV = mrvCtx.setSessionMRV;
   const nodeNav = useNodeNav();
 
+  console.log(sessionMRV);
+  console.log(sessionMRV.oNavNodes);
+
   return (
     <main className={`mrvPage`}>
       <div className={`mrvPanel__main `}>
-        <HeaderMRV title={"Start Carry With Exchanges"} />
+        <HeaderMRV title={"Start Carry With Exchanges"}/>
         <div className={`body`}>
           <div className={`vBox align__center`}>
             <button className={`primary`} onClick={() => nodeNav("itemCheck")}>

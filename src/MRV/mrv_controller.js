@@ -70,21 +70,21 @@ function useNodeNav() {
     const outNavNodesObj = outSessionState.oNavNodes;
 
     // all nodes prior to the target remain enabled.
-    let nodeAfterTarget = false;
+    let nodeBeforeTarget = true;
 
     // Nodes preceeding target get enabled to permit back-nav, nodes following get disabled.
     for (const thisNode of Object.values(outNavNodesObj)) {
-      thisNode.selected = false; // deselect all nodes.  Active node will be reselected later.
-      thisNode.disabled = nodeAfterTarget; // deactivate all nodes
+      thisNode.isCurrent = false; // Set all as not current.  Current node will be marked true later.
+      thisNode.isActive = nodeBeforeTarget; // all nodes preceeding target are active to permit back-nav.
 
-      // once target node is reached, flip bool so all subequent nodes are disabled.
+      // once target node is reached, flip bool so all subequent nodes are inactive.
       if (thisNode.keyStr === targetNodeKey) {
-        nodeAfterTarget = true;
+        nodeBeforeTarget = false;
       }
     }
 
     // activate the target node and make it available.
-    outNavNodesObj[targetNodeKey].selected = true;
+    outNavNodesObj[targetNodeKey].isCurrent = true;
 
     // ensure all automatic derivations are up-to-date.
     outSessionState = mrvAutoDeriver({ sessionState: outSessionState });

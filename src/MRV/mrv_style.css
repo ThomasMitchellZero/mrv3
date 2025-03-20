@@ -447,6 +447,13 @@
           background-color: var(--color__card__selected);
         }
       }
+
+      &.nav {
+        height: 3rem;
+        background-color: transparent;
+        padding: 0rem;
+        border: none;
+      }
     }
 
     & .tabCtnr {
@@ -585,7 +592,6 @@
         align-items: center;
       }
     }
-
   }
 }
 /************************************************************/

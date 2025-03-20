@@ -1,0 +1,18 @@
+.mrv3 {
+  & .header__mrv {
+    
+    & .navBtn {
+      height: 3rem;
+      background-color: transparent;
+      padding: 0rem;
+      border: none;
+    }
+
+    & .nodeBtn{
+        height: 3rem;
+        background-color: transparent;
+        padding: 0rem;
+        border: none;
+    }
+  }
+}

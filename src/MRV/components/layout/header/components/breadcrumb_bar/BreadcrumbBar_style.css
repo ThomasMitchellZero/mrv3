@@ -1,0 +1,20 @@
+
+.mrv3 {
+
+    & .breadcrumbBar{
+
+        & .crumbBtn{
+            height: 3rem;
+            background-color: transparent;
+            padding: 0rem;
+            border: none;
+
+            & .inactive{
+                color: red;
+            }
+            & .active{
+                color: green;
+            }
+        }
+    }
+}

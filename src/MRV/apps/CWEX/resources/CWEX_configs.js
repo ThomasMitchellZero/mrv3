@@ -1,4 +1,6 @@
 import { baseStateExTurns, navNode } from "../../../mrv_data_types";
+import { useOutletContext } from "react-router-dom";
+
 
 const baseStateCWEX = () => {
   const returnState = baseStateExTurns({
@@ -7,7 +9,6 @@ const baseStateCWEX = () => {
         keyStr: "itemCheck",
         sRoute: "/cwex/item-check",
         sTitle: "Item Check",
-        preloadSessionState: {Fartrell: "Cluggins"},
       }),
       returnPhase: navNode({
         keyStr: "returnPhase",
@@ -20,3 +21,9 @@ const baseStateCWEX = () => {
 };
 
 export { baseStateCWEX };
+
+/////////////////////////////////////////////
+// Component Configs
+/////////////////////////////////////////////
+
+

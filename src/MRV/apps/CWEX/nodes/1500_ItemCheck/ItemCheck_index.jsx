@@ -5,14 +5,16 @@ import { SaleRecordsAPI } from "../../../../../local_APIs/sale_records";
 import { useOutlet, useOutletContext } from "react-router-dom";
 import { useContext } from "react";
 
+import { HeaderMRV } from "../../../../components/layout/header/HeaderMRV";
+
 function ItemCheck() {
 
   const productCtx = useContext(bifrostAPI);
-  const saleCtx = useContext(SaleRecordsAPI);  
+  const saleCtx = useContext(SaleRecordsAPI);
 
   return (
     <main className={`mrvPage`}>
-      <h1>Item Check</h1>
+      <HeaderMRV title={"Item Check"}/>
     </main>
   );
 }

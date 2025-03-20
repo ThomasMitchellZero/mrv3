@@ -122,18 +122,18 @@ function navNode({
   keyStr = "",
   sRoute = "",
   sTitle = "No Title",
-  selected = false,
+  isCurrent = false,
   hasBreadcrumb = false,
-  disabled = true,
+  isActive = false,
   preloadSessionState = {}, // wondering if this should be a function?
 }) {
   return {
     keyStr,
     sRoute,
     sTitle,
-    selected,
+    isActive,
+    isCurrent,
     hasBreadcrumb,
-    disabled,
     preloadSessionState,
   };
 }
