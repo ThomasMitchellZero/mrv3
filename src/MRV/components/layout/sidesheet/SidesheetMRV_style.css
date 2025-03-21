@@ -1,0 +1,11 @@
+.mrv3 {
+  & .sidesheet {
+    & .navBtn {
+      background-color: transparent;
+      flex: 0 0 auto;
+      height: 2.5rem;
+      border: none;
+      padding: 0rem;
+    }
+  }
+}

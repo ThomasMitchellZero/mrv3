@@ -3,8 +3,8 @@ import { SaleRecordsAPI } from "../../../../../local_APIs/sale_records";
 import { useOutlet, useOutletContext } from "react-router-dom";
 import { useContext } from "react";
 
-import { HeaderMRV } from "../../../../components/layout/header/HeaderMRV";
 import { HeaderCWEX } from "../../resources/CWEX_configs";
+import { SidesheetMRV } from "../../../../components/layout/sidesheet/SidesheetMRV";
 
 function ItemCheck() {
   const productCtx = useContext(bifrostAPI);
@@ -15,6 +15,9 @@ function ItemCheck() {
       <div className={`mrvPanel__main `}>
         <HeaderCWEX sPageTitle={"Item Check"} />
       </div>
+      <SidesheetMRV sTitle={"Item Check"} sNavBtn="back">
+        <button>Log Product Context</button>
+      </SidesheetMRV>
     </main>
   );
 }

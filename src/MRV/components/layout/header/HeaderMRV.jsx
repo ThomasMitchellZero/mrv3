@@ -8,7 +8,7 @@ import { BreadcrumbBar } from "./components/breadcrumb_bar/BreadcrumbBar";
 /**
  * HeaderMRV component
  *
- * @param {string} [sAppName="NO APP NAME"] - The name of
+ * @param {string} [sAppName="NO APP NAME"] - The name of the app
  * @param {string} [sPageTitle="NO TITLE"] - The title to display in the header
  * @param {Object|null} [oCustomNavNodes=null] - Replaces default session nav nodes (rarely used)
  * @returns {JSX.Element} The rendered header component

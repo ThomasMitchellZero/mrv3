@@ -177,22 +177,22 @@
 
     /* ---- MRV TEXT STYLES ---- */
 
-    & .heading__small {
-      font-size: 1.5rem;
-      line-height: 2rem;
-      font-family: "Fellix-Medium";
-    }
-
-    & .heading__medium {
-      font-family: "Fellix-Bold";
-      font-size: 2rem;
-      line-height: 2.5rem;
-    }
-
     & .heading__large {
       font-family: "Fellix-Bold";
       font-size: 2.5rem;
       line-height: 3rem;
+    }
+
+    & .heading__medium {
+      font-family: "Fellix-Medium";
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }
+
+    & .heading__small {
+      font-size: 1.5rem;
+      line-height: 2rem;
+      font-family: "Fellix-Medium";
     }
 
     & .body__large {
