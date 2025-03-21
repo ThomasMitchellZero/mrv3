@@ -195,22 +195,26 @@
       line-height: 3rem;
     }
 
-    & .body_medium {
-      font-size: 1.25rem;
-      line-height: 2rem;
-    }
-
     & .body__large {
+      font-family: "Fellix-Regular";
       font-size: 1.5rem;
       line-height: 2rem;
     }
 
+    & .body__medium {
+      font-family: "Fellix-Regular";
+      font-size: 1.25rem;
+      line-height: 2rem;
+    }
+
     & .body__small {
+      font-family: "Fellix-Regular";
       font-size: 1rem;
       line-height: 1.5rem;
     }
 
     & .body__tiny {
+      font-family: "Fellix-Regular";
       font-size: 0.875rem;
       line-height: 1.5rem;
     }
@@ -447,7 +451,6 @@
           background-color: var(--color__card__selected);
         }
       }
-      
     }
 
     & .tabCtnr {

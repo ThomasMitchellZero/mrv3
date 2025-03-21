@@ -8,12 +8,17 @@ import { BreadcrumbBar } from "./components/breadcrumb_bar/BreadcrumbBar";
 /**
  * HeaderMRV component
  *
- * @param {string} [title="NO TITLE"] - The title to display in the header
+ * @param {string} [sAppName="NO APP NAME"] - The name of
+ * @param {string} [sPageTitle="NO TITLE"] - The title to display in the header
  * @param {Object|null} [oCustomNavNodes=null] - Replaces default session nav nodes (rarely used)
  * @returns {JSX.Element} The rendered header component
  */
 
-function HeaderMRV({ title = "NO TITLE", oCustomNavNodes = null }) {
+function HeaderMRV({
+  sAppName = "NO APP NAME",
+  sPageTitle = "NO TITLE",
+  oCustomNavNodes = null,
+}) {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
@@ -26,9 +31,9 @@ function HeaderMRV({ title = "NO TITLE", oCustomNavNodes = null }) {
   return (
     <header className={`header header__mrv`}>
       <div className={`vBox color__primary__text heading__large gap__05rem`}>
-        <BreadcrumbBar oNavNodes={oHeaderNodes} />
+        <BreadcrumbBar sAppName={sAppName} oNavNodes={oHeaderNodes} />
         <div className={`hBox color__primary__text heading__large gap__05rem`}>
-          {title}
+          {sPageTitle}
         </div>
       </div>
     </header>

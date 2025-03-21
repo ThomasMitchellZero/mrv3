@@ -4,7 +4,8 @@
     & .breadcrumbBar{
 
         & .crumbBtn{
-            height: 3rem;
+            color: green;
+            height: 2rem;
             background-color: transparent;
             padding: 0rem;
             border: none;
