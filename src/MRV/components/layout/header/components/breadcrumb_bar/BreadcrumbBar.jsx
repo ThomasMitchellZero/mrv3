@@ -13,15 +13,12 @@ function BreadcrumbBar({ sAppName = "", oNavNodes = {} }) {
       : "inactive";
 
     return (
-      <button className={`crumbBtn ${sStatus}`}>
-        {oThisNode.sTitle}
+      <button className={`crumbBtn body__small ${sStatus}`}>
         <MdChevronRight size={`1.25rem`} />
+        {oThisNode.sTitle}
       </button>
     );
   };
-
-  console.log(oNavNodes);
-
 
   // convert NavNodes to an array and filter for nodes that get breadcrumbs
   const aNavNodes = Object.values(oNavNodes);
@@ -34,10 +31,14 @@ function BreadcrumbBar({ sAppName = "", oNavNodes = {} }) {
 
   // Add the app name to the breadcrumb bar if it exists.
   if (sAppName) {
-    uiNodes.unshift(<div className={`body__small`}>{sAppName}</div>);
+    uiNodes.unshift(
+      <div className={`body__small color__secondary__text bold`}>
+        {sAppName}
+      </div>
+    );
   }
 
-  return <div className={`hBox breadcrumbBar gap__05rem`}>{uiNodes}</div>;
+  return <div className={`hBox breadcrumbBar gap__1rem`}>{uiNodes}</div>;
 }
 
 export { BreadcrumbBar };

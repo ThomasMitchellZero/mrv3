@@ -30,7 +30,7 @@ function HeaderMRV({
 
   return (
     <header className={`header header__mrv`}>
-      <div className={`vBox color__primary__text heading__large gap__05rem`}>
+      <div className={`vBox color__primary__text heading__large gap__0rem`}>
         <BreadcrumbBar sAppName={sAppName} oNavNodes={oHeaderNodes} />
         <div className={`hBox color__primary__text heading__large gap__05rem`}>
           {sPageTitle}

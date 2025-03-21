@@ -1,21 +1,19 @@
-
 .mrv3 {
+  & .breadcrumbBar {
+    & .crumbBtn {
+      color: var(--color__interactive);
+      height: 2rem;
+      background-color: transparent;
+      padding: 0rem;
+      border: none;
 
-    & .breadcrumbBar{
+      &.inactive {
+        color: var(--color__tertiary);
+      }
 
-        & .crumbBtn{
-            color: green;
-            height: 2rem;
-            background-color: transparent;
-            padding: 0rem;
-            border: none;
-
-            & .inactive{
-                color: red;
-            }
-            & .active{
-                color: green;
-            }
-        }
+      &.active {
+        background-color: var(--color__container__selected);
+      }
     }
+  }
 }
