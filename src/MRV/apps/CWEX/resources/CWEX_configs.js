@@ -14,6 +14,7 @@ const baseStateCWEX = () => {
         keyStr: "returnPhase",
         sRoute: "/cwex/return-phase",
         sTitle: "Return Phase",
+        hasBreadcrumb: true,
       }),
     },
   });
