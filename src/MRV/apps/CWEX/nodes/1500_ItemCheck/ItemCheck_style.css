@@ -1,0 +1,7 @@
+.mrv3.cwex {
+  & .itemCheck {
+    & .query {
+      padding: 0rem 16%;
+    }
+  }
+}

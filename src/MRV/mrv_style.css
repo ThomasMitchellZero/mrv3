@@ -241,6 +241,11 @@
       min-width: 0;
     }
 
+    & ul {
+      padding: 0rem 0rem 0rem 1rem;
+      margin: 0;
+    }
+
     /* &&&&&&&&&&&&    UI ELEMENT STYLES   &&&&&&&&&&&&&&*/
 
     /* ---- MRV Containers ---- */
@@ -321,7 +326,7 @@
       }
 
       & .body {
-        padding: var(--PrimaryPadding__vertical) 0rem;
+        padding: 0rem;
         flex: 1 1 0rem;
         display: flex;
         flex-direction: column;
@@ -390,7 +395,7 @@
       &.secondary {
         color: var(--color__interactive);
         border-color: var(--color__interactive);
-        background-color: transparent;
+        background-color: var(--color__white);
       }
 
       &.ghost {

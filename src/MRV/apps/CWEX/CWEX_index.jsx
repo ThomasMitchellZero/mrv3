@@ -8,7 +8,7 @@ function CWEX() {
   const [sessionMRV, setSessionMRV] = useState(baseStateCWEX());
 
   return (
-    <main className={`mrv3`}>
+    <main className={`mrv3 cwex`}>
       <Outlet
         context={{
           sessionMRV,
