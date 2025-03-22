@@ -8,11 +8,23 @@ import { HeaderCWEX } from "../../components/layout/header_cwex/HeaderCWEX";
 import { SidesheetMRV } from "../../../../components/layout/sidesheet/SidesheetMRV";
 import { FooterCWEX } from "../../components/layout/footer/FooterCWEX";
 
+import { ReturnPhase_locState } from "./ReturnPhase_schemas";
+import { SidesheetIndex } from "./components/sidesheet_index/SidesheetIndex";
+
 function ReturnPhase() {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
 
-  const [lsReturnPhase, setReturnPhase] = useState([]);
+  const [lsReturnPhase, setReturnPhase] = useState(ReturnPhase_locState);
+
+  const oSidesheet = {
+    index: (
+      <SidesheetIndex pageLS={lsReturnPhase} fSetPageLS={setReturnPhase} />
+    ),
+    itemDetails: null,
+  };
+
+  const activeSidesheet = oSidesheet[lsReturnPhase.sMode || "index"];
 
   return (
     <main className={`mrvPage returnPhase`}>
@@ -21,6 +33,7 @@ function ReturnPhase() {
         <div className={`body`}></div>
         <FooterCWEX />
       </div>
+      {activeSidesheet}
     </main>
   );
 }

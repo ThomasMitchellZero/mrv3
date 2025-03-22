@@ -1,6 +1,6 @@
 import { SidesheetMRV } from "../../../../../../components/layout/sidesheet/SidesheetMRV";
 
-function SidesheetBase({}) {
+function SidesheetIndex({ pageLS, fSetPageLS }) {
   return (
     <SidesheetMRV sTitle={"Sidesheet Base"}>
       <div className={`hBox width__max gap__0rem flex__min`}>
@@ -11,4 +11,4 @@ function SidesheetBase({}) {
   );
 }
 
-export { SidesheetBase };
+export { SidesheetIndex };
