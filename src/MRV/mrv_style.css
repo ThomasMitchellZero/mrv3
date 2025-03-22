@@ -231,6 +231,7 @@
 
     & .warning {
       color: var(--color__red);
+      font-family: "Fellix-Medium";
     }
 
     & .truncate {
@@ -330,8 +331,9 @@
       }
 
       & .footer {
-        flex: 0 0 7rem;
-        padding-top: var(--PrimaryPadding__vertical);
+        height: 8rem;
+        width: 100%;
+        padding: var(--PrimaryPadding__vertical) 0rem;
         justify-content: flex-end;
         display: flex;
         flex-direction: row;
@@ -724,15 +726,6 @@
   }
 
   /* same but more descriptive b/c I don't want to hunt for the other one..*/
-  & .buttonBox25 {
-    height: 100%;
-    width: var(--primaryColumn);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0rem 0rem 0rem var(--PrimaryPadding__horizontal);
-    justify-content: center;
-  }
 
   & .continueBtnBox {
     height: 100%;

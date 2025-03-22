@@ -1,0 +1,56 @@
+.mrv3 {
+  & .footerCWEX {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+
+    & .cashRowsCol {
+      display: flex;
+      flex-direction: column;
+      flex: 0 0 auto;
+      justify-content: center;
+      gap: 0.5rem;
+
+      & .cashRow {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+
+        & .cashLabel {
+          display: flex;
+          flex-direction: row;
+          width: 11rem;
+          justify-content: flex-end;
+        }
+
+        & .cashValue {
+          display: flex;
+          flex-direction: row;
+          width: 9rem;
+          justify-content: flex-start;
+        }
+      }
+    }
+
+    & .cashTotalCol {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 0rem;
+      align-items: flex-start;
+      justify-content: center;
+
+      gap: 0rem;
+    }
+
+    & .btnCol {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 33%;
+      padding: 0rem 0rem 0rem var(--PrimaryPadding__horizontal);
+      gap: 0.25rem;
+    }
+  }
+}
