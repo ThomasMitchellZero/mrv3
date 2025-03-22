@@ -19,7 +19,7 @@ function ItemCheck() {
       <div className={`mrvPanel__main `}>
         <HeaderCWEX sPageTitle={"Item Check"} />
         <div className={`body`}>
-          <div className={`vBox query justify__center gap__1rem `}>
+          <div className={`vBox query justify__center gap__2rem`}>
             <div
               className={`hBox flex__min gap__1rem heading__medium color__text__primary`}
             >

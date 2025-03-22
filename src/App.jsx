@@ -7,8 +7,9 @@ import "./App.css";
 
 //CWEX
 import { CWEX } from "./MRV/apps/CWEX/CWEX_index";
-import { StartCWEX } from "./MRV/apps/CWEX/nodes/1000_StartCEWX/StartCWEX_index";
-import { ItemCheck } from "./MRV/apps/CWEX/nodes/1500_ItemCheck/ItemCheck_index";
+import { StartCWEX } from "./MRV/apps/CWEX/nodes/1000_StartCEWX/StartCWEX";
+import { ItemCheck } from "./MRV/apps/CWEX/nodes/1500_ItemCheck/ItemCheck";
+import { ReturnPhase } from "./MRV/apps/CWEX/nodes/2000_ReturnPhase/ReturnPhase";
 
 ///////////// Deprecate all these once no longer needed ////////////////
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="cwex" element={<CWEX />}>
             <Route index element={<StartCWEX />} />
             <Route path="item-check" element={<ItemCheck />} />
+            <Route path="return-phase" element={<ReturnPhase />} />
           </Route>
           <Route path="test" element={<Placeholder titleText="Tests" />} />
         </Route>

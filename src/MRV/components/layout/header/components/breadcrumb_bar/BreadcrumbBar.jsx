@@ -13,7 +13,10 @@ function BreadcrumbBar({ sAppName = "", oNavNodes = {} }) {
       : "inactive";
 
     return (
-      <button className={`crumbBtn body__small ${sStatus}`}>
+      <button
+        key={oThisNode.keyStr}
+        className={`crumbBtn body__small ${sStatus}`}
+      >
         <MdChevronRight size={`1.25rem`} />
         {oThisNode.sTitle}
       </button>
