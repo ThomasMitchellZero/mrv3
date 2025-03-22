@@ -1,6 +1,5 @@
 // Shared parameter schema
 
-
 const sharedParamsSchema = {
   // universal parameters
   sKey: "",
@@ -20,7 +19,6 @@ const sharedParamsSchema = {
 
   // return reason parameters
   sReturnReason: "",
-
 
   // sale record parameters
   sInvoNum: "",
@@ -58,7 +56,15 @@ export { dMoney };
 /////////////////////////////////////////////////////////////
 
 function dProduct(params = {}) {
-  const { sKey, iQty, sItemNum, sBifrostKey, sProxyKey, sInvoNum, sReturnReason } = {
+  const {
+    sKey,
+    iQty,
+    sItemNum,
+    sBifrostKey,
+    sProxyKey,
+    sInvoNum,
+    sReturnReason,
+  } = {
     ...sharedParamsSchema,
     ...params,
   };
@@ -116,7 +122,9 @@ function dSaleRecord(params = {}) {
 
 export { dSaleRecord };
 
+/////////////////////////////////////////////////////////////
 //// App Logic Objects
+/////////////////////////////////////////////////////////////
 
 function navNode({
   keyStr = "",
@@ -157,3 +165,13 @@ function baseStateExTurns({
 }
 
 export { baseStateExTurns };
+
+function baseLocState({ sActiveError, sActiveMode, sActiveKey }) {
+  return {
+    sActiveError,
+    sActiveMode,
+    sActiveKey,
+  };
+}
+
+export { baseLocState };

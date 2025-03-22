@@ -1,17 +1,11 @@
 import "./ItemCheck_style.css";
 
-import { bifrostAPI } from "../../../../../local_APIs/bifrost";
-import { SaleRecordsAPI } from "../../../../../local_APIs/sale_records";
-import { useOutlet, useOutletContext } from "react-router-dom";
-import { useContext } from "react";
 import { useNodeNav } from "../../../../mrv_controller";
 
 import { HeaderCWEX } from "../../components/layout/header_cwex/HeaderCWEX";
 import { SidesheetMRV } from "../../../../components/layout/sidesheet/SidesheetMRV";
 
 function ItemCheck() {
-  const productCtx = useContext(bifrostAPI);
-  const saleCtx = useContext(SaleRecordsAPI);
   const nodeNav = useNodeNav();
 
   return (

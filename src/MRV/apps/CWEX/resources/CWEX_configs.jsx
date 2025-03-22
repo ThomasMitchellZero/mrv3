@@ -28,15 +28,3 @@ const baseStateCWEX = () => {
 };
 
 export { baseStateCWEX };
-
-/////////////////////////////////////////////
-// Component Configs
-/////////////////////////////////////////////
-
-function HeaderCWEX({ sPageTitle = "NO CEWX TITLE" }) {
-  return (
-    <HeaderMRV sAppName={"Store Exchanges"} sPageTitle={sPageTitle} />
-  );
-}
-
-export { HeaderCWEX };
