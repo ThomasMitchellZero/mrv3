@@ -5,7 +5,6 @@ import { useContext } from "react";
 
 import { HeaderCWEX } from "../../resources/CWEX_configs";
 import { SidesheetMRV } from "../../../../components/layout/sidesheet/SidesheetMRV";
-import { FooterCWEX } from "../../components/footer/FooterCWEX";
 
 function ItemCheck() {
   const productCtx = useContext(bifrostAPI);
@@ -16,9 +15,8 @@ function ItemCheck() {
       <div className={`mrvPanel__main `}>
         <HeaderCWEX sPageTitle={"Item Check"} />
         <div className={`body`}></div>
-        <FooterCWEX />
       </div>
-      <SidesheetMRV sTitle={"Item Check"} sNavBtn="back">
+      <SidesheetMRV sTitle={"Lifetime Warranty Items"}>
         <button>Log Product Context</button>
       </SidesheetMRV>
     </main>
