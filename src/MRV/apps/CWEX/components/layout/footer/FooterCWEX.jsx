@@ -1,6 +1,6 @@
 import "./FooterCWEX_style.css";
 
-import { centsToDollars } from "../../../../mrv_controller";
+import { centsToDollars } from "../../../../../mrv_controller";
 
 function FooterCWEX({ sBtnLabel = "Continue" }) {
   // In the real version, these vals will be mapped to the data.
@@ -19,7 +19,7 @@ function FooterCWEX({ sBtnLabel = "Continue" }) {
     const sRowColor =
       oRowData.iCentValue > 0 ? "color__primary__text" : "color__green__text";
     return (
-      <div className={`cashRow ${sRowColor}`}>
+      <div key={oRowData.sLabel} className={`cashRow ${sRowColor}`}>
         <div className={`cashLabel body__medium`}>{oRowData.sLabel}</div>
         <div className={`cashValue body__large bold`}>
           {`$${centsToDollars(oRowData.iCentValue)}`}

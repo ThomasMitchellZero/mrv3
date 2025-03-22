@@ -6,7 +6,7 @@ import { useOutlet, useOutletContext } from "react-router-dom";
 import { useContext } from "react";
 import { useNodeNav } from "../../../../mrv_controller";
 
-import { HeaderCWEX } from "../../resources/CWEX_configs";
+import { HeaderCWEX } from "../../components/layout/header_cwex/HeaderCWEX";
 import { SidesheetMRV } from "../../../../components/layout/sidesheet/SidesheetMRV";
 
 function ItemCheck() {

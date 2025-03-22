@@ -35,13 +35,16 @@ function BreadcrumbBar({ sAppName = "", oNavNodes = {} }) {
   // Add the app name to the breadcrumb bar if it exists.
   if (sAppName) {
     uiNodes.unshift(
-      <div className={`body__small color__secondary__text bold`}>
+      <div
+        key={`appTitle`}
+        className={`body__small color__secondary__text bold`}
+      >
         {sAppName}
       </div>
     );
   }
 
-  return <div className={`hBox breadcrumbBar gap__1rem`}>{uiNodes}</div>;
+  return <div className={`hBox breadcrumbBar gap__05rem`}>{uiNodes}</div>;
 }
 
 export { BreadcrumbBar };

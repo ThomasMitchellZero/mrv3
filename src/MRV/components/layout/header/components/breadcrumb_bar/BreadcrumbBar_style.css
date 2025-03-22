@@ -4,14 +4,15 @@
       color: var(--color__interactive);
       height: 2rem;
       background-color: transparent;
-      padding: 0rem;
+      padding: 0rem 0.75rem 0rem 0.5rem;
+      border-radius: 0rem;
       border: none;
 
       &.inactive {
         color: var(--color__tertiary);
       }
 
-      &.active {
+      &.current {
         background-color: var(--color__container__selected);
       }
     }
