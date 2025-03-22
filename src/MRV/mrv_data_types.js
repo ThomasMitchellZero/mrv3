@@ -166,12 +166,12 @@ function baseStateExTurns({
 
 export { baseStateExTurns };
 
-function baseLocState({ sActiveError, sActiveMode, sActiveKey }) {
-  return {
-    sActiveError,
-    sActiveMode,
-    sActiveKey,
-  };
-}
+const baseLocState = {
+  // shares fields that will be common to all local states.
+  sActiveError: "",
+  sActiveOverlay: "",
+  sActiveDataKey: "",
+  sMode: "",
+};
 
 export { baseLocState };

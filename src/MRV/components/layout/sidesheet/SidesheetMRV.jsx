@@ -14,6 +14,7 @@ import { MdArrowBack, MdClose } from "react-icons/md";
 function SidesheetMRV({
   sTitle = "",
   sNavBtn = "",
+  sStyleClasses = "",
   fNavBtnClick = () => {
     console.log("navBtn clicked");
   },
@@ -37,7 +38,7 @@ function SidesheetMRV({
   ) : null;
 
   return (
-    <aside className={`sidesheet mrvPanel__side gap__1rem `}>
+    <aside className={`sidesheet mrvPanel__side gap__1rem ${sStyleClasses}`}>
       <div
         className={`flex__min width__max heading__medium gap__05rem truncate`}
       >
