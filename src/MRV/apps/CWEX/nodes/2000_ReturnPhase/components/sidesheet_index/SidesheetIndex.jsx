@@ -1,11 +1,30 @@
 import { SidesheetMRV } from "../../../../../../components/layout/sidesheet/SidesheetMRV";
 
 function SidesheetIndex({ pageLS, fSetPageLS }) {
+  const handleTabClick = (sTabKey) => {
+    fSetPageLS((draft) => ({ ...draft, sMode: sTabKey }));
+  };
+
+  const uiModeTab = (sTabKey) => {
+    const sIsActive = pageLS.sMode === sTabKey ? "active" : "";
+    return (
+      <button
+        key={sTabKey}
+        onClick={() => {
+          handleTabClick(sTabKey);
+        }}
+        className={`tab ${sIsActive} flex__max`}
+      >
+        {sTabKey}
+      </button>
+    );
+  };
+
   return (
-    <SidesheetMRV sTitle={"Sidesheet Base"}>
+    <SidesheetMRV sTitle={"Add To Return"}>
       <div className={`hBox width__max gap__0rem flex__min`}>
-        <button className={`tab flex__max`}>Receipts</button>
-        <button className={`tab flex__max`}>Items</button>
+        {uiModeTab("items")}
+        {uiModeTab("receipts")}
       </div>
     </SidesheetMRV>
   );

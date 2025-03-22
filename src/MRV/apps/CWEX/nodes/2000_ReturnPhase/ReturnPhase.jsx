@@ -24,12 +24,13 @@ function ReturnPhase() {
     itemDetails: null,
   };
 
-  const activeSidesheet = oSidesheet[lsReturnPhase.sMode || "index"];
+  const activeSidesheet =
+    oSidesheet[lsReturnPhase.sMode] || oSidesheet["index"];
 
   return (
     <main className={`mrvPage returnPhase`}>
       <div className={`mrvPanel__main `}>
-        <HeaderCWEX sPageTitle={"Return Phase"} />
+        <HeaderCWEX sPageTitle={"Items Being Returned"} />
         <div className={`body`}></div>
         <FooterCWEX />
       </div>
