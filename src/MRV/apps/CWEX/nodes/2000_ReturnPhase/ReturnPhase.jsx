@@ -11,6 +11,9 @@ import { FooterCWEX } from "../../components/layout/footer/FooterCWEX";
 import { ReturnPhase_locState } from "./ReturnPhase_schemas";
 import { SidesheetIndex } from "./components/sidesheet_index/SidesheetIndex";
 
+import { ItemsList } from "./components/body_items_list/ItemsList";
+import { ReceiptsList } from "./components/body_receipts_list/ReceiptsList";
+
 function ReturnPhase() {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
@@ -32,7 +35,7 @@ function ReturnPhase() {
   // UI Main Panel ///////////////////////////////////////////////////
 
   const oMainPanels = {
-    items: null,
+    items: <ItemsList />,
     receipts: null,
   };
 
@@ -40,7 +43,9 @@ function ReturnPhase() {
     <main className={`mrvPage returnPhase`}>
       <div className={`mrvPanel__main `}>
         <HeaderCWEX sPageTitle={"Items Being Returned"} />
-        <div className={`body`}></div>
+        <div className={`body`}>
+          <ItemsList />
+        </div>
         <FooterCWEX />
       </div>
       {activeSidesheet}

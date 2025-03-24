@@ -141,9 +141,15 @@
     & .color__gold {
       background-color: var(--color__gold);
     }
+
     & .color__white__text {
       color: var(--color__white);
     }
+
+    & .color__white {
+      background-color: var(--color__white);
+    }
+
     & .color__red__text {
       color: var(--color__red);
     }

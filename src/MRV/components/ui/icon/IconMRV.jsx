@@ -11,7 +11,7 @@ import {
 
 /**
  * Standard icons for MRV
- *
+ *@param {Object} props - Component properties
  * @param {("box"|"receiptLong"|"cart"|"alert"|"info"|"success"|"critical")} [props.sIconKey] - Specifies the icon to display
  * @param {string} [props.ctnrSize="2.5rem"] - The size of the container
  * @param {string} [props.fontSize="2rem"] - The size of the icon
@@ -52,14 +52,13 @@ function IconMRV({
 
   return (
     <div
-      height={ctnrSize}
       style={{
         height: ctnrSize,
         width: ctnrSize,
         borderRadius: radius,
         color: color,
       }}
-      className={`hBox ${color} ${backgroundColor}`}
+      className={`hBox align__center justify__center ${color} ${backgroundColor}`}
     >
       {outIcon}
     </div>
