@@ -31,6 +31,11 @@ function ReturnPhase() {
 
   // UI Main Panel ///////////////////////////////////////////////////
 
+  const oMainPanels = {
+    items: null,
+    receipts: null,
+  };
+
   return (
     <main className={`mrvPage returnPhase`}>
       <div className={`mrvPanel__main `}>
