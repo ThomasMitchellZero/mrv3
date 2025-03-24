@@ -28,7 +28,6 @@ function IconMRV({
   backgroundColor = "",
   color = "color__primary__text",
   radius = "100%",
-  REF_iconStr____circle__box__receiptLong__cart__alert__info__success__critical,
 }) {
   const styleObj = {
     fontSize: fontSize,
