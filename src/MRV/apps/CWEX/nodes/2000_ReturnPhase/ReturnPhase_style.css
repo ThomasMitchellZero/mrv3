@@ -1,5 +1,8 @@
 .mrv3.cwex {
   & .returnPhase {
-    background-color: bisque;
+
+    & .sidesheet__base {
+      background-color: bisque;
+    }
   }
 }

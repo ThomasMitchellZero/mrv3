@@ -17,6 +17,8 @@ function ReturnPhase() {
 
   const [lsReturnPhase, setReturnPhase] = useState(ReturnPhase_locState);
 
+  // UI Sidesheets ///////////////////////////////////////////////////
+
   const oSidesheet = {
     index: (
       <SidesheetIndex pageLS={lsReturnPhase} fSetPageLS={setReturnPhase} />
@@ -26,6 +28,8 @@ function ReturnPhase() {
 
   const activeSidesheet =
     oSidesheet[lsReturnPhase.sMode] || oSidesheet["index"];
+
+  // UI Main Panel ///////////////////////////////////////////////////
 
   return (
     <main className={`mrvPage returnPhase`}>
