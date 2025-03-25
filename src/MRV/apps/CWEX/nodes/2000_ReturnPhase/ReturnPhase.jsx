@@ -34,9 +34,8 @@ function ReturnPhase() {
 
   // UI Main Panel ///////////////////////////////////////////////////
 
-  const sPageTitle = (sMode = "items"
-    ? "Items Being Returned"
-    : "Receipts List");
+  const sPageTitle =
+    lsReturnPhase.sMode === "items" ? "Items Being Returned" : "Receipts List";
 
   const oMainPanels = {
     items: <ItemsList />,
