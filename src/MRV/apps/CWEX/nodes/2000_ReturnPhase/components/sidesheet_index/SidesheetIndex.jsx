@@ -1,6 +1,11 @@
 import { SidesheetMRV } from "../../../../../../components/layout/sidesheet/SidesheetMRV";
 
+import { ItemInputs } from "./components/ItemInputs";
+import { ReceiptInputs } from "./components/ReceiptInputs";
+
 function SidesheetIndex({ pageLS, fSetPageLS }) {
+  // UI Mode Tabs //////////////////////////////////////////////////////
+
   const handleTabClick = (sTabKey) => {
     fSetPageLS((draft) => ({ ...draft, sMode: sTabKey }));
   };
@@ -20,12 +25,22 @@ function SidesheetIndex({ pageLS, fSetPageLS }) {
     );
   };
 
+  // Input Clusters  //////////////////////////////////////////////
+
+  const oInputClusters = {
+    items: <ItemInputs />,
+    receipts: <ReceiptInputs />,
+  };
+
+  const uiInputCluster = oInputClusters[pageLS.sMode];
+
   return (
     <SidesheetMRV sTitle={"Add To Return"}>
       <div className={`hBox width__max gap__0rem flex__min`}>
         {uiModeTab("items")}
         {uiModeTab("receipts")}
       </div>
+      {uiInputCluster}
     </SidesheetMRV>
   );
 }
