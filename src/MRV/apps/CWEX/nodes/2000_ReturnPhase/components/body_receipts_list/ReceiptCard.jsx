@@ -8,7 +8,7 @@ function ReceiptCard({ sReceiptKey }) {
   const refReceipt = dSaleRecord(oReceipt);
 
   return (
-    <div className={`receiptCard`}>
+    <div className={`receiptCard card width__max`}>
       <p className={`body__large color__primary__text`}>{oReceipt.sInvoNum}</p>
     </div>
   );

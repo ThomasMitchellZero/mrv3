@@ -73,7 +73,7 @@ function ReceiptInputs({ pageLS, fSetPageLS }) {
   return (
     <form
       id="rtrnReceiptInput"
-      className={`vBox gap__1rem width__max flex__min`}
+      className={`vBox receiptInput gap__1rem width__max flex__min`}
       onSubmit={handleSubmit}
     >
       <input

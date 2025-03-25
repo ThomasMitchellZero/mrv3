@@ -1,7 +1,112 @@
-function ItemInputs({}) {
+import { bifrostAPI } from "../../../../../../../../local_APIs/bifrost";
+import { useState, useContext } from "react";
+import { cloneDeep } from "lodash";
+import { useOutletContext } from "react-router-dom";
+import { ReturnPhase_locState } from "../../../ReturnPhase_schemas";
+import { baseStateExTurns } from "../../../../../../../mrv_data_types";
+
+function ItemInputs({ pageLS, fSetPageLS }) {
+  const mrvCtx = useOutletContext();
+  const sessionMRV = mrvCtx.sessionMRV;
+  const setSessionMRV = mrvCtx.setSessionMRV;
+  const bifrost = useContext(bifrostAPI);
+
+  const oInitLS = {
+    sItemKey: "",
+    sQty: "",
+  };
+
+  const [thisLS, setThisLS] = useState(oInitLS);
+
+  // Item Inputs //////////////////////////////////////////////
+  const handleItemInput = (e) => {
+    const draft = cloneDeep(thisLS);
+    draft.sItemKey = e.target.value;
+    setThisLS(draft);
+  };
+
+  const handleQtyInput = (e) => {
+    const draft = cloneDeep(thisLS);
+    draft.sQty = Number(e.target.value);
+    setThisLS(draft);
+  };
+
+  // Submit //////////////////////////////////////////////////
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Attempting submit");
+    const refLS = ReturnPhase_locState;
+    const refBaseStateExTurns = baseStateExTurns;
+    const sItemKey = thisLS.sItemKey;
+    const sQty = thisLS.sQty;
+
+    // Check for invalid item
+    const bInvalidItem = !(sItemKey in bifrost);
+    if (bInvalidItem) {
+      const draftPage = cloneDeep(pageLS);
+      draftPage.sActiveError = "invalidItem";
+      fSetPageLS(draftPage);
+      return;
+    }
+
+    // Check for invalid quantity
+    const bInvalidQty = isNaN(sQty) || sQty <= 0;
+    if (bInvalidQty) {
+      const draftPage = cloneDeep(pageLS);
+      draftPage.sActiveError = "invalidQty";
+      fSetPageLS(draftPage);
+      return;
+    }
+
+    // If all validity checks pass, add the item to the session
+
+    // This is just a placeholder to verify that we can add an item to the session.
+    // Next we'll need to add actual item handling.
+    const draftMRV = cloneDeep(sessionMRV);
+    draftMRV.returnItems[sItemKey] = sQty;
+    setSessionMRV(draftMRV);
+    setThisLS(oInitLS);
+  };
+
+  const sError = pageLS.sActiveError;
+  const bItemError = sError === "invalidItem" || sError === "invalidQty";
+  const uiError = bItemError ? (
+    <p className={`warning width__max text__align__right`}>
+      {pageLS.oErrorObjects[sError].sMessage}
+    </p>
+  ) : null;
+
   return (
-    <form id="itemInputs">
-      <div className={`body__small color__primary__text`}>Items</div>
+    <form
+      id="rtrnItemInput"
+      onSubmit={handleSubmit}
+      className={`vBox itemInput gap__1rem width__max flex__min`}
+    >
+      <input
+        type="text"
+        placeholder="Item Number"
+        className={`width__max`}
+        value={thisLS.sItemKey}
+        onChange={handleItemInput}
+      />
+      <div className={`hBox gap__05rem`}>
+        <input
+          type="number"
+          placeholder="qty"
+          className={`itemQty`}
+          value={thisLS.sQty}
+          onChange={handleQtyInput}
+        />
+        <div className={`flex__max`}></div>
+        <button
+          className={`addItemBtn secondary`}
+          type="submit"
+          form="rtrnItemInput"
+        >
+          Add Item
+        </button>
+      </div>
+      {uiError}
     </form>
   );
 }

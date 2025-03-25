@@ -11,6 +11,8 @@ const ReturnPhase_locState = {
       "Receipt already added to transaction",
       true
     ),
+    invalidItem: dError("invalidItem", "Invalid item #", true),
+    invalidQty: dError("invalidQty", "Invalid quantity", true),
   },
 };
 

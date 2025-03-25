@@ -33,7 +33,7 @@ function SidesheetIndex({ pageLS, fSetPageLS }) {
   // Input Clusters  //////////////////////////////////////////////
 
   const oInputClusters = {
-    items: <ItemInputs />,
+    items: <ItemInputs pageLS={pageLS} fSetPageLS={fSetPageLS} />,
     receipts: <ReceiptInputs pageLS={pageLS} fSetPageLS={fSetPageLS} />,
   };
 

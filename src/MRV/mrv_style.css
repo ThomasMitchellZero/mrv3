@@ -350,6 +350,7 @@
       & .body {
         padding: 0rem;
         flex: 1 1 0rem;
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
