@@ -358,7 +358,7 @@
       }
 
       & .footer {
-        height: 8rem;
+        height: 7rem;
         width: 100%;
         padding: var(--PrimaryPadding__vertical) 0rem;
         justify-content: flex-end;

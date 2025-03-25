@@ -1,5 +1,5 @@
 .mrv3 {
-  & .footerCWEX {
+  & .footerMRV {
     display: flex;
     flex-direction: row;
     gap: 2rem;
@@ -9,7 +9,7 @@
       flex-direction: column;
       flex: 0 0 auto;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0rem;
 
       & .cashRow {
         display: flex;
