@@ -12,7 +12,6 @@ const ScanScreenMRV = ({
   iconStr = "box",
   REF_iconStr____circle__box__receipt__receiptLong__cart__alert = "",
 }) => {
-
   const iconConfig = (
     <DescriptorIcon
       ctnrSize="8rem"
@@ -24,9 +23,8 @@ const ScanScreenMRV = ({
   );
 
   return (
-    <div className={`scanScreen`}>
+    <div className={`vBox align__center justify__center scanScreen`}>
       {iconConfig}
-
       <h4 className={`heading__medium color__primary__text`}>{mainTitle}</h4>
       <p className={`color__tertiary__text body__large`}>{subtitle}</p>
       {subtitleJSX}

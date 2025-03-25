@@ -34,18 +34,23 @@ function ReturnPhase() {
 
   // UI Main Panel ///////////////////////////////////////////////////
 
+  const sPageTitle = (sMode = "items"
+    ? "Items Being Returned"
+    : "Receipts List");
+
   const oMainPanels = {
     items: <ItemsList />,
-    receipts: null,
+    receipts: (
+      <ReceiptsList pageLS={lsReturnPhase} fSetPageLS={setReturnPhase} />
+    ),
   };
+  const uiMainPanel = oMainPanels[lsReturnPhase.sMode] || oMainPanels["items"];
 
   return (
     <main className={`mrvPage returnPhase`}>
       <div className={`mrvPanel__main `}>
-        <HeaderCWEX sPageTitle={"Items Being Returned"} />
-        <div className={`body`}>
-          <ItemsList />
-        </div>
+        <HeaderCWEX sPageTitle={sPageTitle} />
+        <div className={`body`}>{uiMainPanel}</div>
         <FooterCWEX />
       </div>
       {activeSidesheet}

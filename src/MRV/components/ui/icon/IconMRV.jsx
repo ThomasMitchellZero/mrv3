@@ -15,9 +15,9 @@ import {
  * @param {("box"|"receiptLong"|"cart"|"alert"|"info"|"success"|"critical")} [props.sIconKey] - Specifies the icon to display
  * @param {string} [props.ctnrSize="2.5rem"] - The size of the container
  * @param {string} [props.fontSize="2rem"] - The size of the icon
- * @param {string} [props.backgroundColor=""] - The background color of the container
- * @param {string} [props.color="color__primary__text"] - The color of the icon
- * @param {string} [props.radius="100%"] - The border radius of the container
+ * @param {string} [props.sBackgroundColor="color__white"] - The background color of the icon container
+ * @param {string} [props.sIconColor="color__primary__text"] - The color of the icon itself
+ * @param {string} [props.sRadius="100%"] - The border radius of the container
  * @returns {JSX.Element} The rendered header component
  */
 
@@ -25,13 +25,13 @@ function IconMRV({
   sIconKey = "sick",
   ctnrSize = "2.5rem",
   fontSize = "2rem",
-  backgroundColor = "",
-  color = "color__primary__text",
-  radius = "100%",
+  sBackgroundColor = "color__white",
+  sIconColor = "color__primary__text",
+  sRadius = "100%",
 }) {
   const styleObj = {
     fontSize: fontSize,
-    color: color,
+    color: sIconColor,
   };
 
   const iconsObj = {
@@ -55,10 +55,10 @@ function IconMRV({
       style={{
         height: ctnrSize,
         width: ctnrSize,
-        borderRadius: radius,
-        color: color,
+        borderRadius: sRadius,
+        color: sIconColor,
       }}
-      className={`hBox align__center justify__center ${color} ${backgroundColor}`}
+      className={`hBox flex__min align__center justify__center ${sIconColor} ${sBackgroundColor}`}
     >
       {outIcon}
     </div>

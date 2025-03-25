@@ -1,20 +1,18 @@
 import { IconMRV } from "../../../../../../components/ui/icon/IconMRV";
 import { SidesheetMRV } from "../../../../../../components/layout/sidesheet/SidesheetMRV";
+import { ScanScreen } from "../../../../../../components/ui/scan_screen/ScanScreen";
 
 function ItemsList({}) {
-  return (
-    <main className={`body`}>
-      <div>
-        <IconMRV
-          sIconKey="box"
-          ctnrSize="4rem"
-          fontSize="3rem"
-          backgroundColor="color__white"
-          color="color__red__text"
-        />
-      </div>
-    </main>
+  const aItems = [];
+  const uiItems = [];
+
+  const uiBody = uiItems.length ? (
+    uiItems
+  ) : (
+    <ScanScreen mainTitle="Scan or Enter Items Being Returned" sIconKey="box" />
   );
+
+  return <main className={`body`}>{uiBody}</main>;
 }
 
 export { ItemsList };
