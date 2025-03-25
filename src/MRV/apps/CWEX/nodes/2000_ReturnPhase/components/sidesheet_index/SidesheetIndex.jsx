@@ -1,4 +1,6 @@
+import { cloneDeep } from "lodash";
 import { SidesheetMRV } from "../../../../../../components/layout/sidesheet/SidesheetMRV";
+import "./SidesheetIndex.css";
 
 import { ItemInputs } from "./components/ItemInputs";
 import { ReceiptInputs } from "./components/ReceiptInputs";
@@ -7,7 +9,9 @@ function SidesheetIndex({ pageLS, fSetPageLS }) {
   // UI Mode Tabs //////////////////////////////////////////////////////
 
   const handleTabClick = (sTabKey) => {
-    fSetPageLS((draft) => ({ ...draft, sMode: sTabKey }));
+    const pageDraft = cloneDeep(pageLS);
+    pageDraft.sMode = sTabKey;
+    fSetPageLS(pageDraft);
   };
 
   const uiModeTab = (sTabKey) => {
@@ -15,7 +19,8 @@ function SidesheetIndex({ pageLS, fSetPageLS }) {
     return (
       <button
         key={sTabKey}
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
           handleTabClick(sTabKey);
         }}
         className={`tab ${sIsActive} flex__max`}
@@ -29,18 +34,20 @@ function SidesheetIndex({ pageLS, fSetPageLS }) {
 
   const oInputClusters = {
     items: <ItemInputs />,
-    receipts: <ReceiptInputs />,
+    receipts: <ReceiptInputs pageLS={pageLS} fSetPageLS={fSetPageLS} />,
   };
 
   const uiInputCluster = oInputClusters[pageLS.sMode];
 
   return (
     <SidesheetMRV sTitle={"Add To Return"}>
-      <div className={`hBox width__max gap__0rem flex__min`}>
-        {uiModeTab("items")}
-        {uiModeTab("receipts")}
+      <div className={`sidesheetIndex vBox gap__2rem width__max flex__min`}>
+        <div className={`hBox width__max gap__0rem flex__min`}>
+          {uiModeTab("items")}
+          {uiModeTab("receipts")}
+        </div>
+        {uiInputCluster}
       </div>
-      {uiInputCluster}
     </SidesheetMRV>
   );
 }

@@ -679,12 +679,20 @@
       align-items: flex-end;
     }
 
+    & .justify__start {
+      justify-content: flex-start;
+    }
+
     & .justify__center {
       justify-content: center;
     }
 
     & .justify__end {
       justify-content: flex-end;
+    }
+
+    & .text__align__right {
+      text-align: right;
     }
 
     & .flex__min {

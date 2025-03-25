@@ -13,6 +13,7 @@ import { SidesheetIndex } from "./components/sidesheet_index/SidesheetIndex";
 
 import { ItemsList } from "./components/body_items_list/ItemsList";
 import { ReceiptsList } from "./components/body_receipts_list/ReceiptsList";
+import { clone, cloneDeep } from "lodash";
 
 function ReturnPhase() {
   const mrvCtx = useOutletContext();
@@ -20,9 +21,16 @@ function ReturnPhase() {
 
   const [lsReturnPhase, setReturnPhase] = useState(ReturnPhase_locState);
 
+  const fClearError = () => {
+    const pageDraft = cloneDeep(lsReturnPhase);
+    pageDraft.sActiveError = "";
+    setReturnPhase(pageDraft);
+  };
+
   // UI Sidesheets ///////////////////////////////////////////////////
 
   const oSidesheet = {
+    // fSetPageLS
     index: (
       <SidesheetIndex pageLS={lsReturnPhase} fSetPageLS={setReturnPhase} />
     ),
@@ -46,7 +54,7 @@ function ReturnPhase() {
   const uiMainPanel = oMainPanels[lsReturnPhase.sMode] || oMainPanels["items"];
 
   return (
-    <main className={`mrvPage returnPhase`}>
+    <main onClick={fClearError} className={`mrvPage returnPhase`}>
       <div className={`mrvPanel__main `}>
         <HeaderCWEX sPageTitle={sPageTitle} />
         <div className={`body`}>{uiMainPanel}</div>

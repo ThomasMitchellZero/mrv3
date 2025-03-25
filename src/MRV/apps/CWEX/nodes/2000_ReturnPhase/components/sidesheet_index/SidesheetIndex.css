@@ -1,0 +1,10 @@
+.mrv3.cwex {
+  & .sidesheetIndex {
+    & .storeNum {
+      flex: 1 1 0rem;
+    }
+    & .date {
+      flex: 0 0 12rem;
+    }
+  }
+}

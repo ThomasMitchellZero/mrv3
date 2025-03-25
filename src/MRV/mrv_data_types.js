@@ -166,12 +166,23 @@ function baseStateExTurns({
 
 export { baseStateExTurns };
 
-const baseLocState = {
+const oBaseLocState = {
   // shares fields that will be common to all local states.
   sActiveError: "",
   sActiveOverlay: "",
   sActiveDataKey: "",
   sMode: "",
+  oErrorObjects: {},
 };
 
-export { baseLocState };
+export { oBaseLocState };
+
+function dError(sKey = "", sMessage = "", bClearOnBGClick = true) {
+  return {
+    sKey,
+    sMessage,
+    bClearOnBGClick,
+  };
+}
+
+export { dError };
