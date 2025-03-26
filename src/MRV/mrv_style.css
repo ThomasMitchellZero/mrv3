@@ -536,10 +536,10 @@
       --dropShadow__01: 0px 2px 2px 0px #00000012;
       background-color: var(--color__surface__default);
       box-shadow: var(--dropShadow__01);
-      border-radius: var(--radius__medium);
+      border-radius: 0.75rem;
       box-sizing: border-box;
       border: calc(0.125rem) solid transparent;
-      padding: 0.5rem 1rem;
+      padding: 0.75rem;
 
       &.hasHover:hover {
         background-color: var(--color__container__hover);
@@ -562,7 +562,7 @@
 
     & .tile {
       background-color: var(--color__surface__default);
-      border-radius: var(--radius__small);
+      border-radius: var(--radius__medium);
       box-sizing: border-box;
       border: calc(3rem / 32) solid var(--color__border__subdued);
       padding: 0.5rem 1rem;
