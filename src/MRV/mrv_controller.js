@@ -43,17 +43,17 @@ function keymaker({ aDistinctKeys = [], oObjectToKey = {} }) {
 
 export { keymaker };
 
+/**
+ * - Creates item with unique key if it isn't already in the repository, then adds the qty.
+ * - Does NOT modify state by default.
+ * - Only the key is checked for uniqueness.
+ *
+ * @param {object} oTargetRepo - The repository that directly contains the item being added.
+ * @param {dProduct} oItemToAdd - The item to add.  Must be in dProduct format and contain a qty.
+ * @param {string} [sUniqueKey] - OPTIONAL.  For cases where oItemToAdd lacks a unique key.
+ * @returns {object} A clone of the updated repository.
+ */
 function addItem({ oTargetRepo = {}, oItemToAdd = {}, sUniqueKey = "" }) {
-  /**
-   * -Creates item with unique key if it isn't already in the repository, then adds the qty.
-   * -Does NOT modify state.  Returns a clone of the repository with the item added.
-   * -Only the key is checked for uniqueness.  Any other relevant differences must be evaluated before use.
-   * @param {object} oTargetRepo - The repository that directly contains the item being added.
-   * @param {object} oItemToAdd - The item to add.  Must contain a quantity to work properly.
-   * @param {string} sUniqueKey - OPTIONAL.  For cases where oItemToAdd lacks a unique key.
-   * @returns {object} The updated repository.
-   */
-
   const refProduct = dProduct({});
   const sProdKey = sUniqueKey || oItemToAdd.sKey;
   const iQtyToAdd = oItemToAdd.iQty;
