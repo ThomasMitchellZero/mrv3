@@ -13,7 +13,7 @@ import { SidesheetIndex } from "./components/sidesheet_index/SidesheetIndex";
 
 import { ItemsList } from "./components/body_items_list/ItemsList";
 import { ReceiptsList } from "./components/body_receipts_list/ReceiptsList";
-import { clone, cloneDeep } from "lodash";
+import { cloneDeep } from "lodash";
 
 function ReturnPhase() {
   const mrvCtx = useOutletContext();
@@ -46,7 +46,7 @@ function ReturnPhase() {
     lsReturnPhase.sMode === "items" ? "Items Being Returned" : "Receipts List";
 
   const oMainPanels = {
-    items: <ItemsList />,
+    items: <ItemsList pageLS={lsReturnPhase} fSetPageLS={setReturnPhase} />,
     receipts: (
       <ReceiptsList pageLS={lsReturnPhase} fSetPageLS={setReturnPhase} />
     ),

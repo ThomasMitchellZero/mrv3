@@ -26,8 +26,6 @@ function HeaderMRV({
 
   const refNavNode = navNode({});
 
-  console.log(oHeaderNodes);
-
   return (
     <header className={`header header__mrv`}>
       <div className={`vBox color__primary__text heading__large gap__0rem`}>

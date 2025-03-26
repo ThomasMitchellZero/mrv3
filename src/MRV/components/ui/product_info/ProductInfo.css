@@ -1,0 +1,14 @@
+.mrv3 {
+  & .productInfo {
+    & .s {
+    }
+    & .m {
+    }
+    & .l {
+      & .prodImg {
+        width: 8rem;
+        height: 8rem;
+      }
+    }
+  }
+}
