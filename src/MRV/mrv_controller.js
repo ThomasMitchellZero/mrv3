@@ -1,7 +1,7 @@
 import { useOutletContext, useNavigate } from "react-router";
 
 import { useContext } from "react";
-
+import { dProduct } from "./mrv_data_types";
 import { cloneDeep, isEmpty, isNaN, merge, set, subtract } from "lodash";
 import { navNode } from "./mrv_data_types";
 
@@ -21,25 +21,63 @@ const greenify = (numberVal) => {
 export { greenify };
 
 /////////////////////////////////////////////////////////////////
-////////             Data Handlers                   
+////////             Data Handlers
 /////////////////////////////////////////////////////////////////
 
 function keymaker({ aDistinctKeys = [], oObjectToKey = {} }) {
+  /**
+   * Creates a unique key from a list of distinct keys and an object to key.
+   * @param {array} aDistinctKeys - List of property keys used in this level of differentiation.
+   * @param {object} oObjectToKey - Object to key.
+   * @returns {string} The unique key.
+   */
 
-    let sOutKey = "";
-    for (const thisKey of aDistinctKeys) {
-        const thisVal = oObjectToKey?.[thisKey];
-        let sOutSegment = thisVal || `NONE`;
-        sOutSegment += `{${thisKey}_${sOutSegment}__}`;
-    }
-    return sOutKey; 
+  let sOutKey = "";
+  for (const thisKey of aDistinctKeys) {
+    const thisVal = oObjectToKey?.[thisKey];
+    let sOutSegment = thisVal || `NONE`;
+    sOutSegment += `{${thisKey}_${sOutSegment}__}`;
+  }
+  return sOutKey;
 }
 
 export { keymaker };
 
+function addItem({ oTargetRepo = {}, oItemToAdd = {}, sUniqueKey = "" }) {
+  /**
+   * -Creates item with unique key if it isn't already in the repository, then adds the qty.
+   * -Does NOT modify state.  Returns a clone of the repository with the item added.
+   * -Only the key is checked for uniqueness.  Any other relevant differences must be evaluated before use.
+   * @param {object} oTargetRepo - The repository that directly contains the item being added.
+   * @param {object} oItemToAdd - The item to add.  Must contain a quantity to work properly.
+   * @param {string} sUniqueKey - OPTIONAL.  For cases where oItemToAdd lacks a unique key.
+   * @returns {object} The updated repository.
+   */
+
+  const refProduct = dProduct({});
+  const sProdKey = sUniqueKey || oItemToAdd.sKey;
+  const iQtyToAdd = oItemToAdd.iQty;
+  if (isNaN(iQtyToAdd)) {
+    console.error("addItem requires a quantity to add.");
+    return;
+  }
+
+  const outRepo = cloneDeep(oTargetRepo);
+  if (outRepo[sProdKey]) {
+    // If the item is already in the repo, add the qty.
+    outRepo[sProdKey].iQty += iQtyToAdd;
+  } else {
+    // If the item isn't in the repo, add it.
+    outRepo[sProdKey] = oItemToAdd;
+  }
+
+  return outRepo;
+}
+
+export { addItem };
 
 /////////////////////////////////////////////////////////////////
-////////             Node Navigation                     
+////////             Node Navigation
 /////////////////////////////////////////////////////////////////
 
 function useNodeNav() {
@@ -91,7 +129,10 @@ function useNodeNav() {
 
     outSessionState.oNavNodes = outNavNodesObj;
     setSessionMRV(outSessionState);
-    console.log("attempting navihation to", outNavNodesObj[targetNodeKey].sRoute);
+    console.log(
+      "attempting navihation to",
+      outNavNodesObj[targetNodeKey].sRoute
+    );
 
     navigate(outNavNodesObj[targetNodeKey].sRoute);
   };

@@ -17,12 +17,7 @@ function ReceiptsList({}) {
   ) : (
     <ScanScreen mainTitle="Scan or enter Receipts" sIconKey="receiptLong" />
   );
-  return (
-    <main className={`body gap__1rem`}>
-      {uiBody}
-      <div className={`vBox gap__1rem`}></div>
-    </main>
-  );
+  return <main className={`body gap__1rem`}>{uiBody}</main>;
 }
 
 export { ReceiptsList };

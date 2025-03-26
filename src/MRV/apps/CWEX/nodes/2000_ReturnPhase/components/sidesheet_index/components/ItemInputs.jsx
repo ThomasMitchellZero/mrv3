@@ -4,6 +4,8 @@ import { cloneDeep } from "lodash";
 import { useOutletContext } from "react-router-dom";
 import { ReturnPhase_locState } from "../../../ReturnPhase_schemas";
 import { baseStateExTurns } from "../../../../../../../mrv_data_types";
+import { addItem } from "../../../../../../../mrv_controller";
+import { dProduct } from "../../../../../../../mrv_data_types";
 
 function ItemInputs({ pageLS, fSetPageLS }) {
   const mrvCtx = useOutletContext();
@@ -13,7 +15,7 @@ function ItemInputs({ pageLS, fSetPageLS }) {
 
   const oInitLS = {
     sItemKey: "",
-    sQty: "",
+    iQty: "",
   };
 
   const [thisLS, setThisLS] = useState(oInitLS);
@@ -27,7 +29,7 @@ function ItemInputs({ pageLS, fSetPageLS }) {
 
   const handleQtyInput = (e) => {
     const draft = cloneDeep(thisLS);
-    draft.sQty = Number(e.target.value);
+    draft.iQty = Math.max(0, Number(e.target.value)); // no values below 0
     setThisLS(draft);
   };
 
@@ -38,7 +40,7 @@ function ItemInputs({ pageLS, fSetPageLS }) {
     const refLS = ReturnPhase_locState;
     const refBaseStateExTurns = baseStateExTurns;
     const sItemKey = thisLS.sItemKey;
-    const sQty = thisLS.sQty;
+    const iQty = thisLS.iQty;
 
     // Check for invalid item
     const bInvalidItem = !(sItemKey in bifrost);
@@ -50,7 +52,7 @@ function ItemInputs({ pageLS, fSetPageLS }) {
     }
 
     // Check for invalid quantity
-    const bInvalidQty = isNaN(sQty) || sQty <= 0;
+    const bInvalidQty = isNaN(iQty) || iQty < 1;
     if (bInvalidQty) {
       const draftPage = cloneDeep(pageLS);
       draftPage.sActiveError = "invalidQty";
@@ -60,10 +62,14 @@ function ItemInputs({ pageLS, fSetPageLS }) {
 
     // If all validity checks pass, add the item to the session
 
-    // This is just a placeholder to verify that we can add an item to the session.
-    // Next we'll need to add actual item handling.
     const draftMRV = cloneDeep(sessionMRV);
-    draftMRV.returnItems[sItemKey] = sQty;
+    draftMRV.returnItems = addItem({
+      oTargetRepo: sessionMRV.returnItems,
+      oItemToAdd: dProduct({
+        iQty: thisLS.iQty,
+        sItemNum: thisLS.sItemKey,
+      }),
+    });
     setSessionMRV(draftMRV);
     setThisLS(oInitLS);
   };
@@ -92,9 +98,10 @@ function ItemInputs({ pageLS, fSetPageLS }) {
       <div className={`hBox gap__05rem`}>
         <input
           type="number"
-          placeholder="qty"
+          placeholder="Qty"
           className={`itemQty`}
-          value={thisLS.sQty}
+          min={0}
+          value={thisLS.iQty}
           onChange={handleQtyInput}
         />
         <div className={`flex__max`}></div>
