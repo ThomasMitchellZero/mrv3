@@ -14,8 +14,7 @@ function ItemsList({ pageLS, fSetPageLS }) {
 
   const aItems = [];
   const uiItems = Object.values(returnItems).map((thisItem) => {
-    return <ItemCard dProduct={thisItem} key={thisItem.sItemKey} />;
-    //return <ProductInfo dProduct={thisItem} />;
+    return <ItemCard oProduct={thisItem} key={thisItem.sItemKey} />;
   });
 
   const uiBody = uiItems.length ? (
@@ -24,7 +23,7 @@ function ItemsList({ pageLS, fSetPageLS }) {
     <ScanScreen mainTitle="Scan or Enter Items Being Returned" sIconKey="box" />
   );
 
-  return <main className={`body`}>{uiBody}</main>;
+  return <main className={`body gap__1rem`}>{uiBody}</main>;
 }
 
 export { ItemsList };

@@ -1,13 +1,17 @@
 .mrv3 {
   & .productInfo {
-    & .s {
+    &.s {
     }
-    & .m {
+    &.m {
     }
-    & .l {
+    &.l {
       & .prodImg {
-        width: 8rem;
+        flex: 0 0 12rem;
         height: 8rem;
+        background-color: aqua;
+        & img {
+          height: 100%;
+        }
       }
     }
   }

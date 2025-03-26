@@ -6,18 +6,19 @@ import { bifrostAPI } from "../../../../local_APIs/bifrost";
 
 /**
  *
- * @param {dProduct} dProduct
+ * @param {oProduct} oProduct - The product object to display.
  * @param {"l"|"m"|"s"} sSize - Determines the scale of the elements in the component.
  * @returns
  */
-function ProductInfo({ dProduct, sSize = "l" }) {
+function ProductInfo({ oProduct, sSize = "l" }) {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const bifrost = useContext(bifrostAPI);
 
-  const bifrostData = bifrost[dProduct.sBifrostKey] || bifrost["0000"];
+  const bifrostData = bifrost[oProduct.sBifrostKey] || bifrost["0000"];
 
   const refBifrostProduct = dProduct_bifrost({});
+  const refdProduct = dProduct({ sBifrostKey: "0000" });
 
   const oConfigs = {
     "l": {},
@@ -25,16 +26,26 @@ function ProductInfo({ dProduct, sSize = "l" }) {
     "s": {},
   };
 
+  const uiModelNum = bifrostData.sModelNum ? (
+    <p className={`body__large color__primary__text`}>
+      Model: {bifrostData.sModelNum}
+    </p>
+  ) : null;
+
+  const uiItemNum = bifrostData.sItemNum ? (
+    <p className={`body__large color__primary__text`}>
+      Item Number: {bifrostData.sItemNum}
+    </p>
+  ) : null;
+
   return (
     <div
       className={`productInfo ${sSize} hBox align__start justify__start gap__1rem`}
     >
-      <img
-        src={bifrostData.sImgKey}
-        alt={bifrostData.sName}
-        className={`prodImg`}
-      />
-      <p className={`body__large color__primary__text`}>{bifrostData.sName}</p>
+      <div className={`vBox prodImg gap__1rem`}>
+        <img src={bifrostData.sImgKey} alt={bifrostData.sName} />
+      </div>
+      <div className={`vBox gap__1rem`}></div>
     </div>
   );
 }

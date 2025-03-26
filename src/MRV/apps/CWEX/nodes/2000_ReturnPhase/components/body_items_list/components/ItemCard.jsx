@@ -1,9 +1,9 @@
 import { ItemTile } from "./ItemTile";
 
-function ItemCard({ dProduct }) {
+function ItemCard({ oProduct }) {
   return (
     <div className={`itemCard card width__max`}>
-      <ItemTile dProduct={dProduct} />
+      <ItemTile oProduct={oProduct} />
     </div>
   );
 }
