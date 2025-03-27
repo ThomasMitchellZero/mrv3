@@ -9,7 +9,7 @@
       }
     }
 
-    & .itemInput {
+    & .productInput {
       & .itemQty {
         flex: 0 0 5rem;
       }

@@ -11,7 +11,7 @@ import { FooterCWEX } from "../../components/layout/footer/FooterCWEX";
 import { ReturnPhase_locState } from "./ReturnPhase_schemas";
 import { SidesheetIndex } from "./components/sidesheet_index/SidesheetIndex";
 
-import { ItemsList } from "./components/body_items_list/ItemsList";
+import { ProductList } from "./components/body_product_list/ProductList";
 import { ReceiptsList } from "./components/body_receipts_list/ReceiptsList";
 import { cloneDeep } from "lodash";
 
@@ -46,7 +46,7 @@ function ReturnPhase() {
     lsReturnPhase.sMode === "items" ? "Items Being Returned" : "Receipts List";
 
   const oMainPanels = {
-    items: <ItemsList pageLS={lsReturnPhase} fSetPageLS={setReturnPhase} />,
+    items: <ProductList pageLS={lsReturnPhase} fSetPageLS={setReturnPhase} />,
     receipts: (
       <ReceiptsList pageLS={lsReturnPhase} fSetPageLS={setReturnPhase} />
     ),

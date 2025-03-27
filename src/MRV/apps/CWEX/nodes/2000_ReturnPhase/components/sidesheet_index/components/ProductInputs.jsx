@@ -7,7 +7,7 @@ import { baseStateExTurns } from "../../../../../../../mrv_data_types";
 import { addItem } from "../../../../../../../mrv_controller";
 import { dProduct } from "../../../../../../../mrv_data_types";
 
-function ItemInputs({ pageLS, fSetPageLS }) {
+function ProductInputs({ pageLS, fSetPageLS }) {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
@@ -84,9 +84,9 @@ function ItemInputs({ pageLS, fSetPageLS }) {
 
   return (
     <form
-      id="rtrnItemInput"
+      id="rtrnProductInputs"
       onSubmit={handleSubmit}
-      className={`vBox itemInput gap__1rem width__max flex__min`}
+      className={`vBox productInput gap__1rem width__max flex__min`}
     >
       <input
         type="text"
@@ -108,7 +108,7 @@ function ItemInputs({ pageLS, fSetPageLS }) {
         <button
           className={`addItemBtn secondary`}
           type="submit"
-          form="rtrnItemInput"
+          form="rtrnProductInputs"
         >
           Add Item
         </button>
@@ -118,4 +118,4 @@ function ItemInputs({ pageLS, fSetPageLS }) {
   );
 }
 
-export { ItemInputs };
+export { ProductInputs };

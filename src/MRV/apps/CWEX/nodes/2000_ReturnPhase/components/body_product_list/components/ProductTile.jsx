@@ -1,6 +1,6 @@
 import { ProductInfo } from "../../../../../../../components/ui/product_info/ProductInfo";
 
-function ItemTile({ oProduct }) {
+function ProductTile({ oProduct }) {
   return (
     <div className={`itemTile tile width__max`}>
       <ProductInfo oProduct={oProduct} />
@@ -8,4 +8,4 @@ function ItemTile({ oProduct }) {
   );
 }
 
-export { ItemTile };
+export { ProductTile };

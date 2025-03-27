@@ -1,0 +1,5 @@
+.mrv3.cwex {
+  & .itemsList {
+    background-color: aqua;
+  }
+}
