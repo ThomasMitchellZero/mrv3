@@ -13,17 +13,45 @@ function ProductList({ pageLS, fSetPageLS }) {
   const returnItems = sessionMRV.returnItems;
 
   const aItems = [];
-  const uiItems = Object.values(returnItems).map((thisItem) => {
+  const uiProducts = Object.values(returnItems).map((thisItem) => {
     return <ProductCard oProduct={thisItem} key={thisItem.sItemKey} />;
   });
 
-  const uiBody = uiItems.length ? (
-    uiItems
+  const uiBody = uiProducts.length ? (
+    uiProducts
   ) : (
     <ScanScreen mainTitle="Scan or Enter Items Being Returned" sIconKey="box" />
   );
 
-  return <main className={`body ProductList gap__1rem`}>{uiBody}</main>;
+  return (
+    <main className={`productList gap__1rem`}>
+      {uiProducts.length ? (
+        <>
+          <div className={`columnTitleRow floorplan`}>
+            <div className={`prodTileCol`}>
+              <div className={`productCol`}>
+                <div className={`hBox width__max gap__0rem`}>Return Item</div>
+                <div className={`qtyInputCol cell`}>Qty</div>
+              </div>
+              <div className={`invoCol`}>
+                <div className={`hBox width__max gap__0rem`}>
+                  <div className={`cell rcptNumCol`}>Receipt#: 12345</div>
+                  <div className={`cell rcptQtyCol`}>x 2</div>
+                  <div className={`cell rcptValueCol`}>$-69.00</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {uiProducts}
+        </>
+      ) : (
+        <ScanScreen
+          mainTitle="Scan or Enter Items Being Returned"
+          sIconKey="box"
+        />
+      )}
+    </main>
+  );
 }
 
 export { ProductList };

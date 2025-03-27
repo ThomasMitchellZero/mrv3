@@ -2,7 +2,7 @@ import { cloneDeep } from "lodash";
 import { SidesheetMRV } from "../../../../../../components/layout/sidesheet/SidesheetMRV";
 import "./SidesheetIndex.css";
 
-import { ItemInputs } from "./components/ItemInputs";
+import { ProductInputs } from "./components/ProductInputs";
 import { ReceiptInputs } from "./components/ReceiptInputs";
 
 function SidesheetIndex({ pageLS, fSetPageLS }) {
@@ -33,7 +33,7 @@ function SidesheetIndex({ pageLS, fSetPageLS }) {
   // Input Clusters  //////////////////////////////////////////////
 
   const oInputClusters = {
-    items: <ItemInputs pageLS={pageLS} fSetPageLS={fSetPageLS} />,
+    items: <ProductInputs pageLS={pageLS} fSetPageLS={fSetPageLS} />,
     receipts: <ReceiptInputs pageLS={pageLS} fSetPageLS={fSetPageLS} />,
   };
 

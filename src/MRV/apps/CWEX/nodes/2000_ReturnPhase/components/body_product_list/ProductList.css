@@ -1,5 +1,71 @@
 .mrv3.cwex {
-  & .itemsList {
-    background-color: aqua;
+  & .productList {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0rem;
+    width: 100%;
+    gap: 1rem;
+
+    & .floorplan {
+      display: flex;
+      flex-direction: row;
+      gap: 0rem;
+      width: 100%;
+      flex: 0 0 auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+
+      & .cell {
+        display: flex;
+        padding: 0rem 0.5rem;
+        min-width: 0rem;
+      }
+
+      & .prodTileCol {
+        display: flex;
+        flex: 1 1 0rem;
+        flex-direction: row;
+        background-color: lightgreen;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        min-width: 0rem;
+
+        & .productCol {
+          display: flex;
+          flex-direction: row;
+          background-color: teal;
+          flex: 10 10 0rem;
+          min-width: 0rem;
+
+          & .qtyInputCol {
+            background-color: darkgray;
+            flex: 0 0 6rem;
+          }
+        }
+
+        & .invoCol {
+          display: flex;
+          flex-direction: column;
+          background-color: blue;
+          flex: 10 10 0rem;
+          min-width: 0rem;
+
+          & .rcptNumCol {
+            flex: 10 10 0rem;
+            background-color: darksalmon;
+          }
+
+          & .rcptQtyCol {
+            flex: 4 4 0rem;
+            background-color: khaki;
+          }
+
+          & .rcptValueCol {
+            background-color: lightcoral;
+            flex: 9 9 0rem;
+          }
+        }
+      }
+    }
   }
 }
