@@ -17,12 +17,6 @@ function ProductList({ pageLS, fSetPageLS }) {
     return <ProductCard oProduct={thisItem} key={thisItem.sItemKey} />;
   });
 
-  const uiBody = uiProducts.length ? (
-    uiProducts
-  ) : (
-    <ScanScreen mainTitle="Scan or Enter Items Being Returned" sIconKey="box" />
-  );
-
   return (
     <main className={`productList gap__1rem`}>
       {uiProducts.length ? (
@@ -35,9 +29,9 @@ function ProductList({ pageLS, fSetPageLS }) {
               </div>
               <div className={`invoCol`}>
                 <div className={`hBox width__max gap__0rem`}>
-                  <div className={`cell rcptNumCol`}>Receipt#: 12345</div>
-                  <div className={`cell rcptQtyCol`}>x 2</div>
-                  <div className={`cell rcptValueCol`}>$-69.00</div>
+                  <div className={`cell rcptNumCol`}>Receipt For Item</div>
+                  <div className={`cell rcptQtyCol`}>Rcpt. Qty</div>
+                  <div className={`cell rcptValueCol`}>Unit Value</div>
                 </div>
               </div>
             </div>
