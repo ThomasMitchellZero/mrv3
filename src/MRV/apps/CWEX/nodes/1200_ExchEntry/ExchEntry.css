@@ -1,9 +1,20 @@
 .mrv3.cwex {
   & .exchEntry {
+    & .cardContainer {
+      display: flex;
+      flex-direction: row;
+      gap: 4rem;
+    }
     & .appTile {
       flex: 0 0 16rem;
       padding: 1rem;
       height: 24rem;
+      text-align: center;
+
+      & img {
+        width: 8rem;
+        width: 8rem;
+      }
     }
   }
 }

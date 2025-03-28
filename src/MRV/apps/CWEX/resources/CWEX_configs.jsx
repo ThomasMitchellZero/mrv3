@@ -5,6 +5,11 @@ import { HeaderMRV } from "../../../components/layout/header/HeaderMRV";
 const baseStateCWEX = () => {
   const returnState = baseStateExTurns({
     oNavNodes: {
+      startCWEX: navNode({
+        keyStr: "startCWEX",
+        sRoute: "/cwex",
+        sTitle: "Start",
+      }),
       itemCheck: navNode({
         keyStr: "itemCheck",
         sRoute: "/cwex/item-check",
