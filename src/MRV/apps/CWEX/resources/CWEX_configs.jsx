@@ -10,6 +10,11 @@ const baseStateCWEX = () => {
         sRoute: "/cwex/item-check",
         sTitle: "Item Check",
       }),
+      exchEntry: navNode({
+        keyStr: "exchEntry",
+        sRoute: "/cwex/exch-entry",
+        sTitle: "Exchange Entry",
+      }),
       returnPhase: navNode({
         keyStr: "returnPhase",
         sRoute: "/cwex/return-phase",

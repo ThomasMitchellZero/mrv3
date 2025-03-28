@@ -12,12 +12,12 @@ const StartCWEX = () => {
   console.log(sessionMRV.oNavNodes);
 
   return (
-    <main className={`mrvPage`}>
+    <main className={`mrvPage exchEntry`}>
       <div className={`mrvPanel__main `}>
         <HeaderCWEX sPageTitle={"Start Carry With Exchanges"} />
         <div className={`body`}>
           <div className={`vBox align__center`}>
-            <button className={`primary`} onClick={() => nodeNav("itemCheck")}>
+            <button className={`primary`} onClick={() => nodeNav("exchEntry")}>
               CWEX Test 1
             </button>
           </div>
