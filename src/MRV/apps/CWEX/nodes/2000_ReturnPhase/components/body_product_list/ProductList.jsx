@@ -3,18 +3,35 @@ import "./ProductList.css";
 import { useOutletContext } from "react-router-dom";
 import { cloneDeep } from "lodash";
 import { context, useContext, useState } from "react";
+import { dProduct } from "../../../../../../mrv_data_types";
 
 import { ScanScreen } from "../../../../../../components/ui/scan_screen/ScanScreen";
 import { ProductCard } from "./components/ProductCard";
+import { ProductTile } from "./components/ProductTile";
 
 function ProductList({ pageLS, fSetPageLS }) {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const returnItems = sessionMRV.returnItems;
 
-  const aItems = [];
-  const uiProducts = Object.values(returnItems).map((thisItem) => {
-    return <ProductCard oProduct={thisItem} key={thisItem.sItemKey} />;
+  const refProduct = dProduct({});
+
+  // cards are only for parent items.  Children render as tiles in the parent's card.
+  const aMainItems = Object.values(returnItems).filter((thisItem) => {
+    return !thisItem?.sParentKey;
+  });
+
+  const uiProducts = aMainItems.map((thisMainItem) => {
+    return (
+      <ProductCard key={thisMainItem.sKey}>
+        <ProductTile
+          key={thisMainItem.sKey}
+          oProduct={thisMainItem}
+          pageLS={pageLS}
+          fSetPageLS={fSetPageLS}
+        />
+      </ProductCard>
+    );
   });
 
   return (

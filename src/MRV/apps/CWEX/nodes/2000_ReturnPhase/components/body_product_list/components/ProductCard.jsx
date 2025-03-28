@@ -1,11 +1,5 @@
-import { ProductTile } from "./ProductTile";
-
-function ProductCard({ oProduct }) {
-  return (
-    <div className={`prodCard floorplan card`}>
-      <ProductTile oProduct={oProduct} />
-    </div>
-  );
+function ProductCard({ oProduct, children }) {
+  return <div className={`prodCard floorplan card`}>{children}</div>;
 }
 
 export { ProductCard };
