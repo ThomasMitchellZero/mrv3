@@ -12,7 +12,6 @@ function ProductTile({ oPage, oProduct }) {
     //e.stopPropagation();
     const draftPage = {
       ...cloneDeep(pageLS),
-      ...oResets.errorOnly,
     };
     draftPage.sActiveDataKey = oProduct.sKey;
     fSetPageLS(draftPage);

@@ -1,11 +1,11 @@
 import { cloneDeep } from "lodash";
 
 function ProductCard({ oPage, children }) {
-  const pageLS = oPage.oPageLS;
   const fSetPageLS = oPage.fSetPageLS;
   const oResets = oPage.oResets;
 
   const fHandeClick = (e) => {
+    const pageLS = oPage.oPageLS;
     e.stopPropagation();
     const draftPage = { ...cloneDeep(pageLS), ...oResets.errorOnly };
     fSetPageLS(draftPage);
