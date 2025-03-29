@@ -31,7 +31,6 @@ function keymaker({ aDistinctKeys = [], oObjectToKey = {} }) {
    * @param {object} oObjectToKey - Object to key.
    * @returns {string} The unique key.
    */
-
   let sOutKey = "";
   for (const thisKey of aDistinctKeys) {
     const thisVal = oObjectToKey?.[thisKey];
@@ -75,6 +74,83 @@ function addItem({ oTargetRepo = {}, oItemToAdd = {}, sUniqueKey = "" }) {
 }
 
 export { addItem };
+
+function matchMaker({
+  aRepo1 = [],
+  aRepo2 = [],
+  fSortRepo1 = (a) => a,
+  fSortRepo2 = (a) => a,
+  fIsMatch = ({ oRepo1Item = {}, oRepo2Item = {} }) => {
+    return true;
+  },
+  fBuildMatch = ({ oRepo1Item = {}, oRepo2Item = {} }) => {
+    return { yaDone: "goofed" };
+  },
+  sQtyKey1 = "iQty",
+  sQtyKey2 = "iQty",
+}) {
+  // check ourselves before we wreck ourselves.
+  if (!Array.isArray(aRepo1) || !Array.isArray(aRepo2)) {
+    console.error("matchMaker requires two arrays as inputs.");
+    return;
+  }
+
+  const aMatches = [];
+
+  // These 2 arrays get depleted as matches are found.
+  const aUnmatched1 = fSortRepo1(cloneDeep(aRepo1));
+  const aUnmatched2 = fSortRepo2(cloneDeep(aRepo2));
+
+  Loop_Repo1: for (const thisItem1 of aRepo1) {
+    Loop_Repo2: for (const thisItem2 of aRepo2) {
+      const bIsMatch = fIsMatch({
+        oRepo1Item: thisItem1,
+        oRepo2Item: thisItem2,
+      });
+
+      // If the items don't match, continue to the next item in repo2.
+      if (!bIsMatch) {
+        continue Loop_Repo2;
+      }
+
+      // If the items do match, get the quantity they have in common.
+      const iOverlapQty = Math.min(thisItem1[sQtyKey1], thisItem2[sQtyKey2]);
+
+      // here's the guts.
+
+      // Unmatched Repo1
+      // Unmatched Repo2
+      // Matched = []
+
+      // Got this weird intuition this can be done in a single loop, and it's swinging strangely between obviously yes and obviously no.
+    }
+  }
+}
+
+function fInitResetLS({ oInitLS = {}, oPageLS = {} }) {
+  /**
+   * Resets any parameter passed as `true` in `params` to its initial value in `oInitLS`.
+   * If `ALL` is passed as `true`, resets all parameters.
+   *
+   * @param {object} params - An object where keys correspond to fields in `oInitLS`.
+   * @param {boolean} [params.ALL=false] - If `true`, resets all fields to their initial values.
+   * @returns {object} A clone of the updated local state (LS).
+   */
+  const fResetLS = (params = { ALL: false }) => {
+    const outLS = cloneDeep(oPageLS);
+
+    for (const sKey of Object.keys(oInitLS)) {
+      // Reset the field if params.ALL is true or if the specific field is set to true in params
+      if (params.ALL === true || params?.[sKey] === true) {
+        outLS[sKey] = oInitLS[sKey];
+      }
+    }
+    return outLS;
+  };
+  return fResetLS;
+}
+
+export { fInitResetLS };
 
 /////////////////////////////////////////////////////////////////
 ////////             Node Navigation
@@ -138,58 +214,6 @@ function useNodeNav() {
   };
 
   return nodeNav;
-}
-
-function matchMaker({
-  aRepo1 = [],
-  aRepo2 = [],
-  fSortRepo1 = (a) => a,
-  fSortRepo2 = (a) => a,
-  fIsMatch = ({ oRepo1Item = {}, oRepo2Item = {} }) => {
-    return true;
-  },
-  fBuildMatch = ({ oRepo1Item = {}, oRepo2Item = {} }) => {
-    return { yaDone: "goofed" };
-  },
-  sQtyKey1 = "iQty",
-  sQtyKey2 = "iQty",
-}) {
-  // check ourselves before we wreck ourselves.
-  if (!Array.isArray(aRepo1) || !Array.isArray(aRepo2)) {
-    console.error("matchMaker requires two arrays as inputs.");
-    return;
-  }
-
-  const aMatches = [];
-
-  // These 2 arrays get depleted as matches are found.
-  const aUnmatched1 = fSortRepo1(cloneDeep(aRepo1));
-  const aUnmatched2 = fSortRepo2(cloneDeep(aRepo2));
-
-  Loop_Repo1: for (const thisItem1 of aRepo1) {
-    Loop_Repo2: for (const thisItem2 of aRepo2) {
-      const bIsMatch = fIsMatch({
-        oRepo1Item: thisItem1,
-        oRepo2Item: thisItem2,
-      });
-
-      // If the items don't match, continue to the next item in repo2.
-      if (!bIsMatch) {
-        continue Loop_Repo2;
-      }
-
-      // If the items do match, get the quantity they have in common.
-      const iOverlapQty = Math.min(thisItem1[sQtyKey1], thisItem2[sQtyKey2]);
-
-      // here's the guts.
-
-      // Unmatched Repo1
-      // Unmatched Repo2
-      // Matched = []
-
-      // Got this weird intuition this can be done in a single loop, and it's swinging strangely between obviously yes and obviously no.
-    }
-  }
 }
 
 export { useNodeNav };

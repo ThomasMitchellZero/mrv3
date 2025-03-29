@@ -7,9 +7,14 @@ import { ReturnPhase_locState } from "../../../ReturnPhase_schemas";
 function ProductTile({ oPage, oProduct }) {
   const pageLS = oPage.oPageLS;
   const fSetPageLS = oPage.fSetPageLS;
+  const oResets = oPage.oResets;
 
-  const handeClick = () => {
-    const draftPage = cloneDeep(pageLS);
+  const handeClick = (e) => {
+    //e.stopPropagation();
+    const draftPage = {
+      ...cloneDeep(pageLS),
+      ...oResets.errorOnly,
+    };
     draftPage.sActiveDataKey = oProduct.sKey;
     fSetPageLS(draftPage);
   };
@@ -17,7 +22,12 @@ function ProductTile({ oPage, oProduct }) {
   const sIsActive = pageLS?.sActiveDataKey === oProduct?.sKey ? "selected" : "";
 
   return (
-    <div onClick={handeClick} className={`prodTileCol ${sIsActive} tile `}>
+    <div
+      onClick={(e) => {
+        handeClick(e);
+      }}
+      className={`prodTileCol ${sIsActive} tile `}
+    >
       <div className={`productCol`}>
         <ProductInfo oProduct={oProduct} />
         <div className={`qtyInputCol`}></div>

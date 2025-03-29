@@ -1,3 +1,5 @@
+import { useRef, useState } from "react";
+
 // Shared parameter schema
 
 const sharedParamsSchema = {
@@ -186,14 +188,58 @@ function dError({ sKey = "", sMessage = "", bClearOnBGClick = true }) {
 
 export { dError };
 
-function dPage({ oInitLS, oPageLS, fSetPageLS, oPageMethods, oErrorObjects }) {
+function dPage({ oInitLS, oResets, oMethods, oErrorObjects }) {
+  // Define state and ref inside the dPage object
+  const [oPageLS, setPageLS] = useState(oInitLS);
+  const oPageLSRef = useRef(oPageLS);
+
+  // Wrap the state setter to update both the state and the ref
+  const fSetPageLS = (newState) => {
+    oPageLSRef.current = newState; // Update the ref
+    setPageLS(newState); // Update the state
+  };
+
   return {
     oInitLS,
-    oPageLS,
+    get oPageLS() {
+      return oPageLSRef.current; // Always return the latest value from the ref
+    },
+    oResets,
     fSetPageLS,
-    oPageMethods,
+    oMethods,
     oErrorObjects,
   };
 }
 
 export { dPage };
+
+/*
+
+function dPage({ oInitLS, oResets, oMethods, oErrorObjects }) {
+  // Define state and ref inside the dPage object
+  const [oPageLS, setPageLS] = useState(oInitLS);
+  const oPageLSRef = useRef(oPageLS);
+
+  // Wrap the state setter to update both the state and the ref
+  const fSetPageLS = (newState) => {
+    oPageLSRef.current = newState; // Update the ref
+    setPageLS(newState); // Update the state
+  };
+
+  return {
+    oInitLS,
+    get oPageLS() {
+      return oPageLSRef.current; // Always return the latest value from the ref
+    },
+    oResets,
+    fSetPageLS,
+    oMethods,
+    oErrorObjects,
+  };
+}
+
+export { dPage };
+
+
+
+*/

@@ -1,7 +1,7 @@
 import "./ReturnPhase_style.css";
 
-import { useState } from "react";
-import { useNodeNav } from "../../../../mrv_controller";
+import { useState, useRef } from "react";
+import { useNodeNav, fInitResetLS } from "../../../../mrv_controller";
 import { useOutlet, useOutletContext } from "react-router-dom";
 
 import { HeaderCWEX } from "../../components/layout/header_cwex/HeaderCWEX";
@@ -26,19 +26,27 @@ function ReturnPhase() {
   };
 
   const [lsReturnPhase, setReturnPhase] = useState(initPageLS);
+  const oPageLSRef = useRef(lsReturnPhase);
 
-  const fClearError = () => {
-    const pageDraft = cloneDeep(lsReturnPhase);
-    pageDraft.sActiveError = "";
-    setReturnPhase(pageDraft);
+  const fUpdatePageLS = (pageLSdraft) => {
+    oPageLSRef.current = pageLSdraft;
+    setReturnPhase(pageLSdraft);
   };
 
   const oPage = dPage({
     oInitLS: initPageLS,
     oPageLS: lsReturnPhase,
-    fSetPageLS: setReturnPhase,
+    oResets: {
+      errorOnly: {
+        sActiveError: initPageLS.sActiveError,
+      },
+      allActive: {
+        sActiveDataKey: initPageLS.sActiveDataKey,
+        sActiveError: initPageLS.sActiveError,
+      },
+    },
     oPageMethods: {},
-
+    fSetPageLS: fUpdatePageLS,
     oErrorObjects: {
       invalidReceipt: dError({
         sKey: "invalidReceipt",
@@ -58,6 +66,10 @@ function ReturnPhase() {
       }),
     },
   });
+
+  const oPageLS = oPage.oPageLS;
+  const fSetPageLS = oPage.fSetPageLS;
+  const oResets = oPage.oResets;
 
   // UI Sidesheets ///////////////////////////////////////////////////
 
@@ -82,7 +94,12 @@ function ReturnPhase() {
   const uiMainPanel = oMainPanels[lsReturnPhase.sMode] || oMainPanels["items"];
 
   return (
-    <main onClick={fClearError} className={`mrvPage returnPhase`}>
+    <main
+      onClick={() => {
+        fSetPageLS({ ...oPageLS, ...oResets.allActive });
+      }}
+      className={`mrvPage returnPhase`}
+    >
       <div className={`mrvPanel__main `}>
         <HeaderCWEX sPageTitle={sPageTitle} />
         <div className={`body`}>{uiMainPanel}</div>

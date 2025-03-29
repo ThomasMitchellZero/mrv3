@@ -1,16 +1,23 @@
+import { cloneDeep } from "lodash";
+
 function ProductCard({ oPage, children }) {
   const pageLS = oPage.oPageLS;
   const fSetPageLS = oPage.fSetPageLS;
+  const oResets = oPage.oResets;
 
   const fHandeClick = (e) => {
     e.stopPropagation();
-    const draftPage = cloneDeep(pageLS);
-    draftPage.sActiveError = "";
+    const draftPage = { ...cloneDeep(pageLS), ...oResets.errorOnly };
     fSetPageLS(draftPage);
   };
 
   return (
-    <div onClick={fHandeClick} className={`prodCard floorplan card`}>
+    <div
+      onClick={(e) => {
+        fHandeClick(e);
+      }}
+      className={`prodCard floorplan card`}
+    >
       {children}
     </div>
   );
