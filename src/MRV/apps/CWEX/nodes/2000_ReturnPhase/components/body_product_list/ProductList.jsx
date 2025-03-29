@@ -26,7 +26,11 @@ function ProductList({ oPage }) {
 
   const uiProducts = aMainItems.map((thisMainItem) => {
     return (
-      <ProductCard oPage={oPage} key={thisMainItem.sKey}>
+      <ProductCard
+        oPage={oPage}
+        oProduct={thisMainItem}
+        key={thisMainItem.sKey}
+      >
         <ProductTile
           key={thisMainItem.sKey}
           oProduct={thisMainItem}
@@ -54,6 +58,7 @@ function ProductList({ oPage }) {
                 </div>
               </div>
             </div>
+            <div className={`deleteCol cell`}>Delete</div>
           </div>
           {uiProducts}
         </>

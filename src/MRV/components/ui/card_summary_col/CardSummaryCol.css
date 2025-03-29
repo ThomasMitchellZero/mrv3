@@ -1,0 +1,15 @@
+.mrv3 {
+  & .cardSummaryCol {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 var(--DeleteColWidth);
+    background-color: lightblue;
+    padding: 0rem;
+
+    & .closeBtn {
+      height: 3.5rem;
+      flex: 0 0 3rem;
+      padding: 0rem;
+    }
+  }
+}
