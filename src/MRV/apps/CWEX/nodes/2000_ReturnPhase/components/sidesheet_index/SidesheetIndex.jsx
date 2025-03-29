@@ -5,7 +5,9 @@ import "./SidesheetIndex.css";
 import { ProductInputs } from "./components/ProductInputs";
 import { ReceiptInputs } from "./components/ReceiptInputs";
 
-function SidesheetIndex({ pageLS, fSetPageLS }) {
+function SidesheetIndex({ oPage }) {
+  const pageLS = oPage.oPageLS;
+  const fSetPageLS = oPage.fSetPageLS;
   // UI Mode Tabs //////////////////////////////////////////////////////
 
   const handleTabClick = (sTabKey) => {
@@ -33,8 +35,8 @@ function SidesheetIndex({ pageLS, fSetPageLS }) {
   // Input Clusters  //////////////////////////////////////////////
 
   const oInputClusters = {
-    items: <ProductInputs pageLS={pageLS} fSetPageLS={fSetPageLS} />,
-    receipts: <ReceiptInputs pageLS={pageLS} fSetPageLS={fSetPageLS} />,
+    items: <ProductInputs oPage={oPage} />,
+    receipts: <ReceiptInputs oPage={oPage} />,
   };
 
   const uiInputCluster = oInputClusters[pageLS.sMode];

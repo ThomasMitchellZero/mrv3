@@ -4,14 +4,13 @@ import { ProductInfo } from "../../../../../../../components/ui/product_info/Pro
 import { ProductInvoRow } from "./ProductInvoRow";
 import { ReturnPhase_locState } from "../../../ReturnPhase_schemas";
 
-function ProductTile({ oProduct, pageLS, fSetPageLS }) {
-  const refPageLS = ReturnPhase_locState;
+function ProductTile({ oPage, oProduct }) {
+  const pageLS = oPage.oPageLS;
+  const fSetPageLS = oPage.fSetPageLS;
 
   const handeClick = () => {
     const draftPage = cloneDeep(pageLS);
     draftPage.sActiveDataKey = oProduct.sKey;
-    // it's working up to here, but the state isn't being set.
-    console.log(draftPage);
     fSetPageLS(draftPage);
   };
 

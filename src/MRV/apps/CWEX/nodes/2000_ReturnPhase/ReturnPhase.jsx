@@ -1,25 +1,31 @@
 import "./ReturnPhase_style.css";
 
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNodeNav } from "../../../../mrv_controller";
 import { useOutlet, useOutletContext } from "react-router-dom";
 
 import { HeaderCWEX } from "../../components/layout/header_cwex/HeaderCWEX";
-import { SidesheetMRV } from "../../../../components/layout/sidesheet/SidesheetMRV";
 import { FooterCWEX } from "../../components/layout/footer/FooterCWEX";
-
-import { ReturnPhase_locState } from "./ReturnPhase_schemas";
 import { SidesheetIndex } from "./components/sidesheet_index/SidesheetIndex";
 
 import { ProductList } from "./components/body_product_list/ProductList";
 import { ReceiptsList } from "./components/body_receipts_list/ReceiptsList";
 import { cloneDeep } from "lodash";
+import { dPage, dError, oBaseLocState } from "../../../../mrv_data_types";
 
 function ReturnPhase() {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
 
-  const [lsReturnPhase, setReturnPhase] = useState(ReturnPhase_locState);
+  // Page Configs ///////////////////////////////////////////////////
+
+  const initPageLS = {
+    ...oBaseLocState,
+    sMode: "receipts",
+    sActiveDataKey: "",
+  };
+
+  const [lsReturnPhase, setReturnPhase] = useState(initPageLS);
 
   const fClearError = () => {
     const pageDraft = cloneDeep(lsReturnPhase);
@@ -27,13 +33,36 @@ function ReturnPhase() {
     setReturnPhase(pageDraft);
   };
 
+  const oPage = dPage({
+    oInitLS: initPageLS,
+    oPageLS: lsReturnPhase,
+    fSetPageLS: setReturnPhase,
+    oPageMethods: {},
+
+    oErrorObjects: {
+      invalidReceipt: dError({
+        sKey: "invalidReceipt",
+        sMessage: "Invalid receipt #",
+      }),
+      duplicateReceipt: dError({
+        sKey: "duplicateReceipt",
+        sMessage: "Receipt already added",
+      }),
+      invalidItem: dError({
+        sKey: "invalidItem",
+        sMessage: "Invalid Item #",
+      }),
+      invalidQty: dError({
+        sKey: "invalidQty",
+        sMessage: "Invalid quantity",
+      }),
+    },
+  });
+
   // UI Sidesheets ///////////////////////////////////////////////////
 
   const oSidesheet = {
-    // fSetPageLS
-    index: (
-      <SidesheetIndex pageLS={lsReturnPhase} fSetPageLS={setReturnPhase} />
-    ),
+    index: <SidesheetIndex oPage={oPage} />,
     itemDetails: null,
   };
 
@@ -46,11 +75,10 @@ function ReturnPhase() {
     lsReturnPhase.sMode === "items" ? "Items Being Returned" : "Receipts List";
 
   const oMainPanels = {
-    items: <ProductList pageLS={lsReturnPhase} fSetPageLS={setReturnPhase} />,
-    receipts: (
-      <ReceiptsList pageLS={lsReturnPhase} fSetPageLS={setReturnPhase} />
-    ),
+    items: <ProductList oPage={oPage} />,
+    receipts: <ReceiptsList oPage={oPage} />,
   };
+
   const uiMainPanel = oMainPanels[lsReturnPhase.sMode] || oMainPanels["items"];
 
   return (

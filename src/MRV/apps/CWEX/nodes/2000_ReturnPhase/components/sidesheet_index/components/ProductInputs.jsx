@@ -7,18 +7,21 @@ import { baseStateExTurns } from "../../../../../../../mrv_data_types";
 import { addItem } from "../../../../../../../mrv_controller";
 import { dProduct } from "../../../../../../../mrv_data_types";
 
-function ProductInputs({ pageLS, fSetPageLS }) {
+function ProductInputs({ oPage }) {
+  const pageLS = oPage.oPageLS;
+  const fSetPageLS = oPage.fSetPageLS;
+
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const bifrost = useContext(bifrostAPI);
 
-  const oInitLS = {
+  const oInitThisLS = {
     sItemKey: "",
     iQty: "",
   };
 
-  const [thisLS, setThisLS] = useState(oInitLS);
+  const [thisLS, setThisLS] = useState(oInitThisLS);
 
   // Item Inputs //////////////////////////////////////////////
   const handleItemInput = (e) => {
@@ -37,8 +40,6 @@ function ProductInputs({ pageLS, fSetPageLS }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Attempting submit");
-    const refLS = ReturnPhase_locState;
-    const refBaseStateExTurns = baseStateExTurns;
     const sItemKey = thisLS.sItemKey;
     const iQty = thisLS.iQty;
 
@@ -71,14 +72,14 @@ function ProductInputs({ pageLS, fSetPageLS }) {
       }),
     });
     setSessionMRV(draftMRV);
-    setThisLS(oInitLS);
+    setThisLS(oInitThisLS);
   };
 
   const sError = pageLS.sActiveError;
   const bItemError = sError === "invalidItem" || sError === "invalidQty";
   const uiError = bItemError ? (
     <p className={`warning width__max text__align__right`}>
-      {pageLS.oErrorObjects[sError].sMessage}
+      {oPage.oErrorObjects[sError].sMessage}
     </p>
   ) : null;
 

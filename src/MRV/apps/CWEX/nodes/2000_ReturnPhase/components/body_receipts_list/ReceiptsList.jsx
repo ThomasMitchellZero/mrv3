@@ -3,7 +3,10 @@ import { useOutletContext } from "react-router-dom";
 
 import { ReceiptCard } from "./ReceiptCard";
 
-function ReceiptsList({}) {
+function ReceiptsList({ oPage }) {
+  const pageLS = oPage.oPageLS;
+  const fSetPageLS = oPage.fSetPageLS;
+
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const sessionInvos = sessionMRV.sessionInvos;

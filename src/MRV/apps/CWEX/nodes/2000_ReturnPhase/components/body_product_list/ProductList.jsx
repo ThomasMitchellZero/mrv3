@@ -9,7 +9,10 @@ import { ScanScreen } from "../../../../../../components/ui/scan_screen/ScanScre
 import { ProductCard } from "./components/ProductCard";
 import { ProductTile } from "./components/ProductTile";
 
-function ProductList({ pageLS, fSetPageLS }) {
+function ProductList({ oPage }) {
+  const pageLS = oPage.oPageLS;
+  const fSetPageLS = oPage.fSetPageLS;
+
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const returnItems = sessionMRV.returnItems;
@@ -23,7 +26,7 @@ function ProductList({ pageLS, fSetPageLS }) {
 
   const uiProducts = aMainItems.map((thisMainItem) => {
     return (
-      <ProductCard key={thisMainItem.sKey}>
+      <ProductCard oPage={oPage} key={thisMainItem.sKey}>
         <ProductTile
           key={thisMainItem.sKey}
           oProduct={thisMainItem}

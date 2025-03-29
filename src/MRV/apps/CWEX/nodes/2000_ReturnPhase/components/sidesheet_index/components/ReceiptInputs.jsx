@@ -8,17 +8,20 @@ import {
 } from "../../../../../../../mrv_data_types";
 import { ReturnPhase_locState } from "../../../ReturnPhase_schemas";
 
-function ReceiptInputs({ pageLS, fSetPageLS }) {
+function ReceiptInputs({ oPage }) {
+  const pageLS = oPage.oPageLS;
+  const fSetPageLS = oPage.fSetPageLS;
+
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const oReceiptsAPI = useContext(SaleRecordsAPI);
 
-  const oInitLS = {
+  const oInitThisLS = {
     sReceiptKey: "",
   };
 
-  const [thisLS, setThisLS] = useState(oInitLS);
+  const [thisLS, setThisLS] = useState(oInitThisLS);
 
   // Receipt Num Input //////////////////////////////////////////////////
   const handleReceiptInput = (e) => {
@@ -57,7 +60,7 @@ function ReceiptInputs({ pageLS, fSetPageLS }) {
     const draftMRV = cloneDeep(sessionMRV);
     draftMRV.sessionInvos[sReceiptNum] = true;
     setSessionMRV(draftMRV);
-    setThisLS(oInitLS);
+    setThisLS(oInitThisLS);
   };
 
   // Error UI //////////////////////////////////////////////////
@@ -66,7 +69,7 @@ function ReceiptInputs({ pageLS, fSetPageLS }) {
     sError === "invalidReceipt" || sError === "duplicateReceipt";
   const uiError = bInvoiceError ? (
     <p className={`warning width__max text__align__right`}>
-      {pageLS.oErrorObjects[pageLS.sActiveError].sMessage}
+      {oPage.oErrorObjects[pageLS.sActiveError].sMessage}
     </p>
   ) : null;
 

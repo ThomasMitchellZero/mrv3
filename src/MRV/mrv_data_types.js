@@ -172,12 +172,11 @@ const oBaseLocState = {
   sActiveOverlay: "",
   sActiveDataKey: "",
   sMode: "",
-  oErrorObjects: {},
 };
 
 export { oBaseLocState };
 
-function dError(sKey = "", sMessage = "", bClearOnBGClick = true) {
+function dError({ sKey = "", sMessage = "", bClearOnBGClick = true }) {
   return {
     sKey,
     sMessage,
@@ -186,3 +185,15 @@ function dError(sKey = "", sMessage = "", bClearOnBGClick = true) {
 }
 
 export { dError };
+
+function dPage({ oInitLS, oPageLS, fSetPageLS, oPageMethods, oErrorObjects }) {
+  return {
+    oInitLS,
+    oPageLS,
+    fSetPageLS,
+    oPageMethods,
+    oErrorObjects,
+  };
+}
+
+export { dPage };
