@@ -2,7 +2,6 @@ import { cloneDeep } from "lodash";
 
 import { ProductInfo } from "../../../../../../../components/ui/product_info/ProductInfo";
 import { ProductInvoRow } from "./ProductInvoRow";
-import { ReturnPhase_locState } from "../../../ReturnPhase_schemas";
 
 function ProductTile({ oPage, oProduct }) {
   const pageLS = oPage.oPageLS;

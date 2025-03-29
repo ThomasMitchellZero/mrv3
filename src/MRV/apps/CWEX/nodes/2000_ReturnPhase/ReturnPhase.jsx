@@ -25,17 +25,8 @@ function ReturnPhase() {
     sActiveDataKey: "",
   };
 
-  const [lsReturnPhase, setReturnPhase] = useState(initPageLS);
-  const oPageLSRef = useRef(lsReturnPhase);
-
-  const fUpdatePageLS = (pageLSdraft) => {
-    oPageLSRef.current = pageLSdraft;
-    setReturnPhase(pageLSdraft);
-  };
-
   const oPage = dPage({
     oInitLS: initPageLS,
-    oPageLS: lsReturnPhase,
     oResets: {
       errorOnly: {
         sActiveError: initPageLS.sActiveError,
@@ -46,7 +37,6 @@ function ReturnPhase() {
       },
     },
     oPageMethods: {},
-    fSetPageLS: fUpdatePageLS,
     oErrorObjects: {
       invalidReceipt: dError({
         sKey: "invalidReceipt",
@@ -78,20 +68,19 @@ function ReturnPhase() {
     itemDetails: null,
   };
 
-  const activeSidesheet =
-    oSidesheet[lsReturnPhase.sMode] || oSidesheet["index"];
+  const activeSidesheet = oSidesheet[oPageLS.sMode] || oSidesheet["index"];
 
   // UI Main Panel ///////////////////////////////////////////////////
 
   const sPageTitle =
-    lsReturnPhase.sMode === "items" ? "Items Being Returned" : "Receipts List";
+    oPageLS.sMode === "items" ? "Items Being Returned" : "Receipts List";
 
   const oMainPanels = {
     items: <ProductList oPage={oPage} />,
     receipts: <ReceiptsList oPage={oPage} />,
   };
 
-  const uiMainPanel = oMainPanels[lsReturnPhase.sMode] || oMainPanels["items"];
+  const uiMainPanel = oMainPanels[oPageLS.sMode] || oMainPanels["items"];
 
   return (
     <main

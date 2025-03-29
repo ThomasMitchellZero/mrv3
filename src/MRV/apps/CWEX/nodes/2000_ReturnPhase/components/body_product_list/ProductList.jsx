@@ -16,6 +16,7 @@ function ProductList({ oPage }) {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const returnItems = sessionMRV.returnItems;
+  console.log("returnItems", returnItems);
 
   const refProduct = dProduct({});
 
@@ -23,6 +24,8 @@ function ProductList({ oPage }) {
   const aMainItems = Object.values(returnItems).filter((thisItem) => {
     return !thisItem?.sParentKey;
   });
+
+  console.log("aMainItems", aMainItems);
 
   const uiProducts = aMainItems.map((thisMainItem) => {
     return (
