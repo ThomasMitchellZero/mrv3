@@ -30,8 +30,7 @@ function ProductList({ oPage }) {
         <ProductTile
           key={thisMainItem.sKey}
           oProduct={thisMainItem}
-          pageLS={pageLS}
-          fSetPageLS={fSetPageLS}
+          oPage={oPage}
         />
       </ProductCard>
     );
