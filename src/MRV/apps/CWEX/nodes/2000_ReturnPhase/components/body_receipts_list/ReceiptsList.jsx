@@ -11,8 +11,8 @@ function ReceiptsList({ oPage }) {
   const sessionMRV = mrvCtx.sessionMRV;
   const sessionInvos = sessionMRV.sessionInvos;
 
-  const uiReceipts = Object.keys(sessionInvos).map((sReceiptKey) => (
-    <ReceiptCard sReceiptKey={sReceiptKey} key={sReceiptKey} />
+  const uiReceipts = Object.values(sessionInvos).map((thisReceiptNum) => (
+    <ReceiptCard sReceiptNum={thisReceiptNum} key={thisReceiptNum} />
   ));
 
   const uiBody = uiReceipts.length ? (

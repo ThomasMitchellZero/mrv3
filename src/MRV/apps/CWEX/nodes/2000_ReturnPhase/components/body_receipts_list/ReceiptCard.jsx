@@ -2,8 +2,8 @@ import { dSaleRecord } from "../../../../../../mrv_data_types";
 import { useContext } from "react";
 import { SaleRecordsAPI } from "../../../../../../../local_APIs/sale_records";
 
-function ReceiptCard({ sReceiptKey }) {
-  const oReceipt = useContext(SaleRecordsAPI)[sReceiptKey];
+function ReceiptCard({ sReceiptNum }) {
+  const oReceipt = useContext(SaleRecordsAPI)[sReceiptNum];
 
   const refReceipt = dSaleRecord(oReceipt);
 

@@ -36,10 +36,11 @@ function ReceiptInputs({ oPage }) {
     e.preventDefault();
     const refLS = oBaseLocState;
     const refBaseStateExTurns = ReturnPhase_locState;
-    const sReceiptNum = thisLS.sReceiptKey;
+    const sInvoNum = thisLS.sReceiptKey;
+    const sInvoKey = `_${sInvoNum}`; // session keys have "_" prefix to coerce them to strings.
 
     // Check for duplicate receipt
-    const bDuplicateInvo = sReceiptNum in sessionMRV.sessionInvos;
+    const bDuplicateInvo = sInvoKey in sessionMRV.sessionInvos;
     if (bDuplicateInvo) {
       const draftPage = cloneDeep(pageLS);
       draftPage.sActiveError = "duplicateReceipt";
@@ -48,7 +49,7 @@ function ReceiptInputs({ oPage }) {
     }
 
     // Check for invalid receipt
-    const bInvalidInvo = !(sReceiptNum in oReceiptsAPI);
+    const bInvalidInvo = !(sInvoNum in oReceiptsAPI);
     if (bInvalidInvo) {
       const draftPage = cloneDeep(pageLS);
       draftPage.sActiveError = "invalidReceipt";
@@ -58,7 +59,7 @@ function ReceiptInputs({ oPage }) {
 
     // If all validity checks pass, add the receipt to the session
     const draftMRV = cloneDeep(sessionMRV);
-    draftMRV.sessionInvos[sReceiptNum] = true;
+    draftMRV.sessionInvos[sInvoKey] = sInvoNum;
     setSessionMRV(draftMRV);
     setThisLS(oInitThisLS);
   };

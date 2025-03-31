@@ -52,9 +52,17 @@ export { keymaker };
  * @param {string} [sUniqueKey] - OPTIONAL.  For cases where oItemToAdd lacks a unique key.
  * @returns {object} A clone of the updated repository.
  */
+
 function addItem({ oTargetRepo = {}, oItemToAdd = {}, sUniqueKey = "" }) {
   const refProduct = dProduct({});
-  const sProdKey = sUniqueKey || oItemToAdd.sKey;
+
+  let sProdKey = String(sUniqueKey || oItemToAdd.sKey);
+  // If the key doesn't start with an underscore, add one.  This ensures keys are strings.
+  if (sProdKey[0] !== "_") {
+    sProdKey = "_" + sProdKey;
+  }
+  oItemToAdd.sKey = sProdKey;
+
   const iQtyToAdd = oItemToAdd.iQty;
   if (isNaN(iQtyToAdd)) {
     console.error("addItem requires a quantity to add.");
@@ -126,31 +134,6 @@ function matchMaker({
     }
   }
 }
-
-function fInitResetLS({ oInitLS = {}, oPageLS = {} }) {
-  /**
-   * Resets any parameter passed as `true` in `params` to its initial value in `oInitLS`.
-   * If `ALL` is passed as `true`, resets all parameters.
-   *
-   * @param {object} params - An object where keys correspond to fields in `oInitLS`.
-   * @param {boolean} [params.ALL=false] - If `true`, resets all fields to their initial values.
-   * @returns {object} A clone of the updated local state (LS).
-   */
-  const fResetLS = (params = { ALL: false }) => {
-    const outLS = cloneDeep(oPageLS);
-
-    for (const sKey of Object.keys(oInitLS)) {
-      // Reset the field if params.ALL is true or if the specific field is set to true in params
-      if (params.ALL === true || params?.[sKey] === true) {
-        outLS[sKey] = oInitLS[sKey];
-      }
-    }
-    return outLS;
-  };
-  return fResetLS;
-}
-
-export { fInitResetLS };
 
 /////////////////////////////////////////////////////////////////
 ////////             Node Navigation

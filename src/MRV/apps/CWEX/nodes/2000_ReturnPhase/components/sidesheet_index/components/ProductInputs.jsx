@@ -26,7 +26,7 @@ function ProductInputs({ oPage }) {
   // Item Inputs //////////////////////////////////////////////
   const handleItemInput = (e) => {
     const draft = cloneDeep(thisLS);
-    draft.sItemKey = e.target.value;
+    draft.sItemKey = String(e.target.value);
     setThisLS(draft);
   };
 

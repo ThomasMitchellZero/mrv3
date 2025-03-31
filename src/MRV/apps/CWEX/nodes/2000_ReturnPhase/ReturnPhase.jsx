@@ -1,7 +1,7 @@
 import "./ReturnPhase_style.css";
 
 import { useState, useRef } from "react";
-import { useNodeNav, fInitResetLS } from "../../../../mrv_controller";
+import { useNodeNav } from "../../../../mrv_controller";
 import { useOutlet, useOutletContext } from "react-router-dom";
 
 import { HeaderCWEX } from "../../components/layout/header_cwex/HeaderCWEX";
