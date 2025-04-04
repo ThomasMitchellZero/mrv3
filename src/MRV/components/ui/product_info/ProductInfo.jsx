@@ -4,6 +4,7 @@ import { useOutletContext } from "react-router-dom";
 import { dProduct, dProduct_bifrost } from "../../../mrv_data_types";
 import { bifrostAPI } from "../../../../local_APIs/bifrost";
 import { centsToDollars } from "../../../mrv_controller";
+import { ProductImg } from "../product_img/ProductImg";
 
 /**
  *
@@ -38,6 +39,7 @@ function ProductInfo({
       priceQty: `body__medium bold color__primary__text`,
       itemModel: `body__small color__tertiary__text`,
       description: `description body__large l${sLineLimit} color__primary__text`,
+      imgSize: "8rem",
     },
     "m": {},
     "s": {},
@@ -104,7 +106,10 @@ function ProductInfo({
       className={`productInfo ${sSize} hBox align__start justify__start gap__1rem`}
     >
       <div className={`vBox prodImg gap__1rem`}>
-        <img src={bifrostData.sImgKey} alt={bifrostData.sName} />
+        <ProductImg
+          sImgKey={bifrostData.sImgKey}
+          sSize={oConfig[size].imgSize}
+        />
       </div>
       <div className={`vBox gap__05rem`}>
         {uiPriceQty}

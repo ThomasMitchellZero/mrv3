@@ -1,36 +1,64 @@
+import no_product from "../../../../assets/product-images/no_product.png";
+import windowscraper from "../../../../assets/product-images/windowscraper.png";
+import walloutlet from "../../../../assets/product-images/walloutlet.png";
+import paintstick from "../../../../assets/product-images/paintstick.png";
+import lifetime_warranty from "../../../../assets/product-images/lifetime_warranty.png";
+import kobalt_hammer from "../../../../assets/product-images/kobalt_hammer.png";
+import craftsman_wrench from "../../../../assets/product-images/craftsman_wrench.png";
+
+// Create an object to map keys to images
+const images = {
+  no_product,
+  windowscraper,
+  walloutlet,
+  paintstick,
+  lifetime_warranty,
+  kobalt_hammer,
+  craftsman_wrench,
+};
+
+/**
+ * Component to render a product image.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.sImgKey - The key for the image to display. Allowable values:
+ *   - `"no_product"`: Default fallback image.
+ *   - `"windowscraper"`: Image of a window scraper.
+ *   - `"walloutlet"`: Image of a wall outlet.
+ *   - `"paintstick"`: Image of a paint stick.
+ *   - `"lifetime_warranty"`: Image representing a lifetime warranty.
+ *   - `"kobalt_hammer"`: Image of a Kobalt hammer.
+ *   - `"craftsman_wrench"`: Image of a Craftsman wrench.
+ * @param {string} [props.sSize="4rem"] - The size of the image (applies to both width and height).
+ * @param {string} [props.sWidth="4rem"] - The width of the image.
+ * @param {string} [props.sHeight="4rem"] - The height of the image.
+ * @param {string} [props.radius="0.5rem"] - The border radius of the image.
+ * @returns {JSX.Element} The rendered product image.
+ */
 function ProductImg({
   sImgKey,
   sSize = "4rem",
-  sWidth = "100px",
-  sHeight = "100px",
+  sWidth = "4rem",
+  sHeight = "4rem",
   radius = "0.5rem",
 }) {
-  const getImageSrc = (key) => {
-    try {
-      // Dynamically require the image based on the key
-      return require(`../../../../assets/product-images/${key}.png`);
-    } catch (error) {
-      // Handle missing image by returning a default image
-      console.error(`Image not found for key: ${key}`);
-      return require(`../../../../assets/product-images/no_product.png`);
-    }
-  };
-
-  const imgSrc = getImageSrc(sImgKey);
+  // Use the key to get the image or fallback to no_product
+  const imgSrc = images[sImgKey] || images.no_product;
 
   const oStyle = {
     width: sSize || sWidth,
     height: sSize || sHeight,
-    radius,
-    overflow: "hidden",
+    borderRadius: radius,
   };
 
   return (
     <img
       src={imgSrc}
       alt="product"
-      className="productImg"
-      style={oStyle} // Apply width and height via inline styles
+      style={oStyle}
+      onError={(e) => {
+        e.target.src = "/assets/product-images/no_product.png"; // Fallback to default image
+      }}
     />
   );
 }

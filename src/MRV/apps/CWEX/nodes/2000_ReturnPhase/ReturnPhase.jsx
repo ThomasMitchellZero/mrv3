@@ -7,6 +7,7 @@ import { useOutlet, useOutletContext } from "react-router-dom";
 import { HeaderCWEX } from "../../components/layout/header_cwex/HeaderCWEX";
 import { FooterCWEX } from "../../components/layout/footer/FooterCWEX";
 import { SidesheetIndex } from "./components/sidesheet_index/SidesheetIndex";
+import { ReturnProdDetailsAside } from "./components/sidesheet_product_details/ReturnProdDetailsAside";
 
 import { ProductList } from "./components/body_product_list/ProductList";
 import { ReceiptsList } from "./components/body_receipts_list/ReceiptsList";
@@ -62,25 +63,24 @@ function ReturnPhase() {
   const oResets = oPage.oResets;
 
   // UI Sidesheets ///////////////////////////////////////////////////
+  const sAsideKey =
+    oPageLS.sActiveDataKey && oPageLS.sMode === "items"
+      ? "itemDetails"
+      : "index";
 
-  const oSidesheet = {
+  const oAsides = {
     index: <SidesheetIndex oPage={oPage} />,
-    itemDetails: null,
+    itemDetails: <ReturnProdDetailsAside oPage={oPage} />,
   };
-
-  const activeSidesheet = oSidesheet[oPageLS.sMode] || oSidesheet["index"];
 
   // UI Main Panel ///////////////////////////////////////////////////
 
-  const sPageTitle =
-    oPageLS.sMode === "items" ? "Items Being Returned" : "Receipts List";
+  const sModeKey = oPageLS.sMode || "items";
 
   const oMainPanels = {
-    items: <ProductList oPage={oPage} />,
-    receipts: <ReceiptsList oPage={oPage} />,
+    items: { ui: <ProductList oPage={oPage} />, title: "Items Being Returned" },
+    receipts: { ui: <ReceiptsList oPage={oPage} />, title: "Receipts List" },
   };
-
-  const uiMainPanel = oMainPanels[oPageLS.sMode] || oMainPanels["items"];
 
   return (
     <main
@@ -90,11 +90,11 @@ function ReturnPhase() {
       className={`mrvPage returnPhase`}
     >
       <div className={`mrvPanel__main `}>
-        <HeaderCWEX sPageTitle={sPageTitle} />
-        <div className={`body`}>{uiMainPanel}</div>
+        <HeaderCWEX sPageTitle={oMainPanels[sModeKey].sTitle} />
+        <div className={`body`}>{oMainPanels[sModeKey].ui}</div>
         <FooterCWEX />
       </div>
-      {activeSidesheet}
+      {oAsides[sAsideKey]}
     </main>
   );
 }
