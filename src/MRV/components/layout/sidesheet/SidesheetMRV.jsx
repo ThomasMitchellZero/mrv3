@@ -43,8 +43,7 @@ function SidesheetMRV({
         {uiNavBtn}
         <h3 className={` heading__medium truncate`}>{sTitle}</h3>
       </div>
-
-      <div className={`vBox`}>{children}</div>
+      <div className={`vBox width__max flex__max`}>{children}</div>
     </aside>
   );
 }

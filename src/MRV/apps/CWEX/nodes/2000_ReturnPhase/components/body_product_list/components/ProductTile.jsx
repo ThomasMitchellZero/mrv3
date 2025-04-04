@@ -19,7 +19,7 @@ function ProductTile({ oPage, oProduct }) {
     const draftPage = {
       ...cloneDeep(pageLS),
     };
-    draftPage.sActiveDataKey = oProduct.sKey;
+    draftPage.sActiveProdKey = oProduct.sKey; // sActiveDataKey
     fSetPageLS(draftPage);
   };
 
@@ -30,7 +30,7 @@ function ProductTile({ oPage, oProduct }) {
     setSessionMRV(draftSession);
   };
 
-  const sIsActive = pageLS?.sActiveDataKey === oProduct?.sKey ? "selected" : "";
+  const sIsActive = pageLS?.sActiveProdKey === oProduct?.sKey ? "selected" : "";
 
   return (
     <div

@@ -172,7 +172,6 @@ const oBaseLocState = {
   // shares fields that will be common to all local states.
   sActiveError: "",
   sActiveOverlay: "",
-  sActiveDataKey: "",
   sMode: "",
 };
 

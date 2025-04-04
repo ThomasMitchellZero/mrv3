@@ -23,7 +23,8 @@ function ReturnPhase() {
   const initPageLS = {
     ...oBaseLocState,
     sMode: "receipts",
-    sActiveDataKey: "",
+    sActiveProdKey: "",
+    sActiveInvoKey: "",
   };
 
   const oPage = dPage({
@@ -33,7 +34,8 @@ function ReturnPhase() {
         sActiveError: initPageLS.sActiveError,
       },
       allActive: {
-        sActiveDataKey: initPageLS.sActiveDataKey,
+        sActiveProdKey: initPageLS.sActiveProdKey,
+        sActiveInvoKey: initPageLS.sActiveInvoKey,
         sActiveError: initPageLS.sActiveError,
       },
     },
@@ -64,7 +66,7 @@ function ReturnPhase() {
 
   // UI Sidesheets ///////////////////////////////////////////////////
   const sAsideKey =
-    oPageLS.sActiveDataKey && oPageLS.sMode === "items"
+    oPageLS.sActiveProdKey && oPageLS.sMode === "items"
       ? "itemDetails"
       : "index";
 
@@ -78,8 +80,11 @@ function ReturnPhase() {
   const sModeKey = oPageLS.sMode || "items";
 
   const oMainPanels = {
-    items: { ui: <ProductList oPage={oPage} />, title: "Items Being Returned" },
-    receipts: { ui: <ReceiptsList oPage={oPage} />, title: "Receipts List" },
+    items: {
+      ui: <ProductList oPage={oPage} />,
+      sTitle: "Items Being Returned",
+    },
+    receipts: { ui: <ReceiptsList oPage={oPage} />, sTitle: "Receipts List" },
   };
 
   return (
