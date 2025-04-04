@@ -39,12 +39,11 @@ function SidesheetMRV({
 
   return (
     <aside className={`sidesheet mrvPanel__side gap__1rem ${sStyleClasses}`}>
-      <h3
-        className={`flex__min width__max heading__medium gap__05rem truncate`}
-      >
+      <div className={`hBox gap__05rem flex__min width__max`}>
         {uiNavBtn}
-        {sTitle}
-      </h3>
+        <h3 className={` heading__medium truncate`}>{sTitle}</h3>
+      </div>
+
       <div className={`vBox`}>{children}</div>
     </aside>
   );
