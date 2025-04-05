@@ -33,6 +33,7 @@ function ReturnReason({ oPage, sActiveProdKey }) {
 
   const oInitThisLS = {
     sActiveMode: "unwanted",
+    sActiveReasonKey: "",
   };
 
   const [thisLS, fSetThisLS] = useState(oInitThisLS);
@@ -43,21 +44,11 @@ function ReturnReason({ oPage, sActiveProdKey }) {
     const draftThisLS = cloneDeep(thisLS);
 
     draftThisLS.sActiveMode = sTabKey;
+    draftThisLS.sActiveReasonKey = "";
     fSetThisLS(draftThisLS);
   };
 
   const uiReasonTab = (sTabKey) => {
-    const oConfig = {
-      "unwanted": {
-        sLabel: "Unwanted",
-        sQty: Math.max(oActiveProd.oItemReasonStatus.iUnwanted),
-      },
-      "defective": {
-        sLabel: "Defective",
-        sQty: oActiveProd.oItemReasonStatus.iDefective,
-      },
-    };
-
     const sIsActive = thisLS.sActiveMode === sTabKey ? "active" : "";
     const sLabel =
       sTabKey === "unwanted"
