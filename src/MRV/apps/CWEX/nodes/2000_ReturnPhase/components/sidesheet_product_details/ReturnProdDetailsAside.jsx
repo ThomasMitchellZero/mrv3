@@ -24,7 +24,7 @@ function ReturnProdDetailsAside({ oPage }) {
 
   return (
     <ProductDetailsAside oProduct={oProdData}>
-      <ReturnReason oPage={oPage} reason={oProdData.sReturnReason} />
+      <ReturnReason oPage={oPage} sActiveProdKey={sProdKey} />
     </ProductDetailsAside>
   );
 }

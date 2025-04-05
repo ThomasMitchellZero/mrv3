@@ -25,7 +25,7 @@ function ProductDetailsAside({
   return (
     <SidesheetMRV
       sTitle="Product Details"
-      sNavBtn="Close"
+      sNavBtn="close"
       fNavBtnClick={fHandleClose}
     >
       <div className={`hBox align__start width__max flex__min`}>
