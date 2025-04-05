@@ -22,7 +22,7 @@ function ReturnPhase() {
 
   const initPageLS = {
     ...oBaseLocState,
-    sMode: "receipts",
+    sMode: "items",
     sActiveProdKey: "",
     sActiveInvoKey: "",
   };

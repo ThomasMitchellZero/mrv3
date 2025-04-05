@@ -11,6 +11,8 @@ import {
 } from "../../../mrv_data_types";
 import { fReturnReasonStatus } from "../../../mrv_controller";
 
+import { PlusMinusField } from "../plus_minus_field/PlusMinusField";
+
 function ReturnReason({ oPage, sActiveProdKey }) {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
@@ -113,15 +115,25 @@ function ReturnReason({ oPage, sActiveProdKey }) {
 
   // Defective Items ////////////////////////////////////
 
+  const fHandleDefectiveClick = (oThisDefectiveCode) => {
+    const draftLS = cloneDeep(thisLS);
+    draftLS.sActiveReasonKey = oThisDefectiveCode.sKey;
+    fSetThisLS(draftLS);
+  };
+
   const uiDefectiveChip = (oThisDefectiveCode) => {
     const refReasonCode = dReasonCode({});
+    const sIsActive = oThisDefectiveCode.iQty > 0 ? "active" : "";
+    const sSelected =
+      thisLS.sActiveReasonKey === oThisDefectiveCode.sKey ? "selected" : "";
     return (
       <button
         key={oThisDefectiveCode.sKey}
         onClick={(e) => {
           e.stopPropagation();
+          fHandleDefectiveClick(oThisDefectiveCode);
         }}
-        className={`chip`}
+        className={`chip ${sIsActive} ${sSelected}`}
       >
         {oThisDefectiveCode.sLabel}
       </button>
@@ -135,6 +147,7 @@ function ReturnReason({ oPage, sActiveProdKey }) {
   const uiDefectiveCluster = (
     <div className={`vBox gap__1rem width__max flex__min`}>
       <div className={`chipCtnr`}>{aDefectiveChips}</div>
+      <PlusMinusField />
     </div>
   );
 
