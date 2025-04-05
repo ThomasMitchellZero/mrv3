@@ -39,7 +39,6 @@ function ReturnPhase() {
         sActiveError: initPageLS.sActiveError,
       },
     },
-    oPageMethods: {},
     oErrorObjects: {
       invalidReceipt: dError({
         sKey: "invalidReceipt",

@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { oReturnReason } from "../globalFunctions/globalJS_classes";
 
 // Shared parameter schema
 
@@ -20,7 +21,8 @@ const sharedParamsSchema = {
   sDescription: "NO DESCRIPTION",
 
   // return reason parameters
-  sReturnReason: "",
+  sReasonCode: "",
+  oReturnReasons: null,
 
   // sale record parameters
   sInvoNum: "",
@@ -53,6 +55,59 @@ function dMoney(params = {}) {
 
 export { dMoney };
 
+function dReasonCode({
+  sKey,
+  sProdKey = "",
+  bIsDefective = false,
+  sLabel = "NO LABEL",
+  iQty = 0,
+}) {
+  const outObj = {
+    sKey,
+    sProdKey,
+    bIsDefective,
+    sLabel,
+    iQty,
+  };
+  return outObj;
+}
+
+export { dReasonCode };
+
+function dReturnReasons(sProdKey = "NO ITEM KEY") {
+  const outObj = {
+    unwanted: dReasonCode({
+      sProdKey: sProdKey,
+      sKey: "unwanted",
+      sLabel: "Didn't Want",
+    }),
+    overbought: dReasonCode({
+      sProdKey: sProdKey,
+      sKey: "overbought",
+      sLabel: "Bought Too Many",
+    }),
+    wrongItem: dReasonCode({
+      sProdKey: sProdKey,
+      sKey: "wrongItem",
+      sLabel: "Wrong Item",
+    }),
+    noWorky: dReasonCode({
+      sProdKey: sProdKey,
+      sKey: "noWorky",
+      sLabel: "Doesn't Work",
+      bIsDefective: true,
+    }),
+    missingParts: dReasonCode({
+      sProdKey: sProdKey,
+      sKey: "missingParts",
+      sLabel: "Missing Parts",
+      bIsDefective: true,
+    }),
+  };
+  return outObj;
+}
+export { dReturnReasons };
+
 /////////////////////////////////////////////////////////////
 ////    Session Data Structures (for derived data)
 /////////////////////////////////////////////////////////////
@@ -65,18 +120,23 @@ function dProduct(params = {}) {
     sBifrostKey,
     sProxyKey,
     sInvoNum,
-    sReturnReason,
+    sReasonCode,
+    oReturnReasons,
   } = {
     ...sharedParamsSchema,
     ...params,
   };
+
+  const outSKey = sKey || `_${sItemNum}`;
+
   const outObj = {
-    sKey: sKey || sItemNum,
+    sKey: outSKey,
     iQty,
     sItemNum,
     sBifrostKey: sBifrostKey || sItemNum,
     sProxyKey,
-    sReturnReason,
+    sReasonCode,
+    oReturnReasons: oReturnReasons || dReturnReasons(outSKey),
     sInvoNum,
     ...dMoney(params),
   };

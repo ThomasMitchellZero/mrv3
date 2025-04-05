@@ -63,7 +63,10 @@ function ProductInputs({ oPage }) {
 
     // If all validity checks pass, add the item to the session
 
+    const refState = baseStateExTurns({});
     const draftMRV = cloneDeep(sessionMRV);
+
+    // use the standard addItem function to add the item to the returnItems repo
     draftMRV.returnItems = addItem({
       oTargetRepo: sessionMRV.returnItems,
       oItemToAdd: dProduct({
@@ -71,6 +74,7 @@ function ProductInputs({ oPage }) {
         sItemNum: thisLS.sItemKey,
       }),
     });
+
     setSessionMRV(draftMRV);
     setThisLS(oInitThisLS);
   };
