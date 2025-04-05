@@ -73,13 +73,12 @@ function ReturnReason({ oPage, sActiveProdKey }) {
 
   // Unwanted Items //////////////////////////////////////
 
-  const handleUnwantedClick = (oThisUnwantedCode) => {
+  const fHandleUnwantedClick = (oThisUnwantedCode) => {
     const draftMRV = cloneDeep(sessionMRV);
     const rtThisCode =
       draftMRV.returnItems[sActiveProdKey].oReturnReasons[
         oThisUnwantedCode.sKey
       ];
-    console.log(draftMRV.returnItems[sActiveProdKey].oItemReasonStatus);
     rtThisCode.bIsMarked = !rtThisCode.bIsMarked;
     // Update the session state
     setSessionMRV(draftMRV);
@@ -93,8 +92,7 @@ function ReturnReason({ oPage, sActiveProdKey }) {
         key={oThisUnwantedCode.sKey}
         onClick={(e) => {
           e.stopPropagation();
-          handleUnwantedClick(oThisUnwantedCode);
-          // Update the session state
+          fHandleUnwantedClick(oThisUnwantedCode);
         }}
         className={`chip ${sIsActive}`}
       >
@@ -121,6 +119,17 @@ function ReturnReason({ oPage, sActiveProdKey }) {
     fSetThisLS(draftLS);
   };
 
+  const fHandleDefectiveQtyChange = (iNewQty) => {
+    const draftMRV = cloneDeep(sessionMRV);
+    const rtThisCode =
+      draftMRV.returnItems[sActiveProdKey].oReturnReasons[
+        thisLS.sActiveReasonKey
+      ];
+    rtThisCode.iQty = iNewQty;
+    // Update the session state
+    setSessionMRV(draftMRV);
+  };
+
   const uiDefectiveChip = (oThisDefectiveCode) => {
     const refReasonCode = dReasonCode({});
     const sIsActive = oThisDefectiveCode.iQty > 0 ? "active" : "";
@@ -144,10 +153,15 @@ function ReturnReason({ oPage, sActiveProdKey }) {
     return uiDefectiveChip(thisReasonCode);
   });
 
+  const iActiveReasonQty =
+    oActiveProd.oReturnReasons?.[thisLS.sActiveReasonKey]?.iQty || "";
   const uiDefectiveCluster = (
     <div className={`vBox gap__1rem width__max flex__min`}>
       <div className={`chipCtnr`}>{aDefectiveChips}</div>
-      <PlusMinusField />
+      <PlusMinusField
+        iFieldValue={iActiveReasonQty}
+        handleQtyChange={fHandleDefectiveQtyChange}
+      />
     </div>
   );
 

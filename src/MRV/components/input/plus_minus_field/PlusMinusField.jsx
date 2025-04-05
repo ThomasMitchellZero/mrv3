@@ -1,6 +1,6 @@
 function PlusMinusField({
-  iFieldValue = 0,
-  fChangeFieldValue = (newVal) => {
+  iFieldValue = "",
+  handleQtyChange = (newVal) => {
     console.log("New value: ", newVal);
   },
   bIsPlusDisabled = false,
@@ -17,7 +17,7 @@ function PlusMinusField({
       <button
         type="button"
         className={`ghost body__large bold`}
-        onClick={() => fChangeFieldValue(iFieldValue - 1)}
+        onClick={() => handleQtyChange(parseInt(iFieldValue - 1))}
       >
         -
       </button>
@@ -25,12 +25,12 @@ function PlusMinusField({
         type="number"
         className={`input `}
         value={iFieldValue}
-        onChange={(e) => fChangeFieldValue(parseInt(e.target.value))}
+        onChange={(e) => handleQtyChange(parseInt(e.target.value))}
       />
       <button
         type="button"
         className={`ghost body__large bold`}
-        onClick={() => fChangeFieldValue(iFieldValue + 1)}
+        onClick={() => handleQtyChange(parseInt(iFieldValue + 1))}
       >
         +
       </button>
