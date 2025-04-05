@@ -9,6 +9,7 @@ import {
   dReturnReasons,
   baseStateExTurns,
 } from "../../../mrv_data_types";
+import { fReturnReasonStatus } from "../../../mrv_controller";
 
 function ReturnReason({ oPage, sActiveProdKey }) {
   const mrvCtx = useOutletContext();
@@ -17,9 +18,8 @@ function ReturnReason({ oPage, sActiveProdKey }) {
 
   const refdProd = dProduct({});
   const oActiveProd = sessionMRV.returnItems[sActiveProdKey];
+  const oItemReasonsStatus = fReturnReasonStatus(oActiveProd);
 
-  const refSession1 = baseStateExTurns({});
-  const refReasonCode1 = dReasonCode({});
   const aAllReasons = Object.values(oActiveProd.oReturnReasons);
 
   const aUnwantedReasons = aAllReasons.filter(
@@ -41,12 +41,12 @@ function ReturnReason({ oPage, sActiveProdKey }) {
 
   const handleTabClick = (sTabKey) => {
     const draftThisLS = cloneDeep(thisLS);
+
     draftThisLS.sActiveMode = sTabKey;
     fSetThisLS(draftThisLS);
   };
 
   const uiReasonTab = (sTabKey) => {
-    const refdProd = dProduct({}).oItemReasonStatus;
     const oConfig = {
       "unwanted": {
         sLabel: "Unwanted",
@@ -61,8 +61,8 @@ function ReturnReason({ oPage, sActiveProdKey }) {
     const sIsActive = thisLS.sActiveMode === sTabKey ? "active" : "";
     const sLabel =
       sTabKey === "unwanted"
-        ? `Item OK: ${Math.max(oActiveProd.oItemReasonStatus.iUnwanted, 0)}`
-        : `Defective: ${oActiveProd.oItemReasonStatus.iDefective}`;
+        ? `Item OK: ${Math.max(oItemReasonsStatus.iUnwanted, 0)}`
+        : `Defective: ${oItemReasonsStatus.iDefective}`;
 
     return (
       <button
@@ -86,7 +86,7 @@ function ReturnReason({ oPage, sActiveProdKey }) {
       draftMRV.returnItems[sActiveProdKey].oReturnReasons[
         oThisUnwantedCode.sKey
       ];
-    console.log("Unwanted code clicked:", rtThisCode);
+    console.log(draftMRV.returnItems[sActiveProdKey].oItemReasonStatus);
     rtThisCode.bIsMarked = !rtThisCode.bIsMarked;
     // Update the session state
     setSessionMRV(draftMRV);

@@ -141,37 +141,7 @@ function dProduct(params = {}) {
     ...params,
   };
 
-  const fReasonStatus = ({ oReasonsObj = {}, iProdQty }) => {
-    if (!oReasonsObj) {
-      // terminate if no reasons object
-      return "No reasons object";
-    }
-
-    const aReasons = Object.values(oReasonsObj);
-    const outObj = {
-      iDefective: 0,
-      iUnwanted: 0,
-    };
-
-    const bAnyUnwantedMarked = aReasons.some(
-      (reason) => reason.bIsMarked && !reason.bIsDefective
-    );
-
-    outObj.iDefective = aReasons.reduce(
-      // sum all defective quantities
-      (acc, reason) => acc + (reason.bIsDefective ? reason.iQty : 0),
-      0
-    );
-
-    // Subract defective items from the total quantity
-    const iItemsMinusDefectives = iProdQty - outObj.iDefective;
-    if (iItemsMinusDefectives > 0 && bAnyUnwantedMarked)
-      outObj.iUnwanted = iItemsMinusDefectives;
-
-    return outObj;
-  };
-
-  const outSKey = sKey || `_${sItemNum}`;
+  const outSKey = sKey || `_${sBifrostKey}`;
 
   const outObj = {
     sKey: outSKey,
@@ -182,16 +152,6 @@ function dProduct(params = {}) {
     sReasonCode,
     oReturnReasons: oReturnReasons || dReturnReasons(outSKey),
     sInvoNum,
-    /**
-     * Dynamically computes the reason status using `fReasonStatus`.
-     * @returns {ItemReasonStatus} The computed reason status.
-     */
-    get oItemReasonStatus() {
-      return fReasonStatus({
-        oReasonsObj: this.oReturnReasons,
-        iProdQty: this.iQty,
-      });
-    },
     ...dMoney(params),
   };
   return outObj;

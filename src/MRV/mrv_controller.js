@@ -52,7 +52,6 @@ export { keymaker };
  * @param {string} [sUniqueKey] - OPTIONAL.  For cases where oItemToAdd lacks a unique key.
  * @returns {object} A clone of the updated repository.
  */
-
 function addItem({ oTargetRepo = {}, oItemToAdd = {}, sUniqueKey = "" }) {
   const refProduct = dProduct({});
 
@@ -82,6 +81,48 @@ function addItem({ oTargetRepo = {}, oItemToAdd = {}, sUniqueKey = "" }) {
 }
 
 export { addItem };
+
+/**
+ * Computes the reason status for a return product.
+ *
+ * @param {Object} oReturnProduct - The product object being returned.
+ * @param {Object} oReturnProduct.oReturnReasons - An object containing the reasons for the return.
+ * @param {number} oReturnProduct.iQty - The total quantity of the product being returned.
+ * @returns {Object} An object containing the computed reason status.
+ * @returns {number} returnObj.iDefective - The total quantity of defective items.
+ * @returns {number} returnObj.iUnwanted - The total quantity of unwanted items.
+ */
+function fReturnReasonStatus(oReturnProduct) {
+  const oReasonsObj = oReturnProduct.oReturnReasons;
+  const iProdQty = oReturnProduct.iQty;
+
+  const aReasons = Object.values(oReasonsObj);
+  const outObj = {
+    iDefective: 0,
+    iUnwanted: 0,
+  };
+
+  const bAnyUnwantedMarked = aReasons.some(
+    (reason) => reason.bIsMarked && !reason.bIsDefective
+  );
+
+  outObj.iDefective = aReasons.reduce(
+    // sum all defective quantities
+    (acc, reason) => acc + (reason.bIsDefective ? reason.iQty : 0),
+    0
+  );
+
+  console.log("Item Qty: ", iProdQty);
+
+  // Subract defective items from the total quantity
+  const iItemsMinusDefectives = iProdQty - outObj.iDefective;
+  if (iItemsMinusDefectives > 0 && bAnyUnwantedMarked)
+    outObj.iUnwanted = iItemsMinusDefectives;
+
+  return outObj;
+}
+
+export { fReturnReasonStatus };
 
 function matchMaker({
   aRepo1 = [],
