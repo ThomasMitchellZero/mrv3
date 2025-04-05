@@ -28,7 +28,7 @@ function ProductDetailsAside({
       sNavBtn="Close"
       fNavBtnClick={fHandleClose}
     >
-      <div className={`hBox align__start`}>
+      <div className={`hBox align__start width__max flex__min`}>
         <ProductImg sImgKey={sImageKey} sSize="4rem" />
       </div>
       {children}
