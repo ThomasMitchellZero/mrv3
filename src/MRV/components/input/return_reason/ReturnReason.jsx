@@ -15,9 +15,6 @@ function ReturnReason({ oPage, sActiveProdKey }) {
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
 
-  const pageLS = oPage.oPageLS;
-  const fSetPageLS = oPage.fSetPageLS;
-
   const refdProd = dProduct({});
   const oActiveProd = sessionMRV.returnItems[sActiveProdKey];
 
