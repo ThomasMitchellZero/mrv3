@@ -46,9 +46,23 @@ function ReturnReason({ oPage, sActiveProdKey }) {
   };
 
   const uiReasonTab = (sTabKey) => {
+    const refdProd = dProduct({}).oItemReasonStatus;
+    const oConfig = {
+      "unwanted": {
+        sLabel: "Unwanted",
+        sQty: Math.max(oActiveProd.oItemReasonStatus.iUnwanted),
+      },
+      "defective": {
+        sLabel: "Defective",
+        sQty: oActiveProd.oItemReasonStatus.iDefective,
+      },
+    };
+
     const sIsActive = thisLS.sActiveMode === sTabKey ? "active" : "";
-    const sTabTitle = sTabKey === "unwanted" ? "Item OK" : "Defective";
-    const sTabLabel = `${sTabTitle}`;
+    const sLabel =
+      sTabKey === "unwanted"
+        ? `Item OK: ${Math.max(oActiveProd.oItemReasonStatus.iUnwanted, 0)}`
+        : `Defective: ${oActiveProd.oItemReasonStatus.iDefective}`;
 
     return (
       <button
@@ -59,22 +73,37 @@ function ReturnReason({ oPage, sActiveProdKey }) {
         }}
         className={`tab ${sIsActive} flex__max`}
       >
-        {sTabLabel}
+        {sLabel}
       </button>
     );
   };
 
   // Unwanted Items //////////////////////////////////////
 
+  const handleUnwantedClick = (oThisUnwantedCode) => {
+    const draftMRV = cloneDeep(sessionMRV);
+    const rtThisCode =
+      draftMRV.returnItems[sActiveProdKey].oReturnReasons[
+        oThisUnwantedCode.sKey
+      ];
+    console.log("Unwanted code clicked:", rtThisCode);
+    rtThisCode.bIsMarked = !rtThisCode.bIsMarked;
+    // Update the session state
+    setSessionMRV(draftMRV);
+  };
+
   const uiUnwantedChip = (oThisUnwantedCode) => {
     const refReasonCode = dReasonCode({});
+    const sIsActive = oThisUnwantedCode.bIsMarked ? "active" : "";
     return (
       <button
         key={oThisUnwantedCode.sKey}
         onClick={(e) => {
           e.stopPropagation();
+          handleUnwantedClick(oThisUnwantedCode);
+          // Update the session state
         }}
-        className={`chip`}
+        className={`chip ${sIsActive}`}
       >
         {oThisUnwantedCode.sLabel}
       </button>

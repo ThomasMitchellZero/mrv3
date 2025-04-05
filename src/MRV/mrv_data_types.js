@@ -114,6 +114,18 @@ export { dReturnReasons };
 ////    Session Data Structures (for derived data)
 /////////////////////////////////////////////////////////////
 
+/**
+ * @typedef {Object} ItemReasonStatus
+ * @property {number} iDefective - The total quantity of defective items.
+ * @property {number} iUnwanted - The total quantity of unwanted items.
+ */
+
+/**
+ * Creates a product object with various properties and methods.
+ *
+ * @param {Object} params - The parameters for creating the product.
+ * @returns {Object} The product object.
+ */
 function dProduct(params = {}) {
   const {
     sKey,
@@ -129,14 +141,6 @@ function dProduct(params = {}) {
     ...params,
   };
 
-  /**
-   * Computes the reason status for a product.
-   *
-   * @param {Object} params - The parameters for the function.
-   * @param {Object} params.oReasonsObj - The reasons object.
-   * @param {number} params.iProdQty - The total product quantity.
-   * @returns {ItemReasonStatus} The computed reason status.
-   */
   const fReasonStatus = ({ oReasonsObj = {}, iProdQty }) => {
     if (!oReasonsObj) {
       // terminate if no reasons object
@@ -178,6 +182,10 @@ function dProduct(params = {}) {
     sReasonCode,
     oReturnReasons: oReturnReasons || dReturnReasons(outSKey),
     sInvoNum,
+    /**
+     * Dynamically computes the reason status using `fReasonStatus`.
+     * @returns {ItemReasonStatus} The computed reason status.
+     */
     get oItemReasonStatus() {
       return fReasonStatus({
         oReasonsObj: this.oReturnReasons,
