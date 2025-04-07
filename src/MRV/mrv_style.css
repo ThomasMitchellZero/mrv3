@@ -409,6 +409,11 @@
         opacity: 80%;
       }
 
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 50%;
+      }
+
       &.primary {
         color: var(--color__primary__inverse);
         border-color: transparent;

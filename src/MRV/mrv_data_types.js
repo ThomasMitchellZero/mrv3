@@ -115,16 +115,26 @@ export { dReturnReasons };
 /////////////////////////////////////////////////////////////
 
 /**
- * @typedef {Object} ItemReasonStatus
- * @property {number} iDefective - The total quantity of defective items.
- * @property {number} iUnwanted - The total quantity of unwanted items.
- */
-
-/**
  * Creates a product object with various properties and methods.
  *
  * @param {Object} params - The parameters for creating the product.
+ * @param {string} [params.sKey] - A unique key for the product. Defaults to `_${sBifrostKey}` if not provided.
+ * @param {number} [params.iQty=0] - The quantity of the product.
+ * @param {string} [params.sItemNum] - The item number of the product.
+ * @param {string} [params.sBifrostKey] - A key used for Bifrost integration.
+ * @param {string} [params.sProxyKey] - A proxy key for the product.
+ * @param {string} [params.sInvoNum] - The invoice number associated with the product.
+ * @param {string} [params.sReasonCode] - A reason code for the product's return.
+ * @param {Object} [params.oReturnReasons] - An object containing reasons for the product's return.
  * @returns {Object} The product object.
+ * @returns {string} returnObj.sKey - The unique key for the product.
+ * @returns {number} returnObj.iQty - The quantity of the product.
+ * @returns {string} returnObj.sItemNum - The item number of the product.
+ * @returns {string} returnObj.sBifrostKey - The Bifrost key for the product.
+ * @returns {string} returnObj.sProxyKey - The proxy key for the product.
+ * @returns {string} returnObj.sReasonCode - The reason code for the product's return.
+ * @returns {Object} returnObj.oReturnReasons - The reasons for the product's return.
+ * @returns {string} returnObj.sInvoNum - The invoice number associated with the product.
  */
 function dProduct(params = {}) {
   const {

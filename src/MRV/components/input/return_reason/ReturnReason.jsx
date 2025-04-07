@@ -135,6 +135,9 @@ function ReturnReason({ oPage, sActiveProdKey }) {
     const sIsActive = oThisDefectiveCode.iQty > 0 ? "active" : "";
     const sSelected =
       thisLS.sActiveReasonKey === oThisDefectiveCode.sKey ? "selected" : "";
+    const sChipQty =
+      oThisDefectiveCode.iQty > 0 ? `: ${oThisDefectiveCode.iQty}` : "";
+    const sDefectiveLabel = `${oThisDefectiveCode.sLabel}${sChipQty}`;
     return (
       <button
         key={oThisDefectiveCode.sKey}
@@ -144,7 +147,7 @@ function ReturnReason({ oPage, sActiveProdKey }) {
         }}
         className={`chip ${sIsActive} ${sSelected}`}
       >
-        {oThisDefectiveCode.sLabel}
+        {sDefectiveLabel}
       </button>
     );
   };
@@ -161,6 +164,10 @@ function ReturnReason({ oPage, sActiveProdKey }) {
       <PlusMinusField
         iFieldValue={iActiveReasonQty}
         handleQtyChange={fHandleDefectiveQtyChange}
+        // Product qty is the cap for EACH defective reason, not their sum.  Makes correction easier.
+        bIsPlusDisabled={iActiveReasonQty >= oActiveProd.iQty}
+        bIsMinusDisabled={iActiveReasonQty < 1}
+        bIsFieldDisabled={thisLS.sActiveReasonKey === ""}
       />
     </div>
   );
