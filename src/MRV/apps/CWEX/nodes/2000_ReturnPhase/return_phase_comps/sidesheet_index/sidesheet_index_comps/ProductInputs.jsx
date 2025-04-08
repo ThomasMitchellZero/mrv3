@@ -5,6 +5,7 @@ import { useOutletContext } from "react-router-dom";
 import { baseStateExTurns } from "../../../../../../../mrv_data_types";
 import { addItem } from "../../../../../../../mrv_controller";
 import { dProduct } from "../../../../../../../mrv_data_types";
+import { MdChevronRight } from "react-icons/md";
 
 function ProductInputs({ oPage }) {
   const pageLS = oPage.oPageLS;
@@ -33,6 +34,16 @@ function ProductInputs({ oPage }) {
     const draft = cloneDeep(thisLS);
     draft.iQty = Math.max(0, Number(e.target.value)); // no values below 0
     setThisLS(draft);
+  };
+
+  const handleLWclick = (e) => {
+    e.stopPropagation();
+    const draftPage = {
+      ...pageLS,
+      ...oPage.oResets.errorOnly,
+      sActiveOverlay: "lw",
+    };
+    fSetPageLS(draftPage);
   };
 
   // Submit //////////////////////////////////////////////////
@@ -120,6 +131,15 @@ function ProductInputs({ oPage }) {
         </button>
       </div>
       {uiError}
+      <div className={`vBox flex__min width__max`}>
+        <div className={`divider horizontal`} />
+        <div className={`hBox justify__end`}>
+          <button className={`secondary`} type="button" onClick={handleLWclick}>
+            Unlisted Item
+            <MdChevronRight size={`2rem`} />
+          </button>
+        </div>
+      </div>
     </form>
   );
 }

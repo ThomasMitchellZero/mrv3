@@ -2,8 +2,8 @@ import { cloneDeep } from "lodash";
 import { SidesheetMRV } from "../../../../../../components/layout/sidesheet/SidesheetMRV";
 import "./SidesheetIndex.css";
 
-import { ProductInputs } from "./components/ProductInputs";
-import { ReceiptInputs } from "./components/ReceiptInputs";
+import { ProductInputs } from "./sidesheet_index_comps/ProductInputs";
+import { ReceiptInputs } from "./sidesheet_index_comps/ReceiptInputs";
 
 function SidesheetIndex({ oPage }) {
   const pageLS = oPage.oPageLS;

@@ -3,13 +3,14 @@ import "./ReturnPhase.css";
 import { useState, useRef } from "react";
 import { useNodeNav } from "../../../../mrv_controller";
 import { useOutlet, useOutletContext } from "react-router-dom";
-import { ProductList } from "./return_phase_comps/body_product_list/ProductList";
-import { ReceiptsList } from "./return_phase_comps/body_receipts_list/ReceiptsList";
 
 import { dPage, dError, oBaseLocState } from "../../../../mrv_data_types";
 
 import { HeaderCWEX } from "../../components/layout/header_cwex/HeaderCWEX";
 import { FooterCWEX } from "../../components/layout/footer/FooterCWEX";
+
+import { ProductList } from "./return_phase_comps/body_product_list/ProductList";
+import { ReceiptsList } from "./return_phase_comps/body_receipts_list/ReceiptsList";
 import { SidesheetIndex } from "./return_phase_comps/sidesheet_index/SidesheetIndex";
 import { ReturnProdDetailsAside } from "./return_phase_comps/sidesheet_product_details/ReturnProdDetailsAside";
 import { LifetimeWarranty } from "./return_phase_comps/lifetime_warranty/LifetimeWarranty";
