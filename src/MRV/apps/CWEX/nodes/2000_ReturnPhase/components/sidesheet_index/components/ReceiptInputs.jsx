@@ -6,7 +6,6 @@ import {
   baseStateExTurns,
   oBaseLocState,
 } from "../../../../../../../mrv_data_types";
-import { ReturnPhase_locState } from "../../../ReturnPhase_schemas";
 
 function ReceiptInputs({ oPage }) {
   const pageLS = oPage.oPageLS;
@@ -35,7 +34,6 @@ function ReceiptInputs({ oPage }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const refLS = oBaseLocState;
-    const refBaseStateExTurns = ReturnPhase_locState;
     const sInvoNum = thisLS.sReceiptKey;
     const sInvoKey = `_${sInvoNum}`; // session keys have "_" prefix to coerce them to strings.
 
