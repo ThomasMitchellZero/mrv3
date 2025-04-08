@@ -3,16 +3,16 @@ import "./ReturnPhase.css";
 import { useState, useRef } from "react";
 import { useNodeNav } from "../../../../mrv_controller";
 import { useOutlet, useOutletContext } from "react-router-dom";
+import { ProductList } from "./return_phase_comps/body_product_list/ProductList";
+import { ReceiptsList } from "./return_phase_comps/body_receipts_list/ReceiptsList";
+
+import { dPage, dError, oBaseLocState } from "../../../../mrv_data_types";
 
 import { HeaderCWEX } from "../../components/layout/header_cwex/HeaderCWEX";
 import { FooterCWEX } from "../../components/layout/footer/FooterCWEX";
-import { SidesheetIndex } from "./components/sidesheet_index/SidesheetIndex";
-import { ReturnProdDetailsAside } from "./components/sidesheet_product_details/ReturnProdDetailsAside";
-
-import { ProductList } from "./components/body_product_list/ProductList";
-import { ReceiptsList } from "./components/body_receipts_list/ReceiptsList";
-import { cloneDeep } from "lodash";
-import { dPage, dError, oBaseLocState } from "../../../../mrv_data_types";
+import { SidesheetIndex } from "./return_phase_comps/sidesheet_index/SidesheetIndex";
+import { ReturnProdDetailsAside } from "./return_phase_comps/sidesheet_product_details/ReturnProdDetailsAside";
+import { LifetimeWarranty } from "./return_phase_comps/lifetime_warranty/LifetimeWarranty";
 
 function ReturnPhase() {
   const mrvCtx = useOutletContext();
@@ -22,6 +22,7 @@ function ReturnPhase() {
 
   const initPageLS = {
     ...oBaseLocState,
+    sActiveOverlay: "",
     sMode: "items",
     sActiveProdKey: "",
     sActiveInvoKey: "",
@@ -36,6 +37,10 @@ function ReturnPhase() {
       allActive: {
         sActiveProdKey: initPageLS.sActiveProdKey,
         sActiveInvoKey: initPageLS.sActiveInvoKey,
+        sActiveError: initPageLS.sActiveError,
+      },
+      overlay: {
+        sActiveOverlay: initPageLS.sActiveOverlay,
         sActiveError: initPageLS.sActiveError,
       },
     },
@@ -86,6 +91,16 @@ function ReturnPhase() {
     receipts: { ui: <ReceiptsList oPage={oPage} />, sTitle: "Receipts List" },
   };
 
+  // Lifetime Warranty ///////////////////////////////////////////////
+
+  const oActiveOverlay = {
+    lw: <LifetimeWarranty oPage={oPage} />,
+  };
+
+  const uiOverlay = oPageLS.sActiveOverlay
+    ? oActiveOverlay[oPageLS.sActiveOverlay]
+    : null;
+
   return (
     <main
       onClick={() => {
@@ -93,6 +108,7 @@ function ReturnPhase() {
       }}
       className={`mrvPage returnPhase`}
     >
+      {uiOverlay}
       <div className={`mrvPanel__main `}>
         <HeaderCWEX sPageTitle={oMainPanels[sModeKey].sTitle} />
         <div className={`body`}>{oMainPanels[sModeKey].ui}</div>
