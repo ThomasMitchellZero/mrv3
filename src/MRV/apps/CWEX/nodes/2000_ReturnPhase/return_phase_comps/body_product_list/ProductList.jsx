@@ -10,8 +10,8 @@ import { ProductCard } from "./components/ProductCard";
 import { ProductTile } from "./components/ProductTile";
 
 function ProductList({ oPage }) {
-  const pageLS = oPage.oPageLS;
-  const fSetPageLS = oPage.fSetPageLS;
+  const pageLS = oPage.fSetLocalState;
+  const fSetPageLS = oPage.fSetLocalState;
 
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;

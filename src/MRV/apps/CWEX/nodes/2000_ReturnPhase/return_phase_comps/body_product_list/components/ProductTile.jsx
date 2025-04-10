@@ -3,21 +3,23 @@ import { useOutletContext } from "react-router-dom";
 
 import { ProductInfo } from "../../../../../../../components/ui/product_info/ProductInfo";
 import { ProductInvoRow } from "./ProductInvoRow";
-import { dProduct } from "../../../../../../../mrv_data_types";
+import { dProduct, dLocalCtx } from "../../../../../../../mrv_data_types";
 
 function ProductTile({ oPage, oProduct }) {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
 
-  const pageLS = oPage.oPageLS;
-  const fSetPageLS = oPage.fSetPageLS;
+  const fSetPageLS = oPage.fSetLocalState;
   const oResets = oPage.oResets;
+  const oPageLS = oPage.oLocalState;
 
-  const handeClick = (e) => {
-    //e.stopPropagation();
+  const refLS = dLocalCtx({});
+
+  const handleClick = (e) => {
+    e.stopPropagation();
     const draftPage = {
-      ...cloneDeep(pageLS),
+      ...cloneDeep(oPageLS),
     };
     draftPage.sActiveProdKey = oProduct.sKey; // sActiveDataKey
     fSetPageLS(draftPage);
@@ -30,12 +32,13 @@ function ProductTile({ oPage, oProduct }) {
     setSessionMRV(draftSession);
   };
 
-  const sIsActive = pageLS?.sActiveProdKey === oProduct?.sKey ? "selected" : "";
+  const sIsActive =
+    oPageLS?.sActiveProdKey === oProduct?.sKey ? "selected" : "";
 
   return (
     <div
       onClick={(e) => {
-        handeClick(e);
+        handleClick(e);
       }}
       className={`prodTileCol ${sIsActive} tile `}
     >

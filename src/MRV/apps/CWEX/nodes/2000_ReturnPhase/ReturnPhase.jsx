@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { useNodeNav } from "../../../../mrv_controller";
 import { useOutlet, useOutletContext } from "react-router-dom";
 
-import { dPage, dError, oBaseLocState } from "../../../../mrv_data_types";
+import { dLocalCtx, dError, oBaseLocState } from "../../../../mrv_data_types";
 
 import { HeaderCWEX } from "../../components/layout/header_cwex/HeaderCWEX";
 import { FooterCWEX } from "../../components/layout/footer/FooterCWEX";
@@ -29,7 +29,7 @@ function ReturnPhase() {
     sActiveInvoKey: "",
   };
 
-  const oPage = dPage({
+  const oPage = dLocalCtx({
     oInitLS: initPageLS,
     oResets: {
       errorOnly: {
@@ -65,10 +65,9 @@ function ReturnPhase() {
     },
   });
 
-  const oPageLS = oPage.oPageLS;
-  const fSetPageLS = oPage.fSetPageLS;
+  const oPageLS = oPage.oLocalState;
+  const fSetPageLS = oPage.fSetLocalState;
   const oResets = oPage.oResets;
-
   // UI Sidesheets ///////////////////////////////////////////////////
   const sAsideKey =
     oPageLS.sActiveProdKey && oPageLS.sMode === "items"
@@ -92,7 +91,7 @@ function ReturnPhase() {
     receipts: { ui: <ReceiptsList oPage={oPage} />, sTitle: "Receipts List" },
   };
 
-  // Lifetime Warranty ///////////////////////////////////////////////
+  //  Overlays  ///////////////////////////////////////////////
 
   const oActiveOverlay = {
     lw: <LifetimeWarranty oPage={oPage} />,

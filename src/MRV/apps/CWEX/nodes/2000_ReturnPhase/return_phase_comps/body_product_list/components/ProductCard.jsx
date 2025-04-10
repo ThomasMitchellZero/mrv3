@@ -1,5 +1,6 @@
-import { cloneDeep, set } from "lodash";
+import { cloneDeep } from "lodash";
 import { useOutletContext } from "react-router-dom";
+import { dLocalCtx } from "../../../../../../../mrv_data_types";
 
 import { CardSummaryCol } from "../../../../../../../components/ui/card_summary_col/CardSummaryCol";
 
@@ -8,21 +9,21 @@ function ProductCard({ oPage, oProduct, children }) {
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
   const returnItems = sessionMRV.returnItems;
+  const refLocalCtx = dLocalCtx({});
 
-  const fSetPageLS = oPage.fSetPageLS;
+  const fSetPageLS = oPage.fSetLocalState;
   const oResets = oPage.oResets;
+  const oPageLS = oPage.oLocalState;
 
-  const fHandeClick = (e) => {
-    const pageLS = oPage.oPageLS;
+  const fHandleClick = (e) => {
     e.stopPropagation();
-    const draftPage = { ...cloneDeep(pageLS), ...oResets.errorOnly };
+    const draftPage = { ...cloneDeep(oPageLS), ...oResets.errorOnly };
     fSetPageLS(draftPage);
   };
 
   const fHandleClear = (e) => {
     e.stopPropagation();
-    const pageLS = oPage.oPageLS;
-    const draftPage = { ...cloneDeep(pageLS), ...oResets.errorOnly };
+    const draftPage = { ...cloneDeep(oPageLS), ...oResets.errorOnly };
     fSetPageLS(draftPage);
 
     const draftSession = cloneDeep(sessionMRV);
@@ -33,7 +34,7 @@ function ProductCard({ oPage, oProduct, children }) {
   return (
     <div
       onClick={(e) => {
-        fHandeClick(e);
+        fHandleClick(e);
       }}
       className={`prodCard floorplan card`}
     >

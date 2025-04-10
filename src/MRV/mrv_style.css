@@ -467,6 +467,15 @@
         }
       }
 
+      & .chipCtnr {
+        display: flex;
+        flex: 0 0 auto;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
       &.tab {
         height: 3.5rem;
         background-color: transparent;
@@ -492,15 +501,6 @@
       flex-direction: row;
       flex: 0 0 auto;
       width: 100%;
-    }
-
-    & .chipCtnr {
-      display: flex;
-      flex: 0 0 auto;
-      width: 100%;
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 1rem;
     }
 
     /* ---- Input Styling ---- */

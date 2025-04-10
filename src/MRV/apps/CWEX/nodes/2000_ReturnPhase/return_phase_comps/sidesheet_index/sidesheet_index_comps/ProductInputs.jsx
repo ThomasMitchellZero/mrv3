@@ -8,8 +8,8 @@ import { dProduct } from "../../../../../../../mrv_data_types";
 import { MdChevronRight } from "react-icons/md";
 
 function ProductInputs({ oPage }) {
-  const pageLS = oPage.oPageLS;
-  const fSetPageLS = oPage.fSetPageLS;
+  const pageLS = oPage.oLocalState;
+  const fSetPageLS = oPage.fSetLocalState;
 
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
@@ -103,7 +103,7 @@ function ProductInputs({ oPage }) {
     <form
       id="rtrnProductInputs"
       onSubmit={handleSubmit}
-      className={`vBox productInput gap__1rem width__max flex__min`}
+      className={`vBox productInput gap__2rem width__max flex__min`}
     >
       <input
         type="text"
@@ -131,7 +131,7 @@ function ProductInputs({ oPage }) {
         </button>
       </div>
       {uiError}
-      <div className={`vBox flex__min width__max`}>
+      <div className={`vBox gap__2rem flex__min width__max`}>
         <div className={`divider horizontal`} />
         <div className={`hBox justify__end`}>
           <button className={`secondary`} type="button" onClick={handleLWclick}>

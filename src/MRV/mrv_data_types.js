@@ -271,27 +271,26 @@ function dError({ sKey = "", sMessage = "", bClearOnBGClick = true }) {
 
 export { dError };
 
-function dPage({ oInitLS, oResets, oMethods, oErrorObjects }) {
-  // Define state and ref inside the dPage object
-  const [oPageLS, setPageLS] = useState(oInitLS);
-  const oPageLSRef = useRef(oPageLS);
+function dLocalCtx({ oInitLS, oResets, oMethods, oErrorObjects }) {
+  const [oThisLS, setThisLS] = useState(oInitLS);
+  const oThisLSRef = useRef(oThisLS);
 
   // Wrap the state setter to update both the state and the ref
-  const fSetPageLS = (newState) => {
-    oPageLSRef.current = newState; // Update the ref
-    setPageLS(newState); // Update the state
+  const fSetLocalState = (newState) => {
+    oThisLSRef.current = newState; // Update the ref
+    setThisLS(newState); // Update the state
   };
 
   return {
     oInitLS,
-    get oPageLS() {
-      return oPageLSRef.current; // Always return the latest value from the ref
+    get oLocalState() {
+      return oThisLSRef.current; // Always return the latest value from the ref
     },
     oResets,
-    fSetPageLS,
+    fSetLocalState,
     oMethods,
     oErrorObjects,
   };
 }
 
-export { dPage };
+export { dLocalCtx };

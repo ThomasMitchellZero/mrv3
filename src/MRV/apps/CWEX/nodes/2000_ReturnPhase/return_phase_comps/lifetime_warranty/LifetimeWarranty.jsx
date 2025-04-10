@@ -1,17 +1,28 @@
 import { useOutletContext } from "react-router-dom";
 import { cloneDeep } from "lodash";
-import { dPage } from "../../../../../../mrv_data_types";
+import { dLocalCtx } from "../../../../../../mrv_data_types";
+
+import { SidesheetMRV } from "../../../../../../components/layout/sidesheet/SidesheetMRV";
 
 function LifetimeWarranty({ oPage }) {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
 
-  const pageLS = oPage.oPageLS;
-  const setPageLS = oPage.fSetPageLS;
+  const pageLS = oPage.oLocalState;
+  const setPageLS = oPage.fSetLocalState;
   const resets = oPage.oResets;
 
-  const handleClear = (e) => {
+  const LW_LS = dLocalCtx({
+    oInitLS: {
+      sBrand: "",
+      sElectric: "",
+      iExchQty: 0,
+      sItemKey: "",
+    },
+  });
+
+  const handleClose = (e) => {
     e.stopPropagation();
     // clear the active overlay
     setPageLS({ ...pageLS, ...resets.overlay });
@@ -19,9 +30,14 @@ function LifetimeWarranty({ oPage }) {
 
   return (
     <div
-      onClick={handleClear}
-      className={`lifetime_warranty scrimOverlay`}
-    ></div>
+      onClick={handleClose}
+      className={`hBox lifetime_warranty scrimOverlay justify__end align__end `}
+    >
+      <SidesheetMRV
+        sNavBtn="close"
+        sTitle="Unlisted Warranty Item"
+      ></SidesheetMRV>
+    </div>
   );
 }
 

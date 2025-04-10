@@ -8,8 +8,8 @@ import {
 } from "../../../../../../../mrv_data_types";
 
 function ReceiptInputs({ oPage }) {
-  const pageLS = oPage.oPageLS;
-  const fSetPageLS = oPage.fSetPageLS;
+  const pageLS = oPage.oLocalState;
+  const fSetPageLS = oPage.fSetLocalState;
 
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;

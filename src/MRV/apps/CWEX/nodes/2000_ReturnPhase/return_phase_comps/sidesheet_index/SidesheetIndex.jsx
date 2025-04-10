@@ -6,8 +6,8 @@ import { ProductInputs } from "./sidesheet_index_comps/ProductInputs";
 import { ReceiptInputs } from "./sidesheet_index_comps/ReceiptInputs";
 
 function SidesheetIndex({ oPage }) {
-  const pageLS = oPage.oPageLS;
-  const fSetPageLS = oPage.fSetPageLS;
+  const pageLS = oPage.oLocalState;
+  const fSetPageLS = oPage.fSetLocalState;
   // UI Mode Tabs //////////////////////////////////////////////////////
 
   const handleTabClick = (sTabKey) => {
