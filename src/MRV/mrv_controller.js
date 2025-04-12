@@ -188,12 +188,91 @@ const oIntersectionParams = {
   sQtyKey1: "iQty",
   sQtyKey2: "iQty",
   sQtyKeyLens: "iQty",
+  aLensDistinctKeys: ["sKey"],
   fIsMatch: fNo,
   fPopulateLens: fNo,
   fBuildLune: fNo,
   fBuildLune1: fNo,
   fBuildLune2: fNo,
 };
+
+function fTrisector({
+  oOuterRepo,
+  oInnerRepo,
+  fIsMatch = (oCircle1, oCircle2) => {
+    return false;
+  },
+  fBuildLens = ({ oCircle1, oCircle2 }) => {
+    yaDone: "goofed";
+  },
+  fBuildLune1 = (oCircle) => oCircle,
+  fBuildLune2 = (oCircle) => oCircle,
+  params = {},
+}) {
+  // Extract shared parameters from oIntersectionParams
+  const { sQtyKey1, sQtyKey2, sQtyKeyLens } = {
+    ...oIntersectionParams,
+    ...params,
+  };
+
+  const oOuterPool = cloneDeep(oOuterRepo);
+  const oInnerPool = cloneDeep(oInnerRepo);
+  const oOutLenses = {};
+
+  Loop_Repo1: for (const thisOuterKey of Object.keys(oOuterPool)) {
+    const thisL1_Circle = oOuterPool[thisOuterKey];
+
+    // Eventually we may need to sort this but I'm not gonna fuck with it now.
+    const aInnerKeys = Object.keys(oInnerPool);
+
+    Loop_Repo2: for (const thisInnerKey of aInnerKeys) {
+      const thisL2_Circle = oInnerPool[thisInnerKey];
+
+      const bMatch = fIsMatch({ thisL1_Circle, thisL2_Circle });
+
+      const iMatchQty = Math.min(
+        thisL1_Circle[sQtyKey1],
+        thisL2_Circle[sQtyKey2]
+      );
+
+      // if no match or overlapping qty, skip to next iterator.
+      const bIsValid = bMatch && iMatchQty;
+
+      if (!bIsValid) {
+        continue Loop_Repo2;
+      }
+
+      const oLune1 = fBuildLune1(thisL1_Circle);
+      const oLune2 = fBuildLune2(thisL2_Circle);
+      const oLens = fBuildLens({
+        oCircle1: thisL1_Circle,
+        oCircle2: thisL2_Circle,
+      });
+
+      // set the new quantities
+      oLune1[sQtyKey1] -= iMatchQty;
+      oLune2[sQtyKey2] -= iMatchQty;
+      oLens[sQtyKeyLens];
+
+      // Straight replaces are OK because the lens qty has already been deducted from the lunes.
+      oOutLenses[oLens.sKey] = oLens;
+      oOuterPool[thisOuterKey] = oLune1;
+      oInnerPool[thisInnerKey] = oLune2;
+    }
+  }
+
+  const oOut = {
+    oLenses: oOutLenses,
+    oOuterLunes: oOuterPool,
+    oInnerLunes: oInnerPool,
+  };
+
+  return oOut;
+}
+
+export { fTrisector };
+
+/// Probably not needed anymore.  But maybe.  Maybe not.  Maybe so.  Maybe not.
 
 /**
  * Creates a "lens" object by intersecting two data sets (circles) based on matching criteria.
@@ -346,74 +425,6 @@ function fIntersector(params = {}) {
   return oOut;
 }
 export { fIntersector };
-
-function fTrisector({ oOuterRepo, oInnerRepo, params = {} }) {
-  // Extract shared parameters from oIntersectionParams
-  const { sQtyKey1, sQtyKey2, sQtyKeyLens, fIsMatch, fPopulateLens } = {
-    ...oIntersectionParams,
-    ...params,
-  };
-
-  // Extract function-specific parameters with defaults
-  const {
-    aLensDistinctKeys = ["sKey"],
-    fBuildLune1 = fMainLuner,
-    fBuildLune2 = fMainLuner,
-  } = params;
-
-  const oOuterPool = cloneDeep(oOuterRepo);
-  const oInnerPool = cloneDeep(oInnerRepo);
-  const oOutLenses = {};
-
-  Loop_Repo1: for (const thisOuterKey of Object.keys(oOuterPool)) {
-    const thisL1_Circle = oOuterPool[thisOuterKey];
-
-    // Eventually we may need to sort this but I'm not gonna fuck with it now.
-    const aInnerKeys = Object.keys(oInnerPool);
-
-    Loop_Repo2: for (const thisInnerKey of aInnerKeys) {
-      const thisL2_Circle = oInnerPool[thisInnerKey];
-      console.log("reached inner loop");
-
-      console.log(fIsMatch);
-
-      const { oLens, oLune1, oLune2 } = fIntersector({
-        oCircle1: thisL1_Circle,
-        oCircle2: thisL2_Circle,
-        sQtyKey1,
-        sQtyKey2,
-        sQtyKeyLens,
-        fIsMatch,
-        fPopulateLens,
-        fBuildLune1,
-        fBuildLune2,
-      });
-
-      if (oLens) {
-        // Truthy oLens means there's a match and we need to update the pools.
-        oLens.sKey = keymaker({
-          aDistinctKeys: aLensDistinctKeys,
-          oObjectToKey: oLens,
-        });
-
-        // Straight replaces are OK because the lens qty has already been deducted from the lunes.
-        oOutLenses[oLens.sKey] = oLens;
-        oOuterPool[thisOuterKey] = oLune1;
-        oInnerPool[thisInnerKey] = oLune2;
-      }
-    }
-  }
-
-  const oOut = {
-    oLenses: oOutLenses,
-    oOuterLunes: oOuterPool,
-    oInnerLunes: oInnerPool,
-  };
-
-  return oOut;
-}
-
-export { fTrisector };
 
 /////////////////////////////////////////////////////////////////
 ////////             Node Navigation
