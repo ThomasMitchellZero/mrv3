@@ -26,14 +26,12 @@ export { greenify };
 /////////////////////////////////////////////////////////////////
 
 function clearDepleted({ oRepo = {}, sQtyKey = "iQty" }) {
-  console.log("oRepo: ", oRepo);
   const outRepo = cloneDeep(oRepo);
   for (const k of Object.keys(outRepo)) {
     if (!outRepo[k][sQtyKey]) {
       delete outRepo[k];
     }
   }
-  console.log("outRepo: ", outRepo);
   return outRepo;
 }
 
@@ -123,8 +121,6 @@ function fReturnReasonStatus(oReturnProduct) {
     (acc, reason) => acc + (reason.bIsDefective ? reason.iQty : 0),
     0
   );
-
-  console.log("Item Qty: ", iProdQty);
 
   // Subract defective items from the total quantity
   const iItemsMinusDefectives = iProdQty - outObj.iDefective;
@@ -231,8 +227,6 @@ function fLuneLenser({
     oOuterLunes: clearDepleted({ oRepo: oOuterPool, sQtyKey: sQtyKey1 }),
     oInnerLunes: clearDepleted({ oRepo: oInnerPool, sQtyKey: sQtyKey2 }),
   };
-  console.log("oOuterPool", oOuterPool);
-  console.log("oOuterLunes: ", oOut.oOuterLunes);
 
   return oOut;
 }
@@ -338,7 +332,7 @@ function useAutoDeriver(sessionState) {
       fBuildLens: ({ oCircle1, oCircle2 }) => {
         const oOutLens = dProduct({
           sKey: `${oCircle1.sKey}_${oCircle2.sInvoNum}`,
-          sBifrostKey: oCircle1.sBifrostKey,
+          sBifrostKey: oCircle2.sBifrostKey,
           sInvoNum: oCircle2.sInvoNum,
           iUnitBaseValue: oCircle2.iUnitBaseValue,
           iUnitTax: oCircle2.iUnitTax,

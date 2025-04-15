@@ -9,6 +9,9 @@ function ProductTile({ oPage, oProduct }) {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const setSessionMRV = mrvCtx.setSessionMRV;
+  const oDerived = mrvCtx.oDerived;
+
+  console.log("oDerived", oDerived);
 
   const fSetPageLS = oPage.fSetLocalState;
   const oResets = oPage.oResets;
@@ -31,6 +34,23 @@ function ProductTile({ oPage, oProduct }) {
     draftSession.returnItems[oProduct.sKey].iQty = Number(e.target.value);
     setSessionMRV(draftSession);
   };
+
+  const aItemInvos = Object.values(oDerived.receiptedItems).filter(
+    (thisRcptItem) => {
+      return thisRcptItem.sBifrostKey === oProduct.sBifrostKey;
+    }
+  );
+
+  const uiItemInvos = aItemInvos.map((thisRcptItem) => {
+    return <ProductInvoRow oProduct={thisRcptItem} />;
+  });
+
+  const oNRR = Object.values(oDerived.nrrItems).find((thisRcptItem) => {
+    return thisRcptItem.sBifrostKey === oProduct.sBifrostKey;
+  });
+  if (oNRR) {
+    uiItemInvos.push(<ProductInvoRow oPage={oPage} oProduct={oNRR} />);
+  }
 
   const sIsActive =
     oPageLS?.sActiveProdKey === oProduct?.sKey ? "selected" : "";
@@ -55,9 +75,7 @@ function ProductTile({ oPage, oProduct }) {
           />
         </div>
       </div>
-      <div className={`invoCol`}>
-        <ProductInvoRow />
-      </div>
+      <div className={`invoCol`}>{uiItemInvos.length ? uiItemInvos : null}</div>
     </div>
   );
 }
