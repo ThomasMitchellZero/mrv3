@@ -18,6 +18,7 @@ import { LifetimeWarranty } from "./return_phase_comps/lifetime_warranty/Lifetim
 function ReturnPhase() {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
+  const oDerived = mrvCtx.oDerived;
 
   // Page Configs ///////////////////////////////////////////////////
 
@@ -64,6 +65,8 @@ function ReturnPhase() {
       }),
     },
   });
+
+  console.log(oDerived);
 
   const oPageLS = oPage.oLocalState;
   const fSetPageLS = oPage.fSetLocalState;

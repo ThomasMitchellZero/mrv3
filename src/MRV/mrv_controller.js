@@ -1,13 +1,12 @@
 import { useOutletContext, useNavigate } from "react-router";
+import { SaleRecordsAPI } from "../local_APIs/sale_records";
 
 import { useContext } from "react";
-import { dProduct } from "./mrv_data_types";
+import { dProduct, baseStateExTurns, dSaleRecord } from "./mrv_data_types";
 import { clone, cloneDeep, isEmpty, isNaN, merge, set, subtract } from "lodash";
 import { navNode } from "./mrv_data_types";
 
 //// Money Handlers ////
-
-function fNo() {}
 
 const centsToDollars = (priceInCents = 4200) => {
   return Number.parseFloat(priceInCents / 100).toFixed(2);
@@ -26,7 +25,7 @@ export { greenify };
 ////////             Data Handlers
 /////////////////////////////////////////////////////////////////
 
-function keymaker({ aDistinctKeys = [], oObjectToKey = {} }) {
+function fKeyMaker({ aDistinctKeys = [], oObjectToKey = {} }) {
   /**
    * Creates a unique key from a list of distinct keys and an object to key.
    * @param {array} aDistinctKeys - List of property keys used in this level of differentiation.
@@ -42,13 +41,12 @@ function keymaker({ aDistinctKeys = [], oObjectToKey = {} }) {
   return sOutKey;
 }
 
-export { keymaker };
+export { fKeyMaker };
 
 /**
  * - Creates item with unique key if it isn't already in the repository, then adds the qty.
  * - Does NOT modify state by default.
  * - Only the key is checked for uniqueness.
- *
  * @param {object} oTargetRepo - The repository that directly contains the item being added.
  * @param {dProduct} oItemToAdd - The item to add.  Must be in dProduct format and contain a qty.
  * @param {string} [sUniqueKey] - OPTIONAL.  For cases where oItemToAdd lacks a unique key.
@@ -127,56 +125,8 @@ function fReturnReasonStatus(oReturnProduct) {
 export { fReturnReasonStatus };
 
 /////////////////////////////////////////////////////////////////
-////////             Intersectors
+////////             Data Intersectors
 /////////////////////////////////////////////////////////////////
-
-function matchMaker({
-  oNarrowSet = {},
-  oBroadSet = {},
-  fPreSortBroadSet = (a) => a,
-  fIsMatch = ({ oNarrowItem = {}, oBroadItem = {} }) => {
-    return false;
-  },
-  fBuildOutput = ({ oNarrowItem = {}, oBroadItem = {} }) => {
-    return { yaDone: "goofed" };
-  },
-  sQtyKey1 = "iQty",
-  sQtyKey2 = "iQty",
-}) {
-  const oDepleting_NarrowSet = cloneDeep(oNarrowSet);
-  const oDepleting_BroadSet = cloneDeep(oBroadSet);
-
-  const aKeys_narrowSet = Object.keys(oDepleting_NarrowSet);
-  const aKeys_broadSet = Object.keys(oDepleting_NarrowSet);
-
-  Loop_Repo1: for (const narrowKey of aKeys_narrowSet) {
-    // The order in which broadSet items are matched is sometimes relevant.
-    const aSortedBroadSet = fPreSortBroadSet(aKeys_broadSet);
-
-    Loop_Repo2: for (const broadKey of aSortedBroadSet) {
-      const bIsMatch = fIsMatch({
-        oRepo1Item: thisItem1,
-        oRepo2Item: thisItem2,
-      });
-
-      // If the items don't match, continue to the next item in repo2.
-      if (!bIsMatch) {
-        continue Loop_Repo2;
-      }
-
-      // If the items do match, get the quantity they have in common.
-      const iOverlapQty = Math.min(thisItem1[sQtyKey1], thisItem2[sQtyKey2]);
-
-      // here's the guts.
-
-      // Unmatched Repo1
-      // Unmatched Repo2
-      // Matched = []
-
-      // Got this weird intuition this can be done in a single loop, and it's swinging strangely between obviously yes and obviously no.
-    }
-  }
-}
 
 const oIntersectionParams = {
   oCircle1: {},
@@ -189,14 +139,16 @@ const oIntersectionParams = {
   sQtyKey2: "iQty",
   sQtyKeyLens: "iQty",
   aLensDistinctKeys: ["sKey"],
-  fIsMatch: fNo,
-  fPopulateLens: fNo,
-  fBuildLune: fNo,
-  fBuildLune1: fNo,
-  fBuildLune2: fNo,
+  fIsMatch: null,
+  fPopulateLens: null,
+  fBuildLune: null,
+  fBuildLune1: null,
+  fBuildLune2: null,
 };
 
-function fTrisector({
+//----------
+
+function fLuneLenser({
   oOuterRepo,
   oInnerRepo,
   fIsMatch = (oCircle1, oCircle2) => {
@@ -219,16 +171,16 @@ function fTrisector({
   const oInnerPool = cloneDeep(oInnerRepo);
   const oOutLenses = {};
 
-  Loop_Repo1: for (const thisOuterKey of Object.keys(oOuterPool)) {
+  Loop_Outer: for (const thisOuterKey of Object.keys(oOuterPool)) {
     const thisL1_Circle = oOuterPool[thisOuterKey];
 
     // Eventually we may need to sort this but I'm not gonna fuck with it now.
     const aInnerKeys = Object.keys(oInnerPool);
 
-    Loop_Repo2: for (const thisInnerKey of aInnerKeys) {
+    Loop_Inner: for (const thisInnerKey of aInnerKeys) {
       const thisL2_Circle = oInnerPool[thisInnerKey];
 
-      const bMatch = fIsMatch({ thisL1_Circle, thisL2_Circle });
+      const bMatch = fIsMatch(thisL1_Circle, thisL2_Circle);
 
       const iMatchQty = Math.min(
         thisL1_Circle[sQtyKey1],
@@ -239,7 +191,7 @@ function fTrisector({
       const bIsValid = bMatch && iMatchQty;
 
       if (!bIsValid) {
-        continue Loop_Repo2;
+        continue Loop_Inner;
       }
 
       const oLune1 = fBuildLune1(thisL1_Circle);
@@ -252,7 +204,7 @@ function fTrisector({
       // set the new quantities
       oLune1[sQtyKey1] -= iMatchQty;
       oLune2[sQtyKey2] -= iMatchQty;
-      oLens[sQtyKeyLens];
+      oLens[sQtyKeyLens] = iMatchQty;
 
       // Straight replaces are OK because the lens qty has already been deducted from the lunes.
       oOutLenses[oLens.sKey] = oLens;
@@ -270,161 +222,7 @@ function fTrisector({
   return oOut;
 }
 
-export { fTrisector };
-
-/// Probably not needed anymore.  But maybe.  Maybe not.  Maybe so.  Maybe not.
-
-/**
- * Creates a "lens" object by intersecting two data sets (circles) based on matching criteria.
- *
- * @param {Object} params - The parameters for crafting the lens.
- * @param {Object} params.oCircle1 - The first data set (circle) to intersect.
- * @param {Object} params.oCircle2 - The second data set (circle) to intersect.
- * @param {string} [params.sQtyKey1="iQty"] - The key in `oCircle1` representing the quantity.
- * @param {string} [params.sQtyKey2="iQty"] - The key in `oCircle2` representing the quantity.
- * @param {string} [params.sQtyKeyLens="iQty"] - The key in the resulting lens representing the quantity.
- * @param {Function} params.fIsMatch - Defines the matching criteria for the two circles and returns true or false.
- * @param {Function} params.fPopulateLens - A function to build the resulting lens object for matching items.
- *   - Receives an object with `oCircle1` and `oItem2`.
- *   - Should return the constructed lens object.
- * @returns {Object} The crafted lens object containing the intersection of the two circles.
- */
-function fLensCrafter(params = {}) {
-  const {
-    oCircle1,
-    oCircle2,
-    sQtyKey1,
-    sQtyKey2,
-    sQtyKeyLens,
-    fIsMatch,
-    fPopulateLens,
-  } = {
-    ...oIntersectionParams,
-    ...params,
-  };
-
-  const bMatch = fIsMatch({ oCircle1, oCircle2 });
-  const iMatchQty = Math.min(oCircle1[sQtyKey1], oCircle2[sQtyKey2]);
-
-  // valid lens requires a true match and an overlapping qty.
-  // Qty check saves us from having to clean up the circle repos while looping.
-  const isInvalid = !bMatch || !iMatchQty;
-
-  if (isInvalid) {
-    return null; // Returns null if invalid so downstream logic knows Circles 1 & 2 don't overlap.
-  }
-
-  // If the items match, create the lens.
-  const oOutLens = fPopulateLens({ oCircle1, oCircle2 });
-  oOutLens[sQtyKeyLens] = iMatchQty;
-
-  return oOutLens;
-}
-
-export { fLensCrafter };
-
-/**
- * If lens is valid, subtracts the lens quantity from the circle quantity.
- * All other circle properties are unchanged.
- * @param {Object} params - The parameters for crafting the lune.
- * @param {Object} params.oCircle - The original data set (circle).
- * @param {string} params.sQtyKey - The key in `oCircle` representing the quantity.
- * @param {Object} params.oLens - The intersection (lens) to subtract from the circle.
- * @param {string} params.sQtyKeyLens - The key in `oLens` representing the quantity.
- * @returns {Object} Lune with adjusted quantity.  Identical if lens is null.
- */
-const fMainLuner = (params = {}) => {
-  const { oCircle, sQtyKey, oLens, sQtyKeyLens } = {
-    ...oIntersectionParams,
-    ...params,
-  };
-
-  // If the lens is null, oCircle doesn't change so return it as-is.
-  if (!oLens) {
-    return oCircle;
-  }
-
-  const oOutLune = cloneDeep(oCircle);
-  // Reduce the lens qty by the circle qty so that it isn't double-counted.
-  oOutLune[sQtyKey] -= oLens[sQtyKeyLens];
-
-  return oOutLune;
-};
-
-export { fMainLuner };
-
-/**
- * Intersects two data sets (circles) and computes the lens (intersection) and lunes (non-overlapping portions).
- *
- * @param {Object} params - The parameters for the intersector.
- * @param {Object} params.oCircle1 - The first data set (circle).
- * @param {Object} params.oCircle2 - The second data set (circle).
- * @param {string} [params.sQtyKey1="iQty"] - The key in `oCircle1` representing the quantity.
- * @param {string} [params.sQtyKey2="iQty"] - The key in `oCircle2` representing the quantity.
- * @param {string} [params.sQtyKeyLens="iQty"] - The key in the resulting lens representing the quantity.
- * @param {Function} params.fIsMatch - A function to determine if two items match.
- * @param {Function} params.fPopulateLens - A function to populate the lens object for matching items.
- * @param {Function} [params.fBuildLune1=fMainLuner] - A function to build the lune for `oCircle1`.
- * @param {Function} [params.fBuildLune2=fMainLuner] - A function to build the lune for `oCircle2`.
- * @returns {Object} An object containing the lens and lunes.
- * @returns {Object} returnObj.oLens - The intersection (lens) of the two circles.
- * @returns {Object} returnObj.oLune1 - The non-overlapping portion of `oCircle1`.
- * @returns {Object} returnObj.oLune2 - The non-overlapping portion of `oCircle2`.
- */
-function fIntersector(params = {}) {
-  const {
-    oCircle1,
-    oCircle2,
-    sQtyKey1,
-    sQtyKey2,
-    sQtyKeyLens,
-    fIsMatch,
-    fPopulateLens,
-    fBuildLune1 = fMainLuner,
-    fBuildLune2 = fMainLuner,
-  } = {
-    ...oIntersectionParams,
-    ...params,
-  };
-
-  // Validate required inputs
-  if (!oCircle1 || !oCircle2) {
-    throw new Error("fIntersector: Both oCircle1 and oCircle2 are required.");
-  }
-
-  const oOutLens = fLensCrafter({
-    oCircle1,
-    oCircle2,
-    sQtyKey1,
-    sQtyKey2,
-    sQtyKeyLens,
-    fIsMatch,
-    fPopulateLens,
-  });
-
-  const oOutLune1 = fBuildLune1({
-    oCircle: oCircle1,
-    sQtyKey: sQtyKey1,
-    oLens: oOutLens,
-    sQtyKeyLens,
-  });
-
-  const oOutLune2 = fBuildLune2({
-    oCircle: oCircle2,
-    sQtyKey: sQtyKey2,
-    oLens: oOutLens,
-    sQtyKeyLens,
-  });
-
-  const oOut = {
-    oLens: oOutLens,
-    oLune1: oOutLune1,
-    oLune2: oOutLune2,
-  };
-
-  return oOut;
-}
-export { fIntersector };
+export { fLuneLenser };
 
 /////////////////////////////////////////////////////////////////
 ////////             Node Navigation
@@ -471,9 +269,6 @@ function useNodeNav() {
     // activate the target node and make it available.
     outNavNodesObj[targetNodeKey].isCurrent = true;
 
-    // ensure all automatic derivations are up-to-date.
-    outSessionState = mrvAutoDeriver({ sessionState: outSessionState });
-
     outSessionState.oNavNodes = outNavNodesObj;
     setSessionMRV(outSessionState);
     console.log(
@@ -489,16 +284,70 @@ function useNodeNav() {
 
 export { useNodeNav };
 
-function mrvAutoDeriver({ sessionState }) {
-  /**
-   * Performs all automatic derivations from inputs in the session state.
-   * @param {object} sessionState - State to run through the AutoDeriver.
-   * @returns {object} The updated session state.
-   */
+/////////////////////////////////////////////////////////////////
+////////             Auto-Derivation
+/////////////////////////////////////////////////////////////////
 
-  const outSessionState = cloneDeep(sessionState);
+function useAutoDeriver(sessionState) {
+  const sessionMRV = cloneDeep(sessionState);
+  const saleRecordsAPI = useContext(SaleRecordsAPI);
 
-  return outSessionState;
+  const fAutoDeriver = () => {
+    const refBaseState = baseStateExTurns({});
+    const refSaleRecord = dSaleRecord({});
+
+    const oOutDerived = {
+      receiptedItems: {},
+      nrrItems: {},
+      likeExchItems: {},
+      unlikeExchItems: {},
+    };
+
+    // Build receipted return items /////////////////////////////////
+
+    // unpack items from invoices to feed into fLuneLenser
+    const aInvoNums = Object.values(sessionMRV.sessionInvos);
+    const aInvoicedItems = aInvoNums.flatMap((thisInvoNum) => {
+      const invoItems = Object.values(saleRecordsAPI[thisInvoNum].oItemsSold);
+      return invoItems;
+    });
+    const oInvoicedItems = { ...aInvoicedItems }; // convert to object for fLuneLenser
+    console.log("oInvoicedItems: ", oInvoicedItems);
+
+    /*
+
+    let aInvoicedItems = [];
+  for (const thisInvoNum of aInvoices) {
+    const aInvoItems = Object.values(saleRecordsAPI[thisInvoNum].oItemsSold);
+    aInvoicedItems.push(...aInvoItems);
+  }
+  const oInvoicedItems = { ...aInvoicedItems }; // convert to object for fLuneLenser
+  
+  */
+
+    const receiptedItems = fLuneLenser({
+      oOuterRepo: sessionMRV.returnItems,
+      oInnerRepo: oInvoicedItems,
+      fIsMatch: (oOuterItem, oInnerItem) => {
+        return oOuterItem.sBifrostKey === oInnerItem.sBifrostKey;
+      },
+      fBuildLens: ({ oCircle1, oCircle2 }) => {
+        const oOutLens = dProduct({
+          sKey: `${oCircle1.sKey}_${oCircle2.sInvoNum}`,
+          sBifrostKey: oCircle1.sBifrostKey,
+          sInvoNum: oCircle2.sInvoNum,
+          iUnitBaseValue: oCircle2.iUnitBaseValue,
+          iUnitTax: oCircle2.iUnitTax,
+        });
+        return oOutLens;
+      },
+    });
+    oOutDerived.receiptedItems = receiptedItems.oLenses;
+    oOutDerived.nrrItems = receiptedItems.oOuterLunes;
+
+    return oOutDerived;
+  };
+  return fAutoDeriver;
 }
 
-export { mrvAutoDeriver };
+export { useAutoDeriver };

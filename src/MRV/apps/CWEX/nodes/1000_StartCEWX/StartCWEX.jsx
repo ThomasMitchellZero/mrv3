@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import { useNodeNav } from "../../../../mrv_controller";
 import { HeaderCWEX } from "../../components/layout/header_cwex/HeaderCWEX";
-import { fTrisector } from "../../../../mrv_controller";
+import { fLuneLenser } from "../../../../mrv_controller";
 import { dProduct } from "../../../../mrv_data_types";
 
 const StartCWEX = () => {
@@ -49,7 +49,7 @@ const StartCWEX = () => {
     CC_nnn: dProduct({
       sKey: "CC_nnn",
       sBifrostKey: "CC",
-      iQty: 13,
+      iQty: 99,
       sInvoNum: "nnn",
     }),
     AA_mmm: dProduct({
@@ -66,23 +66,21 @@ const StartCWEX = () => {
     }),
   };
 
-  const testTrisection = fTrisector({
+  const testTrisection = fLuneLenser({
     oOuterRepo: oReturnItems,
     oInnerRepo: oInvoItems,
-    fIsMatch: ({ oCircle1, oCircle2 }) => {
+    fIsMatch: (oCircle1, oCircle2) => {
       return oCircle1.sBifrostKey === oCircle2.sBifrostKey;
     },
-    fPopulateLens: ({ oCircle1, oCircle2 }) => {
+    fBuildLens: ({ oCircle1, oCircle2 }) => {
       const oNewItem = dProduct({
         sBifrostKey: oCircle1.sBifrostKey,
         sInvoNum: oCircle2.sInvoNum,
       });
+      oNewItem.sKey = `_${oNewItem.sBifrostKey}_${oNewItem.sInvoNum}`;
       return oNewItem;
     },
-    aLensDistinctKeys: ["sBifrostKey", "sInvoNum"],
   });
-
-  console.log("testTrisection", testTrisection);
 
   return (
     <main className={`mrvPage exchEntry`}>

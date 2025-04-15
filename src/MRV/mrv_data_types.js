@@ -36,6 +36,16 @@ export { sharedParamsSchema };
 ////    Input Data Structures
 /////////////////////////////////////////////////////////////
 
+/**
+ * Generates a money-related object with default values for unit base value and tax.
+ *
+ * @param {Object} [params={}] - The parameters for creating the money object.
+ * @param {number} [params.iUnitBaseValue=0] - The base value of a unit. Defaults to `0` if not provided.
+ * @param {number} [params.iUnitTax=0] - The tax value of a unit. Defaults to `0` if not provided.
+ * @returns {Object} An object containing the unit base value and tax.
+ * @returns {number} returnObj.iUnitBaseValue - The base value of a unit.
+ * @returns {number} returnObj.iUnitTax - The tax value of a unit.
+ */
 function dMoney(params = {}) {
   // single object parameter
 
@@ -123,9 +133,11 @@ export { dReturnReasons };
  * @param {string} [params.sItemNum] - The item number of the product.
  * @param {string} [params.sBifrostKey] - A key used for Bifrost integration.
  * @param {string} [params.sProxyKey] - A proxy key for the product.
- * @param {string} [params.sInvoNum] - The invoice number associated with the product.
+ * @param {number} [params.iUnitBaseValue=0] - The base value of a unit. Defaults to `0` if not provided.
  * @param {string} [params.sReasonCode] - A reason code for the product's return.
  * @param {Object} [params.oReturnReasons] - An object containing reasons for the product's return.
+ * @param {number} [params.iUnitTax=0] - The tax value of a unit. Defaults to `0` if not provided.
+ * @param {string} [params.sInvoNum] - The invoice number associated with the product.
  * @returns {Object} The product object.
  * @returns {string} returnObj.sKey - The unique key for the product.
  * @returns {number} returnObj.iQty - The quantity of the product.
@@ -135,6 +147,8 @@ export { dReturnReasons };
  * @returns {string} returnObj.sReasonCode - The reason code for the product's return.
  * @returns {Object} returnObj.oReturnReasons - The reasons for the product's return.
  * @returns {string} returnObj.sInvoNum - The invoice number associated with the product.
+ * @returns {number} returnObj.iUnitBaseValue - The base value of a unit.
+ * @returns {number} returnObj.iUnitTax - The tax value of a unit.
  */
 function dProduct(params = {}) {
   const {
