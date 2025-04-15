@@ -25,6 +25,18 @@ export { greenify };
 ////////             Data Handlers
 /////////////////////////////////////////////////////////////////
 
+function clearDepleted({ oRepo = {}, sQtyKey = "iQty" }) {
+  console.log("oRepo: ", oRepo);
+  const outRepo = cloneDeep(oRepo);
+  for (const k of Object.keys(outRepo)) {
+    if (!outRepo[k][sQtyKey]) {
+      delete outRepo[k];
+    }
+  }
+  console.log("outRepo: ", outRepo);
+  return outRepo;
+}
+
 function fKeyMaker({ aDistinctKeys = [], oObjectToKey = {} }) {
   /**
    * Creates a unique key from a list of distinct keys and an object to key.
@@ -213,11 +225,14 @@ function fLuneLenser({
     }
   }
 
+  // Clean up the lunes and lenses
   const oOut = {
     oLenses: oOutLenses,
-    oOuterLunes: oOuterPool,
-    oInnerLunes: oInnerPool,
+    oOuterLunes: clearDepleted({ oRepo: oOuterPool, sQtyKey: sQtyKey1 }),
+    oInnerLunes: clearDepleted({ oRepo: oInnerPool, sQtyKey: sQtyKey2 }),
   };
+  console.log("oOuterPool", oOuterPool);
+  console.log("oOuterLunes: ", oOut.oOuterLunes);
 
   return oOut;
 }
@@ -313,17 +328,6 @@ function useAutoDeriver(sessionState) {
     });
     const oInvoicedItems = { ...aInvoicedItems }; // convert to object for fLuneLenser
     console.log("oInvoicedItems: ", oInvoicedItems);
-
-    /*
-
-    let aInvoicedItems = [];
-  for (const thisInvoNum of aInvoices) {
-    const aInvoItems = Object.values(saleRecordsAPI[thisInvoNum].oItemsSold);
-    aInvoicedItems.push(...aInvoItems);
-  }
-  const oInvoicedItems = { ...aInvoicedItems }; // convert to object for fLuneLenser
-  
-  */
 
     const receiptedItems = fLuneLenser({
       oOuterRepo: sessionMRV.returnItems,
