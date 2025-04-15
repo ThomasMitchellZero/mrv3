@@ -19,6 +19,8 @@ function ProductTile({ oPage, oProduct }) {
 
   const refLS = dLocalCtx({});
 
+  // Action Handlers //////////////////////////////////////
+
   const handleClick = (e) => {
     e.stopPropagation();
     const draftPage = {
@@ -35,6 +37,9 @@ function ProductTile({ oPage, oProduct }) {
     setSessionMRV(draftSession);
   };
 
+  // UI Elements //////////////////////////////////////
+
+  // Receipted Items
   const aItemInvos = Object.values(oDerived.receiptedItems).filter(
     (thisRcptItem) => {
       return thisRcptItem.sBifrostKey === oProduct.sBifrostKey;
@@ -45,6 +50,7 @@ function ProductTile({ oPage, oProduct }) {
     return <ProductInvoRow oProduct={thisRcptItem} />;
   });
 
+  // Non-Receipted Items
   const oNRR = Object.values(oDerived.nrrItems).find((thisRcptItem) => {
     return thisRcptItem.sBifrostKey === oProduct.sBifrostKey;
   });
