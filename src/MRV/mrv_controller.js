@@ -280,10 +280,6 @@ function useNodeNav() {
 
     outSessionState.oNavNodes = outNavNodesObj;
     setSessionMRV(outSessionState);
-    console.log(
-      "attempting navihation to",
-      outNavNodesObj[targetNodeKey].sRoute
-    );
 
     navigate(outNavNodesObj[targetNodeKey].sRoute);
   };
@@ -321,7 +317,6 @@ function useAutoDeriver(sessionState) {
       return invoItems;
     });
     const oInvoicedItems = { ...aInvoicedItems }; // convert to object for fLuneLenser
-    console.log("oInvoicedItems: ", oInvoicedItems);
 
     const receiptedItems = fLuneLenser({
       oOuterRepo: sessionMRV.returnItems,

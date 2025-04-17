@@ -66,8 +66,6 @@ function ReturnPhase() {
     },
   });
 
-  console.log(oDerived);
-
   const oPageLS = oPage.oLocalState;
   const fSetPageLS = oPage.fSetLocalState;
   const oResets = oPage.oResets;

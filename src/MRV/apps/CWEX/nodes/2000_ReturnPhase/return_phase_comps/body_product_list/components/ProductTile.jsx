@@ -11,8 +11,6 @@ function ProductTile({ oPage, oProduct }) {
   const setSessionMRV = mrvCtx.setSessionMRV;
   const oDerived = mrvCtx.oDerived;
 
-  console.log("oDerived", oDerived);
-
   const fSetPageLS = oPage.fSetLocalState;
   const oResets = oPage.oResets;
   const oPageLS = oPage.oLocalState;
@@ -47,7 +45,7 @@ function ProductTile({ oPage, oProduct }) {
   );
 
   const uiItemInvos = aItemInvos.map((thisRcptItem) => {
-    return <ProductInvoRow oProduct={thisRcptItem} />;
+    return <ProductInvoRow key={thisRcptItem.sKey} oProduct={thisRcptItem} />;
   });
 
   // Non-Receipted Items
@@ -55,7 +53,9 @@ function ProductTile({ oPage, oProduct }) {
     return thisRcptItem.sBifrostKey === oProduct.sBifrostKey;
   });
   if (oNRR) {
-    uiItemInvos.push(<ProductInvoRow oPage={oPage} oProduct={oNRR} />);
+    uiItemInvos.push(
+      <ProductInvoRow key={oNRR.skey} oPage={oPage} oProduct={oNRR} />
+    );
   }
 
   const sIsActive =
