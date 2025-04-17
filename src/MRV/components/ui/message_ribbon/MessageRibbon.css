@@ -1,0 +1,24 @@
+.mrv3 {
+  & .message-ribbon {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: 0 0 auto;
+    align-items: flex-start;
+    justify-content: start;
+    padding: 0.5rem;
+    padding-right: 0.75rem;
+    border-radius: 0.25rem;
+    gap: 0.5rem;
+
+    & .color-bar {
+      flex: 0 0 0.25rem;
+      height: 100%;
+      border-radius: 0.125rem;
+    }
+
+    & p {
+      text-align: start;
+    }
+  }
+}
