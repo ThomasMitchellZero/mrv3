@@ -37,7 +37,9 @@ function LifetimeWarranty({ oPage }) {
   const setThisLS = LW_LocalState.fSetLocalState;
 
   // Booleans to determine UI element visibility
-  const okBrand = thisLS.sBrand === "Kobalt" || thisLS.sBrand === "Craftsman";
+  const okBrand =
+    (thisLS.sBrand && thisLS.sBrand === "Kobalt") ||
+    thisLS.sBrand === "Craftsman";
   const okElectric = okBrand && thisLS.sElectric === "No";
   const okExchQty = okElectric && thisLS.iExchQty > 0;
   const okReplacement = okExchQty && thisLS.oReplacement;
@@ -62,16 +64,19 @@ function LifetimeWarranty({ oPage }) {
   // Chips
   const handleChipClick = ({ sLsField, sChipKey }) => {
     const draftLS = cloneDeep(thisLS);
-    draftLS[sLsField] = sChipKey;
+    draftLS[sLsField] = draftLS[sLsField] === sChipKey ? "" : sChipKey;
+    console.log("draftLS", draftLS);
+    console.log(sLsField, draftLS[sLsField]);
     setThisLS(draftLS);
   };
 
   const uiChip = ({ sLsField, sChipKey }) => {
-    const sIsActive = pageLS[sLsKey] === sChipKey ? "active" : "";
+    const sIsActive = thisLS[sLsField] === sChipKey ? "selected" : "";
     return (
       <button
         key={sChipKey}
         onClick={() => handleChipClick({ sLsField, sChipKey })}
+        type="button"
         className={`chip ${sIsActive}`}
       >
         {sChipKey}
@@ -81,16 +86,24 @@ function LifetimeWarranty({ oPage }) {
 
   // Invalid Messages
 
+  const uiInvalidBrand = !okBrand && (
+    <MessageRibbon
+      sMessage={`Brand ineligible for Lifetime Warranty Replacement.  Contact the manufacturer.`}
+      sType="critical"
+    />
+  );
+
   return (
     <div
       onClick={handleClose}
       className={`hBox lifetime_warranty scrimOverlay justify__end align__end `}
     >
       <SidesheetMRV sNavBtn="close" sTitle="Unlisted Warranty Item">
-        <MessageRibbon
-          sMessage="I'm a message! I'm a message!  I'm a message! I'm a message! I'm a message! I'm a message! I'm a message! I'm a message! I'm a message!"
-          sType={`critical`}
-        />
+        <div className={`chipCtnr`}>
+          {uiChip({ sLsField: "sBrand", sChipKey: "Kobalt" })}
+          {uiChip({ sLsField: "sBrand", sChipKey: "Craftsman" })}
+          {uiChip({ sLsField: "sBrand", sChipKey: "Other" })}
+        </div>
       </SidesheetMRV>
     </div>
   );

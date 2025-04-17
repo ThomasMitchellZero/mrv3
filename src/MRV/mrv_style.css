@@ -120,7 +120,7 @@
       background-color: var(--color__tertiary);
     }
 
-    & .color__interactive__text {
+    & .color__transparent {
       color: var(--color__interactive);
     }
 
@@ -379,6 +379,22 @@
       width: 100%;
     }
 
+    & .chipCtnr {
+      display: flex;
+      flex: 0 0 auto;
+      width: 100%;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    & .tabCtnr {
+      display: flex;
+      flex-direction: row;
+      flex: 0 0 auto;
+      width: 100%;
+    }
+
     /* ---- MRV BUTTON STYLES ---- */
 
     & button {
@@ -467,15 +483,6 @@
         }
       }
 
-      & .chipCtnr {
-        display: flex;
-        flex: 0 0 auto;
-        width: 100%;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 1rem;
-      }
-
       &.tab {
         height: 3.5rem;
         background-color: transparent;
@@ -494,13 +501,6 @@
           background-color: var(--color__container__selected);
         }
       }
-    }
-
-    & .tabCtnr {
-      display: flex;
-      flex-direction: row;
-      flex: 0 0 auto;
-      width: 100%;
     }
 
     /* ---- Input Styling ---- */

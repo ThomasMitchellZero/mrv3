@@ -18,6 +18,9 @@ function SidesheetMRV({
   fNavBtnClick = () => {
     console.log("navBtn clicked");
   },
+  fBgClick = (e) => {
+    e.stopPropagation();
+  },
   children,
   ...rest
 }) {
@@ -38,7 +41,10 @@ function SidesheetMRV({
   ) : null;
 
   return (
-    <aside className={`sidesheet mrvPanel__side gap__1rem ${sStyleClasses}`}>
+    <aside
+      onClick={fBgClick}
+      className={`sidesheet mrvPanel__side gap__1rem ${sStyleClasses}`}
+    >
       <div className={`hBox gap__05rem flex__min width__max`}>
         {uiNavBtn}
         <h3 className={` heading__medium truncate`}>{sTitle}</h3>
