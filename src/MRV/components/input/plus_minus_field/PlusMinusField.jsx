@@ -13,7 +13,12 @@ function PlusMinusField({
   };
 
   return (
-    <div className={`hBox gap__0rem width__min flex__min`}>
+    <div
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
+      className={`hBox gap__0rem width__min flex__min`}
+    >
       <button
         type="button"
         disabled={bIsMinusDisabled || bIsFieldDisabled}

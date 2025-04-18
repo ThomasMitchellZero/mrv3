@@ -12,7 +12,7 @@ import {
 /**
  * Standard icons for MRV
  *@param {Object} props - Component properties
- * @param {("box"|"receiptLong"|"cart"|"alert"|"info"|"success"|"critical")} [props.sIconKey] - Specifies the icon to display
+ * @param {("box"|"receiptLong"|"cart"|"alert"|"info"|"success"|"critical"|"barcode")} [props.sIconKey] - Specifies the icon to display
  * @param {string} [props.ctnrSize="2.5rem"] - The size of the container
  * @param {string} [props.fontSize="2rem"] - The size of the icon
  * @param {string} [props.sBackgroundColor="color__white"] - The background color of the icon container

@@ -127,6 +127,11 @@
     & .color__interactive {
       background-color: var(--color__interactive);
     }
+
+    & .color__interactive__text {
+      color: var(--color__interactive);
+    }
+
     & .color__green__text {
       color: var(--color__green);
     }
@@ -276,11 +281,13 @@
       display: flex;
       background-color: var(--color__border);
 
-      &.horizontal {
+      &.horizontal,
+      &.h {
         height: 1px;
         width: 100%;
       }
-      &.vertical {
+      &.vertical,
+      &.v {
         height: 100%;
         width: 1px;
       }
