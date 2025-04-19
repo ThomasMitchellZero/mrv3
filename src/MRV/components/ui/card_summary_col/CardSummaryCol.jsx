@@ -13,8 +13,8 @@ function CardSummaryCol({
   return (
     <div className={`cardSummaryCol gap__05rem align__start`}>
       <div className={`hBox flex__min justify__end width__max`}>
-        <button className={`closeBtn secondary`}>
-          <MdClose onClick={fHandleClose} size={`1.5rem`} />
+        <button onClick={fHandleClose} className={`closeBtn secondary`}>
+          <MdClose size={`1.5rem`} />
         </button>
       </div>
       <div

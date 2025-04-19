@@ -81,7 +81,6 @@ function ProductInputs({ oPage }) {
       oTargetRepo: sessionMRV.returnItems,
       oItemToAdd: dProduct({
         iQty: thisLS.iQty,
-        sItemNum: thisLS.sItemKey,
         sBifrostKey: thisLS.sItemKey,
         sKey: `_${thisLS.sItemKey}`, // session keys have "_" prefix to coerce them to strings.
       }),

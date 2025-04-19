@@ -3,6 +3,7 @@ import { cloneDeep } from "lodash";
 import { dLocalCtx, dError, dProduct } from "../../../../../../mrv_data_types";
 import { useContext } from "react";
 import { bifrostAPI } from "../../../../../../../local_APIs/bifrost";
+import { addItem } from "../../../../../../mrv_controller";
 
 import { SidesheetMRV } from "../../../../../../components/layout/sidesheet/SidesheetMRV";
 import { MessageRibbon } from "../../../../../../components/ui/message_ribbon/MessageRibbon";
@@ -149,7 +150,7 @@ function LifetimeWarranty({ oPage }) {
   );
 
   // UI ExchQty ------------------------------
-  const uiExch = (
+  const uiExchQty = (
     <div className={`vBox flex__min width__max gap__05rem`}>
       <p className={`body__medium`}>Qty to exchange:</p>
       <PlusMinusField
@@ -184,8 +185,6 @@ function LifetimeWarranty({ oPage }) {
         Invalid Item #
       </p>
     ) : null;
-
-  //{LW_localCtx.oErrorObjects?.invalidItem?.sMessage}
 
   const uiReplacementInput = (
     <div className={`vBox flex__min width__max gap__1rem`}>
@@ -229,6 +228,14 @@ function LifetimeWarranty({ oPage }) {
 
   const handleConfirmAdd = (e) => {
     e.stopPropagation();
+    const draftSession = cloneDeep(sessionMRV);
+    const draftPageLS = cloneDeep(pageLS);
+
+    addItem({oTargetRepo: draftSession.returnItems, oItemToAdd: dProduct({
+      iQty: thisLS.iExchQty,
+      sProxyKey: thisLS.sReplacerProd,
+      sBifrostKey: thisLS.sReplacerProd,
+    })});
     console.log("Confirm Add");
   };
 
@@ -280,6 +287,7 @@ function LifetimeWarranty({ oPage }) {
         }}
       >
         <div className={`vBox flex__min width__max gap__2rem`}>
+          {uiExchQty}
           {uiReplacmentCluster}
         </div>
       </SidesheetMRV>

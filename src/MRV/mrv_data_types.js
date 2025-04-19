@@ -19,6 +19,7 @@ const sharedParamsSchema = {
   sModelNum: "",
   sImgKey: "no-image",
   sDescription: "NO DESCRIPTION",
+  bReplaceLW: false,
 
   // return reason parameters
   sReasonCode: "",
@@ -125,7 +126,7 @@ export { dReturnReasons };
 /////////////////////////////////////////////////////////////
 
 /**
- * Creates a product object with various properties and methods.
+ * Creates a product object the full collection of properties.
  *
  * @param {Object} params - The parameters for creating the product.
  * @param {string} [params.sKey] - A unique key for the product. Defaults to `_${sBifrostKey}` if not provided.
@@ -154,7 +155,6 @@ function dProduct(params = {}) {
   const {
     sKey,
     iQty,
-    sItemNum,
     sBifrostKey,
     sProxyKey,
     sInvoNum,
@@ -170,8 +170,7 @@ function dProduct(params = {}) {
   const outObj = {
     sKey: outSKey,
     iQty,
-    sItemNum,
-    sBifrostKey: sBifrostKey || sItemNum,
+    sBifrostKey,
     sProxyKey,
     sReasonCode,
     oReturnReasons: oReturnReasons || dReturnReasons(outSKey),
@@ -187,8 +186,30 @@ export { dProduct };
 ////    Mock Server Data Types
 /////////////////////////////////////////////////////////////
 
+/**
+ * Creates a product object with properties specific to the Bifrost system.
+ *
+ * @param {Object} [params={}] - The parameters for creating the product object.
+ * @param {string} [params.sKey] - A unique key for the product.
+ * @param {string} [params.sImgKey] - The key for the product's image.
+ * @param {string} [params.sDescription] - A description of the product.
+ * @param {string} [params.sModelNum] - The model number of the product.
+ * @param {string} [params.sItemNum] - The item number of the product.
+ * @param {boolean} [params.bReplaceLW=false] - Indicates if the product is eligible for Lifetime Warranty replacement.
+ * @param {number} [params.iUnitBaseValue=0] - The base value of a unit (from `dMoney`).
+ * @param {number} [params.iUnitTax=0] - The tax value of a unit (from `dMoney`).
+ * @returns {Object} An object representing the product with Bifrost-specific properties.
+ * @returns {string} returnObj.sKey - The unique key for the product.
+ * @returns {string} returnObj.sImgKey - The key for the product's image.
+ * @returns {string} returnObj.sDescription - The description of the product.
+ * @returns {string} returnObj.sModelNum - The model number of the product.
+ * @returns {string} returnObj.sItemNum - The item number of the product.
+ * @returns {boolean} returnObj.bReplaceLW - Indicates if the product is eligible for Lifetime Warranty replacement.
+ * @returns {number} returnObj.iUnitBaseValue - The base value of a unit.
+ * @returns {number} returnObj.iUnitTax - The tax value of a unit.
+ */
 function dProduct_bifrost(params = {}) {
-  const { sKey, sImgKey, sDescription, sModelNum, sItemNum } = {
+  const { sKey, sImgKey, sDescription, sModelNum, sItemNum, bReplaceLW } = {
     ...sharedParamsSchema,
     ...params,
   };
@@ -198,6 +219,7 @@ function dProduct_bifrost(params = {}) {
     sDescription,
     sModelNum,
     sItemNum,
+    bReplaceLW,
     ...dMoney(params),
   };
   return outObj;
