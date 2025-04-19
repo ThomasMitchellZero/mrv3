@@ -54,7 +54,7 @@ function ProductTile({ oPage, oProduct }) {
   });
   if (oNRR) {
     uiItemInvos.push(
-      <ProductInvoRow key={oNRR.skey} oPage={oPage} oProduct={oNRR} />
+      <ProductInvoRow key={oNRR.sKey} oPage={oPage} oProduct={oNRR} />
     );
   }
 

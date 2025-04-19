@@ -1,5 +1,6 @@
 import { useOutletContext, useNavigate } from "react-router";
 import { SaleRecordsAPI } from "../local_APIs/sale_records";
+import { bifrostAPI } from "../local_APIs/bifrost";
 
 import { useContext } from "react";
 import { dProduct, baseStateExTurns, dSaleRecord } from "./mrv_data_types";
@@ -296,6 +297,7 @@ export { useNodeNav };
 function useAutoDeriver(sessionState) {
   const sessionMRV = cloneDeep(sessionState);
   const saleRecordsAPI = useContext(SaleRecordsAPI);
+  const bifrost = useContext(bifrostAPI);
 
   const fAutoDeriver = () => {
     const refBaseState = baseStateExTurns({});
@@ -337,6 +339,15 @@ function useAutoDeriver(sessionState) {
     });
     oOutDerived.receiptedItems = receiptedItems.oLenses;
     oOutDerived.nrrItems = receiptedItems.oOuterLunes;
+
+    // Fake-receipt the NRR LW items /////////////////////////////////
+    const nrr_LW_Items = Object.values(oOutDerived.nrrItems).filter(
+      (thisNRRitem) => {
+        const fromBifrost = bifrost[thisNRRitem.sBifrostKey];
+
+        return true; // fromBifrost.sCategory === "Lifetime Warranty";
+      }
+    );
 
     return oOutDerived;
   };
