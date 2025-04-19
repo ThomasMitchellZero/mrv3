@@ -229,14 +229,18 @@ function LifetimeWarranty({ oPage }) {
   const handleConfirmAdd = (e) => {
     e.stopPropagation();
     const draftSession = cloneDeep(sessionMRV);
-    const draftPageLS = cloneDeep(pageLS);
-
-    addItem({oTargetRepo: draftSession.returnItems, oItemToAdd: dProduct({
-      iQty: thisLS.iExchQty,
-      sProxyKey: thisLS.sReplacerProd,
-      sBifrostKey: thisLS.sReplacerProd,
-    })});
-    console.log("Confirm Add");
+    const outReturnItems = addItem({
+      oTargetRepo: draftSession.returnItems,
+      oItemToAdd: dProduct({
+        iQty: thisLS.iExchQty,
+        sProxyKey: thisLS.sReplacerProd,
+        sBifrostKey: "LWNB",
+        sKey: `_LWNB_${thisLS.sReplacerProd}`,
+      }),
+    });
+    draftSession.returnItems = outReturnItems;
+    setSessionMRV(draftSession);
+    handleClose(e);
   };
 
   const uiReplacementDetails = (
@@ -254,7 +258,7 @@ function LifetimeWarranty({ oPage }) {
           Clear Item
         </button>
         <button
-          onClick={handleConfirmAdd}
+          onClick={(e) => handleConfirmAdd(e)}
           className={`primary flex__max`}
           type="button"
         >
