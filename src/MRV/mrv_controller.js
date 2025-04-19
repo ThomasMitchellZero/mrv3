@@ -310,7 +310,9 @@ function useAutoDeriver(sessionState) {
       unlikeExchItems: {},
     };
 
-    // Build receipted return items /////////////////////////////////
+    //------------------------------------------------------------------
+    //    Match Return Items to Session Invoices
+    //------------------------------------------------------------------
 
     // unpack items from invoices to feed into fLuneLenser
     const aInvoNums = Object.values(sessionMRV.sessionInvos);
@@ -340,14 +342,48 @@ function useAutoDeriver(sessionState) {
     oOutDerived.receiptedItems = receiptedItems.oLenses;
     oOutDerived.nrrItems = receiptedItems.oOuterLunes;
 
-    // Fake-receipt the NRR LW items /////////////////////////////////
-    const nrr_LW_Items = Object.values(oOutDerived.nrrItems).filter(
-      (thisNRRitem) => {
-        const fromBifrost = bifrost[thisNRRitem.sBifrostKey];
+    //------------------------------------------------------------------
+    //    LW receipt for NRR LW items
+    //------------------------------------------------------------------
 
-        return true; // fromBifrost.sCategory === "Lifetime Warranty";
+    // run AFTER checking for real receipts, which are better for us and our customers.
+
+    const oLwInvoProds = {};
+
+    const aNRR_LW_Prods = Object.values(oOutDerived.nrrItems).filter(
+      (oProduct) => {
+        // check Bifrost to see if the NRR item has LW eligibility.
+        const bifrostData = bifrost?.[oProduct.sBifrostKey];
+        return bifrostData?.bLwEligible;
       }
     );
+
+    for (const thisLwProd of aNRR_LW_Prods) {
+      delete oOutDerived.nrrItems[thisLwProd.sKey]; // remove from NRR items so they aren't double counted.
+
+      // if item has a proxy key, use that as the data source because the Bifrost key won't contain real data.
+      const bifrostDataKey = thisLwProd.sProxyKey || thisLwProd.sBifrostKey;
+      const bifrostData = bifrost?.[bifrostDataKey];
+
+      const outLwProd = {
+        ...cloneDeep(thisLwProd),
+        sKey: `${thisLwProd.sKey}_LW`,
+        sInvoNum: "Lifetime Warranty",
+        iUnitBaseValue: bifrostData.iUnitBaseValue,
+        iUnitTax: bifrostData.iUnitTax,
+      };
+      oLwInvoProds[outLwProd.sKey] = outLwProd;
+    }
+    
+    // add the LW items to the receipted items so they can be processed together.
+    oOutDerived.receiptedItems = {
+      ...oOutDerived.receiptedItems,
+      ...oLwInvoProds,
+    };
+
+    //------------------------------------------------------------------
+    //    whatever's next.
+    //------------------------------------------------------------------
 
     return oOutDerived;
   };

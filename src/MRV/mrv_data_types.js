@@ -19,7 +19,7 @@ const sharedParamsSchema = {
   sModelNum: "",
   sImgKey: "no-image",
   sDescription: "NO DESCRIPTION",
-  bReplaceLW: false,
+  bLwEligible: false,
 
   // return reason parameters
   sReasonCode: "",
@@ -209,7 +209,7 @@ export { dProduct };
  * @returns {number} returnObj.iUnitTax - The tax value of a unit.
  */
 function dProduct_bifrost(params = {}) {
-  const { sKey, sImgKey, sDescription, sModelNum, sItemNum, bReplaceLW } = {
+  const { sKey, sImgKey, sDescription, sModelNum, sItemNum, bLwEligible } = {
     ...sharedParamsSchema,
     ...params,
   };
@@ -219,7 +219,7 @@ function dProduct_bifrost(params = {}) {
     sDescription,
     sModelNum,
     sItemNum,
-    bReplaceLW,
+    bLwEligible,
     ...dMoney(params),
   };
   return outObj;

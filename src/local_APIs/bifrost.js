@@ -25,7 +25,7 @@ const bifrostAPI = React.createContext({
     sDescription: "Warranty Replacement: ",
     sModelNum: "LWNB",
     sItemNum: "LWNB",
-    bReplaceLW: true,
+    bLwEligible: true,
   }),
 
   "3300": dProduct_bifrost({
@@ -64,15 +64,17 @@ const bifrostAPI = React.createContext({
     sItemNum: "6611",
     iUnitBaseValue: 1299,
     iUnitTax: 129,
+    bLwEligible: true,
   }),
-  "6612": dProduct_bifrost({
-    sKey: "6612",
+  "6622": dProduct_bifrost({
+    sKey: "6622",
     sImgKey: "craftsman_wrench",
     sDescription: "Craftsman 10-in Chromium-Plated Adjustable Wrench",
-    sModelNum: "CW6612",
-    sItemNum: "6612",
+    sModelNum: "CW6622",
+    sItemNum: "6622",
     iUnitBaseValue: 1999,
     iUnitTax: 199,
+    bLwEligible: true,
   }),
 });
 
