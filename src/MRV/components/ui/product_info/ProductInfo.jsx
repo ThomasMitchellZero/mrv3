@@ -70,7 +70,7 @@ function ProductInfo({
   const uiPriceQty =
     uiPrice || uiQty ? (
       <div
-        className={`hBox ${config.priceQty} color__tertiary__text gap__1rem bold`}
+        className={`hBox ${config.priceQty} color__primary__text gap__1rem bold`}
       >
         {uiQty}
         {uiX}
