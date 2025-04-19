@@ -102,11 +102,13 @@ function ProductInfo({
 
   // UI: Description ///////////////////////////////////////////////////////////
 
+  const sProxyDescription = bifrost?.[oProduct.sProxyKey]?.sDescription || "";
   const uiDescription = bifrostData.sDescription ? (
     <p
-      className={`description line${sLineLimit} color__primary__text ${config.description}`}
+      className={`description color__primary__text line${sLineLimit}  ${config.description} ${sProxyDescription}`}
     >
       {bifrostData.sDescription}
+      {sProxyDescription}
     </p>
   ) : null;
 

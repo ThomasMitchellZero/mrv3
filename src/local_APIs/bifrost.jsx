@@ -22,7 +22,7 @@ const bifrostAPI = React.createContext({
   "LWNB": dProduct_bifrost({
     sKey: "LWNB",
     sImgKey: "lifetime_warranty",
-    sDescription: "Lifetime Warranty Replacement",
+    sDescription: "Warranty Replacement: ",
     sModelNum: "LWNB",
     sItemNum: "LWNB",
     bReplaceLW: true,

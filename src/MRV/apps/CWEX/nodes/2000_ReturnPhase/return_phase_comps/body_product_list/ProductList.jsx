@@ -27,12 +27,12 @@ function ProductList({ oPage }) {
   const uiProducts = aMainItems.map((thisMainItem) => {
     return (
       <ProductCard
+        key={`card${thisMainItem.sKey}`}
         oPage={oPage}
         oProduct={thisMainItem}
-        key={thisMainItem.sKey}
       >
         <ProductTile
-          key={thisMainItem.sKey}
+          key={`tile${thisMainItem.sKey}`}
           oProduct={thisMainItem}
           oPage={oPage}
         />

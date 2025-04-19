@@ -41,6 +41,7 @@ function ProductImg({
   sWidth = "4rem",
   sHeight = "4rem",
   radius = "0.5rem",
+  bgColor = "color__white",
 }) {
   // Use the key to get the image or fallback to no_product
   const imgSrc = images[sImgKey] || images.no_product;
@@ -55,6 +56,7 @@ function ProductImg({
     <img
       src={imgSrc}
       alt="product"
+      className={`${bgColor}`}
       style={oStyle}
       onError={(e) => {
         e.target.src = "/assets/product-images/no_product.png"; // Fallback to default image
