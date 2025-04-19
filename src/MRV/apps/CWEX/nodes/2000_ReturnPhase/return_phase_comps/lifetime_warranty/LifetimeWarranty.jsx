@@ -1,6 +1,6 @@
 import { useOutletContext } from "react-router-dom";
 import { cloneDeep } from "lodash";
-import { dLocalCtx, dError } from "../../../../../../mrv_data_types";
+import { dLocalCtx, dError, dProduct } from "../../../../../../mrv_data_types";
 import { useContext } from "react";
 import { bifrostAPI } from "../../../../../../../local_APIs/bifrost";
 
@@ -8,7 +8,7 @@ import { SidesheetMRV } from "../../../../../../components/layout/sidesheet/Side
 import { MessageRibbon } from "../../../../../../components/ui/message_ribbon/MessageRibbon";
 import { PlusMinusField } from "../../../../../../components/input/plus_minus_field/PlusMinusField";
 import { IconMRV } from "../../../../../../components/ui/icon/IconMRV";
-import { use } from "react";
+import { ProductInfo } from "../../../../../../components/ui/product_info/ProductInfo";
 
 function LifetimeWarranty({ oPage }) {
   const mrvCtx = useOutletContext();
@@ -32,8 +32,9 @@ function LifetimeWarranty({ oPage }) {
     sBrand: "",
     sElectric: "",
     iExchQty: 0,
-    sReplacementKey: "",
+    sProdInput: "",
     oReplacement: null,
+    sReplacerProd: "",
     sActiveError: "",
   };
 
@@ -57,14 +58,16 @@ function LifetimeWarranty({ oPage }) {
   const resets = LW_localCtx.oResets;
   const sError = thisLS.sActiveError;
 
-  // visibility Booleans /////////////////////////////////////////////
+  /*
   const visBrandError = thisLS.sBrand === "Other";
   const visElectric = !visBrandError && thisLS.sBrand;
   const visElectricError = visElectric && thisLS.sElectric === "Yes";
-  const visExchQty = !visElectricError && thisLS.sElectric;
-  const visNewItemInput = visExchQty && thisLS.iExchQty > 0;
+  const visExchQty = !visElectricError && visElectric;
+  const visNewItemInput = visExchQty && thisLS.iExchQty > 0 && !visReplacement;
   const visItemError = sError === "invalidItem";
-  const visReplacement = false; //
+  const visReplacerProd = thisLS.sReplacerProd; //
+  
+  */
 
   // UI Elements /////////////////////////////////////////////////////////
 
@@ -90,24 +93,99 @@ function LifetimeWarranty({ oPage }) {
     );
   };
 
-  // Replacement Input
+  // visibility Booleans /////////////////////////////////////////////
+  //
+
+  const show_Brand = true;
+  const fill_Brand = thisLS.sBrand;
+  const valid_Brand = fill_Brand && fill_Brand !== "Other";
+
+  const show_Electric = valid_Brand;
+  const fill_Electric = thisLS.sElectric;
+  const valid_Electric = fill_Electric && fill_Electric !== "Yes";
+
+  const show_ExchQty = valid_Electric;
+  const fill_ExchQty = thisLS.iExchQty;
+  const valid_ExchQty = fill_ExchQty && fill_ExchQty > 0;
+
+  const show_ReplacementPod = valid_ExchQty;
+
+  // UI Brand
+
+  const uiBrand = (
+    <div className={`vBox flex__min width__max gap__05rem`}>
+      <p className={`body__medium`}>Brand of item being returned:</p>
+      <div className={`chipCtnr`}>
+        {uiChip({ sLsField: "sBrand", sChipKey: "Kobalt" })}
+        {uiChip({ sLsField: "sBrand", sChipKey: "Craftsman" })}
+        {uiChip({ sLsField: "sBrand", sChipKey: "Other" })}
+      </div>
+    </div>
+  );
+
+  const uiBrandError = (
+    <MessageRibbon
+      sMessage={`Brand not eligible for Lifetime Warranty replacement.  Contact manufacturer.`}
+      sType="critical"
+    />
+  );
+
+  // UI Electric --------------------------------
+  const uiElectric = (
+    <div className={`vBox flex__min width__max gap__05rem`}>
+      <p className={`body__medium`}>Does item use electricity?</p>
+      <div className={`chipCtnr`}>
+        {uiChip({ sLsField: "sElectric", sChipKey: "No" })}
+        {uiChip({ sLsField: "sElectric", sChipKey: "Yes" })}
+      </div>
+    </div>
+  );
+
+  const uiElectricError = (
+    <MessageRibbon
+      sMessage={`Electric items ineligible for Lifetime Warranty replacement.  Contact the manufacturer.`}
+      sType="critical"
+    />
+  );
+
+  // UI ExchQty ------------------------------
+  const uiExch = (
+    <div className={`vBox flex__min width__max gap__05rem`}>
+      <p className={`body__medium`}>Qty to exchange:</p>
+      <PlusMinusField
+        iFieldValue={thisLS.iExchQty}
+        handleQtyChange={(qty) => {
+          const draftLS = cloneDeep(thisLS);
+          draftLS.iExchQty = qty;
+          setThisLS(draftLS);
+        }}
+        bIsMinusDisabled={thisLS.iExchQty < 1}
+      />
+    </div>
+  );
+
+  // Replacement Cluster ------------------------------
 
   const fHandleAdd = (e) => {
     e.stopPropagation();
+
     const draftLS = cloneDeep(thisLS);
-    if (draftLS.sReplacementKey in bifrost) {
-      draftLS.oReplacement = draftLS.sReplacementKey;
+    if (draftLS.sProdInput in bifrost) {
+      draftLS.sReplacerProd = draftLS.sProdInput;
     } else {
       draftLS.sActiveError = "invalidItem";
     }
     setThisLS(draftLS);
   };
 
-  const uiItemError = (
-    <p className={`warning width__max text__align__right`}>
-      {LW_localCtx.oErrorObjects?.invalidItem?.sMessage}
-    </p>
-  );
+  const uiItemError =
+    thisLS.sActiveError === "invalidItem" ? (
+      <p className={`warning width__max flex__min text__align__right`}>
+        Invalid Item #
+      </p>
+    ) : null;
+
+  //{LW_localCtx.oErrorObjects?.invalidItem?.sMessage}
 
   const uiReplacementInput = (
     <div className={`vBox flex__min width__max gap__1rem`}>
@@ -126,21 +204,70 @@ function LifetimeWarranty({ oPage }) {
           onChange={(e) => {
             e.stopPropagation();
             const draftLS = cloneDeep(thisLS);
-            draftLS.sReplacementKey = e.target.value;
+            draftLS.sProdInput = e.target.value;
             setThisLS({ ...draftLS, ...resets.errorOnly });
           }}
+          value={thisLS.sProdInput}
+          placeholder={`Item Number`}
         />
         <button onClick={fHandleAdd} className={`secondary`}>
           Add
         </button>
       </div>
-      {visItemError && uiItemError}
+      {uiItemError}
     </div>
   );
 
+  // Replacement Details
+
+  const handleClearItem = (e) => {
+    e.stopPropagation();
+    const draftLS = { ...cloneDeep(thisLS), ...resets.errorOnly };
+    draftLS.sReplacerProd = "";
+    setThisLS(draftLS);
+  };
+
+  const handleConfirmAdd = (e) => {
+    e.stopPropagation();
+    console.log("Confirm Add");
+  };
+
+  const uiReplacementDetails = (
+    <div className={`vBox flex__min width__max gap__1rem`}>
+      <ProductInfo
+        oProduct={dProduct({
+          sKey: `_${thisLS.sReplacerProd}`,
+          sBifrostKey: `${thisLS.sReplacerProd}`,
+        })}
+        sSize="m"
+        bShowQty={false}
+      />
+      <div className={`hBox width__max flex__min gap__1rem`}>
+        <button onClick={handleClearItem} className={`secondary`} type="button">
+          Clear Item
+        </button>
+        <button
+          onClick={handleConfirmAdd}
+          className={`primary flex__max`}
+          type="button"
+        >
+          Confirm & Add
+        </button>
+      </div>
+    </div>
+  );
+
+  const uiReplacmentCluster = thisLS.sReplacerProd
+    ? uiReplacementDetails
+    : uiReplacementInput;
+
+  // Final Output ///////////////////////////////////////////////////////
+
   return (
     <div
-      onClick={handleClose}
+      onClick={(e) => {
+        handleClose(e);
+      }}
       className={`hBox gap__2rem lifetime_warranty scrimOverlay justify__end align__end `}
     >
       <SidesheetMRV
@@ -153,51 +280,8 @@ function LifetimeWarranty({ oPage }) {
         }}
       >
         <div className={`vBox flex__min width__max gap__2rem`}>
-          <div className={`vBox flex__min width__max gap__05rem`}>
-            <p className={`body__medium`}>Brand of item being returned:</p>
-            <div className={`chipCtnr`}>
-              {uiChip({ sLsField: "sBrand", sChipKey: "Kobalt" })}
-              {uiChip({ sLsField: "sBrand", sChipKey: "Craftsman" })}
-              {uiChip({ sLsField: "sBrand", sChipKey: "Other" })}
-            </div>
-          </div>
-          {visBrandError && (
-            <MessageRibbon
-              sMessage={`Brand ineligible for Lifetime Warranty replacement.  Contact the manufacturer.`}
-              sType="critical"
-            />
-          )}
-          {visElectric && (
-            <div className={`vBox flex__min width__max gap__05rem`}>
-              <p className={`body__medium`}>Does item use electricity?</p>
-              <div className={`chipCtnr`}>
-                {uiChip({ sLsField: "sElectric", sChipKey: "No" })}
-                {uiChip({ sLsField: "sElectric", sChipKey: "Yes" })}
-              </div>
-            </div>
-          )}
+          {uiReplacmentCluster}
         </div>
-        {visElectricError && (
-          <MessageRibbon
-            sMessage={`Electric items ineligible for Lifetime Warranty replacement.  Contact the manufacturer.`}
-            sType="critical"
-          />
-        )}
-        {visExchQty && (
-          <div className={`vBox flex__min width__max gap__05rem`}>
-            <p className={`body__medium`}>Qty to exchange:</p>
-            <PlusMinusField
-              iFieldValue={thisLS.iExchQty}
-              handleQtyChange={(qty) => {
-                const draftLS = cloneDeep(thisLS);
-                draftLS.iExchQty = qty;
-                setThisLS(draftLS);
-              }}
-              bIsMinusDisabled={thisLS.iExchQty < 1}
-            />
-          </div>
-        )}
-        {visNewItemInput && uiReplacementInput}
       </SidesheetMRV>
     </div>
   );

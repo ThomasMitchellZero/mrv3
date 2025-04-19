@@ -6,7 +6,7 @@
       overflow: hidden; /* Hides the overflowing text */
       text-overflow: ellipsis; /* Adds an ellipsis (...) to indicate truncated text */
 
-      &.l2 {
+      &.line2 {
         -webkit-line-clamp: 2; /* Limits the text to 2 lines */
       }
     }

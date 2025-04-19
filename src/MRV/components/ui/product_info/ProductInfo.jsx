@@ -36,37 +36,44 @@ function ProductInfo({
 
   const oConfig = {
     "l": {
-      priceQty: `body__medium bold color__primary__text`,
-      itemModel: `body__small color__tertiary__text`,
-      description: `description body__large l${sLineLimit} color__primary__text`,
-      imgSize: "8rem",
+      priceQty: `body__medium`,
+      itemModel: `body__small`,
+      description: `body__large`,
+      imgHeight: "8rem",
+      imgWidth: "8rem",
+      gap: "gap__05rem",
     },
-    "m": {},
+    "m": {
+      priceQty: `body__medium`,
+      itemModel: `body__tiny`,
+      description: `body__medium`,
+      imgHeight: "5.5rem",
+      imgWidth: "5.5rem",
+      gap: "gap__0rem",
+    },
     "s": {},
   };
 
+  const config = oConfig[size];
+
   // UI:  Price & Qty   ///////////////////////////////////////////////////////
 
-  const uiQty =
-    oProduct.iQty && bShowQty ? (
-      <p className={`${oConfig[size].priceQty}`}>{oProduct.iQty}</p>
-    ) : null;
-
-  const iDisplayPrice = iCustomPrice || bifrostData.iUnitBaseValue;
   const uiPrice =
     bifrostData.iUnitBaseValue && bShowPrice ? (
-      <>
-        <p className={`${oConfig[size].itemModel}`}>x</p>
-        <p className={`${oConfig[size].priceQty}`}>
-          ${centsToDollars(iDisplayPrice)}
-        </p>
-      </>
+      <p>${centsToDollars(iCustomPrice || bifrostData.iUnitBaseValue)}</p>
     ) : null;
+
+  const uiQty = oProduct.iQty && bShowQty ? <p>{oProduct.iQty}</p> : null;
+
+  const uiX = uiQty && uiPrice && <p>x</p>;
 
   const uiPriceQty =
     uiPrice || uiQty ? (
-      <div className={`hBox gap__1rem`}>
+      <div
+        className={`hBox ${config.priceQty} color__tertiary__text gap__1rem bold`}
+      >
         {uiQty}
+        {uiX}
         {uiPrice}
       </div>
     ) : null;
@@ -75,21 +82,19 @@ function ProductInfo({
 
   const uiItemNum =
     bifrostData.sItemNum && bShowItemNum ? (
-      <p className={`${oConfig[size].itemModel}`}>
-        Item#: {bifrostData.sItemNum}
-      </p>
+      <p>Item#: {bifrostData.sItemNum}</p>
     ) : null;
 
   const uiModelNum =
     bifrostData.sModelNum && bShowModelNum ? (
-      <p className={`${oConfig[size].itemModel}`}>
-        Model#: {bifrostData.sModelNum}
-      </p>
+      <p>Model#: {bifrostData.sModelNum}</p>
     ) : null;
 
   const uiItemModel =
     uiItemNum || uiModelNum ? (
-      <div className={`hBox gap__1rem`}>
+      <div
+        className={`hBox gap__1rem color__tertiary__text ${config.itemModel}`}
+      >
         {uiItemNum}
         {uiModelNum}
       </div>
@@ -98,20 +103,24 @@ function ProductInfo({
   // UI: Description ///////////////////////////////////////////////////////////
 
   const uiDescription = bifrostData.sDescription ? (
-    <p className={`${oConfig[size].description}`}>{bifrostData.sDescription}</p>
+    <p
+      className={`description line${sLineLimit} color__primary__text ${config.description}`}
+    >
+      {bifrostData.sDescription}
+    </p>
   ) : null;
 
   return (
     <div
       className={`productInfo ${sSize} hBox align__start justify__start gap__1rem`}
     >
-      <div className={`vBox prodImg gap__1rem`}>
-        <ProductImg
-          sImgKey={bifrostData.sImgKey}
-          sSize={oConfig[size].imgSize}
-        />
-      </div>
-      <div className={`vBox gap__05rem`}>
+      <ProductImg
+        sImgKey={bifrostData.sImgKey}
+        sWidth={config.imgWidth}
+        sHeight={config.imgHeight}
+      />
+
+      <div className={`vBox ${config.gap} flex__max height__min`}>
         {uiPriceQty}
         {uiItemModel}
         {uiDescription}

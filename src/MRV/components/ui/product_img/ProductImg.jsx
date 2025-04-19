@@ -37,7 +37,7 @@ const images = {
  */
 function ProductImg({
   sImgKey,
-  sSize = "4rem",
+  sSize = "",
   sWidth = "4rem",
   sHeight = "4rem",
   radius = "0.5rem",
