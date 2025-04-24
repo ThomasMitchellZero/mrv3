@@ -1,3 +1,4 @@
+import "./FooterCWEX.css";
 import { FooterMRV } from "../../../../../components/layout/footer/FooterMRV";
 import { centsToDollars } from "../../../../../mrv_controller";
 
@@ -57,7 +58,7 @@ function FooterCWEX({
   ) : null;
 
   const uiCWEXmoney = (
-    <>
+    <div className={`cashCWEX`}>
       <div className={`cashRowsCol`}>{uiCashRowArr}</div>
       <div className={`cashTotalCol ${oActiveTotal.sColor}`}>
         <div className={`body__small`}>{oActiveTotal.sLabel}</div>
@@ -65,10 +66,16 @@ function FooterCWEX({
           {`$${centsToDollars(iCentTotal)}`}
         </div>
       </div>
-    </>
+    </div>
   );
 
-  return <FooterMRV sBtnLabel={sBtnLabel} fBtnAction={fBtnAction} />;
+  return (
+    <FooterMRV
+      sBtnLabel={sBtnLabel}
+      fBtnAction={fBtnAction}
+      leftSlot={uiCWEXmoney}
+    />
+  );
 }
 
 export { FooterCWEX };
