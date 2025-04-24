@@ -2,7 +2,13 @@ import "./FooterMRV_style.css";
 
 import { centsToDollars } from "../../../mrv_controller";
 
-function FooterMRV({ sBtnLabel = "Continue" }) {
+function FooterMRV({
+  sBtnLabel = "Continue",
+  fBtnAction = () => {
+    console.log("No Btn Function");
+  },
+  cashTotalSlot = null,
+}) {
   // In the real version, these vals will be mapped to the data.
   const iCentReturnItemValue = -42000;
   const iCentNewItemCost = 6900;
@@ -62,8 +68,11 @@ function FooterMRV({ sBtnLabel = "Continue" }) {
           {`$${centsToDollars(iCentTotal)}`}
         </div>
       </div>
+      {cashTotalSlot}
       <div className={`btnCol`}>
-        <button className={`primary width__max jumbo`}>{sBtnLabel}</button>
+        <button onClick={fBtnAction} className={`primary width__max jumbo`}>
+          {sBtnLabel}
+        </button>
         {uiActiveError}
       </div>
     </footer>

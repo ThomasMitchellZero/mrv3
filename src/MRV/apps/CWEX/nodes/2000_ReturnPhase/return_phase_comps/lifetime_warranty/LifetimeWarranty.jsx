@@ -59,20 +59,11 @@ function LifetimeWarranty({ oPage }) {
   const resets = LW_localCtx.oResets;
   const sError = thisLS.sActiveError;
 
-  /*
-  const visBrandError = thisLS.sBrand === "Other";
-  const visElectric = !visBrandError && thisLS.sBrand;
-  const visElectricError = visElectric && thisLS.sElectric === "Yes";
-  const visExchQty = !visElectricError && visElectric;
-  const visNewItemInput = visExchQty && thisLS.iExchQty > 0 && !visReplacement;
-  const visItemError = sError === "invalidItem";
-  const visReplacerProd = thisLS.sReplacerProd; //
-  
-  */
+  ////////////////////////////////////////////////////////////////////////
+  // UI Elements
+  ////////////////////////////////////////////////////////////////////////
 
-  // UI Elements /////////////////////////////////////////////////////////
-
-  // Chips
+  // Chips --------------------------------------------------
 
   const uiChip = ({ sLsField, sChipKey }) => {
     const sIsActive = thisLS[sLsField] === sChipKey ? "selected" : "";
@@ -94,8 +85,7 @@ function LifetimeWarranty({ oPage }) {
     );
   };
 
-  // visibility Booleans /////////////////////////////////////////////
-  //
+  // visibility Booleans ---------------------------------
 
   const show_Brand = true;
   const fill_Brand = thisLS.sBrand;
@@ -111,7 +101,7 @@ function LifetimeWarranty({ oPage }) {
 
   const show_ReplacementPod = valid_ExchQty;
 
-  // UI Brand
+  // UI Brand ------------------------------------------------
 
   const uiBrand = (
     <div className={`vBox flex__min width__max gap__05rem`}>

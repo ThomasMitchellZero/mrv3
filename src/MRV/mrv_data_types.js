@@ -248,6 +248,20 @@ export { dSaleRecord };
 //// App Logic Objects
 /////////////////////////////////////////////////////////////
 
+/**
+ * Creates a navigation node object with properties for routing and display.
+ *
+ * @param {Object} params - The parameters for creating the navigation node.
+ * @param {string} [params.keyStr=""] - camelCase keystring used as a target for useNodeNav.
+ * @param {string} [params.sRoute=""] - The route associated with the navigation node.  nodeNav uses keyStr, not sRoute.
+ * @param {string} [params.sTitle="No Title"] - The title of the navigation node. Only used for breadcrumbs.
+ * @param {boolean} [params.isCurrent=false] - Indicates if the node is the current one.
+ * @param {boolean} [params.hasBreadcrumb=false] - Indicates if the node has a breadcrumb.
+ * @param {boolean} [params.isActive=false] - Indicates if the node is active.
+ * @param {Object} [params.preloadSessionState={}] - for cases where session state needs to be modified before nodeNav.
+ *
+ * @returns {Object} An object representing the navigation node.
+ */
 function navNode({
   keyStr = "",
   sRoute = "",

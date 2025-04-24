@@ -19,6 +19,7 @@ function ReturnPhase() {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const oDerived = mrvCtx.oDerived;
+  const nodeNav = useNodeNav();
 
   // Page Configs ///////////////////////////////////////////////////
 
@@ -69,7 +70,29 @@ function ReturnPhase() {
   const oPageLS = oPage.oLocalState;
   const fSetPageLS = oPage.fSetLocalState;
   const oResets = oPage.oResets;
-  // UI Sidesheets ///////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
+  // Page Logic
+  ///////////////////////////////////////////////////////////////////
+
+  const handleContinue = () => {
+    const sError = false;
+    const iUnmatched = 69;
+
+    if (sError) {
+      return;
+    }
+
+    if (iUnmatched > 0) {
+      nodeNav("returnRejects");
+      return;
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////////
+  // UI Sidesheets
+  ///////////////////////////////////////////////////////////////////
+
   const sAsideKey =
     oPageLS.sActiveProdKey && oPageLS.sMode === "items"
       ? "itemDetails"
@@ -80,7 +103,9 @@ function ReturnPhase() {
     itemDetails: <ReturnProdDetailsAside oPage={oPage} />,
   };
 
-  // UI Main Panel ///////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
+  // UI Main Panel
+  ///////////////////////////////////////////////////////////////////
 
   const sModeKey = oPageLS.sMode || "items";
 
@@ -92,7 +117,9 @@ function ReturnPhase() {
     receipts: { ui: <ReceiptsList oPage={oPage} />, sTitle: "Receipts List" },
   };
 
-  //  Overlays  ///////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
+  //  Overlays
+  ///////////////////////////////////////////////////////////////////
 
   const oActiveOverlay = {
     lw: <LifetimeWarranty oPage={oPage} />,
@@ -101,6 +128,10 @@ function ReturnPhase() {
   const uiOverlay = oPageLS.sActiveOverlay
     ? oActiveOverlay[oPageLS.sActiveOverlay]
     : null;
+
+  ///////////////////////////////////////////////////////////////////
+  //  Export Component
+  ///////////////////////////////////////////////////////////////////
 
   return (
     <main
@@ -113,7 +144,7 @@ function ReturnPhase() {
       <div className={`mrvPanel__main `}>
         <HeaderCWEX sPageTitle={oMainPanels[sModeKey].sTitle} />
         <div className={`body`}>{oMainPanels[sModeKey].ui}</div>
-        <FooterCWEX />
+        <FooterCWEX fBtnAction={handleContinue} />
       </div>
       {oAsides[sAsideKey]}
     </main>
