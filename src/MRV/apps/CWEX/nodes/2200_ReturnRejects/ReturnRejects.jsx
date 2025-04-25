@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import { HeaderCWEX } from "../../components/layout/header_cwex/HeaderCWEX";
 import { FooterCWEX } from "../../components/layout/footer/FooterCWEX";
-import { CartRejection } from "../../../../components/ui/rejection/RejectionMRV";
+import { RejectionMRV } from "../../../../components/ui/rejection/RejectionMRV";
 
 function ReturnRejects() {
   const mrvCtx = useOutletContext();
