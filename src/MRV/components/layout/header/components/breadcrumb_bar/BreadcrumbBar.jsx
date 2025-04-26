@@ -1,9 +1,11 @@
 import "./BreadcrumbBar_style.css";
 import { navNode } from "../../../../../mrv_data_types";
 import { MdChevronRight } from "react-icons/md";
+import { useNodeNav } from "../../../../../mrv_controller";
 
 function BreadcrumbBar({ sAppName = "", oNavNodes = {} }) {
   const refNavNode = navNode({});
+  const nodeNav = useNodeNav();
 
   const uiNode = (oThisNode) => {
     const sStatus = oThisNode.isCurrent
@@ -16,6 +18,11 @@ function BreadcrumbBar({ sAppName = "", oNavNodes = {} }) {
       <button
         key={oThisNode.keyStr}
         className={`crumbBtn body__small ${sStatus}`}
+        onClick={() => {
+          if (oThisNode.isActive) {
+            nodeNav(oThisNode.keyStr);
+          }
+        }}
       >
         <MdChevronRight size={`1.25rem`} />
         {oThisNode.sTitle}

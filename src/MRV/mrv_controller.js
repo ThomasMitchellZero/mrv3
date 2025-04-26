@@ -323,7 +323,6 @@ function useAutoDeriver(sessionState) {
     const aLW_ReturnProds = Object.values(oReturnProds).filter(
       (thisReturnProd) => bifrost?.[thisReturnProd.sBifrostKey]?.bLwEligible
     );
-    console.log("aLW_ReturnProds", aLW_ReturnProds);
     const refBifrost_Product = dProduct_bifrost({});
 
     const aLWpseudoInvoProds = aLW_ReturnProds.map((thisLW_ReturnProd) => {
@@ -359,9 +358,7 @@ function useAutoDeriver(sessionState) {
     const aMergedProdInvos = [...aInvoicedItems, ...aLWpseudoInvoProds];
 
     // Uses array indices as 'keys'.  Actual sKey gets built in fLuneLenser.
-
     const oInvoicedItems = { ...aMergedProdInvos };
-    console.log("oInvoicedItems", oInvoicedItems);
     const oReceiptedItems = fLuneLenser({
       oOuterRepo: sessionMRV.returnItems,
       oInnerRepo: oInvoicedItems,
