@@ -44,11 +44,11 @@ function ReturnRejects() {
   //----------------------------------------------------
 
   return (
-    <main className={`mrvPage returnPhase`}>
+    <main className={`mrvPage return-rejects`}>
       <div className={`mrvPanel__main `}>
         <HeaderCWEX sPageTitle={`Items Removed From Exchange`} />
-        <div className={`body hBox gap__2rem`}>
-          <div className={`vBox gap__1rem width__50pct flex__min`}>
+        <div className={`hBox justify__center gap__2rem`}>
+          <div className={`vBox gap__1rem cardCol__half`}>
             <ColumnLabel
               sIconKey="cart"
               sMainTitle="Return"

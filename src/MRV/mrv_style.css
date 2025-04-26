@@ -638,6 +638,13 @@
         align-items: center;
       }
     }
+    & .cardCol__half {
+      display: flex;
+      flex: 1 1 0rem;
+      max-width: 50%;
+      flex-direction: column;
+      gap: 1rem;
+    }
   }
 }
 /************************************************************/
@@ -733,6 +740,10 @@
 
     & .width__max {
       width: 100%;
+    }
+
+    & .width__50pct {
+      max-width: 50%;
     }
 
     & .nohover {

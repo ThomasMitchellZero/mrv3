@@ -16,7 +16,7 @@ function ColumnLabel({
 }) {
   return (
     <div className={`hBox justify__start width__max flex__min`}>
-      <IconMRV sIconKey={sIconKey} ctnrSize="5rem" fontSize="4rem" />
+      <IconMRV sIconKey={sIconKey} ctnrSize="5rem" fontSize="3.5rem" />
       <div className={`vBox gap__05rem`}>
         {sMainTitle ? (
           <div className={`heading__medium`}>{sMainTitle}</div>
