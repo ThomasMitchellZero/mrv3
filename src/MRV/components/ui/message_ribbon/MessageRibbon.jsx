@@ -40,7 +40,9 @@ const MessageRibbon = ({ sMessage = "No Message", sType = "info" }) => {
 
   return (
     <div className={`message-ribbon ${oConfig[sType].sBG_color}`}>
-      <div className={`color-bar ${oConfig[sType].sBarColor} `} />
+      <div
+        className={`vBox color-bar ${oConfig[sType].sBarColor} `}
+      />
       <IconMRV
         sIconKey={sType}
         sIconColor={`${oConfig[sType].sIconColor}`}

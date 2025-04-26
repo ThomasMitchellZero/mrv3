@@ -640,6 +640,7 @@
     }
 
     & .cardCol__half {
+      padding-top: var(--PrimaryPadding__vertical);
       display: flex;
       flex: 1 1 0rem;
       max-width: 50%;

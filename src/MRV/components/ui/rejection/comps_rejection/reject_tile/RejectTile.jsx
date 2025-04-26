@@ -1,4 +1,5 @@
-import { ProductInfo } from "../../product_info/ProductInfo";
+import "./RejectTile.css";
+import { ProductInfo } from "../../../product_info/ProductInfo";
 
 function RejectTile({ oProduct }) {
   return (

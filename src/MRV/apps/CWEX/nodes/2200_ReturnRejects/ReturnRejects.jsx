@@ -6,7 +6,7 @@ import { HeaderCWEX } from "../../components/layout/header_cwex/HeaderCWEX";
 import { FooterCWEX } from "../../components/layout/footer/FooterCWEX";
 import { RejectionMRV } from "../../../../components/ui/rejection/RejectionMRV";
 import { RejectCard } from "../../../../components/ui/rejection/comps_rejection/RejectCard";
-import { RejectTile } from "../../../../components/ui/rejection/comps_rejection/RejectTile";
+import { RejectTile } from "../../../../components/ui/rejection/comps_rejection/reject_tile/RejectTile";
 import { dProduct } from "../../../../mrv_data_types";
 import { ColumnLabel } from "../../../../components/ui/column_header/ColumnLabel";
 import { MessageRibbon } from "../../../../components/ui/message_ribbon/MessageRibbon";
@@ -31,7 +31,7 @@ function ReturnRejects() {
     <RejectCard
       uiCardLabel={
         <MessageRibbon
-          sType="critical"
+          sType="alert"
           sMessage="These items are missing receipts."
         />
       }
@@ -47,7 +47,7 @@ function ReturnRejects() {
     <main className={`mrvPage return-rejects`}>
       <div className={`mrvPanel__main `}>
         <HeaderCWEX sPageTitle={`Items Removed From Exchange`} />
-        <div className={`hBox justify__center gap__2rem`}>
+        <div className={`hBox justify__center align__start gap__2rem`}>
           <div className={`vBox gap__1rem cardCol__half`}>
             <ColumnLabel
               sIconKey="cart"
