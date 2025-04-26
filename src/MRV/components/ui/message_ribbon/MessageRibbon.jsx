@@ -2,6 +2,14 @@ import "./MessageRibbon.css";
 
 import { IconMRV } from "../icon/IconMRV";
 
+/**
+ * A reusable message ribbon component for displaying messages with different types and styles.
+ *
+ * @param {Object} props - Component properties.
+ * @param {string} [props.sMessage="No Message"] - The message text to display on the ribbon.
+ * @param {("success"|"info"|"alert"|"critical")} [props.sType="info"] - Type of ribbon.
+ * @returns {JSX.Element} The rendered message ribbon component.
+ */
 const MessageRibbon = ({ sMessage = "No Message", sType = "info" }) => {
   const oConfig = {
     success: {

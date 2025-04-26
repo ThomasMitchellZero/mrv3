@@ -1,46 +1,61 @@
 import { useOutletContext } from "react-router-dom";
+import { useNodeNav } from "../../../../mrv_controller";
+import { dLocalCtx, dError, oBaseLocState } from "../../../../mrv_data_types";
+
 import { HeaderCWEX } from "../../components/layout/header_cwex/HeaderCWEX";
 import { FooterCWEX } from "../../components/layout/footer/FooterCWEX";
 import { RejectionMRV } from "../../../../components/ui/rejection/RejectionMRV";
+import { RejectCard } from "../../../../components/ui/rejection/comps_rejection/RejectCard";
+import { RejectTile } from "../../../../components/ui/rejection/comps_rejection/RejectTile";
 import { dProduct } from "../../../../mrv_data_types";
 import { ColumnLabel } from "../../../../components/ui/column_header/ColumnLabel";
+import { MessageRibbon } from "../../../../components/ui/message_ribbon/MessageRibbon";
 
 function ReturnRejects() {
   const mrvCtx = useOutletContext();
   const sessionMRV = mrvCtx.sessionMRV;
   const oDerived = mrvCtx.oDerived;
 
-  const oC1 = {
-    c11: dProduct({
-      sKey: "3300",
-      sBifrostKey: "3300",
-      iQty: 33,
-    }),
-    c12: dProduct({
-      sKey: "4400",
-      sBifrostKey: "4400",
-      iQty: 44,
-    }),
-  };
+  //----------------------------------------------------
+  // Page Logic
+  //----------------------------------------------------
 
-  const oC2 = {
-    c21: dProduct({
-      sKey: "5500",
-      sBifrostKey: "5500",
-      iQty: 55,
-    }),
-  };
+  //----------------------------------------------------
+  // UI Elements
+  //----------------------------------------------------
+
+  const uiNRRtiles = Object.values(oDerived.oNRRitems).map((oProduct) => {
+    return <RejectTile key={oProduct.sKey} oProduct={oProduct} />;
+  });
+  const uiNRRcard = (
+    <RejectCard
+      uiCardLabel={
+        <MessageRibbon
+          sType="critical"
+          sMessage="These items are missing receipts."
+        />
+      }
+      children={uiNRRtiles}
+    />
+  );
+
+  //----------------------------------------------------
+  // Final Component
+  //----------------------------------------------------
 
   return (
     <main className={`mrvPage returnPhase`}>
       <div className={`mrvPanel__main `}>
         <HeaderCWEX sPageTitle={`Items Removed From Exchange`} />
-        <div className={`body`}>
-          <ColumnLabel
-            sIconKey="cart"
-            sMainTitle="Return"
-            sMiniSubtext="Do a return, ya filthy animal"
-          />
+        <div className={`body hBox gap__2rem`}>
+          <div className={`vBox gap__1rem width__50pct flex__min`}>
+            <ColumnLabel
+              sIconKey="cart"
+              sMainTitle="Return"
+              sMiniSubtext="Do a return, ya filthy animal"
+            />
+            {uiNRRcard}
+          </div>
         </div>
         <FooterCWEX />
       </div>
