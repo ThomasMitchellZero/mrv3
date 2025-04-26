@@ -12,6 +12,7 @@ import { ExchEntry } from "./MRV/apps/CWEX/nodes/1200_ExchEntry/ExchEntry";
 import { ItemCheck } from "./MRV/apps/CWEX/nodes/1500_ItemCheck/ItemCheck";
 import { ReturnPhase } from "./MRV/apps/CWEX/nodes/2000_ReturnPhase/ReturnPhase";
 import { ReturnRejects } from "./MRV/apps/CWEX/nodes/2200_ReturnRejects/ReturnRejects";
+import { NewItemsPhase } from "./MRV/apps/CWEX/nodes/3000_NewItemsPhase/NewItemsPhase";
 
 ///////////// Deprecate all these once no longer needed ////////////////
 
@@ -37,6 +38,7 @@ function App() {
             <Route path="item-check" element={<ItemCheck />} />
             <Route path="return-phase" element={<ReturnPhase />} />
             <Route path="return-rejects" element={<ReturnRejects />} />
+            <Route path="new-items-phase" element={<NewItemsPhase />} />
           </Route>
           <Route path="test" element={<Placeholder titleText="Tests" />} />
         </Route>

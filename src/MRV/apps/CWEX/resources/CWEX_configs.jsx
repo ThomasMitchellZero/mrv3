@@ -26,15 +26,15 @@ const baseStateCWEX = () => {
         sTitle: "Return Items",
         hasBreadcrumb: true,
       }),
-      newItemPhase: navNode({
-        keyStr: "newItemPhase",
-        sRoute: "/cwex/new-item-phase",
-        sTitle: "New Items",
-        hasBreadcrumb: true,
-      }),
       returnRejects: navNode({
         keyStr: "returnRejects",
         sRoute: "/cwex/return-rejects",
+      }),
+      newItemPhase: navNode({
+        keyStr: "newItemPhase",
+        sRoute: "/cwex/new-items-phase",
+        sTitle: "New Items",
+        hasBreadcrumb: true,
       }),
     },
   });

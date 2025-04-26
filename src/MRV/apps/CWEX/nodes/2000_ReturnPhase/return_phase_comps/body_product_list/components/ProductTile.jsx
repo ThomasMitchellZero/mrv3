@@ -35,7 +35,9 @@ function ProductTile({ oPage, oProduct }) {
     setSessionMRV(draftSession);
   };
 
-  // UI Elements //////////////////////////////////////
+  //--------------------------------------------------------------
+  // UI Elements
+  //--------------------------------------------------------------
 
   // Receipted Items
   const aItemInvos = Object.values(oDerived.oReceiptedItems).filter(

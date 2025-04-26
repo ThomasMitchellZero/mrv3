@@ -77,7 +77,7 @@ function ReturnPhase() {
 
   const handleContinue = () => {
     const sError = false;
-    const iUnmatched = oDerived.oNRRitems.length;
+    const iUnmatched = Object.keys(oDerived.oNRRitems).length;
 
     if (sError) {
       return;
@@ -87,6 +87,8 @@ function ReturnPhase() {
       nodeNav("returnRejects");
       return;
     }
+
+    nodeNav("newItemPhase");
   };
 
   ///////////////////////////////////////////////////////////////////
