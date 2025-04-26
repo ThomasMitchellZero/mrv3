@@ -77,7 +77,7 @@ function ReturnPhase() {
 
   const handleContinue = () => {
     const sError = false;
-    const iUnmatched = 69;
+    const iUnmatched = oDerived.oNRRitems.length;
 
     if (sError) {
       return;

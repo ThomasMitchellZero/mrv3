@@ -38,7 +38,7 @@ function ProductTile({ oPage, oProduct }) {
   // UI Elements //////////////////////////////////////
 
   // Receipted Items
-  const aItemInvos = Object.values(oDerived.receiptedItems).filter(
+  const aItemInvos = Object.values(oDerived.oReceiptedItems).filter(
     (thisRcptItem) => {
       return thisRcptItem.sBifrostKey === oProduct.sBifrostKey;
     }
@@ -49,7 +49,8 @@ function ProductTile({ oPage, oProduct }) {
   });
 
   // Non-Receipted Items
-  const oNRR = Object.values(oDerived.nrrItems).find((thisRcptItem) => {
+  const oNRR = Object.values(oDerived.oNRRitems).find((thisRcptItem) => {
+    // using find() because there should only ever be one of these.
     return thisRcptItem.sBifrostKey === oProduct.sBifrostKey;
   });
   if (oNRR) {

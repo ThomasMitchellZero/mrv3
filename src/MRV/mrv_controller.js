@@ -310,8 +310,8 @@ function useAutoDeriver(sessionState) {
     const refSaleRecord = dSaleRecord({});
 
     const oOutDerived = {
-      receiptedItems: {},
-      nrrItems: {},
+      oReceiptedItems: {},
+      oNRRitems: {},
       likeExchItems: {},
       unlikeExchItems: {},
     };
@@ -343,10 +343,9 @@ function useAutoDeriver(sessionState) {
       };
       return outLwProd;
     });
-    console.log("aLWpseudoInvoProds", aLWpseudoInvoProds);
 
     //------------------------------------------------------------------
-    //    Match Return Items to Session Invoices
+    //    Match Return Items to Session and Pseudo Invoices
     //------------------------------------------------------------------
 
     // unpack items from invoices to feed into fLuneLenser
@@ -356,13 +355,14 @@ function useAutoDeriver(sessionState) {
       return invoItems;
     });
 
+    // merge in real invos before pseudo invos to ensure all real invos are depleted before matching to pseudos.
     const aMergedProdInvos = [...aInvoicedItems, ...aLWpseudoInvoProds];
 
     // Uses array indices as 'keys'.  Actual sKey gets built in fLuneLenser.
-    // merge in LW invos after so they are only processed if no real invos are found.
+
     const oInvoicedItems = { ...aMergedProdInvos };
     console.log("oInvoicedItems", oInvoicedItems);
-    const receiptedItems = fLuneLenser({
+    const oReceiptedItems = fLuneLenser({
       oOuterRepo: sessionMRV.returnItems,
       oInnerRepo: oInvoicedItems,
       fIsMatch: (oOuterItem, oInnerItem) => {
@@ -379,8 +379,8 @@ function useAutoDeriver(sessionState) {
         return oOutLens;
       },
     });
-    oOutDerived.receiptedItems = receiptedItems.oLenses;
-    oOutDerived.nrrItems = receiptedItems.oOuterLunes;
+    oOutDerived.oReceiptedItems = oReceiptedItems.oLenses;
+    oOutDerived.oNRRitems = oReceiptedItems.oOuterLunes;
 
     //------------------------------------------------------------------
     // Make a lens of Return Items that have receipts.
