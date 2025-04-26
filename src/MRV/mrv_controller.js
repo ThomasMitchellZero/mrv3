@@ -3,7 +3,12 @@ import { SaleRecordsAPI } from "../local_APIs/sale_records";
 import { bifrostAPI } from "../local_APIs/bifrost";
 
 import { useContext } from "react";
-import { dProduct, baseStateExTurns, dSaleRecord } from "./mrv_data_types";
+import {
+  dProduct,
+  dProduct_bifrost,
+  baseStateExTurns,
+  dSaleRecord,
+} from "./mrv_data_types";
 import { clone, cloneDeep, isEmpty, isNaN, merge, set, subtract } from "lodash";
 import { navNode } from "./mrv_data_types";
 
@@ -298,6 +303,7 @@ function useAutoDeriver(sessionState) {
   const sessionMRV = cloneDeep(sessionState);
   const saleRecordsAPI = useContext(SaleRecordsAPI);
   const bifrost = useContext(bifrostAPI);
+  const oReturnProds = sessionMRV.returnItems;
 
   const fAutoDeriver = () => {
     const refBaseState = baseStateExTurns({});
@@ -311,6 +317,35 @@ function useAutoDeriver(sessionState) {
     };
 
     //------------------------------------------------------------------
+    //    Produce Pseudo-Invos
+    //------------------------------------------------------------------
+
+    const aLW_ReturnProds = Object.values(oReturnProds).filter(
+      (thisReturnProd) => bifrost?.[thisReturnProd.sBifrostKey]?.bLwEligible
+    );
+    console.log("aLW_ReturnProds", aLW_ReturnProds);
+    const refBifrost_Product = dProduct_bifrost({});
+
+    const aLWpseudoInvoProds = aLW_ReturnProds.map((thisLW_ReturnProd) => {
+      // OoS items have no Bifrost data, so we need to use the proxy key.
+      const dataKey =
+        thisLW_ReturnProd.sProxyKey || thisLW_ReturnProd.sBifrostKey;
+      const bifrostData = bifrost?.[dataKey];
+
+      // build the pseudo-invoItem for the LW item.
+      const outLwProd = {
+        ...cloneDeep(thisLW_ReturnProd),
+        sKey: `${thisLW_ReturnProd.sKey}_LW`, // add the LW suffix to the key
+        sInvoNum: "Lifetime Warranty",
+        iUnitBaseValue: bifrostData.iUnitBaseValue,
+        iUnitTax: bifrostData.iUnitTax,
+        iQty: 9999, // high qty because LW products don't need a reciept and this prevents depletion.
+      };
+      return outLwProd;
+    });
+    console.log("aLWpseudoInvoProds", aLWpseudoInvoProds);
+
+    //------------------------------------------------------------------
     //    Match Return Items to Session Invoices
     //------------------------------------------------------------------
 
@@ -320,8 +355,13 @@ function useAutoDeriver(sessionState) {
       const invoItems = Object.values(saleRecordsAPI[thisInvoNum].oItemsSold);
       return invoItems;
     });
-    const oInvoicedItems = { ...aInvoicedItems }; // convert to object for fLuneLenser
 
+    const aMergedProdInvos = [...aInvoicedItems, ...aLWpseudoInvoProds];
+
+    // Uses array indices as 'keys'.  Actual sKey gets built in fLuneLenser.
+    // merge in LW invos after so they are only processed if no real invos are found.
+    const oInvoicedItems = { ...aMergedProdInvos };
+    console.log("oInvoicedItems", oInvoicedItems);
     const receiptedItems = fLuneLenser({
       oOuterRepo: sessionMRV.returnItems,
       oInnerRepo: oInvoicedItems,
@@ -343,43 +383,8 @@ function useAutoDeriver(sessionState) {
     oOutDerived.nrrItems = receiptedItems.oOuterLunes;
 
     //------------------------------------------------------------------
-    //    LW receipt for NRR LW items
+    // Make a lens of Return Items that have receipts.
     //------------------------------------------------------------------
-
-    // run AFTER checking for real receipts, which are better for us and our customers.
-
-    const oLwInvoProds = {};
-
-    const aNRR_LW_Prods = Object.values(oOutDerived.nrrItems).filter(
-      (oProduct) => {
-        // check Bifrost to see if the NRR item has LW eligibility.
-        const bifrostData = bifrost?.[oProduct.sBifrostKey];
-        return bifrostData?.bLwEligible;
-      }
-    );
-
-    for (const thisLwProd of aNRR_LW_Prods) {
-      delete oOutDerived.nrrItems[thisLwProd.sKey]; // remove from NRR items so they aren't double counted.
-
-      // if item has a proxy key, use that as the data source because the Bifrost key won't contain real data.
-      const bifrostDataKey = thisLwProd.sProxyKey || thisLwProd.sBifrostKey;
-      const bifrostData = bifrost?.[bifrostDataKey];
-
-      const outLwProd = {
-        ...cloneDeep(thisLwProd),
-        sKey: `${thisLwProd.sKey}_LW`,
-        sInvoNum: "Lifetime Warranty",
-        iUnitBaseValue: bifrostData.iUnitBaseValue,
-        iUnitTax: bifrostData.iUnitTax,
-      };
-      oLwInvoProds[outLwProd.sKey] = outLwProd;
-    }
-    
-    // add the LW items to the receipted items so they can be processed together.
-    oOutDerived.receiptedItems = {
-      ...oOutDerived.receiptedItems,
-      ...oLwInvoProds,
-    };
 
     //------------------------------------------------------------------
     //    whatever's next.

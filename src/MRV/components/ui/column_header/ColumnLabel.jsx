@@ -15,14 +15,14 @@ function ColumnLabel({
   sMiniSubtext = "No Subtext",
 }) {
   return (
-    <div className={`hBox width__max flex__min`}>
+    <div className={`hBox justify__start width__max flex__min`}>
       <IconMRV sIconKey={sIconKey} ctnrSize="5rem" fontSize="4rem" />
-      <div className={`vBox`}>
+      <div className={`vBox gap__05rem`}>
         {sMainTitle ? (
-          <div className={`heading__large`}>{sMainTitle}</div>
+          <div className={`heading__medium`}>{sMainTitle}</div>
         ) : null}
         {sMiniSubtext ? (
-          <div className={`body__small`}>{sMiniSubtext}</div>
+          <div className={`body__large`}>{sMiniSubtext}</div>
         ) : null}
       </div>
     </div>

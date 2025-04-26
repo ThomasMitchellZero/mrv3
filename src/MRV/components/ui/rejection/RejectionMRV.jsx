@@ -1,4 +1,5 @@
 import "./RejectionMRV.css";
+import { dProduct } from "../../../mrv_data_types";
 
 import { useOutletContext } from "react-router-dom";
 

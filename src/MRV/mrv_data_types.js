@@ -195,7 +195,7 @@ export { dProduct };
  * @param {string} [params.sDescription] - A description of the product.
  * @param {string} [params.sModelNum] - The model number of the product.
  * @param {string} [params.sItemNum] - The item number of the product.
- * @param {boolean} [params.bReplaceLW=false] - Indicates if the product is eligible for Lifetime Warranty replacement.
+ * @param {boolean} [params.bLwEligible=false] - Indicates if the product is eligible for Lifetime Warranty replacement.
  * @param {number} [params.iUnitBaseValue=0] - The base value of a unit (from `dMoney`).
  * @param {number} [params.iUnitTax=0] - The tax value of a unit (from `dMoney`).
  * @returns {Object} An object representing the product with Bifrost-specific properties.
@@ -204,7 +204,7 @@ export { dProduct };
  * @returns {string} returnObj.sDescription - The description of the product.
  * @returns {string} returnObj.sModelNum - The model number of the product.
  * @returns {string} returnObj.sItemNum - The item number of the product.
- * @returns {boolean} returnObj.bReplaceLW - Indicates if the product is eligible for Lifetime Warranty replacement.
+ * @returns {boolean} returnObj.bLwEligible - Indicates if the product is eligible for Lifetime Warranty replacement.
  * @returns {number} returnObj.iUnitBaseValue - The base value of a unit.
  * @returns {number} returnObj.iUnitTax - The tax value of a unit.
  */
