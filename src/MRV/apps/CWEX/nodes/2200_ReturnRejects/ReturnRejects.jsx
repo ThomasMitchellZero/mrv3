@@ -4,9 +4,8 @@ import { dLocalCtx, dError, oBaseLocState } from "../../../../mrv_data_types";
 
 import { HeaderCWEX } from "../../components/layout/header_cwex/HeaderCWEX";
 import { FooterCWEX } from "../../components/layout/footer/FooterCWEX";
-import { RejectionMRV } from "../../../../components/ui/rejection/RejectionMRV";
-import { RejectCard } from "../../../../components/ui/rejection/comps_rejection/RejectCard";
-import { RejectTile } from "../../../../components/ui/rejection/comps_rejection/reject_tile/RejectTile";
+import { RejectCard } from "../../../../components/ui/rejection/reject_card/RejectCard";
+import { RejectTile } from "../../../../components/ui/rejection/reject_tile/RejectTile";
 import { dProduct } from "../../../../mrv_data_types";
 import { ColumnLabel } from "../../../../components/ui/column_header/ColumnLabel";
 import { MessageRibbon } from "../../../../components/ui/message_ribbon/MessageRibbon";
