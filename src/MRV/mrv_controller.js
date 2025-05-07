@@ -19,6 +19,13 @@ const centsToDollars = (priceInCents = 4200) => {
 };
 export { centsToDollars };
 
+/**
+ * Determines the appropriate CSS class for a number based on its value.
+ * Returns a green text color class if the number is negative; otherwise, returns an empty string.
+ *
+ * @param {number} numberVal - The number to evaluate.
+ * @returns {string} A CSS class name. Returns "color__green__text" if the number is negative, otherwise an empty string.
+ */
 const greenify = (numberVal) => {
   // This JUST returns a CSS class.  Not the number, not a UI element.  Just a class.
   const isNeg = typeof numberVal === "number" && numberVal < 0;
@@ -26,6 +33,21 @@ const greenify = (numberVal) => {
 };
 
 export { greenify };
+
+const fcCashTotal = ({ aProdsToSum = [] }) => {
+  // Sums the iUnitBaseValue of all products in aProdsToSum.
+  const iCashTotal = aProdsToSum.reduce((acc, thisProd) => {
+    const refProduct = dProduct({});
+    const iUnitBaseVal = thisProd.iUnitBaseValue || 0;
+    const iUnitTax = thisProd.iUnitTax || 0;
+    const iQty = thisProd.iQty || 0;
+    const iUnitTotal = iUnitBaseVal + iUnitTax;
+    const iProdTotal = iUnitTotal * iQty;
+
+    return acc + iProdTotal;
+  }, 0);
+  return iCashTotal;
+};
 
 /////////////////////////////////////////////////////////////////
 ////////             Data Handlers
@@ -326,7 +348,8 @@ function useAutoDeriver(sessionState) {
     const refBifrost_Product = dProduct_bifrost({});
 
     const aLWpseudoInvoProds = aLW_ReturnProds.map((thisLW_ReturnProd) => {
-      // OoS items have no Bifrost data, so we need to use the proxy key.
+      // OoS items have no Bifrost data, so if a proxy key exists, that takes precedence.
+      // Otherwise, use the Bifrost key.
       const dataKey =
         thisLW_ReturnProd.sProxyKey || thisLW_ReturnProd.sBifrostKey;
       const bifrostData = bifrost?.[dataKey];
